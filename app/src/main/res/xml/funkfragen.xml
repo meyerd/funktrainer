@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questionaire xmlns='http://hosenhasser.de'>
+  <topic id='9588' name='Betriebliche Kenntnisse'>
+    <question id='9589' reference='1'>
+      <text>Was ist zu tun, wenn vor Antritt der Fahrt nicht feststeht, wer Fahrzeugführer ist?</text>
+      <correct>Der verantwortliche Fahrzeugführer muss bestimmt werden.</correct>
+      <incorrect>Der verantwortliche Fahrzeugführer muss gewählt werden.</incorrect>
+      <incorrect>Ein Inhaber des Sportbootführerscheins muss die Fahrzeugführung übernehmen.</incorrect>
+      <incorrect>Ein Inhaber des Sportbootführerscheins muss die Verantwortung übernehmen.</incorrect>
+    </question>
+  </topic>
+  <topic id='9590' name='Kenntnisse von Vorschriften'>
+    <question id='9591' reference='2'>
+      <text>Wo gelten die Kollisionsverhütungsregeln (KVR)?</text>
+      <correct>Auf der Hohen See und auf den mit dieser zusammenhängenden, von Seeschiffen befahrbaren Gewässern.</correct>
+      <incorrect>Auf der Hohen See und den deutschen Seeschifffahrtsstraßen, die von Seeschiffen befahren werden.</incorrect>
+      <incorrect>Auf den Seeschifffahrtsstraßen und den küstennahen deutschen Seegewässern, die von Seeschiffen befahren werden.</incorrect>
+      <incorrect>Auf der Hohen See und den von Seeschiffen befahrbaren Randmeeren, mit Ausnahme der Verkehrstrennungsgebiete.</incorrect>
+    </question>
+  </topic>
+  <topic id='9592' name='Technische Kenntnisse'>
+    <question id='9591' reference='3'>
+      <text>Wo gelten die Kollisionsverhütungsregeln (KVR)?</text>
+      <correct>Auf der Hohen See und auf den mit dieser zusammenhängenden, von Seeschiffen befahrbaren Gewässern.</correct>
+      <incorrect>Auf der Hohen See und den deutschen Seeschifffahrtsstraßen, die von Seeschiffen befahren werden.</incorrect>
+      <incorrect>Auf den Seeschifffahrtsstraßen und den küstennahen deutschen Seegewässern, die von Seeschiffen befahren werden.</incorrect>
+      <incorrect>Auf der Hohen See und den von Seeschiffen befahrbaren Randmeeren, mit Ausnahme der Verkehrstrennungsgebiete.</incorrect>
+    </question>
+  </topic>
+</questionaire>

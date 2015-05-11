@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="de.hosenhasser.funktrainer"
+	android:installLocation="auto"
+    android:versionCode="11"
+    android:versionName="1.5.3.1" >
+
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="21" />
+
+    <application
+	android:theme="@style/AppTheme"
+        android:icon="@drawable/ic_launcher_funk"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".FunkTrainerActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+			android:name="de.hosenhasser.funktrainer.QuestionAsker"></activity>
+		<activity
+			android:name=".StatisticsActivity"></activity>
+    </application>
+
+</manifest>

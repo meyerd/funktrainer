@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Funk-Trainer</string>
+    <string name="infoMessage">This App contains the questions for the German amateur radio license A (questions from February 2007/October 2006)</string>
+    <string name="selectTopic">Please select a topic:</string>
+    <string name="continueButtonText">Continue</string>
+    <string name="waitBeforeContinue">Please wait before you continue to learn…</string>
+    <string name="nextQuestionAt">You will see the next question at:</string>
+    <string name="continueNow">Continue now…</string>
+    <string name="restart">Restart</string>
+    <string name="chapterFinished">You finished this topic successfully…</string>
+    <string name="offeneFragen">Open questions:</string>
+    <string name="nextLabel">Next: </string>
+    <string name="right">Correct!</string>
+	<string name="done">done</string>
+	<string name="firstPass">First Pass</string>
+	<string name="secondPass">Second Pass</string>
+	<string name="thirdPass">Third Pass</string>
+	<string name="fourthPass">Fourth Pass</string>
+	<string name="fifthPass">Fifth Pass</string>
+	<string name="passText">Pass: %d</string>
+    <string name="noAnswerSelected">You have to select a answer first.</string>
+    <string name="menuResetTopic">Restart topic</string>
+    <string name="menuResetTopicCondensed">Restart</string>
+	<string name="menuStatistics">Statistics</string>
+	<string name="menuHelp">Help</string>
+	<string name="menuHelpCondensed">Help</string>
+	<string name="menuInfo">Exam information</string>
+	<string name="menuInfoCondensed">Info</string>
+    <string name="chapter">Topic:</string>
+    <string name="totalProgress">Total progress:</string>
+    <string name="atLevel0">Without correct answer:</string>
+    <string name="atLevel1">One time correct:</string>
+    <string name="atLevel2">Two times correct:</string>
+    <string name="atLevel3">Three times correct:</string>
+    <string name="atLevel4">Four times correct:</string>
+    <string name="atLevel5">Five times correct (completed):</string>
+    <string name="warningReset">This will reset your progress. The topic will be restarted.</string>
+    <string name="resetOkay">OK</string>
+    <string name="resetCancel">Cancel</string>
+</resources>

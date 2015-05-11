@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/titleChapter"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp"
+			android:text="@string/chapter"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<TextView
+			android:id="@+id/topicName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp"
+			android:text=""
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<TextView
+			android:id="@+id/titleTotalProgress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="20dp"
+			android:text="@string/totalProgress"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/totalProgress"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+
+		<TextView
+			android:id="@+id/titleAtLevel0"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="20dp"
+			android:text="@string/atLevel0"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/atLevel0"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+
+		<TextView
+			android:id="@+id/titleAtLevel1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="10dp"
+			android:text="@string/atLevel1"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/atLevel1"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+
+		<TextView
+			android:id="@+id/titleAtLevel2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="10dp"
+			android:text="@string/atLevel2"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/atLevel2"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+
+		<TextView
+			android:id="@+id/titleAtLevel3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="10dp"
+			android:text="@string/atLevel3"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/atLevel3"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+		
+		<TextView
+			android:id="@+id/titleAtLevel4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="10dp"
+			android:text="@string/atLevel4"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/atLevel4"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+		
+		<TextView
+			android:id="@+id/titleAtLevel5"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="6dp"
+			android:layout_marginTop="10dp"
+			android:text="@string/atLevel5"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<ProgressBar
+			android:id="@+id/atLevel5"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="6dp" />
+	</LinearLayout>
+</ScrollView>

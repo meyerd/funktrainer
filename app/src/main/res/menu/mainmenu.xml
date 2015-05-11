@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item android:id="@+id/mainInfo" android:title="@string/menuInfo" android:titleCondensed="@string/menuInfoCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>
+	<item android:id="@+id/mainHelp" android:title="@string/menuHelp" android:titleCondensed="@string/menuHelpCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>
+</menu>
