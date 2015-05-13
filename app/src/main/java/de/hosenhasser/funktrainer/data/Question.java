@@ -30,6 +30,7 @@ public class Question {
 	private List<String> answers = new LinkedList<String>();
 	private int level;
 	private Date nextTime;
+	private List<String> images;
 	public int getId() {
 		return id;
 	}
@@ -72,5 +73,7 @@ public class Question {
 	public void setNextTime(Date nextTime) {
 		this.nextTime = nextTime;
 	}
+	public void setImages(List<String> images) { this.images = images; }
+	public List<String> getImages() { return this.images; }
 	
 }

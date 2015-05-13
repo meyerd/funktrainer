@@ -37,6 +37,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 
 public class Repository extends SQLiteOpenHelper {
@@ -115,7 +116,25 @@ public class Repository extends SQLiteOpenHelper {
 					break;
 				case XmlPullParser.TEXT:
 					if (expectingQuestion) {
-						currentQuestion.setQuestionText(xmlResourceParser.getText());
+                        String qtext = xmlResourceParser.getText();
+                        int imgi = 1;
+                        List<String> images = new ArrayList<String>();
+                        while(imgi > 0) {
+                            String beginstr = "&lt;img src='";
+                            int pos = qtext.indexOf(beginstr);
+                            if(pos > 0) {
+                                int endpos = qtext.indexOf("'>");
+                                if (endpos > 0) {
+                                    String img = qtext.substring(pos + beginstr.length(), endpos);
+                                    images.add(img);
+                                    Log.d("Funktrainer", "found image" + img);
+                                }
+                                qtext = qtext.substring(0, pos) + qtext.substring(endpos + 2, qtext.length() - 1);
+                            }
+                            imgi = pos;
+                        }
+						currentQuestion.setQuestionText(qtext);
+                        currentQuestion.setImages(images);
 						expectingQuestion = false;
 					}
 					if (expectingAnswer) {
@@ -139,7 +158,7 @@ public class Repository extends SQLiteOpenHelper {
                     }
 					break;
 				}
-				xmlResourceParser.next();
+                xmlResourceParser.next();
 				eventType = xmlResourceParser.getEventType();
 			}
 			xmlResourceParser.close();
