@@ -121,7 +121,7 @@ public class StatisticsActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.statHelp:
 			final StringBuilder uri = new StringBuilder();
-			uri.append("http://sportboot.mobi/trainer/segeln/sbfs/app/help?view=StatisticsActivity");
+			uri.append("http://funktrainer.hosenhasser.dei/app/help?view=StatisticsActivity");
 			final Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(uri.toString()));
 			startActivity(intent);

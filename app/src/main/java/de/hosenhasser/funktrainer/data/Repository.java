@@ -19,6 +19,7 @@
 package de.hosenhasser.funktrainer.data;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +36,7 @@ import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 import android.widget.SimpleCursorAdapter;
 
 public class Repository extends SQLiteOpenHelper {
@@ -70,31 +72,44 @@ public class Repository extends SQLiteOpenHelper {
 			final List<Question> questions = new LinkedList<Question>();
 			final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen);
 			int eventType = xmlResourceParser.getEventType();
+
 			Topic currentTopic = null;
 			Question currentQuestion = null;
 			boolean expectingAnswer = false;
 			boolean expectingQuestion = false;
+
+            List topicPrefixes = new ArrayList<String>();
+            int topiclevel = 0;
+
 			int index = 0;
+            int idcounter = 0;
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				switch (eventType) {
 				case XmlPullParser.START_TAG:
 					final String tagName = xmlResourceParser.getName();
-					if ("topic".equals(tagName)) {
-						currentTopic = new Topic();
-						currentTopic.setId(xmlResourceParser.getAttributeIntValue(null, "id", 0));
-						currentTopic.setIndex(index++);
-						currentTopic.setName(xmlResourceParser.getAttributeValue(null, "name"));
-					} else if ("question".equals(tagName)) {
-						currentQuestion = new Question();
-						currentQuestion.setId(xmlResourceParser.getAttributeIntValue(null, "id", 0));
-						currentQuestion.setReference(xmlResourceParser.getAttributeValue(null, "reference"));
-						currentQuestion.setNextTime(new Date());
-						currentQuestion.setTopicId(currentTopic.getId());
-					} else if ("text".equals(tagName)) {
+                    if("chapter".equals(tagName)) {
+                        String chaptername = xmlResourceParser.getAttributeValue(null, "name");
+                        if(topiclevel <= 0) {
+                            topicPrefixes.clear();
+                            topicPrefixes.add(chaptername);
+                        } else {
+                            topicPrefixes.add(chaptername);
+                        }
+                        currentTopic = new Topic();
+                        currentTopic.setId(idcounter++);
+                        currentTopic.setIndex(index++);
+                        String tprefix = TextUtils.join(" - ", topicPrefixes);
+                        currentTopic.setName(tprefix);
+                        topiclevel += 1;
+                    } else if ("question".equals(tagName)) {
+                        currentQuestion = new Question();
+                        currentQuestion.setId(idcounter++);
+                        currentQuestion.setReference(xmlResourceParser.getAttributeValue(null, "id"));
+                        currentQuestion.setNextTime(new Date());
+                        currentQuestion.setTopicId(currentTopic.getId());
+					} else if ("textquestion".equals(tagName)) {
 						expectingQuestion = true;
-					} else if ("correct".equals(tagName)) {
-						expectingAnswer = true;
-					} else if ("incorrect".equals(tagName)) {
+					} else if ("textanswer".equals(tagName)) {
 						expectingAnswer = true;
 					}
 					break;
@@ -109,13 +124,19 @@ public class Repository extends SQLiteOpenHelper {
 					}
 				case XmlPullParser.END_TAG:
 					final String endTagName = xmlResourceParser.getName();
-					if ("topic".equals(endTagName)) {
-						topics.add(currentTopic);
-						currentTopic = null;
-					} else if ("question".equals(endTagName)) {
+                    if("chapter".equals(endTagName)) {
+                        if(topiclevel >= 3) {
+                            topics.add(currentTopic);
+                        }
+                        topiclevel -= 1;
+                        if(topicPrefixes.size() >= 1) {
+                            topicPrefixes.remove(topicPrefixes.size() - 1);
+                        }
+                        currentTopic = null;
+                    } else if ("question".equals(endTagName)) {
 						questions.add(currentQuestion);
 						currentQuestion = null;
-					}
+                    }
 					break;
 				}
 				xmlResourceParser.next();
