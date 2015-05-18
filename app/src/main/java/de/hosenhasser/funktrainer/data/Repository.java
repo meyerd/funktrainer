@@ -129,7 +129,7 @@ public class Repository extends SQLiteOpenHelper {
                             int pos = qtext.indexOf(beginstr);
                             if(pos >= 0) {
                                 int endpos = qtext.indexOf("'>");
-                                if (endpos > 0) {
+                                if (endpos > pos) {
                                     String img = qtext.substring(pos + beginstr.length(), endpos);
                                     images.add(img);
                                     //Log.d("Funktrainer", "found image" + img);
