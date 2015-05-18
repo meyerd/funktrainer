@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <questionaire xmlns='http://hosenhasser.de'>
-    <chapter id="T" name="Prüfungsfragen im Prüfungsteil „Technische Kenntnisse“ der Klasse A" >
+    <chapter id="T" name="Technische Kenntnisse (Klasse A)" >
         <chapter id="A" name="Allgemeine mathematische Grundkenntnisse und Größen" >
             <chapter id="1" name="Größen und Einheiten" >
                 <question id="TA101" >

@@ -43,6 +43,8 @@ import android.widget.SimpleCursorAdapter;
 public class Repository extends SQLiteOpenHelper {
 	private final Context context;
 	private int answerIdSeq;
+	private int imageIdSeq;
+    private int answerImageSeq;
 	private SQLiteDatabase database;
 	private final String done;
 	
@@ -62,6 +64,8 @@ public class Repository extends SQLiteOpenHelper {
 			db.execSQL("CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL)");
 			db.execSQL("CREATE TABLE question (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, reference TEXT, question TEXT NOT NULL, level INT NOT NULL, next_time INT NOT NULL)");
 			db.execSQL("CREATE TABLE answer (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT NOT NULL)");
+			db.execSQL("CREATE TABLE image (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, image TEXT NOT NULL)");
+            db.execSQL("CREATE TABLE answerImage (_id INT NOT NULL PRIMARY KEY, answer_id INT NOT NULL REFERENCES answer(_id) ON DELETE CASCADE, order_index INT NOT NULL, image TEXT NOT NULL)");
 			db.setTransactionSuccessful();
 		} finally {
 			db.endTransaction();
@@ -120,16 +124,23 @@ public class Repository extends SQLiteOpenHelper {
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
-                            String beginstr = "&lt;img src='";
+                            // String beginstr = "&lt;img src='";
+                            String beginstr = "<img src='";
                             int pos = qtext.indexOf(beginstr);
-                            if(pos > 0) {
+                            if(pos >= 0) {
                                 int endpos = qtext.indexOf("'>");
                                 if (endpos > 0) {
                                     String img = qtext.substring(pos + beginstr.length(), endpos);
                                     images.add(img);
-                                    Log.d("Funktrainer", "found image" + img);
+                                    //Log.d("Funktrainer", "found image" + img);
+                                } else {
+                                    endpos = pos + beginstr.length();
                                 }
-                                qtext = qtext.substring(0, pos) + qtext.substring(endpos + 2, qtext.length() - 1);
+                                if(endpos + 2 < qtext.length() - 1) {
+                                    qtext = qtext.substring(0, pos) + qtext.substring(endpos + 2, qtext.length() - 1);
+                                } else {
+                                    qtext = qtext.substring(0, pos);
+                                }
                             }
                             imgi = pos;
                         }
@@ -138,7 +149,34 @@ public class Repository extends SQLiteOpenHelper {
 						expectingQuestion = false;
 					}
 					if (expectingAnswer) {
-						currentQuestion.getAnswers().add(xmlResourceParser.getText());
+                        String answertext = xmlResourceParser.getText();
+
+                        int imgi = 1;
+                        List<String> images = new ArrayList<String>();
+                        while(imgi > 0) {
+                            // String beginstr = "&lt;img src='";
+                            String beginstr = "<img src='";
+                            int pos = answertext.indexOf(beginstr);
+                            if(pos >= 0) {
+                                int endpos = answertext.indexOf("'>");
+                                if (endpos > 0) {
+                                    String img = answertext.substring(pos + beginstr.length(), endpos);
+                                    images.add(img);
+                                    //Log.d("Funktrainer", "found image" + img);
+                                } else {
+                                    endpos = pos + beginstr.length();
+                                }
+                                if(endpos + 2 < answertext.length() - 1) {
+                                    answertext = answertext.substring(0, pos) + answertext.substring(endpos + 2, answertext.length() - 1);
+                                } else {
+                                    answertext = answertext.substring(0, pos);
+                                }
+                            }
+                            imgi = pos;
+                        }
+
+						currentQuestion.getAnswers().add(answertext);
+                        currentQuestion.getAnswerImages().add(images);
 						expectingAnswer = false;
 					}
 				case XmlPullParser.END_TAG:
@@ -258,15 +296,38 @@ public class Repository extends SQLiteOpenHelper {
 		}
 		
 		// _id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT
-		final Cursor answer = getDb().query("answer", new String[]{"answer"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, "order_index");
+		final Cursor answer = getDb().query("answer", new String[]{"_id", "answer"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, "order_index");
 		try {
 			answer.moveToNext();
 			while (!answer.isAfterLast()) {
-				question.getAnswers().add(answer.getString(0));
+                int answerId = answer.getInt(0);
+				question.getAnswers().add(answer.getString(1));
+                final Cursor answerImage = getDb().query("answerImage", new String[]{"image"}, "answer_id=?", new String[]{Integer.toString(answerId)}, null, null, "order_index");
+                List<String> imagesForAnswer = new LinkedList<String>();
+                try {
+                    answerImage.moveToNext();
+                    while (!answerImage.isAfterLast()) {
+                        imagesForAnswer.add(answerImage.getString(0));
+                        answerImage.moveToNext();
+                    }
+                } finally {
+                    answerImage.close();
+                }
+                question.getAnswerImages().add(imagesForAnswer);
 				answer.moveToNext();
 			}	
 		} finally {
 			answer.close();
+		}
+		final Cursor image = getDb().query("image", new String[]{"image"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, "order_index");
+		try {
+			image.moveToNext();
+			while (!image.isAfterLast()) {
+				question.getImages().add(image.getString(0));
+				image.moveToNext();
+			}
+		} finally {
+			image.close();
 		}
 		
 		return question;
@@ -400,9 +461,29 @@ public class Repository extends SQLiteOpenHelper {
 			contentValues.clear();
 			contentValues.put("_id", ++answerIdSeq);
 			contentValues.put("question_id", question.getId());
-			contentValues.put("order_index", answerIndex++);
+			contentValues.put("order_index", answerIndex);
 			contentValues.put("answer", answer);
 			db.insert("answer", null, contentValues);
+            int answerImageIndex = 0;
+            for (final String answerImage : question.getAnswerImages().get(answerIndex)) {
+                contentValues.clear();
+                contentValues.put("_id", ++answerImageSeq);
+                contentValues.put("answer_id", answerIdSeq);
+                contentValues.put("order_index", answerImageIndex++);
+                contentValues.put("image", answerImage);
+                db.insert("answerImage", null, contentValues);
+            }
+            answerIndex++;
+		}
+
+		int imageIndex = 0;
+		for(final String image : question.getImages()) {
+			contentValues.clear();
+			contentValues.put("_id", ++imageIdSeq);
+			contentValues.put("question_id", question.getId());
+			contentValues.put("order_index", imageIndex++);
+			contentValues.put("image", image);
+			db.insert("image", null, contentValues);
 		}
 	}
 	

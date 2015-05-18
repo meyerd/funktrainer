@@ -19,6 +19,7 @@
 package de.hosenhasser.funktrainer;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,8 +32,10 @@ import de.hosenhasser.funktrainer.data.QuestionSelection;
 import de.hosenhasser.funktrainer.data.Repository;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -220,48 +223,48 @@ public class QuestionAsker extends Activity {
 
 		// only enable continue when answer is selected
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				contButton.setEnabled(radioGroup.getCheckedRadioButtonId() != -1);
-			}
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                contButton.setEnabled(radioGroup.getCheckedRadioButtonId() != -1);
+            }
 
-		});
+        });
 	
         contButton.setOnClickListener(new View.OnClickListener() {
 
-			// @Override
-			public void onClick(View v) {
+            // @Override
+            public void onClick(View v) {
 
-				// find what has been selected
-				if (showingCorrectAnswer) {
-					showingCorrectAnswer = false;
-					radioGroup.setEnabled(true);
-					nextQuestion();
-					return;
-				}
-				
-				int selectedButton = radioGroup.getCheckedRadioButtonId();
-				if (selectedButton == correctChoice) {
-					Toast.makeText(QuestionAsker.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
-					
-					repository.answeredCorrect(currentQuestion);
-					
-					nextQuestion();
-					
-					return;
-				} else if (selectedButton != -1) {
-					repository.answeredIncorrect(currentQuestion);
-					
-					showingCorrectAnswer = true;
-					radioGroup.setEnabled(false);
-					
-					final RadioButton correctButton = (RadioButton) findViewById(correctChoice);
-					correctButton.setBackgroundResource(R.color.correctAnswer);
-					
-					return;
-				} else {
-					Toast.makeText(QuestionAsker.this, getString(R.string.noAnswerSelected), Toast.LENGTH_SHORT).show();
-				}
-			}
+                // find what has been selected
+                if (showingCorrectAnswer) {
+                    showingCorrectAnswer = false;
+                    radioGroup.setEnabled(true);
+                    nextQuestion();
+                    return;
+                }
+
+                int selectedButton = radioGroup.getCheckedRadioButtonId();
+                if (selectedButton == correctChoice) {
+                    Toast.makeText(QuestionAsker.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
+
+                    repository.answeredCorrect(currentQuestion);
+
+                    nextQuestion();
+
+                    return;
+                } else if (selectedButton != -1) {
+                    repository.answeredIncorrect(currentQuestion);
+
+                    showingCorrectAnswer = true;
+                    radioGroup.setEnabled(false);
+
+                    final RadioButton correctButton = (RadioButton) findViewById(correctChoice);
+                    correctButton.setBackgroundResource(R.color.correctAnswer);
+
+                    return;
+                } else {
+                    Toast.makeText(QuestionAsker.this, getString(R.string.noAnswerSelected), Toast.LENGTH_SHORT).show();
+                }
+            }
         });		
 	}
 	
@@ -306,13 +309,13 @@ public class QuestionAsker extends Activity {
 
 		final Button restartTopicButton = (Button) findViewById(R.id.restartTopic);
 		restartTopicButton.setOnClickListener(new View.OnClickListener() {
-			//@Override
-			public void onClick(View v) {
-				restartTopic();
-				nextQuestion();
-			}
-			
-		});
+            //@Override
+            public void onClick(View v) {
+                restartTopic();
+                nextQuestion();
+            }
+
+        });
 		return;
 	}
 	
@@ -377,7 +380,21 @@ public class QuestionAsker extends Activity {
 		}
 		correctChoice = radioButtons.get(order.get(0)).getId();
 		for (int i = 0; i < 4; i++) {
-			radioButtons.get(order.get(i)).setText(safeText(question.getAnswers().get(i)));
+            RadioButton rb = radioButtons.get(order.get(i));
+            rb.setText(safeText(question.getAnswers().get(i)));
+            if(question.getAnswerImages().get(i).size() > 0) {
+                String iname = question.getAnswerImages().get(i).get(0);
+                String stripped_iname = iname.substring(0, iname.length() - 4);
+                int imageResourceId = -1;
+                Context context = rb.getContext();
+                imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
+                Drawable img = context.getResources().getDrawable(imageResourceId);
+                rb.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                //rb.setBackgroundResource(imageResourceId);
+            }
+//            } else {
+//                rb.setButtonDrawable(0);
+//            }
 		}
 
 		final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
@@ -394,27 +411,29 @@ public class QuestionAsker extends Activity {
             }
         }
 
-        final ImageView questionImage = getQuestionImage();
-        if (questionImage != null) {
-            linearLayout.addView(questionImage, 2);
+        final List<ImageView> questionImages = getQuestionImage(question.getImages());
+		int idx = 3;
+        for(ImageView iv : questionImages) {
+            linearLayout.addView(iv, idx++);
         }
 
 	}
 	
-    private ImageView getQuestionImage() {
-        int imageResourceId = -1;
-        switch (currentQuestion) {
-        case 9688:
-        	imageResourceId = R.drawable.q99;
-        	break;
-        default:
-            return null;
-        }
+    private List<ImageView> getQuestionImage(List<String> inames) {
+        List<ImageView> images = new ArrayList<ImageView>();
+        for(String iname : inames) {
+            String stripped_iname = iname.substring(0, iname.length() - 4);
+            int imageResourceId = -1;
 
-        final ImageView image = new ImageView(this);
-        // image.setBackgroundColor(Color.WHITE);
-        image.setImageResource(imageResourceId);
-        return image;
+            final ImageView image = new ImageView(this);
+            Context context = image.getContext();
+            imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
+            //imageResourceId = R.drawable.tb111f;
+            // image.setBackgroundColor(Color.WHITE);
+            image.setImageResource(imageResourceId);
+            images.add(image);
+        }
+        return images;
     }
 	
 	private void showNextQuestionAt(final Date when) {
