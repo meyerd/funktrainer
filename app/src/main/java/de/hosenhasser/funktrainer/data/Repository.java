@@ -97,14 +97,18 @@ public class Repository extends SQLiteOpenHelper {
                         if(topiclevel <= 0) {
                             topicPrefixes.clear();
                             topicPrefixes.add(chaptername);
+                            currentTopic = new Topic();
+                            currentTopic.setId(idcounter++);
+                            currentTopic.setIndex(index++);
+                            currentTopic.setName(chaptername);
                         } else {
                             topicPrefixes.add(chaptername);
                         }
-                        currentTopic = new Topic();
-                        currentTopic.setId(idcounter++);
-                        currentTopic.setIndex(index++);
-                        String tprefix = TextUtils.join(" - ", topicPrefixes);
-                        currentTopic.setName(tprefix);
+//                        currentTopic = new Topic();
+//                        currentTopic.setId(idcounter++);
+//                        currentTopic.setIndex(index++);
+//                        String tprefix = TextUtils.join(" - ", topicPrefixes);
+//                        currentTopic.setName(tprefix);
                         topiclevel += 1;
                     } else if ("question".equals(tagName)) {
                         currentQuestion = new Question();
@@ -121,6 +125,7 @@ public class Repository extends SQLiteOpenHelper {
 				case XmlPullParser.TEXT:
 					if (expectingQuestion) {
                         String qtext = xmlResourceParser.getText();
+                        qtext = qtext.replace('\n', ' ');
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
@@ -150,7 +155,7 @@ public class Repository extends SQLiteOpenHelper {
 					}
 					if (expectingAnswer) {
                         String answertext = xmlResourceParser.getText();
-
+                        answertext = answertext.replace('\n', ' ');
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
@@ -182,14 +187,18 @@ public class Repository extends SQLiteOpenHelper {
 				case XmlPullParser.END_TAG:
 					final String endTagName = xmlResourceParser.getName();
                     if("chapter".equals(endTagName)) {
-                        if(topiclevel >= 3) {
+//                        if(topiclevel >= 3) {
+//                            topics.add(currentTopic);
+//                        }
+                        if(topiclevel <= 1) {
                             topics.add(currentTopic);
+                            currentTopic = null;
                         }
                         topiclevel -= 1;
                         if(topicPrefixes.size() >= 1) {
                             topicPrefixes.remove(topicPrefixes.size() - 1);
                         }
-                        currentTopic = null;
+//                        currentTopic = null;
                     } else if ("question".equals(endTagName)) {
 						questions.add(currentQuestion);
 						currentQuestion = null;
