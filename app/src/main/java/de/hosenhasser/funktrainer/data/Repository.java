@@ -148,8 +148,8 @@ public class Repository extends SQLiteOpenHelper {
                                 } else {
                                     endpos = pos + beginstr.length();
                                 }
-                                if(endpos + 2 < qtext.length() - 1) {
-                                    qtext = qtext.substring(0, pos) + qtext.substring(endpos + 2, qtext.length() - 1);
+                                if(endpos + 2 < qtext.length()) {
+                                    qtext = qtext.substring(0, pos) + qtext.substring(endpos + 2, qtext.length());
                                 } else {
                                     qtext = qtext.substring(0, pos);
                                 }
@@ -178,8 +178,8 @@ public class Repository extends SQLiteOpenHelper {
                                 } else {
                                     endpos = pos + beginstr.length();
                                 }
-                                if(endpos + 2 < answertext.length() - 1) {
-                                    answertext = answertext.substring(0, pos) + answertext.substring(endpos + 2, answertext.length() - 1);
+                                if(endpos + 2 < answertext.length()) {
+                                    answertext = answertext.substring(0, pos) + answertext.substring(endpos + 2, answertext.length());
                                 } else {
                                     answertext = answertext.substring(0, pos);
                                 }
