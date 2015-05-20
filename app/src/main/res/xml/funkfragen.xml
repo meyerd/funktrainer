@@ -131,14 +131,14 @@
             </chapter>
             <chapter name="Strom- und Spannungsquellen" id="2" >
                 <question id="TB201" >
-                    <textquestion>Welche Spannung zeigt der Spannungsmesser in folgender Schaltung?&lt;p>&lt;img src='etb201f.png'></textquestion>
+                    <textquestion>Welche Spannung zeigt der Spannungsmesser in folgender Schaltung?&lt;img src='etb201f.png'></textquestion>
                     <textanswer correct="true" >0 V</textanswer>
                     <textanswer>3 V</textanswer>
                     <textanswer>-3 V</textanswer>
                     <textanswer>1,5 V</textanswer>
                 </question>
                 <question id="TB202" >
-                    <textquestion>Folgende Schaltung eines Akkus besteht aus Zellen von je 2 V. Jede Zelle kann 10 Ah Ladung liefern. Welche Daten hat der Akku?&lt;p>&lt;img src='etb202f.png'></textquestion>
+                    <textquestion>Folgende Schaltung eines Akkus besteht aus Zellen von je 2 V. Jede Zelle kann 10 Ah Ladung liefern. Welche Daten hat der Akku?&lt;img src='etb202f.png'></textquestion>
                     <textanswer correct="true" >12 V / 10 Ah</textanswer>
                     <textanswer>12 V / 60 Ah</textanswer>
                     <textanswer>2 V / 10 Ah</textanswer>
@@ -152,7 +152,7 @@
                     <textanswer>Es ist die Flussrichtung der Elektronen vom Pluspol zum Minuspol.</textanswer>
                 </question>
                 <question id="TB204" >
-                    <textquestion>Kann in folgender Schaltung von zwei gleichen Spannungsquellen Strom fließen? Welche Begründung ist richtig?&lt;p>&lt;img src='etb204f.png'></textquestion>
+                    <textquestion>Kann in folgender Schaltung von zwei gleichen Spannungsquellen Strom fließen? Welche Begründung ist richtig?&lt;img src='etb204f.png'></textquestion>
                     <textanswer correct="true" >Nein, weil kein geschlossener Stromkreis vorhanden ist.</textanswer>
                     <textanswer>Nein, weil der Pluspol mit dem Minuspol verbunden ist.</textanswer>
                     <textanswer>Ja, sogar Kurzschlussstrom, weil der Pluspol mit dem Minuspol verbunden ist.</textanswer>
@@ -175,14 +175,14 @@
                     <textanswer>Henry pro Meter (H/m)</textanswer>
                 </question>
                 <question id="TB302" >
-                    <textquestion>Wie nennt man das Feld zwischen zwei parallelen Kondensatorplatten bei Anschluss einer Gleichspannung?&lt;p>&lt;img src='etb302f.png'></textquestion>
+                    <textquestion>Wie nennt man das Feld zwischen zwei parallelen Kondensatorplatten bei Anschluss einer Gleichspannung?&lt;img src='etb302f.png'></textquestion>
                     <textanswer correct="true" >Homogenes elektrisches Feld</textanswer>
                     <textanswer>Homogenes magnetisches Feld</textanswer>
                     <textanswer>Polarisiertes elektrisches Feld</textanswer>
                     <textanswer>Polarisiertes magnetisches Feld</textanswer>
                 </question>
                 <question id="TB303" >
-                    <textquestion>Wie werden die mit X gekennzeichneten Feldlinien einer Vertikalantenne bezeichnet?&lt;p>&lt;img src='etb303f.png'></textquestion>
+                    <textquestion>Wie werden die mit X gekennzeichneten Feldlinien einer Vertikalantenne bezeichnet?&lt;img src='etb303f.png'></textquestion>
                     <textanswer correct="true" >Elektrische Feldlinien</textanswer>
                     <textanswer>Magnetische Feldlinien</textanswer>
                     <textanswer>Polarisierte Feldlinien</textanswer>
@@ -198,7 +198,7 @@
                     <textanswer>Henry pro Meter (H/m)</textanswer>
                 </question>
                 <question id="TB402" >
-                    <textquestion>Wie nennt man das Feld im Innern einer langen Zylinderspule beim Fließen eines Gleichstroms?&lt;p>&lt;img src='etb402f.png'></textquestion>
+                    <textquestion>Wie nennt man das Feld im Innern einer langen Zylinderspule beim Fließen eines Gleichstroms?&lt;img src='etb402f.png'></textquestion>
                     <textanswer correct="true" >Homogenes magnetisches Feld</textanswer>
                     <textanswer>Homogenes elektrisches Feld</textanswer>
                     <textanswer>Konzentrisches magnetisches Feld</textanswer>
@@ -212,7 +212,7 @@
                     <textanswer>homogenes elektrisches Feld um den Leiter.</textanswer>
                 </question>
                 <question id="TB404" >
-                    <textquestion>Wie werden die mit X gekennzeichneten Feldlinien einer Vertikalantenne bezeichnet?&lt;p>&lt;img src='etb404f.png'></textquestion>
+                    <textquestion>Wie werden die mit X gekennzeichneten Feldlinien einer Vertikalantenne bezeichnet?&lt;img src='etb404f.png'></textquestion>
                     <textanswer correct="true" >Magnetische Feldlinien</textanswer>
                     <textanswer>Elektrische Feldlinien</textanswer>
                     <textanswer>Radiale Feldlinien</textanswer>
@@ -242,7 +242,7 @@
                     <textanswer>über die sich unabhängig voneinander ausbreitenden und senkrecht zueinander stehenden elektrischen und magnetischen Felder.</textanswer>
                 </question>
                 <question id="TB503" >
-                    <textquestion>Das folgende Bild zeigt die Feldlinien eines elektromagnetischen Feldes. Welche Polarisation hat die skizzierte Wellenfront?&lt;p>&lt;img src='etb503f.png'></textquestion>
+                    <textquestion>Das folgende Bild zeigt die Feldlinien eines elektromagnetischen Feldes. Welche Polarisation hat die skizzierte Wellenfront?&lt;img src='etb503f.png'></textquestion>
                     <textanswer correct="true" >Horizontale Polarisation</textanswer>
                     <textanswer>Vertikale Polarisation</textanswer>
                     <textanswer>Rechtsdrehende Polarisation</textanswer>
@@ -256,7 +256,7 @@
                     <textanswer>360°.</textanswer>
                 </question>
                 <question id="TB505" >
-                    <textquestion>Die Polarisation des Sendesignals in der Hauptstrahlrichtung dieser Richtantenne ist&lt;p>&lt;img src='etb505f.png'></textquestion>
+                    <textquestion>Die Polarisation des Sendesignals in der Hauptstrahlrichtung dieser Richtantenne ist&lt;img src='etb505f.png'></textquestion>
                     <textanswer correct="true" >vertikal.</textanswer>
                     <textanswer>horizontal.</textanswer>
                     <textanswer>rechtsdrehend.</textanswer>
@@ -328,14 +328,14 @@
                     <textanswer>EHF-Bereich.</textanswer>
                 </question>
                 <question id="TB610" >
-                    <textquestion>Welche Frequenz hat die in diesem Oszillogramm dargestellte Spannung?&lt;p>&lt;img src='etb610f.png'></textquestion>
+                    <textquestion>Welche Frequenz hat die in diesem Oszillogramm dargestellte Spannung?&lt;img src='etb610f.png'></textquestion>
                     <textanswer correct="true" >83,3 kHz</textanswer>
                     <textanswer>833,3 kHz</textanswer>
                     <textanswer>8,3 MHz</textanswer>
                     <textanswer>83,3 MHz</textanswer>
                 </question>
                 <question id="TB611" >
-                    <textquestion>Welche Frequenz hat das in diesem Schirmbild dargestellte Signal?&lt;p>&lt;img src='etb611f.png'></textquestion>
+                    <textquestion>Welche Frequenz hat das in diesem Schirmbild dargestellte Signal?&lt;img src='etb611f.png'></textquestion>
                     <textanswer correct="true" >8,33 MHz</textanswer>
                     <textanswer>16,7 MHz</textanswer>
                     <textanswer>8,33 kHz</textanswer>
@@ -365,7 +365,7 @@
                     <textanswer>kreisförmig</textanswer>
                 </question>
                 <question id="TB702" >
-                    <textquestion>Ein periodische Schwingung, die wie das folgende Signal aussieht, besteht&lt;p>&lt;img src='etb702f.png'></textquestion>
+                    <textquestion>Ein periodische Schwingung, die wie das folgende Signal aussieht, besteht&lt;img src='etb702f.png'></textquestion>
                     <textanswer correct="true" >aus der Grundwelle mit ganzzahligen Vielfachen dieser Frequenz (Oberwellen).</textanswer>
                     <textanswer>aus der Grundwelle und Teilen dieser Frequenz (Unterwellen).</textanswer>
                     <textanswer>aus nur einer einzigen Frequenz.</textanswer>
@@ -527,7 +527,7 @@
                     <textanswer>2,7 MΩ</textanswer>
                 </question>
                 <question id="TC105" >
-                    <textquestion>Welches Bauteil hat folgendes Schaltzeichen?&lt;p>&lt;img src='etc105f.png'></textquestion>
+                    <textquestion>Welches Bauteil hat folgendes Schaltzeichen?&lt;img src='etc105f.png'></textquestion>
                     <textanswer correct="true" >NTC</textanswer>
                     <textanswer>PTC</textanswer>
                     <textanswer>LDR</textanswer>
@@ -592,21 +592,21 @@
                     <textanswer>Rotorkondensator.</textanswer>
                 </question>
                 <question id="TC203" >
-                    <textquestion>Welche Kapazität hat nebenstehend abgebildeter Kondensator?&lt;p>&lt;img src='etc203f.png'></textquestion>
+                    <textquestion>Welche Kapazität hat nebenstehend abgebildeter Kondensator?&lt;img src='etc203f.png'></textquestion>
                     <textanswer correct="true" >330 µF</textanswer>
                     <textanswer>3,3 µF</textanswer>
                     <textanswer>33 µF</textanswer>
                     <textanswer>33000 µF</textanswer>
                 </question>
                 <question id="TC204" >
-                    <textquestion>Welche Kapazität hat nebenstehend abgebildeter Kondensator?&lt;p>&lt;img src='etc204f.png'></textquestion>
+                    <textquestion>Welche Kapazität hat nebenstehend abgebildeter Kondensator?&lt;img src='etc204f.png'></textquestion>
                     <textanswer correct="true" >470 pF</textanswer>
                     <textanswer>4,7 pF</textanswer>
                     <textanswer>47 pF</textanswer>
                     <textanswer>47000 pF</textanswer>
                 </question>
                 <question id="TC205" >
-                    <textquestion>Welche Kapazität hat nebenstehend abgebildeter Kondensator?&lt;p>&lt;img src='etc205f.png'></textquestion>
+                    <textquestion>Welche Kapazität hat nebenstehend abgebildeter Kondensator?&lt;img src='etc205f.png'></textquestion>
                     <textanswer correct="true" >8,2 pF</textanswer>
                     <textanswer>820 pF</textanswer>
                     <textanswer>82 pF</textanswer>
@@ -636,14 +636,14 @@
             </chapter>
             <chapter name="Spule" id="3" >
                 <question id="TC301" >
-                    <textquestion>Wie ändert sich die Induktivität einer Spule von 12 µH, wenn die Windungszahl bei gleicher Wickellänge verdoppelt wird?&lt;p>&lt;img src='etc301f.png'></textquestion>
+                    <textquestion>Wie ändert sich die Induktivität einer Spule von 12 µH, wenn die Windungszahl bei gleicher Wickellänge verdoppelt wird?&lt;img src='etc301f.png'></textquestion>
                     <textanswer correct="true" >Die Induktivität steigt auf 48 µH.</textanswer>
                     <textanswer>Die Induktivität steigt auf 24 µH.</textanswer>
                     <textanswer>Die Induktivität sinkt auf 6 µH.</textanswer>
                     <textanswer>Die Induktivität sinkt auf 3 µH.</textanswer>
                 </question>
                 <question id="TC302" >
-                    <textquestion>Wie ändert sich die Induktivität einer Spule von 12 µH, wenn die Wicklung auf dem Wickelkörper bei gleicher Windungszahl auf die doppelte Länge auseinander gezogen wird?&lt;p>&lt;img src='etc302f.png'></textquestion>
+                    <textquestion>Wie ändert sich die Induktivität einer Spule von 12 µH, wenn die Wicklung auf dem Wickelkörper bei gleicher Windungszahl auf die doppelte Länge auseinander gezogen wird?&lt;img src='etc302f.png'></textquestion>
                     <textanswer correct="true" >Die Induktivität sinkt auf 6 µH.</textanswer>
                     <textanswer>Die Induktivität steigt auf 24 µH.</textanswer>
                     <textanswer>Die Induktivität steigt auf 48 µH.</textanswer>
@@ -657,14 +657,14 @@
                     <textanswer>Durch Einbau der Spule in einen Abschirmbecher.</textanswer>
                 </question>
                 <question id="TC304" >
-                    <textquestion>Das folgende Bild zeigt einen Kern, um den ein Kabel für den Bau einer Netzdrossel gewickelt ist. Der Kern sollte aus&lt;p>&lt;img src='etc304f.png'></textquestion>
+                    <textquestion>Das folgende Bild zeigt einen Kern, um den ein Kabel für den Bau einer Netzdrossel gewickelt ist. Der Kern sollte aus&lt;img src='etc304f.png'></textquestion>
                     <textanswer correct="true" >Ferrit bestehen.</textanswer>
                     <textanswer>Kunststoff bestehen.</textanswer>
                     <textanswer>Stahl bestehen.</textanswer>
                     <textanswer>aus gut leitendem Material bestehen.</textanswer>
                 </question>
                 <question id="TC305" >
-                    <textquestion>Schaltet man zwei Glühlampen gleichzeitig an eine Spannungsquelle, wobei eine Glühlampe zum Helligkeitsausgleich über einen Widerstand und die andere über eine Spule mit vielen Windungen und Eisenkern angeschlossen ist, so&lt;p>&lt;img src='etc305f.png'></textquestion>
+                    <textquestion>Schaltet man zwei Glühlampen gleichzeitig an eine Spannungsquelle, wobei eine Glühlampe zum Helligkeitsausgleich über einen Widerstand und die andere über eine Spule mit vielen Windungen und Eisenkern angeschlossen ist, so&lt;img src='etc305f.png'></textquestion>
                     <textanswer correct="true" >leuchtet H1 zuerst.</textanswer>
                     <textanswer>leuchtet H2 zuerst.</textanswer>
                     <textanswer>leuchten H1 und H2 genau gleich schnell.</textanswer>
@@ -752,14 +752,14 @@
                     <textanswer>Sie erhöht sich mit zunehmendem Durchlassstrom.</textanswer>
                 </question>
                 <question id="TC508" >
-                    <textquestion>Wozu dient folgende Schaltung? Sie dient&lt;p>&lt;img src='etc508f.png'></textquestion>
+                    <textquestion>Wozu dient folgende Schaltung? Sie dient&lt;img src='etc508f.png'></textquestion>
                     <textanswer correct="true" >zur Spannungsstabilisierung.</textanswer>
                     <textanswer>zur Signalbegrenzung.</textanswer>
                     <textanswer>als Leuchtanzeige.</textanswer>
                     <textanswer>zur Stromgewinnung.</textanswer>
                 </question>
                 <question id="TC509" >
-                    <textquestion>Wozu dient die folgende Schaltung? Sie dient&lt;p>&lt;img src='etc509f.png'></textquestion>
+                    <textquestion>Wozu dient die folgende Schaltung? Sie dient&lt;img src='etc509f.png'></textquestion>
                     <textanswer correct="true" >als Leuchtanzeige.</textanswer>
                     <textanswer>zur Signalbegrenzung.</textanswer>
                     <textanswer>zur Spannungsstabilisierung.</textanswer>
@@ -782,14 +782,14 @@
                     <textanswer>1 zu 100 bis 1 zu 500.</textanswer>
                 </question>
                 <question id="TC603" >
-                    <textquestion>Bei diesem Bauelement handelt es sich um einen&lt;p>&lt;img src='etc603f.png'></textquestion>
+                    <textquestion>Bei diesem Bauelement handelt es sich um einen&lt;img src='etc603f.png'></textquestion>
                     <textanswer correct="true" >NPN-Transistor.</textanswer>
                     <textanswer>PNP-Transistor.</textanswer>
                     <textanswer>Sperrschicht-FET.</textanswer>
                     <textanswer>MOSFET.</textanswer>
                 </question>
                 <question id="TC604" >
-                    <textquestion>Bei diesem Bauelement handelt es sich um einen&lt;p>&lt;img src='etc604f.png'></textquestion>
+                    <textquestion>Bei diesem Bauelement handelt es sich um einen&lt;img src='etc604f.png'></textquestion>
                     <textanswer correct="true" >PNP-Transistor.</textanswer>
                     <textanswer>NPN-Transistor.</textanswer>
                     <textanswer>P-Kanal-FET.</textanswer>
@@ -845,7 +845,7 @@
                     <textanswer>Der Gatestrom steuert den Widerstand des Kanals zwischen Source und Drain.</textanswer>
                 </question>
                 <question id="TC612" >
-                    <textquestion>Wie bezeichnet man die Anschlüsse des nebenstehenden Transistors? &lt;p>&lt;img src='etc612f.png'></textquestion>
+                    <textquestion>Wie bezeichnet man die Anschlüsse des nebenstehenden Transistors? &lt;img src='etc612f.png'></textquestion>
                     <textanswer correct="true" >1 ... Drain, 2 … Source, 3 … Gate.</textanswer>
                     <textanswer>1 ... Source, 2 … Drain, 3 … Gate.</textanswer>
                     <textanswer>1 ... Anode, 2 … Katode, 3 … Gate.</textanswer>
@@ -856,56 +856,56 @@
         <chapter name="Elektronische Schaltungen und deren Merkmale" id="D" >
             <chapter name="Serien- und Parallelschaltung von Widerständen, Spulen und Kondensatoren" id="1" >
                 <question id="TD101" >
-                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 500 Ω, R_2 = 1000 Ω und R_3 = 1 kΩ&lt;p>&lt;img src='etd101f.png'></textquestion>
+                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 500 Ω, R_2 = 1000 Ω und R_3 = 1 kΩ&lt;img src='etd101f.png'></textquestion>
                     <textanswer correct="true" >1 kΩ</textanswer>
                     <textanswer>2,5 kΩ</textanswer>
                     <textanswer>501 Ω</textanswer>
                     <textanswer>5,1 kΩ</textanswer>
                 </question>
                 <question id="TD102" >
-                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 1 kΩ, R_2 = 2000 Ω und R_3 = 2 kΩ&lt;p>&lt;img src='etd101f.png'></textquestion>
+                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 1 kΩ, R_2 = 2000 Ω und R_3 = 2 kΩ&lt;img src='etd101f.png'></textquestion>
                     <textanswer correct="true" >2 kΩ</textanswer>
                     <textanswer>2,5 kΩ</textanswer>
                     <textanswer>501 Ω</textanswer>
                     <textanswer>5,1 kΩ</textanswer>
                 </question>
                 <question id="TD103" >
-                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 500 Ω, R_2 = 500 Ω und R_3 = 1 kΩ&lt;p>&lt;img src='etd103f.png'></textquestion>
+                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 500 Ω, R_2 = 500 Ω und R_3 = 1 kΩ&lt;img src='etd103f.png'></textquestion>
                     <textanswer correct="true" >500 Ω</textanswer>
                     <textanswer>250 Ω</textanswer>
                     <textanswer>1 kΩ</textanswer>
                     <textanswer>2 kΩ</textanswer>
                 </question>
                 <question id="TD104" >
-                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 500 Ω, R_2 = 1,5 kΩ und R_3 = 2 kΩ&lt;p>&lt;img src='etd103f.png'></textquestion>
+                    <textquestion>Wie groß ist der Ersatzwiderstand der Gesamtschaltung? Gegeben: R_1 = 500 Ω, R_2 = 1,5 kΩ und R_3 = 2 kΩ&lt;img src='etd103f.png'></textquestion>
                     <textanswer correct="true" >1 kΩ</textanswer>
                     <textanswer>4 kΩ</textanswer>
                     <textanswer>500 Ω</textanswer>
                     <textanswer>2 kΩ</textanswer>
                 </question>
                 <question id="TD105" >
-                    <textquestion>Welche Gesamtkapazität hat die folgende Schaltung? Gegeben: C_1 = 0,01 µF; C_2 = 5 nF, C_3 = 5000 pF&lt;p>&lt;img src='etd105f.png'></textquestion>
+                    <textquestion>Welche Gesamtkapazität hat die folgende Schaltung? Gegeben: C_1 = 0,01 µF; C_2 = 5 nF, C_3 = 5000 pF&lt;img src='etd105f.png'></textquestion>
                     <textanswer correct="true" >5 nF</textanswer>
                     <textanswer>0,015 nF</textanswer>
                     <textanswer>7,5 nF</textanswer>
                     <textanswer>10 nF</textanswer>
                 </question>
                 <question id="TD106" >
-                    <textquestion>Welche Gesamtkapazität hat die folgende Schaltung? Gegeben: C_1 = 0,02 µF; C_2 = 10 nF; C_3 = 10000 pF&lt;p>&lt;img src='etd105f.png'></textquestion>
+                    <textquestion>Welche Gesamtkapazität hat die folgende Schaltung? Gegeben: C_1 = 0,02 µF; C_2 = 10 nF; C_3 = 10000 pF&lt;img src='etd105f.png'></textquestion>
                     <textanswer correct="true" >10 nF</textanswer>
                     <textanswer>5 nF</textanswer>
                     <textanswer>2,5 nF</textanswer>
                     <textanswer>40 nF</textanswer>
                 </question>
                 <question id="TD107" >
-                    <textquestion>Welche Gesamtkapazität hat die folgende Schaltung? Gegeben: C_1 = 0,01 µF; C_2 = 10 nF; C_3 = 5000 pF&lt;p>&lt;img src='etd107f.png'></textquestion>
+                    <textquestion>Welche Gesamtkapazität hat die folgende Schaltung? Gegeben: C_1 = 0,01 µF; C_2 = 10 nF; C_3 = 5000 pF&lt;img src='etd107f.png'></textquestion>
                     <textanswer correct="true" >10 nF</textanswer>
                     <textanswer>5 nF</textanswer>
                     <textanswer>2,5 nF</textanswer>
                     <textanswer>0,015 nF</textanswer>
                 </question>
                 <question id="TD108" >
-                    <textquestion>Die Gesamtspannung U an folgendem Spannungsteiler beträgt 12,2 V. Die Widerstände haben die Werte R_1 = 10 kΩ und R_2 = 2,2 kΩ Wie groß ist die Teilspannung U_2?&lt;p>&lt;img src='etd108f.png'></textquestion>
+                    <textquestion>Die Gesamtspannung U an folgendem Spannungsteiler beträgt 12,2 V. Die Widerstände haben die Werte R_1 = 10 kΩ und R_2 = 2,2 kΩ Wie groß ist die Teilspannung U_2?&lt;img src='etd108f.png'></textquestion>
                     <textanswer correct="true" >2,20 V</textanswer>
                     <textanswer>2,64 V</textanswer>
                     <textanswer>10,0 V</textanswer>
@@ -928,14 +928,14 @@
             </chapter>
             <chapter name="Schwingkreise und Filter" id="2" >
                 <question id="TD201" >
-                    <textquestion>Der Impedanzfrequenzgang in der Abbildung zeigt die Kennlinie&lt;p>&lt;img src='etd201f.png'></textquestion>
+                    <textquestion>Der Impedanzfrequenzgang in der Abbildung zeigt die Kennlinie&lt;img src='etd201f.png'></textquestion>
                     <textanswer correct="true" >eines Serienschwingkreises.</textanswer>
                     <textanswer>eines Parallelschwingkreises.</textanswer>
                     <textanswer>einer Induktivität.</textanswer>
                     <textanswer>einer Kapazität.</textanswer>
                 </question>
                 <question id="TD202" >
-                    <textquestion>Der im folgenden Bild dargestellte Impedanzfrequenzgang ist typisch für&lt;p>&lt;img src='etd202f.png'></textquestion>
+                    <textquestion>Der im folgenden Bild dargestellte Impedanzfrequenzgang ist typisch für&lt;img src='etd202f.png'></textquestion>
                     <textanswer correct="true" >einen Parallelschwingkreis.</textanswer>
                     <textanswer>einen Kondensator.</textanswer>
                     <textanswer>eine Spule.</textanswer>
@@ -963,28 +963,28 @@
                     <textanswer>Wie eine Spule mit sehr großer Induktivität.</textanswer>
                 </question>
                 <question id="TD206" >
-                    <textquestion>Was stellt die folgende Schaltung dar?&lt;p>&lt;img src='etd206f.png'></textquestion>
+                    <textquestion>Was stellt die folgende Schaltung dar?&lt;img src='etd206f.png'></textquestion>
                     <textanswer correct="true" >Hochpass</textanswer>
                     <textanswer>Sperrkreis</textanswer>
                     <textanswer>Bandpass</textanswer>
                     <textanswer>Tiefpass</textanswer>
                 </question>
                 <question id="TD207" >
-                    <textquestion>Was stellt die folgende Schaltung dar?&lt;p>&lt;img src='etd207f.png'></textquestion>
+                    <textquestion>Was stellt die folgende Schaltung dar?&lt;img src='etd207f.png'></textquestion>
                     <textanswer correct="true" >Sperrkreis</textanswer>
                     <textanswer>Saugkreis</textanswer>
                     <textanswer>Bandpass</textanswer>
                     <textanswer>Tiefpass</textanswer>
                 </question>
                 <question id="TD208" >
-                    <textquestion>Was stellt die folgende Schaltung dar?&lt;p>&lt;img src='etd208f.png'></textquestion>
+                    <textquestion>Was stellt die folgende Schaltung dar?&lt;img src='etd208f.png'></textquestion>
                     <textanswer correct="true" >Tiefpass</textanswer>
                     <textanswer>Sperrkreis</textanswer>
                     <textanswer>Bandpass</textanswer>
                     <textanswer>Hochpass</textanswer>
                 </question>
                 <question id="TD209" >
-                    <textquestion>Was stellt die folgende Schaltung dar?&lt;p>&lt;img src='etd209f.png'></textquestion>
+                    <textquestion>Was stellt die folgende Schaltung dar?&lt;img src='etd209f.png'></textquestion>
                     <textanswer correct="true" >Saugkreis</textanswer>
                     <textanswer>Sperrkreis</textanswer>
                     <textanswer>Bandpass</textanswer>
@@ -1021,14 +1021,14 @@
                     <textanswer>6,5 Ω</textanswer>
                 </question>
                 <question id="TD304" >
-                    <textquestion>Berechnen Sie die Leerlaufausgangsspannung dieser Schaltung für ein Transformationsverhältnis von 5:1.&lt;p>&lt;img src='etd304f.png'></textquestion>
+                    <textquestion>Berechnen Sie die Leerlaufausgangsspannung dieser Schaltung für ein Transformationsverhältnis von 5:1.&lt;img src='etd304f.png'></textquestion>
                     <textanswer correct="true" >Zirka 65 Volt</textanswer>
                     <textanswer>Zirka 46 Volt</textanswer>
                     <textanswer>Zirka 40 Volt</textanswer>
                     <textanswer>Zirka 28 Volt</textanswer>
                 </question>
                 <question id="TD305" >
-                    <textquestion>Berechnen Sie die Leerlaufausgangsspannung dieser Schaltung für ein Transformationsverhältnis von 8:1.&lt;p>&lt;img src='etd304f.png'></textquestion>
+                    <textquestion>Berechnen Sie die Leerlaufausgangsspannung dieser Schaltung für ein Transformationsverhältnis von 8:1.&lt;img src='etd304f.png'></textquestion>
                     <textanswer correct="true" >Zirka 40 Volt</textanswer>
                     <textanswer>Zirka 46 Volt</textanswer>
                     <textanswer>Zirka 65 Volt</textanswer>
@@ -1171,28 +1171,28 @@
                     <textanswer>AM</textanswer>
                 </question>
                 <question id="TE103" >
-                    <textquestion>Das folgende Oszillogramm zeigt ein AM-Signal. Der Modulationsgrad beträgt hier zirka&lt;p>&lt;img src='ete103f.png'></textquestion>
+                    <textquestion>Das folgende Oszillogramm zeigt ein AM-Signal. Der Modulationsgrad beträgt hier zirka&lt;img src='ete103f.png'></textquestion>
                     <textanswer correct="true" >50 %.</textanswer>
                     <textanswer>33 %.</textanswer>
                     <textanswer>67 %.</textanswer>
                     <textanswer>75 %.</textanswer>
                 </question>
                 <question id="TE104" >
-                    <textquestion>Das folgende Oszillogramm zeigt ein AM-Signal. Der Modulationsgrad beträgt hier zirka&lt;p>&lt;img src='ete104f.png'></textquestion>
+                    <textquestion>Das folgende Oszillogramm zeigt ein AM-Signal. Der Modulationsgrad beträgt hier zirka&lt;img src='ete104f.png'></textquestion>
                     <textanswer correct="true" >45 %.</textanswer>
                     <textanswer>55 %.</textanswer>
                     <textanswer>30 %.</textanswer>
                     <textanswer>75 %.</textanswer>
                 </question>
                 <question id="TE105" >
-                    <textquestion>Das folgende Oszillogramm zeigt&lt;p>&lt;img src='ete105f.png'></textquestion>
+                    <textquestion>Das folgende Oszillogramm zeigt&lt;img src='ete105f.png'></textquestion>
                     <textanswer correct="true" >ein typisches Zweiton-SSB-Testsignal.</textanswer>
                     <textanswer>ein typisches Einton-FM-Testsignal.</textanswer>
                     <textanswer>ein typisches 100%-AM-Signal.</textanswer>
                     <textanswer>ein typisches CW-Signal.</textanswer>
                 </question>
                 <question id="TE106" >
-                    <textquestion>Das folgende Oszillogramm zeigt ein typisches Zweiton-SSB-Testsignal. Bestimmen Sie den Modulationsgrad!&lt;p>&lt;img src='ete106f.png'></textquestion>
+                    <textquestion>Das folgende Oszillogramm zeigt ein typisches Zweiton-SSB-Testsignal. Bestimmen Sie den Modulationsgrad!&lt;img src='ete106f.png'></textquestion>
                     <textanswer correct="true" >Man kann keinen Modulationsgrad bestimmen, da es keinen Träger gibt.</textanswer>
                     <textanswer>Er beträgt 100 %.</textanswer>
                     <textanswer>Er beträgt 0 %.</textanswer>
@@ -1412,14 +1412,14 @@
                     <textanswer>Sie reduziert die Höhe der Versorgungsspannungen.</textanswer>
                 </question>
                 <question id="TF204" >
-                    <textquestion>Ein Doppelsuper hat eine erste ZF von 10,7 MHz und eine zweite ZF von 460 kHz. Die Empfangsfrequenz soll 28 MHz sein. Welche Frequenzen sind für den VFO und den CO erforderlich, wenn die Oszillatoren oberhalb der Mischer-Eingangssignale schwingen sollen?&lt;p>&lt;img src='etf204f.png'></textquestion>
+                    <textquestion>Ein Doppelsuper hat eine erste ZF von 10,7 MHz und eine zweite ZF von 460 kHz. Die Empfangsfrequenz soll 28 MHz sein. Welche Frequenzen sind für den VFO und den CO erforderlich, wenn die Oszillatoren oberhalb der Mischer-Eingangssignale schwingen sollen?&lt;img src='etf204f.png'></textquestion>
                     <textanswer correct="true" >Der VFO muss bei 38,70 MHz und der CO bei 11,16 MHz schwingen.</textanswer>
                     <textanswer>Der VFO muss bei 10,26 MHz und der CO bei 17,30 MHz schwingen.</textanswer>
                     <textanswer>Der VFO muss bei 11,16 MHz und der CO bei 38,70 MHz schwingen.</textanswer>
                     <textanswer>Der VFO muss bei 28,460 MHz und der CO bei 38,26 MHz schwingen.</textanswer>
                 </question>
                 <question id="TF205" >
-                    <textquestion>Ein Doppelsuper hat eine erste ZF von 9 MHz und eine zweite ZF von 460 kHz. Die Empfangsfrequenz soll 21,1 MHz sein. Welche Frequenzen sind für den VFO und den CO erforderlich, wenn die Oszillatoren oberhalb der Mischer-Eingangssignale schwingen sollen?&lt;p>&lt;img src='etf204f.png'></textquestion>
+                    <textquestion>Ein Doppelsuper hat eine erste ZF von 9 MHz und eine zweite ZF von 460 kHz. Die Empfangsfrequenz soll 21,1 MHz sein. Welche Frequenzen sind für den VFO und den CO erforderlich, wenn die Oszillatoren oberhalb der Mischer-Eingangssignale schwingen sollen?&lt;img src='etf204f.png'></textquestion>
                     <textanswer correct="true" >Der VFO muss bei 30,1 MHz und der CO bei 9,46 MHz schwingen.</textanswer>
                     <textanswer>Der VFO muss bei 9,46 MHz und der CO bei 8,54 MHz schwingen.</textanswer>
                     <textanswer>Der VFO muss bei 30,1 MHz und der CO bei 8,54 MHz schwingen.</textanswer>
@@ -1428,7 +1428,7 @@
             </chapter>
             <chapter name="Betrieb und Funktionsweise einzelner Stufen" id="3" >
                 <question id="TF301" >
-                    <textquestion>In der folgenden Schaltung können bei einer Empfangsfrequenz von 28,3 MHz und einer Oszillatorfrequenz von 39 MHz Spiegelfrequenzstörungen bei&lt;p>&lt;img src='etf301f.png'></textquestion>
+                    <textquestion>In der folgenden Schaltung können bei einer Empfangsfrequenz von 28,3 MHz und einer Oszillatorfrequenz von 39 MHz Spiegelfrequenzstörungen bei&lt;img src='etf301f.png'></textquestion>
                     <textanswer correct="true" >49,7 MHz auftreten.</textanswer>
                     <textanswer>39 MHz auftreten.</textanswer>
                     <textanswer>67,3 MHz auftreten.</textanswer>
@@ -1775,7 +1775,7 @@
                     <textanswer>elliptische Polarisation.</textanswer>
                 </question>
                 <question id="TH110" >
-                    <textquestion>Sie wollen eine Zweibandantenne für 160 und 80 m selbst bauen. Welche der folgenden Antworten enthält die richtige Drahtlänge l zwischen den Schwingkreisen und die richtige Resonanzfrequenz f_res der Kreise?&lt;p>&lt;img src='eth110f.png'></textquestion>
+                    <textquestion>Sie wollen eine Zweibandantenne für 160 und 80 m selbst bauen. Welche der folgenden Antworten enthält die richtige Drahtlänge l zwischen den Schwingkreisen und die richtige Resonanzfrequenz f_res der Kreise?&lt;img src='eth110f.png'></textquestion>
                     <textanswer correct="true" >l beträgt zirka 40 m, f_res liegt bei zirka 3,65 MHz.</textanswer>
                     <textanswer>l beträgt zirka 80 m, f_res liegt bei zirka 3,65 MHz.</textanswer>
                     <textanswer>l beträgt zirka 40 m, f_res liegt bei zirka 1,85 MHz.</textanswer>
@@ -1789,7 +1789,7 @@
                     <textanswer>Erdelemente.</textanswer>
                 </question>
                 <question id="TH112" >
-                    <textquestion>Das folgende Bild enthält eine einfache Richtantenne. Die Bezeichnungen der Elemente in numerischer Reihenfolge lauten&lt;p>&lt;img src='eth112f.png'></textquestion>
+                    <textquestion>Das folgende Bild enthält eine einfache Richtantenne. Die Bezeichnungen der Elemente in numerischer Reihenfolge lauten&lt;img src='eth112f.png'></textquestion>
                     <textanswer correct="true" >1 Reflektor, 2 Strahler und 3 Direktor.</textanswer>
                     <textanswer>1 Strahler, 2 Direktor und 3 Reflektor.</textanswer>
                     <textanswer>1 Direktor, 2 Strahler und 3 Reflektor.</textanswer>
@@ -1813,10 +1813,10 @@
                 </question>
                 <question id="TH202" >
                     <textquestion>Welches Strahlungsdiagramm ist der Antenne richtig zugeordnet?</textquestion>
-                    <textanswer correct="true" >Dipol&lt;p>&lt;img src='eth202a.png'></textanswer>
-                    <textanswer>Groundplane&lt;p>&lt;img src='eth202b.png'></textanswer>
-                    <textanswer>Yagiantenne&lt;p>&lt;img src='eth202c.png'></textanswer>
-                    <textanswer>Faltdipol&lt;p>&lt;img src='eth202d.png'></textanswer>
+                    <textanswer correct="true" >Dipol&lt;img src='eth202a.png'></textanswer>
+                    <textanswer>Groundplane&lt;img src='eth202b.png'></textanswer>
+                    <textanswer>Yagiantenne&lt;img src='eth202c.png'></textanswer>
+                    <textanswer>Faltdipol&lt;img src='eth202d.png'></textanswer>
                 </question>
                 <question id="TH203" >
                     <textquestion>Welchen Eingangs- bzw. Fußpunktwiderstand hat die Groundplane?</textquestion>
@@ -1854,14 +1854,14 @@
                     <textanswer>100 %</textanswer>
                 </question>
                 <question id="TH208" >
-                    <textquestion>Das folgende Bild enthält verschiedene UKW-Vertikalantennen. In welcher der folgenden Zeilen ist die entsprechende Bezeichnung der Antenne richtig zugeordnet?&lt;p>&lt;img src='eth208f.png'></textquestion>
+                    <textquestion>Das folgende Bild enthält verschiedene UKW-Vertikalantennen. In welcher der folgenden Zeilen ist die entsprechende Bezeichnung der Antenne richtig zugeordnet?&lt;img src='eth208f.png'></textquestion>
                     <textanswer correct="true" >Bild 1 zeigt einen λ/4-Vertikalstrahler (Viertelwellenstab).</textanswer>
                     <textanswer>Bild 2 zeigt eine Sperrtopf-Antenne.</textanswer>
                     <textanswer>Bild 3 zeigt eine λ/2-Antenne mit Fuchskreis.</textanswer>
                     <textanswer>Bild 4 zeigt eine 5/8-λ-Antenne.</textanswer>
                 </question>
                 <question id="TH209" >
-                    <textquestion>Das folgende Bild enthält verschiedene UKW-Antennen. Welche der folgenden Antworten ist richtig?&lt;p>&lt;img src='eth209f.png'></textquestion>
+                    <textquestion>Das folgende Bild enthält verschiedene UKW-Antennen. Welche der folgenden Antworten ist richtig?&lt;img src='eth209f.png'></textquestion>
                     <textanswer correct="true" >Bild 1 zeigt eine horizontal polarisierte Yagi-Antenne.</textanswer>
                     <textanswer>Bild 2 zeigt eine Kreuz-Yagi-Antenne.</textanswer>
                     <textanswer>Bild 3 zeigt eine gestockte X-Yagi-Antenne.</textanswer>
@@ -1905,14 +1905,14 @@
                     <textanswer>1 dBm entspricht 0 mW; 2 dBm entspricht 3 mW; 100 dBm entspricht 20 mW</textanswer>
                 </question>
                 <question id="TH305" >
-                    <textquestion>Welche Dämpfung hat ein 25 m langes Koaxkabel vom Typ Aircell 7 bei 145 MHz? (siehe hierzu beiliegendes Diagramm)&lt;p>&lt;img src='ekabeldaempfung.png'></textquestion>
+                    <textquestion>Welche Dämpfung hat ein 25 m langes Koaxkabel vom Typ Aircell 7 bei 145 MHz? (siehe hierzu beiliegendes Diagramm)&lt;img src='ekabeldaempfung.png'></textquestion>
                     <textanswer correct="true" >1,9 dB</textanswer>
                     <textanswer>7,5 dB</textanswer>
                     <textanswer>3,75 dB</textanswer>
                     <textanswer>1,5 dB</textanswer>
                 </question>
                 <question id="TH306" >
-                    <textquestion>Welche Dämpfung hat ein 20 m langes Koaxkabel vom Typ RG 58 bei 29 MHz? (siehe hierzu beiliegendes Diagramm)&lt;p>&lt;img src='ekabeldaempfung.png'></textquestion>
+                    <textquestion>Welche Dämpfung hat ein 20 m langes Koaxkabel vom Typ RG 58 bei 29 MHz? (siehe hierzu beiliegendes Diagramm)&lt;img src='ekabeldaempfung.png'></textquestion>
                     <textanswer correct="true" >1,8 dB</textanswer>
                     <textanswer>4,5 dB</textanswer>
                     <textanswer>3,75 dB</textanswer>
@@ -1991,7 +1991,7 @@
                     <textanswer>das Koaxialkabel in einem Kunststoffrohr zur mechanischen Schirmung unterzubringen.</textanswer>
                 </question>
                 <question id="TH405" >
-                    <textquestion>Auf einem Ferritkern sind etliche Windungen Koaxialkabel aufgewickelt. Diese Anordnung kann dazu dienen,&lt;p>&lt;img src='eth405f.png'></textquestion>
+                    <textquestion>Auf einem Ferritkern sind etliche Windungen Koaxialkabel aufgewickelt. Diese Anordnung kann dazu dienen,&lt;img src='eth405f.png'></textquestion>
                     <textanswer correct="true" >Mantelwellen zu dämpfen.</textanswer>
                     <textanswer>statische Aufladungen zu verhindern.</textanswer>
                     <textanswer>eine Antennenleitung abzustimmen.</textanswer>
@@ -2216,7 +2216,7 @@
                     <textanswer>lokal begrenzten kurzzeitigen Ausfall der Reflexion durch ungewöhnlich hohe Ionisation innerhalb der E-Schicht.</textanswer>
                 </question>
                 <question id="TI310" >
-                    <textquestion>In dem folgenden Geländeprofil sei S ein Sender im 2-m-Band, E1 bis E4 vier Empfangsstationen. Welche Funkstrecke geht wahrscheinlich am besten, welche am schlechtesten?&lt;p>&lt;img src='eti310f.png'></textquestion>
+                    <textquestion>In dem folgenden Geländeprofil sei S ein Sender im 2-m-Band, E1 bis E4 vier Empfangsstationen. Welche Funkstrecke geht wahrscheinlich am besten, welche am schlechtesten?&lt;img src='eti310f.png'></textquestion>
                     <textanswer correct="true" >Am besten S-E3, am schlechtesten S-E1</textanswer>
                     <textanswer>Am besten S-E1, am schlechtesten S-E4</textanswer>
                     <textanswer>Am besten S-E3, am schlechtesten S-E4</textanswer>
@@ -2313,7 +2313,7 @@
                     <textanswer>Der Spannungsmesser ist in den Stromkreis einzuschleifen und sollte hochohmig sein.</textanswer>
                 </question>
                 <question id="TJ203" >
-                    <textquestion>Die Zeitbasis eines Oszilloskops ist so eingestellt, dass ein Skalenteil 0,5 ms entspricht. Welche Frequenz hat die angelegte Spannung?&lt;p>&lt;img src='etj203f.png'></textquestion>
+                    <textquestion>Die Zeitbasis eines Oszilloskops ist so eingestellt, dass ein Skalenteil 0,5 ms entspricht. Welche Frequenz hat die angelegte Spannung?&lt;img src='etj203f.png'></textquestion>
                     <textanswer correct="true" >250 Hz.</textanswer>
                     <textanswer>500 Hz.</textanswer>
                     <textanswer>667 Hz.</textanswer>
@@ -2327,7 +2327,7 @@
                     <textanswer>Als Abschluss des Senders.</textanswer>
                 </question>
                 <question id="TJ205" >
-                    <textquestion>Welche Spannung wird bei dem folgenden Messinstrument angezeigt, wenn dessen Messbereich auf 10 V eingestellt ist?&lt;p>&lt;img src='etj205f.png'></textquestion>
+                    <textquestion>Welche Spannung wird bei dem folgenden Messinstrument angezeigt, wenn dessen Messbereich auf 10 V eingestellt ist?&lt;img src='etj205f.png'></textquestion>
                     <textanswer correct="true" >2,93 V</textanswer>
                     <textanswer>29,3 V</textanswer>
                     <textanswer>8,8 V</textanswer>
@@ -2369,7 +2369,7 @@
                     <textanswer>des Wirkungsgrades.</textanswer>
                 </question>
                 <question id="TJ211" >
-                    <textquestion>An welchem Punkt sollte das Stehwellenmessgerät eingeschleift werden, um zu prüfen, ob der Sender gut an die Antennenanlage angepasst ist?&lt;p>&lt;img src='etj211f.png'></textquestion>
+                    <textquestion>An welchem Punkt sollte das Stehwellenmessgerät eingeschleift werden, um zu prüfen, ob der Sender gut an die Antennenanlage angepasst ist?&lt;img src='etj211f.png'></textquestion>
                     <textanswer correct="true" >Punkt 1</textanswer>
                     <textanswer>Punkt 2</textanswer>
                     <textanswer>Punkt 3</textanswer>
@@ -3209,31 +3209,31 @@
                     <textanswer>0,25 Ω</textanswer>
                 </question>
                 <question id="TB207">
-                    <textquestion>In welchem Zusammenhang müssen Innenwiderstand R_>i> und
-                        Lastwiderstand R_>L> stehen, damit Leistungsanpassung vorliegt?
+                    <textquestion>In welchem Zusammenhang müssen Innenwiderstand R_i und
+                        Lastwiderstand R_L stehen, damit Leistungsanpassung vorliegt?
                     </textquestion>
-                    <textanswer correct="true">R_>L> = R_>i></textanswer>
-                    <textanswer>R_>L> &lt; R_>i></textanswer>
-                    <textanswer>R_>L> >> R_>i></textanswer>
-                    <textanswer>R_>L> = 1 / R_>i></textanswer>
+                    <textanswer correct="true">R_L = R_i</textanswer>
+                    <textanswer>R_L &lt; R_i</textanswer>
+                    <textanswer>R_L >> R_i</textanswer>
+                    <textanswer>R_L = 1 / R_i</textanswer>
                 </question>
                 <question id="TB208">
-                    <textquestion>In welchem Zusammenhang müssen Innenwiderstand R_>i> und
-                        Lastwiderstand R_>L> stehen, damit Stromanpassung vorliegt?
+                    <textquestion>In welchem Zusammenhang müssen Innenwiderstand R_i und
+                        Lastwiderstand R_L stehen, damit Stromanpassung vorliegt?
                     </textquestion>
-                    <textanswer correct="true">R_>L> &lt; R_>i></textanswer>
-                    <textanswer>R_>L> >> R_>i></textanswer>
-                    <textanswer>R_>L> = R_>i></textanswer>
-                    <textanswer>R_>L> = 1/R_>i></textanswer>
+                    <textanswer correct="true">R_L &lt; R_i</textanswer>
+                    <textanswer>R_L >> R_i</textanswer>
+                    <textanswer>R_L = R_i</textanswer>
+                    <textanswer>R_L = 1/R_i</textanswer>
                 </question>
                 <question id="TB209">
-                    <textquestion>In welchem Zusammenhang müssen Innenwiderstand R_>i> und
-                        Lastwiderstand R_>L> stehen, damit Spannungsanpassung vorliegt?
+                    <textquestion>In welchem Zusammenhang müssen Innenwiderstand R_i und
+                        Lastwiderstand R_L stehen, damit Spannungsanpassung vorliegt?
                     </textquestion>
-                    <textanswer correct="true">R_>L> >> R_>i></textanswer>
-                    <textanswer>R_>L> &lt; R_>i></textanswer>
-                    <textanswer>R_>L> = R_>i></textanswer>
-                    <textanswer>R_>L> = 1/R_>i></textanswer>
+                    <textanswer correct="true">R_L >> R_i</textanswer>
+                    <textanswer>R_L &lt; R_i</textanswer>
+                    <textanswer>R_L = R_i</textanswer>
+                    <textanswer>R_L = 1/R_i</textanswer>
                 </question>
                 <question id="TB210">
                     <textquestion>Welche Eigenschaften sollten Strom- und Spannungsquellen
@@ -3562,16 +3562,16 @@
             <chapter name="Sinusförmige Signale" id="6">
                 <question id="TB601">
                     <textquestion>Welche der im folgenden Diagramm eingezeichneten Gleichspannungen
-                        (U_>1> ... U_>6>) setzen an einem Wirkwiderstand die gleiche Leistung um wie
+                        (U_1 ... U_6) setzen an einem Wirkwiderstand die gleiche Leistung um wie
                         die dargestellte sinusförmige Wechselspannung?&lt;img src='tb601f.jpg'>
                     </textquestion>
-                    <textanswer correct="true">U_>2> oder U_>5></textanswer>
-                    <textanswer>U_>1> oder U_>6></textanswer>
-                    <textanswer>U_>3> oder U_>4></textanswer>
-                    <textanswer>nur U_>2></textanswer>
+                    <textanswer correct="true">U_2 oder U_5</textanswer>
+                    <textanswer>U_1 oder U_6</textanswer>
+                    <textanswer>U_3 oder U_4</textanswer>
+                    <textanswer>nur U_2</textanswer>
                 </question>
                 <question id="TB602">
-                    <textquestion>Wie groß ist der Spitzen-Spitzen-Wert (U_>ss>) der in der
+                    <textquestion>Wie groß ist der Spitzen-Spitzen-Wert (U_ss) der in der
                         Abbildung dargestellten Spannung?&lt;img src='tb602f.png'>
                     </textquestion>
                     <textanswer correct="true">40 Volt</textanswer>
@@ -3641,7 +3641,7 @@
                     <textanswer>460 Volt.</textanswer>
                 </question>
                 <question id="TB610">
-                    <textquestion>Ein sinusförmiger Wechselstrom mit einer Amplitude (I_>max>) von
+                    <textquestion>Ein sinusförmiger Wechselstrom mit einer Amplitude (I_max) von
                         0,5 Ampere fließt durch einen Widerstand von 20 Ω. Wie hoch ist die
                         aufgenommene Leistung?
                     </textquestion>
@@ -3652,7 +3652,7 @@
                 </question>
                 <question id="TB611">
                     <textquestion>Welche Antwort enthält die richtigen Phasenwinkel einer
-                        sinusförmigen Wechselspannung an der mit X_>3> bezeichneten Stelle?&lt;img
+                        sinusförmigen Wechselspannung an der mit X_3 bezeichneten Stelle?&lt;img
                         src='tb611f.jpg'>
                     </textquestion>
                     <textanswer correct="true">3pi/2; 270°</textanswer>
@@ -3976,31 +3976,31 @@
                     <textquestion>Wie wird die ERP (Effective Radiated Power oder auch Equivalent
                         Radiated Power) berechnet und worauf ist sie bezogen?
                     </textquestion>
-                    <textanswer correct="true">ERP = (P_>Sender> - P_>Verluste>) • G_>Antenne>
+                    <textanswer correct="true">ERP = (P_Sender - P_Verluste) • G_Antenne
                         bezogen auf den Halbwellendipol
                     </textanswer>
-                    <textanswer>ERP = (P_>Sender> • G_>Antenne>) - P_>Verluste> bezogen auf den
+                    <textanswer>ERP = (P_Sender • G_Antenne) - P_Verluste bezogen auf den
                         isotropen Kugelstrahler
                     </textanswer>
-                    <textanswer>ERP = (P_>Sender> + P_>Verluste>) • G_>Antenne> bezogen auf den
+                    <textanswer>ERP = (P_Sender + P_Verluste) • G_Antenne bezogen auf den
                         Halbwellendipol
                     </textanswer>
-                    <textanswer>ERP = P_>Sender> + P_>Verluste> + G_>Antenne> bezogen auf den
+                    <textanswer>ERP = P_Sender + P_Verluste + G_Antenne bezogen auf den
                         isotropen Kugelstrahler
                     </textanswer>
                 </question>
                 <question id="TB910">
                     <textquestion>Wie wird die EIRP ermittelt?</textquestion>
-                    <textanswer correct="true">P_>EIRP> = (P_>Sender> - P_>Verluste>) • G_>Antenne>
+                    <textanswer correct="true">P_EIRP = (P_Sender - P_Verluste) • G_Antenne
                         bezogen auf den isotropen Kugelstrahler
                     </textanswer>
-                    <textanswer>P_>EIRP> = (P_>Sender> • G_>Antenne>) - P_>Verluste> bezogen auf den
+                    <textanswer>P_EIRP = (P_Sender • G_Antenne) - P_Verluste bezogen auf den
                         Halbwellendipol
                     </textanswer>
-                    <textanswer>P_>EIRP> = (P_>Sender> + P_>Verluste>) • G_>Antenne> bezogen auf den
+                    <textanswer>P_EIRP = (P_Sender + P_Verluste) • G_Antenne bezogen auf den
                         isotropen Kugelstrahler
                     </textanswer>
-                    <textanswer>P_>EIRP> = P_>Sender> + P_>Verluste> + G_>Antenne> bezogen auf den
+                    <textanswer>P_EIRP = P_Sender + P_Verluste + G_Antenne bezogen auf den
                         Halbwellendipol
                     </textanswer>
                 </question>
@@ -4032,7 +4032,7 @@
                 </question>
                 <question id="TB913">
                     <textquestion>An einem Kondensator mit einer Kapazität von 1 µF wird eine
-                        NF-Spannung von 10 kHz und 12 V_>eff> angelegt. Wie groß ist die
+                        NF-Spannung von 10 kHz und 12 V_eff angelegt. Wie groß ist die
                         aufgenommene Wirkleistung im eingeschwungenen Zustand?
                     </textquestion>
                     <textanswer correct="true">Fast null Watt</textanswer>
@@ -4476,23 +4476,23 @@
                 <question id="TC304">
                     <textquestion>Beim Anlegen einer Gleichspannung U = 1 V an eine Spule messen Sie
                         einen Strom. Wird der Strom beim Anlegen von einer Wechselspannung mit
-                        U_>eff> = 1 V größer oder kleiner?
+                        U_eff = 1 V größer oder kleiner?
                     </textquestion>
                     <textanswer correct="true">Beim Betrieb mit Gleichspannung wirkt nur der
                         Gleichstromwiderstand der Spule. Beim Betrieb mit Wechselspannung wird der
-                        induktive Widerstand X_>L> wirksam und erhöht den Gesamtwiderstand. Der
+                        induktive Widerstand X_L wirksam und erhöht den Gesamtwiderstand. Der
                         Strom wird kleiner.
                     </textanswer>
                     <textanswer>Beim Betrieb mit Gleichspannung wirkt nur der Gleichstromwiderstand
                         der Spule. Beim Betrieb mit Wechselspannung wirkt nur der kleinere induktive
-                        Widerstand X_>L>. Der Strom wird größer.
+                        Widerstand X_L. Der Strom wird größer.
                     </textanswer>
                     <textanswer>Beim Betrieb mit Gleich- oder Wechselspannung wirkt nur der ohmsche
-                        Widerstand X_>L> der Spule. Der Strom bleibt gleich.
+                        Widerstand X_L der Spule. Der Strom bleibt gleich.
                     </textanswer>
                     <textanswer>Beim Betrieb mit Wechselspannung wirkt nur der
                         Wechselstromwiderstand der Spule. Beim Betrieb mit Gleichspannung wird nur
-                        der ohmsche Widerstand X_>L> wirksam. Der Strom wird größer.
+                        der ohmsche Widerstand X_L wirksam. Der Strom wird größer.
                     </textanswer>
                 </question>
                 <question id="TC305">
@@ -4571,7 +4571,7 @@
                     <textanswer>Durch Einbau der Spule in einen Abschirmbecher.</textanswer>
                 </question>
                 <question id="TC310">
-                    <textquestion>Mit einem Schalenkern dessen A_>L>-Wert mit 250 angegeben ist,
+                    <textquestion>Mit einem Schalenkern dessen A_L-Wert mit 250 angegeben ist,
                         soll eine Spule mit einer Induktivität von 2 mH hergestellt werden. Wie groß
                         ist die erforderliche Windungszahl?
                     </textquestion>
@@ -4582,7 +4582,7 @@
                 </question>
                 <question id="TC311">
                     <textquestion>Wie groß ist die Induktivität einer Spule mit 300 Windungen, die
-                        auf einen Kern mit einem A_>L>-Wert von 1250 gewickelt ist?
+                        auf einen Kern mit einem A_L-Wert von 1250 gewickelt ist?
                     </textquestion>
                     <textanswer correct="true">112,5 mH</textanswer>
                     <textanswer>112,5 µH</textanswer>
@@ -4591,7 +4591,7 @@
                 </question>
                 <question id="TC312">
                     <textquestion>Wie groß ist die Induktivität einer Spule mit 14 Windungen, die
-                        auf einen Kern mit einem A_>L>-Wert von 1,5 gewickelt ist?
+                        auf einen Kern mit einem A_L-Wert von 1,5 gewickelt ist?
                     </textquestion>
                     <textanswer correct="true">0,294 µH</textanswer>
                     <textanswer>2,94 µH</textanswer>
@@ -4599,7 +4599,7 @@
                     <textanswer>2,94 nH</textanswer>
                 </question>
                 <question id="TC313">
-                    <textquestion>Ein Spulenkern hat einen A_>L>-Wert von 30. Wie groß ist die
+                    <textquestion>Ein Spulenkern hat einen A_L-Wert von 30. Wie groß ist die
                         erforderliche Windungszahl zur Herstellung einer Induktivität von 12 µH?
                     </textquestion>
                     <textanswer correct="true">20</textanswer>
@@ -5024,8 +5024,8 @@
                     <textanswer>die Gewinnung von Wechselstrom aus Licht.</textanswer>
                 </question>
                 <question id="TC525">
-                    <textquestion>Das folgende Signal wird als U_>1> an den Eingang der Schaltung
-                        mit Siliziumdioden gelegt. Wie sieht das zugehörige Ausgangssignal U_>2>
+                    <textquestion>Das folgende Signal wird als U_1 an den Eingang der Schaltung
+                        mit Siliziumdioden gelegt. Wie sieht das zugehörige Ausgangssignal U_2
                         aus?&lt;img src='tc525f1.jpg'>&lt;img src='tc525f2.jpg'>
                     </textquestion>
                     <textanswer correct="true">&lt;img src='tc525a.jpg'></textanswer>
@@ -5034,8 +5034,8 @@
                     <textanswer>&lt;img src='tc525d.jpg'></textanswer>
                 </question>
                 <question id="TC526">
-                    <textquestion>Das folgende Signal wird als U_>1> an den Eingang der Schaltung
-                        mit Germaniumdioden gelegt. Wie sieht das zugehörige Ausgangssignal U_>2>
+                    <textquestion>Das folgende Signal wird als U_1 an den Eingang der Schaltung
+                        mit Germaniumdioden gelegt. Wie sieht das zugehörige Ausgangssignal U_2
                         aus?&lt;img src='tc525f1.jpg'>&lt;img src='tc525f2.jpg'>
                     </textquestion>
                     <textanswer correct="true">&lt;img src='tc525d.jpg'></textanswer>
@@ -5045,17 +5045,17 @@
                 </question>
                 <question id="TC527">
                     <textquestion>In der folgenden Schaltung werden 3 Siliziumdioden zur Entkopplung
-                        dreier Stromversorgungen eingesetzt. Der Sonnenkollektor liefert U_>1> =
-                        14,9 V. Der Akkumulator hat U_>2> = 13,9 V. Das Netzteil ist auf U_>3> =
+                        dreier Stromversorgungen eingesetzt. Der Sonnenkollektor liefert U_1 =
+                        14,9 V. Der Akkumulator hat U_2 = 13,9 V. Das Netzteil ist auf U_3 =
                         13,5 V eingestellt. In welcher Zeile ist der sich unter diesen
                         Voraussetzungen einstellende Zustand der 3 Dioden richtig beschrieben?&lt;img
                         src='tc527f.jpg'>
                     </textquestion>
-                    <textanswer correct="true">D_>1> leitet. D_>2> leitet. D_>3> leitet nicht.
+                    <textanswer correct="true">D_1 leitet. D_2 leitet. D_3 leitet nicht.
                     </textanswer>
-                    <textanswer>D_>1> leitet. D_>2> leitet. D_>3> leitet.</textanswer>
-                    <textanswer>D_>1> leitet. D_>2> leitet nicht. D_>3> leitet nicht.</textanswer>
-                    <textanswer>D_>1> leitet nicht. D_>2> leitet. D_>3> leitet.</textanswer>
+                    <textanswer>D_1 leitet. D_2 leitet. D_3 leitet.</textanswer>
+                    <textanswer>D_1 leitet. D_2 leitet nicht. D_3 leitet nicht.</textanswer>
+                    <textanswer>D_1 leitet nicht. D_2 leitet. D_3 leitet.</textanswer>
                 </question>
                 <question id="TC528">
                     <textquestion>In welcher der folgenden Schaltungen ist die Diode zur
@@ -5248,7 +5248,7 @@
                 <question id="TC618">
                     <textquestion>Die Betriebsspannung beträgt 10 V, der Kollektorstrom soll 2 mA
                         betragen, die Gleichstromverstärkung des Transistors beträgt 200. Berechnen
-                        Sie den Vorwiderstand R_>1>.&lt;img src='tc618f.jpg'>
+                        Sie den Vorwiderstand R_1.&lt;img src='tc618f.jpg'>
                     </textquestion>
                     <textanswer correct="true">940 kΩ</textanswer>
                     <textanswer>1 MΩ</textanswer>
@@ -5258,8 +5258,8 @@
                 <question id="TC619">
                     <textquestion>Die Betriebsspannung beträgt 10 V, der Kollektorstrom soll 2 mA
                         betragen, die Gleichstromverstärkung des Transistors beträgt 200. Durch den
-                        Querwiderstand R_>2> soll der zehnfache Basisstrom fließen. Berechnen Sie
-                        den Vorwiderstand R_>1>.&lt;img src='tc619f.jpg'>
+                        Querwiderstand R_2 soll der zehnfache Basisstrom fließen. Berechnen Sie
+                        den Vorwiderstand R_1.&lt;img src='tc619f.jpg'>
                     </textquestion>
                     <textanswer correct="true">85,5 kΩ</textanswer>
                     <textanswer>940 kΩ</textanswer>
@@ -5269,8 +5269,8 @@
                 <question id="TC620">
                     <textquestion>Die Betriebsspannung beträgt 10 V, der Kollektorstrom soll 2 mA
                         betragen, die Gleichstromverstärkung des Transistors beträgt 200. Durch den
-                        Querwiderstand R_>2> soll der zehnfache Basisstrom fließen. Am
-                        Emitterwiderstand soll 1 V abfallen. Berechnen Sie den Vorwiderstand R_>1>.&lt;img
+                        Querwiderstand R_2 soll der zehnfache Basisstrom fließen. Am
+                        Emitterwiderstand soll 1 V abfallen. Berechnen Sie den Vorwiderstand R_1.&lt;img
                         src='tc620f.jpg'>
                     </textquestion>
                     <textanswer correct="true">76,4 kΩ</textanswer>
@@ -5282,7 +5282,7 @@
                     <textquestion>Die Betriebsspannung beträgt 10 V, der Kollektorstrom soll 2 mA
                         betragen, die Gleichstromverstärkung des Transistors beträgt 200. Die
                         Kollektor-Emitterspannung soll 6 V betragen. Berechnen Sie den Vorwiderstand
-                        R_>1>.&lt;img src='tc621f.jpg'>
+                        R_1.&lt;img src='tc621f.jpg'>
                     </textquestion>
                     <textanswer correct="true">540 kΩ</textanswer>
                     <textanswer>76,4 kΩ</textanswer>
@@ -5293,7 +5293,7 @@
                     <textquestion>Die Betriebsspannung beträgt 10 V, der Kollektorstrom soll 2 mA
                         betragen, die Gleichstromverstärkung des Transistors beträgt 100. Die
                         Kollektor-Emitterspannung soll 6 V betragen. Berechnen Sie den
-                        Kollektorwiderstand R_>C>.&lt;img src='tc621f.jpg'>
+                        Kollektorwiderstand R_C.&lt;img src='tc621f.jpg'>
                     </textquestion>
                     <textanswer correct="true">1,98 kΩ</textanswer>
                     <textanswer>20,0 kΩ</textanswer>
@@ -5301,11 +5301,11 @@
                     <textanswer>2,97 kΩ</textanswer>
                 </question>
                 <question id="TC623">
-                    <textquestion>Was passiert, wenn der Widerstand R_>2> durch eine fehlerhafte
+                    <textquestion>Was passiert, wenn der Widerstand R_2 durch eine fehlerhafte
                         Lötstelle an einer Seite keinen Kontakt mehr zur Schaltung hat (Leerlauf)?
                         In welcher Zeile sind beide Aussagen richtig?&lt;img src='tc623f.jpg'>
                     </textquestion>
-                    <textanswer correct="true">Der Kollektorstrom wird nur durch R_>C> begrenzt. Die
+                    <textanswer correct="true">Der Kollektorstrom wird nur durch R_C begrenzt. Die
                         Kollektorspannung sinkt auf zirka 0,1 Volt.
                     </textanswer>
                     <textanswer>Es fließt Kurzschlussstrom und der Transistor wird zerstört.
@@ -5318,7 +5318,7 @@
                     </textanswer>
                 </question>
                 <question id="TC624">
-                    <textquestion>Was passiert, wenn der Widerstand R_>1> durch eine fehlerhafte
+                    <textquestion>Was passiert, wenn der Widerstand R_1 durch eine fehlerhafte
                         Lötstelle an einer Seite keinen Kontakt mehr zur Schaltung hat (Leerlauf)?
                         In welcher Zeile sind beide Aussagen richtig?&lt;img src='tc623f.jpg'>
                     </textquestion>
@@ -5327,7 +5327,7 @@
                     </textanswer>
                     <textanswer>Es fließt Kurzschlussstrom und der Transistor wird zerstört.
                     </textanswer>
-                    <textanswer>Der Kollektorstrom wird nur durch R_>C> begrenzt. Die
+                    <textanswer>Der Kollektorstrom wird nur durch R_C begrenzt. Die
                         Kollektorspannung sinkt auf zirka 0,1 Volt.
                     </textanswer>
                     <textanswer>Der Kollektorstrom steigt stark an. Die Kollektorspannung geht auf
@@ -5345,7 +5345,7 @@
                     <textanswer>0</textanswer>
                 </question>
                 <question id="TC626">
-                    <textquestion>Folgendes Signal U_>E> wurde auf den Eingang folgender Schaltung
+                    <textquestion>Folgendes Signal U_E wurde auf den Eingang folgender Schaltung
                         gegeben. In welcher Antwort sind alle dargestellten Signale phasenrichtig
                         zugeordnet?&lt;img src='tc626f1.jpg'>&lt;img src='tc626f2.jpg'>
                     </textquestion>
@@ -5457,34 +5457,34 @@
                     </textanswer>
                 </question>
                 <question id="TC707">
-                    <textquestion>Welches der vier im Bild dargestellten Ausgangssignale X_>1> bis
-                        X_>4> liefert ein ODER-Gatter, wenn an dessen Eingängen die Signale E_>1>
-                        und E_>2> anliegen?&lt;img src='tc707f.jpg'>
+                    <textquestion>Welches der vier im Bild dargestellten Ausgangssignale X_1 bis
+                        X_4 liefert ein ODER-Gatter, wenn an dessen Eingängen die Signale E_1
+                        und E_2 anliegen?&lt;img src='tc707f.jpg'>
                     </textquestion>
-                    <textanswer correct="true">X_>1></textanswer>
-                    <textanswer>X_>2></textanswer>
-                    <textanswer>X_>3></textanswer>
-                    <textanswer>X_>4></textanswer>
+                    <textanswer correct="true">X_1</textanswer>
+                    <textanswer>X_2</textanswer>
+                    <textanswer>X_3</textanswer>
+                    <textanswer>X_4</textanswer>
                 </question>
                 <question id="TC708">
-                    <textquestion>Welches der vier im Bild dargestellten Ausgangssignale X_>1> bis
-                        X_>4> liefert ein EXOR-Gatter, wenn an dessen Eingängen die Signale E_>1>
-                        und E_>2> anliegen?&lt;img src='tc707f.jpg'>
+                    <textquestion>Welches der vier im Bild dargestellten Ausgangssignale X_1 bis
+                        X_4 liefert ein EXOR-Gatter, wenn an dessen Eingängen die Signale E_1
+                        und E_2 anliegen?&lt;img src='tc707f.jpg'>
                     </textquestion>
-                    <textanswer correct="true">X_>3></textanswer>
-                    <textanswer>X_>1></textanswer>
-                    <textanswer>X_>2></textanswer>
-                    <textanswer>X_>4></textanswer>
+                    <textanswer correct="true">X_3</textanswer>
+                    <textanswer>X_1</textanswer>
+                    <textanswer>X_2</textanswer>
+                    <textanswer>X_4</textanswer>
                 </question>
                 <question id="TC709">
-                    <textquestion>Welches der vier im Bild dargestellten Ausgangssignale X_>1> bis
-                        X_>4> liefert ein UND-Gatter, wenn an dessen Eingängen die Signale E_>1> und
-                        E_>2> anliegen?&lt;img src='tc707f.jpg'>
+                    <textquestion>Welches der vier im Bild dargestellten Ausgangssignale X_1 bis
+                        X_4 liefert ein UND-Gatter, wenn an dessen Eingängen die Signale E_1 und
+                        E_2 anliegen?&lt;img src='tc707f.jpg'>
                     </textquestion>
-                    <textanswer correct="true">X_>2></textanswer>
-                    <textanswer>X_>1></textanswer>
-                    <textanswer>X_>3></textanswer>
-                    <textanswer>X_>4></textanswer>
+                    <textanswer correct="true">X_2</textanswer>
+                    <textanswer>X_1</textanswer>
+                    <textanswer>X_3</textanswer>
+                    <textanswer>X_4</textanswer>
                 </question>
                 <question id="TC710">
                     <textquestion>In welchem Versorgungsspannungsbereich können CMOS-ICs betrieben
@@ -5529,7 +5529,7 @@
                     </textanswer>
                 </question>
                 <question id="TC713">
-                    <textquestion>Wie groß ist der Betrag der Spannungsverstärkung U_>A>/U_>E> der
+                    <textquestion>Wie groß ist der Betrag der Spannungsverstärkung U_A/U_E der
                         folgenden Operationsverstärkerschaltung?&lt;img src='tc713f.jpg'>
                     </textquestion>
                     <textanswer correct="true">10</textanswer>
@@ -5538,7 +5538,7 @@
                     <textanswer>24,2</textanswer>
                 </question>
                 <question id="TC714">
-                    <textquestion>Wie groß ist die Spannungsverstärkung U_>A>/U_>E> der folgenden
+                    <textquestion>Wie groß ist die Spannungsverstärkung U_A/U_E der folgenden
                         Operationsverstärkerschaltung?&lt;img src='tc714f.jpg'>
                     </textquestion>
                     <textanswer correct="true">11</textanswer>
@@ -5549,7 +5549,7 @@
                 <question id="TC715">
                     <textquestion>Der Eingangswiderstand der folgenden Operationsverstärkerschaltung
                         soll 1 kΩ betragen und es wird eine Spannungsverstärkung von zirka 20
-                        erwünscht. Wie groß muss der Rückkopplungswiderstand R_>2> sein?&lt;img
+                        erwünscht. Wie groß muss der Rückkopplungswiderstand R_2 sein?&lt;img
                         src='tc715f.jpg'>
                     </textquestion>
                     <textanswer correct="true">zirka 20 kΩ</textanswer>
@@ -5593,7 +5593,7 @@
                 </question>
                 <question id="TC719">
                     <textquestion>In folgender Schaltung mit Elektronenröhre wird die Spannung
-                        -U_>g> am Steuergitter erniedrigt (negativer gemacht). Wie verändert sich
+                        -U_g am Steuergitter erniedrigt (negativer gemacht). Wie verändert sich
                         der Anodenstrom?&lt;img src='tc719f.png'>
                     </textquestion>
                     <textanswer correct="true">Der Anodenstrom sinkt.</textanswer>
@@ -5634,8 +5634,8 @@
             <chapter name="Reihen- und Parallelschaltung von Widerständen, Spulen und Kondensatoren"
                 id="1">
                 <question id="TD101">
-                    <textquestion>Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R_>1> =
-                        3,3 kΩ, R_>2> = 4,7 kΩ und R_>3> = 27 kΩ betragen?&lt;img
+                    <textquestion>Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R_1 =
+                        3,3 kΩ, R_2 = 4,7 kΩ und R_3 = 27 kΩ betragen?&lt;img
                         src='td101f.png'>
                     </textquestion>
                     <textanswer correct="true">7,3 kΩ</textanswer>
@@ -5681,7 +5681,7 @@
                 </question>
                 <question id="TD106">
                     <textquestion>Wie groß ist die Gesamtkapazität, wenn drei Kondensatoren C1 =
-                        0,06 nF, C_>2> = 40 pF und C3 = 20 pF in Reihe geschaltet werden?
+                        0,06 nF, C_2 = 40 pF und C3 = 20 pF in Reihe geschaltet werden?
                     </textquestion>
                     <textanswer correct="true">10,9 pF</textanswer>
                     <textanswer>0,12 nF</textanswer>
@@ -5699,23 +5699,23 @@
                 </question>
                 <question id="TD108">
                     <textquestion>Wie teilt sich die Spannung an zwei in Reihe geschalteten
-                        Widerständen auf, wenn R_>1> = 5 mal so groß ist wie R_>2> ?&lt;img
+                        Widerständen auf, wenn R_1 = 5 mal so groß ist wie R_2 ?&lt;img
                         src='td108f.png'>
                     </textquestion>
-                    <textanswer correct="true">U_>1> = 5 • U_>2></textanswer>
-                    <textanswer>U_>1> = 6 • U_>2></textanswer>
-                    <textanswer>U_>1> = U_>2> / 5</textanswer>
-                    <textanswer>U_>1> = U_>2> / 6</textanswer>
+                    <textanswer correct="true">U_1 = 5 • U_2</textanswer>
+                    <textanswer>U_1 = 6 • U_2</textanswer>
+                    <textanswer>U_1 = U_2 / 5</textanswer>
+                    <textanswer>U_1 = U_2 / 6</textanswer>
                 </question>
                 <question id="TD109">
                     <textquestion>Wie teilt sich die Spannung an zwei in Reihe geschalteten
-                        Widerständen auf, wenn R_>1> = 1/6 mal so groß ist wie R_>2> ?&lt;img
+                        Widerständen auf, wenn R_1 = 1/6 mal so groß ist wie R_2 ?&lt;img
                         src='td108f.png'>
                     </textquestion>
-                    <textanswer correct="true">U_>1> = U_>2> / 6</textanswer>
-                    <textanswer>U_>1> = 6 • U_>2></textanswer>
-                    <textanswer>U_>1> = U_>2> / 5</textanswer>
-                    <textanswer>U_>1> = 5 • U_>2></textanswer>
+                    <textanswer correct="true">U_1 = U_2 / 6</textanswer>
+                    <textanswer>U_1 = 6 • U_2</textanswer>
+                    <textanswer>U_1 = U_2 / 5</textanswer>
+                    <textanswer>U_1 = 5 • U_2</textanswer>
                 </question>
                 <question id="TD110">
                     <textquestion>Was ist bei der Berechnung von Wechselstromkreisen, die
@@ -5735,8 +5735,8 @@
                     </textanswer>
                 </question>
                 <question id="TD111">
-                    <textquestion>Wie groß ist die Spannung U, wenn durch R_>3> ein Strom von 1 mA
-                        fließt und alle Widerstände R_>1> bis R_>3> je 10 kΩ betragen?&lt;img
+                    <textquestion>Wie groß ist die Spannung U, wenn durch R_3 ein Strom von 1 mA
+                        fließt und alle Widerstände R_1 bis R_3 je 10 kΩ betragen?&lt;img
                         src='td111f.png'>
                     </textquestion>
                     <textanswer correct="true">30 V</textanswer>
@@ -5745,8 +5745,8 @@
                     <textanswer>40 V</textanswer>
                 </question>
                 <question id="TD112">
-                    <textquestion>Wie groß ist der Strom durch R_>3>, wenn U = 15 V und alle
-                        Widerstände R_>1> bis R_>3> je 10 kΩ betragen?&lt;img src='td111f.png'>
+                    <textquestion>Wie groß ist der Strom durch R_3, wenn U = 15 V und alle
+                        Widerstände R_1 bis R_3 je 10 kΩ betragen?&lt;img src='td111f.png'>
                     </textquestion>
                     <textanswer correct="true">0,5 mA</textanswer>
                     <textanswer>1,0 mA</textanswer>
@@ -5754,8 +5754,8 @@
                     <textanswer>4,5 mA</textanswer>
                 </question>
                 <question id="TD113">
-                    <textquestion>Welche Leistung tritt in R_>2> auf, wenn U = 15 V und alle
-                        Widerstände R_>1> bis R_>3> je 10 kΩ betragen?&lt;img src='td111f.png'>
+                    <textquestion>Welche Leistung tritt in R_2 auf, wenn U = 15 V und alle
+                        Widerstände R_1 bis R_3 je 10 kΩ betragen?&lt;img src='td111f.png'>
                     </textquestion>
                     <textanswer correct="true">2,5 mW</textanswer>
                     <textanswer>5,0 mW</textanswer>
@@ -5801,8 +5801,8 @@
                     <textanswer>0,255 µF</textanswer>
                 </question>
                 <question id="TD118">
-                    <textquestion>Welche Gesamtkapazität hat diese Schaltung, wenn C_>1> = 0,01 µF,
-                        C_>2> = 5 nF und C_>3> = 5000 pF betragen?&lt;img src='td118f.png'>
+                    <textquestion>Welche Gesamtkapazität hat diese Schaltung, wenn C_1 = 0,01 µF,
+                        C_2 = 5 nF und C_3 = 5000 pF betragen?&lt;img src='td118f.png'>
                     </textquestion>
                     <textanswer correct="true">5 nF</textanswer>
                     <textanswer>12,5 nF</textanswer>
@@ -5810,8 +5810,8 @@
                     <textanswer>0,015 nF</textanswer>
                 </question>
                 <question id="TD119">
-                    <textquestion>Welche Gesamtkapazität hat diese Schaltung, wenn C_>1> = 2 µF,
-                        C_>2> = 1 µF und C_>3> = 1 µF betragen?&lt;img src='td118f.png'>
+                    <textquestion>Welche Gesamtkapazität hat diese Schaltung, wenn C_1 = 2 µF,
+                        C_2 = 1 µF und C_3 = 1 µF betragen?&lt;img src='td118f.png'>
                     </textquestion>
                     <textanswer correct="true">1,0 µF</textanswer>
                     <textanswer>4400 nF</textanswer>
@@ -5819,8 +5819,8 @@
                     <textanswer>4,0 µF</textanswer>
                 </question>
                 <question id="TD120">
-                    <textquestion>Wie groß ist die Gesamtkapazität dieser Schaltung, wenn C_>1> =
-                        0,1 nF, C_>2> = 1,5 nF, C_>3> = 220 pF und die Eigenkapazität der Spule 1 pF
+                    <textquestion>Wie groß ist die Gesamtkapazität dieser Schaltung, wenn C_1 =
+                        0,1 nF, C_2 = 1,5 nF, C_3 = 220 pF und die Eigenkapazität der Spule 1 pF
                         beträgt?&lt;img src='td120f.png'>
                     </textquestion>
                     <textanswer correct="true">1821 pF</textanswer>
@@ -5829,7 +5829,7 @@
                     <textanswer>≈1 pF</textanswer>
                 </question>
                 <question id="TD121">
-                    <textquestion>Wenn R_>1> und R_>3> je 2 kΩ hat und R_>2> und R_>4> je 200 Ω
+                    <textquestion>Wenn R_1 und R_3 je 2 kΩ hat und R_2 und R_4 je 200 Ω
                         betragen, hat die Schaltung einen Gesamtwiderstand von&lt;img
                         src='td121f.png'>
                     </textquestion>
@@ -5849,8 +5849,8 @@
                     <textanswer>300 bis 366,7 Ω</textanswer>
                 </question>
                 <question id="TD123">
-                    <textquestion>Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R_>1> =
-                        30 kΩ, R_>2> = 15 kΩ, R_>3> = 30 kΩ und R_>4> = 2,7 kΩ betragen?&lt;img
+                    <textquestion>Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R_1 =
+                        30 kΩ, R_2 = 15 kΩ, R_3 = 30 kΩ und R_4 = 2,7 kΩ betragen?&lt;img
                         src='td123f.png'>
                     </textquestion>
                     <textanswer correct="true">10,2 kΩ</textanswer>
@@ -5859,8 +5859,8 @@
                     <textanswer>4,5 kΩ</textanswer>
                 </question>
                 <question id="TD124">
-                    <textquestion>Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R_>1> =
-                        12 kΩ, R_>2> = 12 kΩ, R_>3> = 6 kΩ und R_>4> = 1,5 k Ωbetragen?&lt;img
+                    <textquestion>Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R_1 =
+                        12 kΩ, R_2 = 12 kΩ, R_3 = 6 kΩ und R_4 = 1,5 k Ωbetragen?&lt;img
                         src='td123f.png'>
                     </textquestion>
                     <textanswer correct="true">4,5 kΩ</textanswer>
@@ -5946,8 +5946,8 @@
                     </textanswer>
                 </question>
                 <question id="TD207">
-                    <textquestion>Wie groß ist die Resonanzfrequenz dieser Schaltung, wenn C_>1> =
-                        0,1 nF, C_>2> = 1,5 nF, C_>3> = 220 pF und L = 1 mH beträgt?&lt;img
+                    <textquestion>Wie groß ist die Resonanzfrequenz dieser Schaltung, wenn C_1 =
+                        0,1 nF, C_2 = 1,5 nF, C_3 = 220 pF und L = 1 mH beträgt?&lt;img
                         src='td207f.png'>
                     </textquestion>
                     <textanswer correct="true">117,973 kHz</textanswer>
@@ -5956,7 +5956,7 @@
                     <textanswer>1,17973 MHz</textanswer>
                 </question>
                 <question id="TD208">
-                    <textquestion>Welche Resonanzfrequenz f_>res> hat die Reihenschaltung einer
+                    <textquestion>Welche Resonanzfrequenz f_res hat die Reihenschaltung einer
                         Spule von 100 µH mit einem Kondensator von 0,01 µF und einem Widerstand von
                         100 Ω?
                     </textquestion>
@@ -5966,7 +5966,7 @@
                     <textanswer>1591,55 kHz</textanswer>
                 </question>
                 <question id="TD209">
-                    <textquestion>Welche Resonanzfrequenz f_>res> hat die Parallelschaltung einer
+                    <textquestion>Welche Resonanzfrequenz f_res hat die Parallelschaltung einer
                         Spule von 2 µH mit einem Kondensator von 60 pF und einem Widerstand von 10
                         kΩ ?
                     </textquestion>
@@ -5999,8 +5999,8 @@
                     </textquestion>
                     <textanswer correct="true">gleich dem reellen Widerstand R.</textanswer>
                     <textanswer>unendlich hoch.</textanswer>
-                    <textanswer>gleich dem kapazitiven Widerstand X_>C>.</textanswer>
-                    <textanswer>gleich dem induktiven Widerstand X_>L>.</textanswer>
+                    <textanswer>gleich dem kapazitiven Widerstand X_C.</textanswer>
+                    <textanswer>gleich dem induktiven Widerstand X_L.</textanswer>
                 </question>
                 <question id="TD213">
                     <textquestion>Welche Grenzfrequenz ergibt sich bei einem Tiefpass mit einem
@@ -6304,25 +6304,25 @@
                         bei Belastung absinkt?&lt;img src='td306f.png'>
                     </textquestion>
                     <textanswer correct="true">Sinkt die Ausgangsspannung, so erhält Transistor T2
-                        über die Z-Diode Z_>1> weniger Strom und leitet dadurch weniger. Durch den
+                        über die Z-Diode Z_1 weniger Strom und leitet dadurch weniger. Durch den
                         verminderten Kollektorstrom von T2 verringert sich der Spannungsabfall an
-                        R_>1>/R_>2> und die Basisspannung von T1 steigt und somit auch die
+                        R_1/R_2 und die Basisspannung von T1 steigt und somit auch die
                         Emitterspannung.
                     </textanswer>
                     <textanswer>Sinkt die Ausgangsspannung bei Belastung, so erhält Transistor T2
-                        über die Z-Diode Z_>1> mehr Strom und leitet dadurch stärker. Durch den
-                        ansteigenden Kollektorstrom von T2 nimmt der Spannungsabfall an R_>1>/R_>2>
+                        über die Z-Diode Z_1 mehr Strom und leitet dadurch stärker. Durch den
+                        ansteigenden Kollektorstrom von T2 nimmt der Spannungsabfall an R_1/R_2
                         zu. Dabei sinkt die Basisspannung von T1 und die Emitterspannung steigt
                         wieder.
                     </textanswer>
                     <textanswer>Sinkt die Ausgangsspannung, so fließt durch Transistor T1 weniger
                         Strom. Durch den sich vermindernden Kollektorstrom von T1 steigt aber der
-                        Spannungsabfall an R_>1>/R_>2> und die Basisspannung von T2 über die Z-Diode
-                        Z_>1>. Somit steigt auch die Emitterspannung von T1.
+                        Spannungsabfall an R_1/R_2 und die Basisspannung von T2 über die Z-Diode
+                        Z_1. Somit steigt auch die Emitterspannung von T1.
                     </textanswer>
                     <textanswer>Sinkt die Ausgangsspannung bei Belastung, so fließt durch den
-                        Transistor T1 mehr Belastungsstrom. Der Transistor T2 erhält über Z_>1>
-                        weniger Spannung und der Spannungsabfall am Spannungsteiler R_>1>/R_>2>
+                        Transistor T1 mehr Belastungsstrom. Der Transistor T2 erhält über Z_1
+                        weniger Spannung und der Spannungsabfall am Spannungsteiler R_1/R_2
                         nimmt zu. Dabei sinkt die Basisspannung von T1 und die Emitterspannung
                         steigt wieder.
                     </textanswer>
@@ -6502,7 +6502,7 @@
                     <textanswer>einen Verstärker in Basisschaltung.</textanswer>
                 </question>
                 <question id="TD402">
-                    <textquestion>Welche Funktion haben die Widerstände R_>1> und R_>2> in der
+                    <textquestion>Welche Funktion haben die Widerstände R_1 und R_2 in der
                         folgenden Schaltung? Sie dienen zur&lt;img src='td402f.png'>
                     </textquestion>
                     <textanswer correct="true">Einstellung der Basisvorspannung.</textanswer>
@@ -6511,7 +6511,7 @@
                     <textanswer>Festlegung der oberen und unteren Grenzfrequenz.</textanswer>
                 </question>
                 <question id="TD403">
-                    <textquestion>Welche Funktion hat der Kondensator C_>1> in der folgenden
+                    <textquestion>Welche Funktion hat der Kondensator C_1 in der folgenden
                         Schaltung? Er dient zur&lt;img src='td403f.png'>
                     </textquestion>
                     <textanswer correct="true">Überbrückung des Emitterwiderstandes für das
@@ -6523,7 +6523,7 @@
                 </question>
                 <question id="TD404">
                     <textquestion>Wie verhält sich die Spannungs-Verstärkung bei der folgenden
-                        Schaltung, wenn der Kondensator C_>1> entfernt wird?&lt;img
+                        Schaltung, wenn der Kondensator C_1 entfernt wird?&lt;img
                         src='td403f.png'>
                     </textquestion>
                     <textanswer correct="true">Sie nimmt ab.</textanswer>
@@ -6532,7 +6532,7 @@
                     <textanswer>Sie fällt auf Null ab.</textanswer>
                 </question>
                 <question id="TD405">
-                    <textquestion>Welche Funktion haben die Kondensatoren C_>1> und C_>2> in der
+                    <textquestion>Welche Funktion haben die Kondensatoren C_1 und C_2 in der
                         folgenden Schaltung? Sie dienen zur&lt;img src='td405f.png'>
                     </textquestion>
                     <textanswer correct="true">Wechselstromkopplung.</textanswer>
@@ -6541,31 +6541,31 @@
                     <textanswer>Anhebung niederfrequenter Signalanteile.</textanswer>
                 </question>
                 <question id="TD406">
-                    <textquestion>Was lässt sich über die Wechselspannungsverstärkung v_>U> und die
+                    <textquestion>Was lässt sich über die Wechselspannungsverstärkung v_U und die
                         Phasenverschiebung µ zwischen Ausgangs- und Eingangsspannung dieser
                         Schaltung aussagen?&lt;img src='td401f.png'>
                     </textquestion>
-                    <textanswer correct="true">v_>U> ist groß (z.B. 100 ... 300) und µ=180°.
+                    <textanswer correct="true">v_U ist groß (z.B. 100 ... 300) und µ=180°.
                     </textanswer>
-                    <textanswer>v_>U> ist groß (z.B. 100 ... 300) und µ=0°.</textanswer>
-                    <textanswer>v_>U> ist klein (z.B. 0,9 .... 0,98) und µ=180°.
+                    <textanswer>v_U ist groß (z.B. 100 ... 300) und µ=0°.</textanswer>
+                    <textanswer>v_U ist klein (z.B. 0,9 .... 0,98) und µ=180°.
                     </textanswer>
-                    <textanswer>v_>U> ist klein (z.B. 0,9 .... 0,98) und µ=0°.</textanswer>
+                    <textanswer>v_U ist klein (z.B. 0,9 .... 0,98) und µ=0°.</textanswer>
                 </question>
                 <question id="TD407">
-                    <textquestion>Was lässt sich über den Wechselstromeingangswiderstand r_>e> und
-                        den Wechselstromausgangswiderstand r_>a> dieser Vorverstärkerschaltung
+                    <textquestion>Was lässt sich über den Wechselstromeingangswiderstand r_e und
+                        den Wechselstromausgangswiderstand r_a dieser Vorverstärkerschaltung
                         aussagen?&lt;img src='td401f.png'>
                     </textquestion>
-                    <textanswer correct="true">r_>e> ist klein (z.B. 100 Ω ... 5 kΩ) und r_>a>
-                        ist gegenüber r_>e> groß (z.B. 5 kΩ ... 50 kΩ).
+                    <textanswer correct="true">r_e ist klein (z.B. 100 Ω ... 5 kΩ) und r_a
+                        ist gegenüber r_e groß (z.B. 5 kΩ ... 50 kΩ).
                     </textanswer>
-                    <textanswer>r_>e> ist groß (z.B. 10 kΩ ... 200 kΩ) und r_>a> ist gegenüber
-                        r_>e> klein (z.B. 4 Ω ... 100 Ω).
+                    <textanswer>r_e ist groß (z.B. 10 kΩ ... 200 kΩ) und r_a ist gegenüber
+                        r_e klein (z.B. 4 Ω ... 100 Ω).
                     </textanswer>
-                    <textanswer>r_>e> und r_>a> sind beide relativ klein (z.B. 20 Ω ... 5 kΩ).
+                    <textanswer>r_e und r_a sind beide relativ klein (z.B. 20 Ω ... 5 kΩ).
                     </textanswer>
-                    <textanswer>r_>e> und r_>a> sind beide relativ groß (z.B. 10 kΩ ... 200 kΩ).
+                    <textanswer>r_e und r_a sind beide relativ groß (z.B. 10 kΩ ... 200 kΩ).
                     </textanswer>
                 </question>
                 <question id="TD408">
@@ -6577,15 +6577,15 @@
                     <textanswer>eine Stufe in einer Basisschaltung.</textanswer>
                 </question>
                 <question id="TD409">
-                    <textquestion>Was lässt sich über die Wechselspannungsverstärkung v_>U> und die
+                    <textquestion>Was lässt sich über die Wechselspannungsverstärkung v_U und die
                         Phasenverschiebung µ zwischen Ausgangs- und Eingangsspannung dieser
                         Schaltung aussagen?&lt;img src='td408f.png'>
                     </textquestion>
-                    <textanswer correct="true">v_>U> ist klein (z.B. 0,9 .... 0,98) und µ=0°.</textanswer>
-                    <textanswer>v_>U> ist groß (z.B. 100 ... 300) und µ=0°.</textanswer>
-                    <textanswer>v_>U> ist klein (z.B. 0,9 .... 0,98) und µ=180°.
+                    <textanswer correct="true">v_U ist klein (z.B. 0,9 .... 0,98) und µ=0°.</textanswer>
+                    <textanswer>v_U ist groß (z.B. 100 ... 300) und µ=0°.</textanswer>
+                    <textanswer>v_U ist klein (z.B. 0,9 .... 0,98) und µ=180°.
                     </textanswer>
-                    <textanswer>v_>U> ist groß (z.B. 100 ... 300) und µ=180°.</textanswer>
+                    <textanswer>v_U ist groß (z.B. 100 ... 300) und µ=180°.</textanswer>
                 </question>
                 <question id="TD410">
                     <textquestion>In welchem Bereich liegt der Wechselstrom-Eingangswiderstand eines
@@ -6678,21 +6678,21 @@
                 </question>
                 <question id="TD419">
                     <textquestion>Das folgende Bild zeigt eine idealisierte Steuerkennlinie eines
-                        Transistors mit vier eingezeichneten Arbeitspunkten P_>1> bis P_>4>. Welcher
+                        Transistors mit vier eingezeichneten Arbeitspunkten P_1 bis P_4. Welcher
                         Arbeitspunkt ist welcher Verstärkerbetriebsart zuzuordnen?&lt;img
                         src='td419f.png'>
                     </textquestion>
-                    <textanswer correct="true">P_>1> entspricht C-Betrieb, P_>2> entspricht
-                        BBetrieb, P_>3> entspricht AB-Betrieb, P_>4> entspricht A-Betrieb.
+                    <textanswer correct="true">P_1 entspricht C-Betrieb, P_2 entspricht
+                        BBetrieb, P_3 entspricht AB-Betrieb, P_4 entspricht A-Betrieb.
                     </textanswer>
-                    <textanswer>P_>2> entspricht C-Betrieb, P_>3> entspricht BBetrieb, P_>4>
-                        entspricht A-Betrieb, P_>1> ist kein geeigneter Verstärkerarbeitspunkt.
+                    <textanswer>P_2 entspricht C-Betrieb, P_3 entspricht BBetrieb, P_4
+                        entspricht A-Betrieb, P_1 ist kein geeigneter Verstärkerarbeitspunkt.
                     </textanswer>
-                    <textanswer>P_>2> entspricht A-Betrieb, P_>3> entspricht BBetrieb, P_>4>
-                        entspricht C-Betrieb, P_>1> ist kein geeigneter Verstärkerarbeitspunkt.
+                    <textanswer>P_2 entspricht A-Betrieb, P_3 entspricht BBetrieb, P_4
+                        entspricht C-Betrieb, P_1 ist kein geeigneter Verstärkerarbeitspunkt.
                     </textanswer>
-                    <textanswer>P_>1> entspricht A-Betrieb, P_>2> entspricht ABBetrieb, P_>3>
-                        entspricht B-Betrieb, P_>4> entspricht C-Betrieb.
+                    <textanswer>P_1 entspricht A-Betrieb, P_2 entspricht ABBetrieb, P_3
+                        entspricht B-Betrieb, P_4 entspricht C-Betrieb.
                     </textanswer>
                 </question>
                 <question id="TD420">
@@ -6821,7 +6821,7 @@
                 </question>
                 <question id="TD431">
                     <textquestion>An den Eingang dieser Schaltung wird das folgende Signal gelegt.
-                        Welches ist ein mögliches Ausgangssignal U_>A>?&lt;img src='td431f1.png'>&lt;img
+                        Welches ist ein mögliches Ausgangssignal U_A?&lt;img src='td431f1.png'>&lt;img
                         src='td431f2.png'>
                     </textquestion>
                     <textanswer correct="true">&lt;img src='td431a.png'></textanswer>
@@ -6831,7 +6831,7 @@
                 </question>
                 <question id="TD432">
                     <textquestion>An den Eingang dieser Schaltung wird das folgende Signal gelegt.
-                        Welches ist ein mögliches Ausgangssignal U_>A>?&lt;img src='td432f1.png'>&lt;img
+                        Welches ist ein mögliches Ausgangssignal U_A?&lt;img src='td432f1.png'>&lt;img
                         src='td431f2.png'>
                     </textquestion>
                     <textanswer correct="true">&lt;img src='td431b.png'></textanswer>
@@ -7423,38 +7423,38 @@
                 </question>
                 <question id="TE202">
                     <textquestion>Was gilt in etwa für die Bandbreite B eines FM-Signals, wenn der
-                        Modulationsindex m &lt; 0,5 wird? (f_>mod> sei die Modulationsfrequenz und
+                        Modulationsindex m &lt; 0,5 wird? (f_mod sei die Modulationsfrequenz und
                         DeltaF der Hub.)
                     </textquestion>
-                    <textanswer correct="true">f_>mod> > DeltaF. Die Bandbreite wird im wesentlichen
-                        durch f_>mod> bestimmt; B ≈ 2 * f_>mod>.
+                    <textanswer correct="true">f_mod > DeltaF. Die Bandbreite wird im wesentlichen
+                        durch f_mod bestimmt; B ≈ 2 * f_mod.
                     </textanswer>
-                    <textanswer>f_>mod> &lt; DeltaF. Die Bandbreite wird im wesentlichen durch
+                    <textanswer>f_mod &lt; DeltaF. Die Bandbreite wird im wesentlichen durch
                         DeltaF bestimmt; B ≈ 2 * DeltaF.
                     </textanswer>
-                    <textanswer>f_>mod> &lt; DeltaF. Die Bandbreite wird im wesentlichen durch m *
+                    <textanswer>f_mod &lt; DeltaF. Die Bandbreite wird im wesentlichen durch m *
                         DeltaF bestimmt; B ≈ m * DeltaF.
                     </textanswer>
-                    <textanswer>f_>mod> > DeltaF. Die Bandbreite wird im wesentlichen durch m *
-                        f_>mod> bestimmt; B ≈ m * f_>mod>.
+                    <textanswer>f_mod > DeltaF. Die Bandbreite wird im wesentlichen durch m *
+                        f_mod bestimmt; B ≈ m * f_mod.
                     </textanswer>
                 </question>
                 <question id="TE203">
                     <textquestion>Was gilt in etwa für die Bandbreite B eines FM-Signals, wenn der
-                        Modulationsindex m > 2 wird? (f_>mod> sei die Modulationsfrequenz und DeltaF
+                        Modulationsindex m > 2 wird? (f_mod sei die Modulationsfrequenz und DeltaF
                         der Hub.)
                     </textquestion>
-                    <textanswer correct="true">f_>mod> &lt; DeltaF. Die Bandbreite wird im
+                    <textanswer correct="true">f_mod &lt; DeltaF. Die Bandbreite wird im
                         wesentlichen durch DeltaF bestimmt; B ≈ 2 * DeltaF.
                     </textanswer>
-                    <textanswer>f_>mod> > DeltaF. Die Bandbreite wird im wesentlichen durch f_>mod>
-                        bestimmt; B ≈ 2 * f_>mod>.
+                    <textanswer>f_mod > DeltaF. Die Bandbreite wird im wesentlichen durch f_mod
+                        bestimmt; B ≈ 2 * f_mod.
                     </textanswer>
-                    <textanswer>f_>mod> > DeltaF. Die Bandbreite wird im wesentlichen durch m *
+                    <textanswer>f_mod > DeltaF. Die Bandbreite wird im wesentlichen durch m *
                         DeltaF bestimmt; B ≈ m * DeltaF.
                     </textanswer>
-                    <textanswer>f_>mod> &lt; DeltaF. Die Bandbreite wird im wesentlichen durch m *
-                        f_>mod> bestimmt; B ≈ m * f_>mod>.
+                    <textanswer>f_mod &lt; DeltaF. Die Bandbreite wird im wesentlichen durch m *
+                        f_mod bestimmt; B ≈ m * f_mod.
                     </textanswer>
                 </question>
                 <question id="TE204">
@@ -8135,7 +8135,7 @@
                 <question id="TF206">
                     <textquestion>Welche beiden Frequenzen muss der Quarzoszillator erzeugen, damit
                         im 70-cm-Bereich die oberen 4 MHz durch diesen Konverter empfangen werden
-                        können? Die Oszillatorfrequenz f_>osz> soll jeweils unterhalb des
+                        können? Die Oszillatorfrequenz f_osz soll jeweils unterhalb des
                         Nutzsignals liegen.&lt;img src='tf206f.png'>
                     </textquestion>
                     <textanswer correct="true">45,333 und 45,556 MHz</textanswer>
@@ -8146,7 +8146,7 @@
                 <question id="TF207">
                     <textquestion>Welche beiden Frequenzen muss der Quarzoszillator erzeugen, damit
                         im 70-cm-Bereich die unteren 4 MHz durch diesen Konverter empfangen werden
-                        können? Die Oszillatorfrequenz f_>osz> soll jeweils unterhalb des
+                        können? Die Oszillatorfrequenz f_osz soll jeweils unterhalb des
                         Nutzsignals liegen.&lt;img src='tf207f.png'>
                     </textquestion>
                     <textanswer correct="true">44,667 und 44,889 MHz</textanswer>
@@ -8211,14 +8211,14 @@
                 <question id="TF213">
                     <textquestion>Dies ist das Blockschaltbild eines modernen Empfängers mit
                         PLL-Frequenzaufbereitung. Es soll eine Frequenz von 15,0 MHz empfangen
-                        werden. Welche Frequenzen liefern VCO_>1> und VCO_>2>, wenn der
-                        programmierbare Frequenzvervielfacher n_>p> dabei 18 MHz liefert?&lt;img
+                        werden. Welche Frequenzen liefern VCO_1 und VCO_2, wenn der
+                        programmierbare Frequenzvervielfacher n_p dabei 18 MHz liefert?&lt;img
                         src='tf213f.png'>
                     </textquestion>
-                    <textanswer correct="true">VCO_>1>: 67,5 MHz VCO_>2>: 85,5 MHz</textanswer>
-                    <textanswer>VCO_>1>: 68,5 MHz VCO_>2>: 85,5 MHz</textanswer>
-                    <textanswer>VCO_>1>: 85,5 MHz VCO_>2>: 67,5 MHz</textanswer>
-                    <textanswer>VCO_>1>: 67,5 MHz VCO_>2>: 87,5 MHz</textanswer>
+                    <textanswer correct="true">VCO_1: 67,5 MHz VCO_2: 85,5 MHz</textanswer>
+                    <textanswer>VCO_1: 68,5 MHz VCO_2: 85,5 MHz</textanswer>
+                    <textanswer>VCO_1: 85,5 MHz VCO_2: 67,5 MHz</textanswer>
+                    <textanswer>VCO_1: 67,5 MHz VCO_2: 87,5 MHz</textanswer>
                 </question>
                 <question id="TF214">
                     <textquestion>An welcher Stelle einer Amateurfunkanlage sollte ein
@@ -8287,23 +8287,23 @@
                     <textanswer>140,5 MHz und 281 MHz</textanswer>
                 </question>
                 <question id="TF307">
-                    <textquestion>Ein Doppelsuper hat eine erste ZF (ZF_>1>) von 10,7 MHz und eine
-                        zweite ZF (ZF_>2>) von 450 kHz. Die Empfangsfrequenz soll 28 MHz sein. Die
+                    <textquestion>Ein Doppelsuper hat eine erste ZF (ZF_1) von 10,7 MHz und eine
+                        zweite ZF (ZF_2) von 450 kHz. Die Empfangsfrequenz soll 28 MHz sein. Die
                         Oszillatoren sollen oberhalb des Nutzsignals schwingen. Welche Frequenzen
                         sind für den VFO und den CO erforderlich, wenn die Oszillatoren oberhalb des
                         Mischer-Eingangssignals schwingen sollen?
                     </textquestion>
-                    <textanswer correct="true">1. Oszillatorfrequenz: f_>o1> = 38,7 MHz 2.
-                        Oszillatorfrequenz: f_>o2> = 11,15 MHz
+                    <textanswer correct="true">1. Oszillatorfrequenz: f_o1 = 38,7 MHz 2.
+                        Oszillatorfrequenz: f_o2 = 11,15 MHz
                     </textanswer>
-                    <textanswer>1. Oszillatorfrequenz: f_>o1> = 38,7 MHz 2. Oszillatorfrequenz:
-                        f_>o2> = 39,15 MHz
+                    <textanswer>1. Oszillatorfrequenz: f_o1 = 38,7 MHz 2. Oszillatorfrequenz:
+                        f_o2 = 39,15 MHz
                     </textanswer>
-                    <textanswer>1. Oszillatorfrequenz: f_>o1> = 11,15 MHz 2. Oszillatorfrequenz:
-                        f_>o2> = 38,7 MHz
+                    <textanswer>1. Oszillatorfrequenz: f_o1 = 11,15 MHz 2. Oszillatorfrequenz:
+                        f_o2 = 38,7 MHz
                     </textanswer>
-                    <textanswer>1. Oszillatorfrequenz: f_>o1> = 28,45 MHz 2. Oszillatorfrequenz:
-                        f_>o2> = 17,75 MHz
+                    <textanswer>1. Oszillatorfrequenz: f_o1 = 28,45 MHz 2. Oszillatorfrequenz:
+                        f_o2 = 17,75 MHz
                     </textanswer>
                 </question>
                 <question id="TF308">
@@ -8328,7 +8328,7 @@
                     <textanswer>Um acht S-Stufen.</textanswer>
                 </question>
                 <question id="TF310">
-                    <textquestion>Welche Funktion haben die beiden Kondensatoren C_>3> und C_>4> in
+                    <textquestion>Welche Funktion haben die beiden Kondensatoren C_3 und C_4 in
                         der folgenden Schaltung?&lt;img src='tf310f.png'>
                     </textquestion>
                     <textanswer correct="true">Sie erzeugen zusammen die notwendige
@@ -8337,15 +8337,15 @@
                     <textanswer>Sie erzeugen zusammen die notwendige Rückkopplungsspannung für eine
                         Audionschaltung.
                     </textanswer>
-                    <textanswer>C_>3> stabilisiert die Basisvorspannung und C_>4> die
+                    <textanswer>C_3 stabilisiert die Basisvorspannung und C_4 die
                         Emittervorspannung.
                     </textanswer>
-                    <textanswer>C_>3> kompensiert die Basis-Kollektor-Kapazität und C_>4> die
+                    <textanswer>C_3 kompensiert die Basis-Kollektor-Kapazität und C_4 die
                         Basis-Emitter-Kapazität
                     </textanswer>
                 </question>
                 <question id="TF311">
-                    <textquestion>Welchem Zweck dient D_>1> in der folgenden Schaltung?&lt;img
+                    <textquestion>Welchem Zweck dient D_1 in der folgenden Schaltung?&lt;img
                         src='tf311f.png'>
                     </textquestion>
                     <textanswer correct="true">Sie sorgt für eine stabile Versorgungsspannung, damit
@@ -8367,7 +8367,7 @@
                     <textanswer>im HF-Bereich nicht gefiltert werden.</textanswer>
                 </question>
                 <question id="TF313">
-                    <textquestion>Wozu dienen P und C_>4> bei dieser Schaltung? Sie dienen&lt;img
+                    <textquestion>Wozu dienen P und C_4 bei dieser Schaltung? Sie dienen&lt;img
                         src='tf313f.png'>
                     </textquestion>
                     <textanswer correct="true">zur Einstellung der Trägerunterdrückung nach Betrag
@@ -9129,7 +9129,7 @@
                 <question id="TG110">
                     <textquestion>Im folgenden Blockschaltbild ist die Frequenzaufbereitung für
                         einen Amateurfunk-Transceiver dargestellt. Welche Frequenz erzeugt der
-                        Sender, wenn VCO_>1> auf 2,651 MHz eingestellt und VCO_>2> auf 6 MHz
+                        Sender, wenn VCO_1 auf 2,651 MHz eingestellt und VCO_2 auf 6 MHz
                         eingerastet ist?&lt;img src='tg110f.png'>
                     </textquestion>
                     <textanswer correct="true">3,651 MHz</textanswer>
@@ -9140,7 +9140,7 @@
                 <question id="TG111">
                     <textquestion>Im folgenden Blockschaltbild ist die Frequenzaufbereitung für
                         einen Amateurfunk-Transceiver dargestellt. Auf welcher Frequenz muss der
-                        VCO_>2> eingerastet haben, wenn eine Ausgangsfrequenz von 14,351 MHz
+                        VCO_2 eingerastet haben, wenn eine Ausgangsfrequenz von 14,351 MHz
                         abgegeben wird?&lt;img src='tg110f.png'>
                     </textquestion>
                     <textanswer correct="true">17,000 MHz</textanswer>
@@ -9395,7 +9395,7 @@
                     <textanswer>Oszillator.</textanswer>
                 </question>
                 <question id="TG223">
-                    <textquestion>Welchem Zweck dient C_>5> in der folgenden Schaltung?&lt;img
+                    <textquestion>Welchem Zweck dient C_5 in der folgenden Schaltung?&lt;img
                         src='tg222f.png'>
                     </textquestion>
                     <textanswer correct="true">Zur HF-Entkopplung</textanswer>
@@ -9419,7 +9419,7 @@
                     </textanswer>
                 </question>
                 <question id="TG225">
-                    <textquestion>Welchem Zweck dient C_>2> in der folgenden Schaltung?&lt;img
+                    <textquestion>Welchem Zweck dient C_2 in der folgenden Schaltung?&lt;img
                         src='tg222f.png'>
                     </textquestion>
                     <textanswer correct="true">Zur Festlegung der HF-Kopplung</textanswer>
@@ -9496,25 +9496,25 @@
                         bei der Bemessung des Spannungsteilers zu beachten?&lt;img src='tg233f.png'>
                     </textquestion>
                     <textanswer correct="true">Sie dient als HF-Spannungsmesser. Der Spannungsteiler
-                        R_>1>/R_>2> muss so bemessen sein, dass die Spannungsbelastbarkeit der Diode
-                        nicht überschritten wird. Der Widerstand R_>1> muss so bemessen sein, dass
+                        R_1/R_2 muss so bemessen sein, dass die Spannungsbelastbarkeit der Diode
+                        nicht überschritten wird. Der Widerstand R_1 muss so bemessen sein, dass
                         die an der Diode entstehenden Oberwellen von der Antenne möglichst hoch
                         entkoppelt sind.
                     </textanswer>
-                    <textanswer>Sie dient als SWR-Anzeige. Der Spannungsteiler R_>1>/R_>2> wird mit
+                    <textanswer>Sie dient als SWR-Anzeige. Der Spannungsteiler R_1/R_2 wird mit
                         Hilfe eines Reflektometers voreingestellt. Die Spannungsbelastbarkeit der
-                        Diode darf nicht überschritten werden. Der Widerstand R_>1> muss so bemessen
+                        Diode darf nicht überschritten werden. Der Widerstand R_1 muss so bemessen
                         sein, dass die an der gekrümmten Kennlinie der Diode zusätzlich entstehenden
                         Oberwellen nicht die Messung verfälschen.
                     </textanswer>
                     <textanswer>Sie dient als Antennenimpedanzmesser. Der Spannungsteiler
-                        R_>1>/R_>2> wird als Impedanzanpassung der Messdiode verwendet. Die
+                        R_1/R_2 wird als Impedanzanpassung der Messdiode verwendet. Die
                         Spannungsbelastbarkeit der Diode darf nicht überschritten werden. Der
-                        Widerstand R_>1> muss so bemessen sein, dass die an der gekrümmten Kennlinie
+                        Widerstand R_1 muss so bemessen sein, dass die an der gekrümmten Kennlinie
                         der Diode zusätzlich entstehenden Oberwellen nicht die Messung verfälschen.
                     </textanswer>
-                    <textanswer>Sie dient als Leistungsmesser. Über den Spannungsteiler R_>1>/R_>2>
-                        wird das HF-Hitzdraht-Amperemeter kalibriert. Der Widerstand R_>1> muss so
+                    <textanswer>Sie dient als Leistungsmesser. Über den Spannungsteiler R_1/R_2
+                        wird das HF-Hitzdraht-Amperemeter kalibriert. Der Widerstand R_1 muss so
                         bemessen sein, dass die an der gekrümmten Kennlinie der Diode zusätzlich
                         entstehenden Oberwellen vom Messinstrument möglichst hoch entkoppelt sind
                         und nicht die Messung verfälschen.
@@ -9578,7 +9578,7 @@
                     <textanswer>Kollektorschaltung an den Eingang der folgenden PA.</textanswer>
                 </question>
                 <question id="TG239">
-                    <textquestion>Weshalb wurden bei C_>1>, C_>2> und C_>3> je zwei Kondensatoren
+                    <textquestion>Weshalb wurden bei C_1, C_2 und C_3 je zwei Kondensatoren
                         parallel geschaltet?&lt;img src='tg239f.png'>
                     </textquestion>
                     <textanswer correct="true">Der Kondensator geringer Kapazität dient jeweils zum
@@ -9733,7 +9733,7 @@
                     <textanswer>zur Erhöhung des HF-Wirkungsgrades der Verstärkerstufe.</textanswer>
                 </question>
                 <question id="TG311">
-                    <textquestion>Welche Funktion haben C_>1>, C_>2> und L_>1> in der folgenden
+                    <textquestion>Welche Funktion haben C_1, C_2 und L_1 in der folgenden
                         Schaltung?&lt;img src='tg311f.png'>
                     </textquestion>
                     <textanswer correct="true">Sie passen die Eingangsimpedanz an den
@@ -9751,13 +9751,13 @@
                     <textquestion>Welche der nachfolgenden Aussagen trifft nicht für die Schaltung
                         zu?&lt;img src='tg311f.png'>
                     </textquestion>
-                    <textanswer correct="true">R_>1> dient zur Arbeitspunkteinstellung des
+                    <textanswer correct="true">R_1 dient zur Arbeitspunkteinstellung des
                         Transistors T1.
                     </textanswer>
-                    <textanswer>C_>4>, C_>5> und L_>2> passen den Transistorausgang an die
+                    <textanswer>C_4, C_5 und L_2 passen den Transistorausgang an die
                         niederohmigere Ausgangsimpedanz an.
                     </textanswer>
-                    <textanswer>C_>1>, C_>2> und L_>1> passen die hochohmigere Eingangsimpedanz an
+                    <textanswer>C_1, C_2 und L_1 passen die hochohmigere Eingangsimpedanz an
                         den Transistoreingang an.
                     </textanswer>
                     <textanswer>HF-Eingang und HF-Ausgang sind gleichspannungsfrei.</textanswer>
@@ -9774,7 +9774,7 @@
                     <textanswer>ein Pendelaudion mit Selbstüberlagerung.</textanswer>
                 </question>
                 <question id="TG314">
-                    <textquestion>Bei C_>1>, C_>2> und L_>1> handelt es sich um&lt;img
+                    <textquestion>Bei C_1, C_2 und L_1 handelt es sich um&lt;img
                         src='tg313f.png'>
                     </textquestion>
                     <textanswer correct="true">einen Pi-Filter zur Anpassung der Antenne an die
@@ -9791,28 +9791,28 @@
                 </question>
                 <question id="TG315">
                     <textquestion>Das folgende Bild zeigt eine HF-Endstufe. Welche Bedeutung und
-                        Funktion haben C_>1>, C_>2> und L_>1> ? Wie sind die Bedienknöpfe der beiden
+                        Funktion haben C_1, C_2 und L_1 ? Wie sind die Bedienknöpfe der beiden
                         Kondensatoren an einer Endstufe wahrscheinlich beschriftet?&lt;img
                         src='tg313f.png'>
                     </textquestion>
-                    <textanswer correct="true">An dem Drehknopf für C_>1> steht "C_>Plate>" oder
-                        "Plate", an dem für C_>2> steht "C_>Load>" oder "Load". Die drei Bauelemente
-                        C_>1>, C_>2> und L_>1> bilden zusammen einen so genannten Pi-Tankkreis zur
+                    <textanswer correct="true">An dem Drehknopf für C_1 steht "C_Plate" oder
+                        "Plate", an dem für C_2 steht "C_Load" oder "Load". Die drei Bauelemente
+                        C_1, C_2 und L_1 bilden zusammen einen so genannten Pi-Tankkreis zur
                         Anpassung der Ausgangsimpedanz der Röhre an die Antennenimpedanz.
                     </textanswer>
-                    <textanswer>An dem Drehknopf für C_>1> steht "C_>Load>" oder "Load", an dem für
-                        C_>2> steht "C_>Plate>" oder "Plate". Die drei Bauelemente C_>1>, C_>2> und
-                        L_>1> bilden zusammen ein abstimmbaren Sperrkreis zur Unterdrückung von
+                    <textanswer>An dem Drehknopf für C_1 steht "C_Load" oder "Load", an dem für
+                        C_2 steht "C_Plate" oder "Plate". Die drei Bauelemente C_1, C_2 und
+                        L_1 bilden zusammen ein abstimmbaren Sperrkreis zur Unterdrückung von
                         Harmonischen.
                     </textanswer>
-                    <textanswer>An dem Drehknopf für C_>1> steht "C_>Plate>" oder "Plate", an dem
-                        für C_>2> steht "C_>Load>" oder "Load". Die drei Bauelemente C_>1>, C_>2>
-                        und L_>1> bilden zusammen ein abstimmbaren Sperrkreis zur Unterdrückung von
+                    <textanswer>An dem Drehknopf für C_1 steht "C_Plate" oder "Plate", an dem
+                        für C_2 steht "C_Load" oder "Load". Die drei Bauelemente C_1, C_2
+                        und L_1 bilden zusammen ein abstimmbaren Sperrkreis zur Unterdrückung von
                         Harmonischen.
                     </textanswer>
-                    <textanswer>An dem Drehknopf für C_>1> steht "C_>Load>" oder "Load", an dem für
-                        C_>2> steht "C_>Plate>" oder "Plate". Die drei Bauelemente C_>1>, C_>2> und
-                        L_>1> bilden zusammen einen so genannten Pi-Tankkreis zur Anpassung der
+                    <textanswer>An dem Drehknopf für C_1 steht "C_Load" oder "Load", an dem für
+                        C_2 steht "C_Plate" oder "Plate". Die drei Bauelemente C_1, C_2 und
+                        L_1 bilden zusammen einen so genannten Pi-Tankkreis zur Anpassung der
                         Ausgangsimpedanz der Röhre an die Antennenimpedanz.
                     </textanswer>
                 </question>
@@ -9820,35 +9820,35 @@
                     <textquestion>Wie wird die folgende Endstufe richtig auf die Sendefrequenz
                         abgestimmt?&lt;img src='tg313f.png'>
                     </textquestion>
-                    <textanswer correct="true">C_>1> und C_>2> auf maximale Kapazität stellen. C1
-                        auf Dip im Anodenstrom (Resonanz) stellen, dann mit C_>2> einen etwas
-                        höheren Anodenstrom einstellen (Leistung auskoppeln). Vorgang mit C_>1> und
-                        C_>2> wechselweise mehrmals wiederholen bis die maximale Ausgangsleistung
+                    <textanswer correct="true">C_1 und C_2 auf maximale Kapazität stellen. C1
+                        auf Dip im Anodenstrom (Resonanz) stellen, dann mit C_2 einen etwas
+                        höheren Anodenstrom einstellen (Leistung auskoppeln). Vorgang mit C_1 und
+                        C_2 wechselweise mehrmals wiederholen bis die maximale Ausgangsleistung
                         erreicht ist. Nach dem Abstimmvorgang sollte ein Dip von etwa 10 %
                         verbleiben.
                     </textanswer>
-                    <textanswer>C_>1> und C_>2> auf minimale Kapazität stellen. C2 auf Dip im
-                        Anodenstrom (Resonanz) stellen, dann mit C_>1> einen etwas höheren
-                        Anodenstrom einstellen (Leistung auskoppeln). Vorgang mit C_>1> und C_>2>
+                    <textanswer>C_1 und C_2 auf minimale Kapazität stellen. C2 auf Dip im
+                        Anodenstrom (Resonanz) stellen, dann mit C_1 einen etwas höheren
+                        Anodenstrom einstellen (Leistung auskoppeln). Vorgang mit C_1 und C_2
                         wechselweise mehrmals wiederholen bis die maximale Ausgangsleistung erreicht
                         ist. Nach dem Abstimmvorgang sollte ein Dip von etwa 20 % verbleiben.
                     </textanswer>
-                    <textanswer>C_>1> und C_>2> auf maximale Kapazität stellen. C1 auf Dip im
-                        Anodenstrom (Resonanz) stellen, dann mit C_>2> einen etwas niedrigeren
-                        Anodenstrom einstellen (Leistung einkoppeln). Vorgang mit C_>1> und C_>2>
+                    <textanswer>C_1 und C_2 auf maximale Kapazität stellen. C1 auf Dip im
+                        Anodenstrom (Resonanz) stellen, dann mit C_2 einen etwas niedrigeren
+                        Anodenstrom einstellen (Leistung einkoppeln). Vorgang mit C_1 und C_2
                         wechselweise mehrmals wiederholen bis die maximale Oberwellenleistung
                         erreicht ist. Nach dem Abstimmvorgang sollte ein Dip von etwa 10 %
                         verbleiben.
                     </textanswer>
-                    <textanswer>C_>1> und C_>2> auf minimale Kapazität stellen. C2 auf maximalen
-                        Anodenstrom (Resonanz) stellen, dann mit C_>1> einen etwas niedrigeren
+                    <textanswer>C_1 und C_2 auf minimale Kapazität stellen. C2 auf maximalen
+                        Anodenstrom (Resonanz) stellen, dann mit C_1 einen etwas niedrigeren
                         Anodenstrom (Dip) einstellen. Vorgang so oft wiederholen bis die maximale
                         Ausgangsleistung erreicht ist. Nach dem Abstimmvorgang sollte ein Dip von
                         etwa 20 % verbleiben.
                     </textanswer>
                 </question>
                 <question id="TG317">
-                    <textquestion>Welchem Zweck dient R_>1> in der folgenden Schaltung? R_>1> dient&lt;img
+                    <textquestion>Welchem Zweck dient R_1 in der folgenden Schaltung? R_1 dient&lt;img
                         src='tg313f.png'>
                     </textquestion>
                     <textanswer correct="true">als Katodenwiderstand zur Erzeugung einer negativen
@@ -9861,14 +9861,14 @@
                     </textanswer>
                 </question>
                 <question id="TG318">
-                    <textquestion>Wodurch könnte R_>1> in der folgenden Schaltung ersetzt werden, um
+                    <textquestion>Wodurch könnte R_1 in der folgenden Schaltung ersetzt werden, um
                         den Arbeitspunkt der Röhre von der HF-Aussteuerung unabhängig einzustellen?&lt;img
                         src='tg313f.png'>
                     </textquestion>
                     <textanswer correct="true">Durch eine Konstantspannungsquelle</textanswer>
                     <textanswer>Durch eine Konstantstromquelle</textanswer>
                     <textanswer>Durch mehrere Siliziumdioden in Sperrrichtung</textanswer>
-                    <textanswer>Durch nichts, da R_>1> ohnehin überflüssig ist</textanswer>
+                    <textanswer>Durch nichts, da R_1 ohnehin überflüssig ist</textanswer>
                 </question>
             </chapter>
             <chapter name="Betrieb und Funktionsweise von HF-Transceivern" id="4">
@@ -10940,20 +10940,20 @@
                         Yagi-Antenne. Der Antennengewinn der Yagi-Antenne über dem Dipol ist
                         definiert als&lt;img src='th206f.png'>
                     </textquestion>
-                    <textanswer correct="true">das Verhältnis von P_>v> zu P_>D>.</textanswer>
-                    <textanswer>das Verhältnis von P_>D> zu P_>R>.</textanswer>
-                    <textanswer>das Verhältnis von P_>v> zu P_>R>.</textanswer>
-                    <textanswer>das Verhältnis von 0,7•P_>v> zu 0,7•P_>R> .</textanswer>
+                    <textanswer correct="true">das Verhältnis von P_v zu P_D.</textanswer>
+                    <textanswer>das Verhältnis von P_D zu P_R.</textanswer>
+                    <textanswer>das Verhältnis von P_v zu P_R.</textanswer>
+                    <textanswer>das Verhältnis von 0,7•P_v zu 0,7•P_R .</textanswer>
                 </question>
                 <question id="TH207">
                     <textquestion>Das folgende Bild zeigt das Richtdiagramm einer Dipol- und einer
                         Yagi-Antenne. Das Vor-/Rück-Verhältnis der Yagi-Antenne ist definiert&lt;img
                         src='th206f.png'>
                     </textquestion>
-                    <textanswer correct="true">als das Verhältnis von P_>v> zu P_>R>.</textanswer>
-                    <textanswer>als das Verhältnis von P_>D> zu P_>R>.</textanswer>
-                    <textanswer>als das Verhältnis von P_>v> zu P_>D>.</textanswer>
-                    <textanswer>als das Verhältnis von 0,7•P_>v> zu 0,7•P_>D> .</textanswer>
+                    <textanswer correct="true">als das Verhältnis von P_v zu P_R.</textanswer>
+                    <textanswer>als das Verhältnis von P_D zu P_R.</textanswer>
+                    <textanswer>als das Verhältnis von P_v zu P_D.</textanswer>
+                    <textanswer>als das Verhältnis von 0,7•P_v zu 0,7•P_D .</textanswer>
                 </question>
                 <question id="TH208">
                     <textquestion>Der Gewinn von Antennen wird häufig in dBi angegeben. Auf welche
@@ -11001,7 +11001,7 @@
                 </question>
                 <question id="TH212">
                     <textquestion>In dem folgenden Richtdiagramm sind auf der Skala der relativen
-                        Feldstärke E / E_>max> die Punkte A bis D markiert. Durch welchen der Punkte
+                        Feldstärke E / E_max die Punkte A bis D markiert. Durch welchen der Punkte
                         A bis D ziehen sie mit einem Zirkel den Kreisbogen, um die Halbwertsbreite
                         der Antenne an den Schnittpunkten des Kreises mit der Keule ablesen zu
                         können?&lt;img src='th212f.png'>
@@ -11428,7 +11428,7 @@
                 <question id="TH316">
                     <textquestion>Eine offene Paralleldrahtleitung ist aus Draht mit einem
                         Durchmesser d = 2 mm gefertigt. Der Abstand der parallelen Leiter beträgt a
-                        = 20 cm. Wie groß ist der Wellenwiderstand Z_>0> der Leitung?
+                        = 20 cm. Wie groß ist der Wellenwiderstand Z_0 der Leitung?
                     </textquestion>
                     <textanswer correct="true">ca. 635 Ω</textanswer>
                     <textanswer>ca. 276 Ω</textanswer>
@@ -11438,7 +11438,7 @@
                 <question id="TH317">
                     <textquestion>Ein Koaxialkabel (luftisoliert) hat einen Innendurchmesser der
                         Abschirmung von 5 mm. Der Außendurchmesser des inneren Leiters beträgt 1 mm
-                        . Wie groß ist der Wellenwiderstand Z_>0> des Kabels?
+                        . Wie groß ist der Wellenwiderstand Z_0 des Kabels?
                     </textquestion>
                     <textanswer correct="true">ca. 97 Ω</textanswer>
                     <textanswer>ca. 60 Ω</textanswer>
@@ -11666,37 +11666,37 @@
                 </question>
                 <question id="TH403">
                     <textquestion>Einem Ganzwellendipol wird die Sendeleistung über eine abgestimmte
-                        λ/4-Speiseleitung zugeführt. Wie groß ist die Impedanz Z_>1> am
-                        Einspeisepunkt des Dipols? Und wie groß ist die Impedanz Z_>2> am Anfang der
+                        λ/4-Speiseleitung zugeführt. Wie groß ist die Impedanz Z_1 am
+                        Einspeisepunkt des Dipols? Und wie groß ist die Impedanz Z_2 am Anfang der
                         Speiseleitung?&lt;img src='th403f.png'>
                     </textquestion>
-                    <textanswer correct="true">Z_>1> ist hochohmig und Z_>2> niederohmig.
+                    <textanswer correct="true">Z_1 ist hochohmig und Z_2 niederohmig.
                     </textanswer>
-                    <textanswer>Z_>1> und Z_>2> sind hochohmig.</textanswer>
-                    <textanswer>Z_>1> und Z_>2> sind niederohmig.</textanswer>
-                    <textanswer>Z_>1> ist niederohmig und Z_>2> hochohmig.</textanswer>
+                    <textanswer>Z_1 und Z_2 sind hochohmig.</textanswer>
+                    <textanswer>Z_1 und Z_2 sind niederohmig.</textanswer>
+                    <textanswer>Z_1 ist niederohmig und Z_2 hochohmig.</textanswer>
                 </question>
                 <question id="TH404">
                     <textquestion>Einem Ganzwellendipol wird die Sendeleistung über eine abgestimmte
-                        λ/2-Speiseleitung zugeführt. Wie groß ist die Impedanz Z_>1> am
-                        Einspeisepunkt des Dipols? Und wie groß ist die Impedanz Z_>2> am Anfang der
+                        λ/2-Speiseleitung zugeführt. Wie groß ist die Impedanz Z_1 am
+                        Einspeisepunkt des Dipols? Und wie groß ist die Impedanz Z_2 am Anfang der
                         Speiseleitung?&lt;img src='th403f.png'>
                     </textquestion>
-                    <textanswer correct="true">Z_>1> und Z_>2> sind hochohmig.</textanswer>
-                    <textanswer>Z_>1> ist niederohmig und Z_>2> hochohmig.</textanswer>
-                    <textanswer>Z_>1> und Z_>2> sind niederohmig.</textanswer>
-                    <textanswer>Z_>1> ist hochohmig und Z_>2> niederohmig.</textanswer>
+                    <textanswer correct="true">Z_1 und Z_2 sind hochohmig.</textanswer>
+                    <textanswer>Z_1 ist niederohmig und Z_2 hochohmig.</textanswer>
+                    <textanswer>Z_1 und Z_2 sind niederohmig.</textanswer>
+                    <textanswer>Z_1 ist hochohmig und Z_2 niederohmig.</textanswer>
                 </question>
                 <question id="TH405">
                     <textquestion>Einem Halbwellendipol wird die Sendeleistung über eine abgestimmte
-                        λ/2-Speiseleitung zugeführt. Wie groß ist die Impedanz Z_>1> am
-                        Einspeisepunkt des Dipols? Und wie groß ist die Impedanz Z_>2> am Anfang der
+                        λ/2-Speiseleitung zugeführt. Wie groß ist die Impedanz Z_1 am
+                        Einspeisepunkt des Dipols? Und wie groß ist die Impedanz Z_2 am Anfang der
                         Speiseleitung?&lt;img src='th403f.png'>
                     </textquestion>
-                    <textanswer correct="true">Z_>1> und Z_>2> sind niederohmig.</textanswer>
-                    <textanswer>Z_>1> und Z_>2> sind hochohmig.</textanswer>
-                    <textanswer>Z_>1> ist niederohmig und Z_>2> hochohmig.</textanswer>
-                    <textanswer>Z_>1> ist hochohmig und Z_>2> niederohmig.</textanswer>
+                    <textanswer correct="true">Z_1 und Z_2 sind niederohmig.</textanswer>
+                    <textanswer>Z_1 und Z_2 sind hochohmig.</textanswer>
+                    <textanswer>Z_1 ist niederohmig und Z_2 hochohmig.</textanswer>
+                    <textanswer>Z_1 ist hochohmig und Z_2 niederohmig.</textanswer>
                 </question>
                 <question id="TH406">
                     <textquestion>Ein Faltdipol mit einem Fußpunktwiderstand von 240 Ω soll mit
@@ -12367,7 +12367,7 @@
                     <textanswer>sich nicht ändern.</textanswer>
                 </question>
                 <question id="TI222">
-                    <textquestion>Die kritische Grenzfrequenz (F_>krit>) ist die</textquestion>
+                    <textquestion>Die kritische Grenzfrequenz (F_krit) ist die</textquestion>
                     <textanswer correct="true">höchste Frequenz, die bei senkrechter Abstrahlung von
                         der Ionosphäre noch reflektiert wird.
                     </textanswer>
@@ -12388,8 +12388,8 @@
                     </textquestion>
                     <textanswer correct="true">höchste nutzbare Frequenz bezeichnet (MUF).
                     </textanswer>
-                    <textanswer>optimale Arbeitsfrequenz bezeichnet (F_>opt>).</textanswer>
-                    <textanswer>kritische Grenzfrequenz bezeichnet (F_>krit>).</textanswer>
+                    <textanswer>optimale Arbeitsfrequenz bezeichnet (F_opt).</textanswer>
+                    <textanswer>kritische Grenzfrequenz bezeichnet (F_krit).</textanswer>
                     <textanswer>höchste durchlässige Frequenz bezeichnet (LUF).</textanswer>
                 </question>
                 <question id="TI224">
@@ -12848,8 +12848,8 @@
                 </question>
                 <question id="TJ102">
                     <textquestion>Das Drehspulmesswerk in der folgenden Schaltung hat einen
-                        maximalen Messstrom I_>M> = 100 µA und einen Messwerkwiderstand R_>M> = 1
-                        kΩ. R_>V> = 499 kΩ Welche Gleichspannung muss an die Gesamtschaltung
+                        maximalen Messstrom I_M = 100 µA und einen Messwerkwiderstand R_M = 1
+                        kΩ. R_V = 499 kΩ Welche Gleichspannung muss an die Gesamtschaltung
                         angelegt werden, damit das Messwerk Vollausschlag anzeigt?&lt;img
                         src='tj102f.png'>
                     </textquestion>
@@ -12860,8 +12860,8 @@
                 </question>
                 <question id="TJ103">
                     <textquestion>Das Drehspulmesswerk in der folgenden Schaltung hat einen
-                        maximalen Messstrom I_>M> = 0,3 mA und einen Messwerkwiderstand R_>M> = 300
-                        Ω. R_>V> = 9,7 k Welche Gleichspannung muss an die Gesamtschaltung
+                        maximalen Messstrom I_M = 0,3 mA und einen Messwerkwiderstand R_M = 300
+                        Ω. R_V = 9,7 k Welche Gleichspannung muss an die Gesamtschaltung
                         angelegt werden, damit das Messwerk Vollausschlag anzeigt?&lt;img
                         src='tj102f.png'>
                     </textquestion>
@@ -12872,8 +12872,8 @@
                 </question>
                 <question id="TJ104">
                     <textquestion>Das Drehspulmesswerk in der folgenden Schaltung hat einen
-                        maximalen Messstrom I_>M> = 100 µA und einen Messwerkwiderstand R_>M> = 1
-                        kΩ. Wie groß muss R_>P> gewählt werden, damit das Messwerk in der
+                        maximalen Messstrom I_M = 100 µA und einen Messwerkwiderstand R_M = 1
+                        kΩ. Wie groß muss R_P gewählt werden, damit das Messwerk in der
                         Gesamtschaltung bei I = 100 mA Vollausschlag anzeigt?&lt;img
                         src='tj104f.png'>
                     </textquestion>
@@ -12884,7 +12884,7 @@
                 </question>
                 <question id="TJ105">
                     <textquestion>Wenn bei dieser Messschaltung I = 1 A zu einem Vollausschlag des
-                        Instruments führt, beträgt der Strom durch R_>P>&lt;img src='tj105f.png'>
+                        Instruments führt, beträgt der Strom durch R_P&lt;img src='tj105f.png'>
                     </textquestion>
                     <textanswer correct="true">0,999 A.</textanswer>
                     <textanswer>0,9 A.</textanswer>
@@ -12892,7 +12892,7 @@
                     <textanswer>99 mA.</textanswer>
                 </question>
                 <question id="TJ106">
-                    <textquestion>Wie groß muss R_>P> bei der folgenden Schaltung gewählt werden,
+                    <textquestion>Wie groß muss R_P bei der folgenden Schaltung gewählt werden,
                         wenn I = 1 A zum Vollausschlag des Instruments mit 300 Ω Innenwiderstand
                         führen soll?&lt;img src='tj105f.png'>
                     </textquestion>
@@ -12905,35 +12905,35 @@
                     <textquestion>Durch ein Einbauinstrument mit einem Messbereich von 2 V, fließt
                         bei Vollausschlag ein Strom von 2 mA. Das Instrument soll mit einem
                         Vorwiderstand auf einen Messbereich von 20 V Endausschlag erweitert werden.
-                        Wie groß ist der Widerstandswert R_>V> und die Belastung P_>V> des
+                        Wie groß ist der Widerstandswert R_V und die Belastung P_V des
                         Vorwiderstandes?&lt;img src='tj107f.png'>
                     </textquestion>
-                    <textanswer correct="true">R_>V> = 9 kΩ P_>V> = 36 mW</textanswer>
-                    <textanswer>R_>V> = 10 kΩ P_>V> = 40 mW</textanswer>
-                    <textanswer>R_>V> = 9 kΩ P_>V> = 4 mW</textanswer>
-                    <textanswer>R_>V> = 0,1 MΩ P_>V> = 131 mW</textanswer>
+                    <textanswer correct="true">R_V = 9 kΩ P_V = 36 mW</textanswer>
+                    <textanswer>R_V = 10 kΩ P_V = 40 mW</textanswer>
+                    <textanswer>R_V = 9 kΩ P_V = 4 mW</textanswer>
+                    <textanswer>R_V = 0,1 MΩ P_V = 131 mW</textanswer>
                 </question>
                 <question id="TJ108">
-                    <textquestion>Der Messbereich eines Amperemeters mit dem Innenwiderstand R_>i>
+                    <textquestion>Der Messbereich eines Amperemeters mit dem Innenwiderstand R_i
                         soll um den Faktor 5 erweitert werden. Durch welche Maßnahme ist dies
                         erreichbar?
                     </textquestion>
-                    <textanswer correct="true">Durch Parallelschaltung mit R_>p> = 1/4 * R_>i>
+                    <textanswer correct="true">Durch Parallelschaltung mit R_p = 1/4 * R_i
                     </textanswer>
-                    <textanswer>Durch Parallelschaltung mit R_>p> = 5 * R_>i></textanswer>
-                    <textanswer>Durch Reihenschaltung mit R_>v> = 1/4 * R_>i></textanswer>
-                    <textanswer>Durch Reihenschaltung mit R_>v> = 5 * R_>i></textanswer>
+                    <textanswer>Durch Parallelschaltung mit R_p = 5 * R_i</textanswer>
+                    <textanswer>Durch Reihenschaltung mit R_v = 1/4 * R_i</textanswer>
+                    <textanswer>Durch Reihenschaltung mit R_v = 5 * R_i</textanswer>
                 </question>
                 <question id="TJ109">
-                    <textquestion>Der Messbereich eines Voltmeters mit dem Innenwiderstand R_>i>
+                    <textquestion>Der Messbereich eines Voltmeters mit dem Innenwiderstand R_i
                         soll um den Faktor 8 erweitert werden. Durch welche Maßnahme ist dies
                         erreichbar?
                     </textquestion>
-                    <textanswer correct="true">Durch Reihenschaltung mit R_>v> = 7 * R_>i>
+                    <textanswer correct="true">Durch Reihenschaltung mit R_v = 7 * R_i
                     </textanswer>
-                    <textanswer>Durch Reihenschaltung mit R_>v> = 8 * R_>i></textanswer>
-                    <textanswer>Durch Reihenschaltung mit R_>v> = 1/8 * R_>i></textanswer>
-                    <textanswer>Durch Reihenschaltung mit R_>p> = 1/7 * R_>i></textanswer>
+                    <textanswer>Durch Reihenschaltung mit R_v = 8 * R_i</textanswer>
+                    <textanswer>Durch Reihenschaltung mit R_v = 1/8 * R_i</textanswer>
+                    <textanswer>Durch Reihenschaltung mit R_p = 1/7 * R_i</textanswer>
                 </question>
                 <question id="TJ110">
                     <textquestion>Ein Vielfachmessgerät hat in den Wechselspannungsbereichen die
@@ -13439,7 +13439,7 @@
                     <textanswer correct="true">Korrekturwerte, die z.B. aus Vergleichsmessungen
                         stammen.
                     </textanswer>
-                    <textanswer>R_>1> muss genau 50 Ω betragen.</textanswer>
+                    <textanswer>R_1 muss genau 50 Ω betragen.</textanswer>
                     <textanswer>Bei den Umrechnungen darf nur mit dem Effektivwert gerechnet werden.
                     </textanswer>
                     <textanswer>Die Messschaltung muss vor jeder Messung mit einem Dipmeter
@@ -13782,8 +13782,8 @@
                 </question>
                 <question id="TJ830">
                     <textquestion>Dem Eingang der folgenden Messschaltung wird eine HF-Leistung von
-                        1 Watt zugeführt. D ist eine Schottkydiode mit U_>F> = 0,23V. Welche
-                        Spannung U_>A> ist am Ausgang A zu erwarten, wenn die Messung mit einem
+                        1 Watt zugeführt. D ist eine Schottkydiode mit U_F = 0,23V. Welche
+                        Spannung U_A ist am Ausgang A zu erwarten, wenn die Messung mit einem
                         hochohmigen Voltmeter erfolgt?&lt;img src='tj830f.png'>
                     </textquestion>
                     <textanswer correct="true">4,8 V</textanswer>
@@ -13792,9 +13792,9 @@
                     <textanswer>9,8 V</textanswer>
                 </question>
                 <question id="TJ831">
-                    <textquestion>Bei der folgenden Schaltung besteht R_>1> aus einer
+                    <textquestion>Bei der folgenden Schaltung besteht R_1 aus einer
                         Zusammenschaltung von Widerständen, die einen Gesamtwidersand von 50,77 hat
-                        und etwa 200 Watt aufnehmen kann. D ist eine Siliziumdiode mit U_>F> = 0,7
+                        und etwa 200 Watt aufnehmen kann. D ist eine Siliziumdiode mit U_F = 0,7
                         V. Am Ausgang wird mit einem Digitalvoltmeter eine Gleichspannung von 14,9 V
                         gemessen. Wie groß ist etwa die HF-Leistung am Eingang der Schaltung?&lt;img
                         src='tj831f.png'>
@@ -13806,8 +13806,8 @@
                 </question>
                 <question id="TJ832">
                     <textquestion>Mit der folgenden Schaltung soll die Ausgangsleistung eines
-                        2-m-Handfunkgerätes gemessen werden. D_>1> und D_>2> sind Schottkydioden mit
-                        U_>F> = 0,23 V. Am Ausgang wird mit einem Digitalvoltmeter eine
+                        2-m-Handfunkgerätes gemessen werden. D_1 und D_2 sind Schottkydioden mit
+                        U_F = 0,23 V. Am Ausgang wird mit einem Digitalvoltmeter eine
                         Gleichspannung von 15,3 V gemessen. Wie groß ist etwa die HF-Leistung am
                         Eingang der Schaltung?&lt;img src='tj832f.png'>
                     </textquestion>
@@ -13820,7 +13820,7 @@
                     <textquestion>Die Leistung eines 2-m-Senders soll mit einer künstlichen
                         50-Ω-Antenne bestimmt werden, die über eine Anzapfung bei 5 Ω vom
                         erdnahen Ende verfügt. Zur Messung an diesem Punkt wird die folgende
-                        Schaltung eingesetzt. D_>1> und D_>2> sind Schottkydioden mit U_>F> = 0,23
+                        Schaltung eingesetzt. D_1 und D_2 sind Schottkydioden mit U_F = 0,23
                         V. Am Ausgang der Schaltung wird dabei mit einem Digitalvoltmeter eine
                         Gleichspannung von 15,3 V gemessen. Wie groß ist etwa die HF-Leistung des
                         Senders?&lt;img src='tj833f.png'>
@@ -14757,17 +14757,17 @@
                     </textquestion>
                     <textanswer correct="true">Sie addieren die Verluste zwischen Senderausgang und
                         Antenneneingang und berechnen aus dieser Dämpfung einen Dämpfungsfaktor D;
-                        die Antenneneingangsleistung ist dann P_>Ant> = D * P_>Sender>.
+                        die Antenneneingangsleistung ist dann P_Ant = D * P_Sender.
                     </textanswer>
                     <textanswer>Antenneneingangsleistung und Senderausgangsleistung sind gleich, da
                         die Kabelverluste bei Amateurfunkstationen vernachlässigbar klein sind, d.
-                        h. es gilt P_>Ant> = P_>Sender>.
+                        h. es gilt P_Ant = P_Sender.
                     </textanswer>
                     <textanswer>Die Antenneneingangsleistung ist der Spitzenwert der
-                        Senderausgangsleistung, also P_>Ant> = sqrt(2 * P_>Sender>).
+                        Senderausgangsleistung, also P_Ant = sqrt(2 * P_Sender).
                     </textanswer>
                     <textanswer>Die Antenneneingangsleistung ist der Spitzen-Spitzen-Wert der
-                        Senderausgangsleistung, also P_>Ant> = 2 * sqrt(2 * P_>Sender>).
+                        Senderausgangsleistung, also P_Ant = 2 * sqrt(2 * P_Sender).
                     </textanswer>
                 </question>
                 <question id="TL212">
@@ -14786,7 +14786,7 @@
                 <question id="TL213">
                     <textquestion>Wann hat die folgende Formel zur Berechnung des
                         Sicherheitsabstandes Gültigkeit und was sollten Sie tun, wenn die Gültigkeit
-                        nicht mehr sichergestellt ist? d = sqrt(30 Ω * P_>EIRP>) / E
+                        nicht mehr sichergestellt ist? d = sqrt(30 Ω * P_EIRP) / E
                     </textquestion>
                     <textanswer correct="true">Die Formel gilt nur für Abstände d > λ / (2 *
                         pi) bei Dipol-Antennen (Drahtdipole, Yagi-Antennen etc.). Für andere

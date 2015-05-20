@@ -36,7 +36,6 @@ import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 
@@ -50,10 +49,18 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
+    private static final int DATABASE_VERSION = 5;
+
 	public Repository(final Context context) {
-		super(context, "topics", null, 4);
+		super(context, "topics", null, DATABASE_VERSION);
 		done = context.getString(R.string.done);
 		this.context = context;
+	}
+
+	private String cleanUpTagText(String text) {
+		text = text.replace('\n', ' ');
+		text = text.replaceAll("[\t ]{1,}", " ");
+		return text;
 	}
 
 	@Override
@@ -125,7 +132,7 @@ public class Repository extends SQLiteOpenHelper {
 				case XmlPullParser.TEXT:
 					if (expectingQuestion) {
                         String qtext = xmlResourceParser.getText();
-                        qtext = qtext.replace('\n', ' ');
+                        qtext = cleanUpTagText(qtext);
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
@@ -155,7 +162,7 @@ public class Repository extends SQLiteOpenHelper {
 					}
 					if (expectingAnswer) {
                         String answertext = xmlResourceParser.getText();
-                        answertext = answertext.replace('\n', ' ');
+                        answertext = cleanUpTagText(answertext);
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
@@ -505,6 +512,23 @@ public class Repository extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.i("Funktrainer", "upgrading database from version " + oldVersion + " to new version "
+                + newVersion);
+        // Flush db and create again
+        db.beginTransaction();
+        try {
+            db.execSQL("DROP TABLE IF EXISTS topic");
+            db.execSQL("DROP TABLE IF EXISTS question");
+            db.execSQL("DROP TABLE IF EXISTS answer");
+            db.execSQL("DROP TABLE IF EXISTS image");
+            db.execSQL("DROP TABLE IF EXISTS answerImage");
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        onCreate(db);
+
+
 //		if (oldVersion <= 2) {
 //			final ContentValues updates = new ContentValues();
 //			updates.put("question", "Welches Funkzeugnis ist mindestens erforderlich, um mit einer Seefunkstelle auf einem Sportfahrzeug am Weltweiten Seenot- und Sicherheitsfunksystem (GMDSS) im Seegebiet A3 teilnehmen zu können?");

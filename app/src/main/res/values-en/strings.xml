@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Funk-Trainer</string>
-    <string name="infoMessage">This App contains the questions for the German amateur radio license A (questions from February 2007/October 2006)</string>
+    <string name="app_name">Funktrainer</string>
+    <string name="infoMessage">This App contains the questions for the German amateur radio license (questions from February 2007/October 2006)</string>
     <string name="selectTopic">Please select a topic:</string>
     <string name="continueButtonText">Continue</string>
     <string name="waitBeforeContinue">Please wait before you continue to learn…</string>

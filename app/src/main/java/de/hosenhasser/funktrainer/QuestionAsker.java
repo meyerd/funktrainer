@@ -391,10 +391,9 @@ public class QuestionAsker extends Activity {
                 Drawable img = context.getResources().getDrawable(imageResourceId);
                 rb.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
                 //rb.setBackgroundResource(imageResourceId);
-            }
-//            } else {
-//                rb.setButtonDrawable(0);
-//            }
+            } else {
+				rb.setCompoundDrawables(null, null, null, null);
+			}
 		}
 
 		final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
