@@ -34,9 +34,11 @@ public class URLImageParser implements Html.ImageGetter {
         int imageResourceId = -1;
         imageResourceId = this.c.getResources().getIdentifier(stripped_iname, "drawable", this.c.getPackageName());
         Drawable img = this.c.getResources().getDrawable(imageResourceId);
+        int containerwidth = this.container.getMeasuredWidth();
         int orgwidth = img.getIntrinsicWidth();
-        int width = Math.min(orgwidth * 2, this.screenwidth - 2);
-        Double ratio = (double)width / (double)orgwidth;
+//        int width = Math.min(orgwidth * 2, this.screenwidth - (int) (this.screenwidth + 0.1));
+        int width = Math.min((int)(orgwidth * 1.2), containerwidth);
+        float ratio = (float)width / (float)orgwidth;
         img.setBounds(0, 0, width, (int)(img.getIntrinsicHeight() * ratio));
 
         return img;
