@@ -49,7 +49,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
 	public Repository(final Context context) {
 		super(context, "topics", null, DATABASE_VERSION);
@@ -71,9 +71,6 @@ public class Repository extends SQLiteOpenHelper {
 			db.execSQL("CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL)");
 			db.execSQL("CREATE TABLE question (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, reference TEXT, question TEXT NOT NULL, level INT NOT NULL, next_time INT NOT NULL)");
 			db.execSQL("CREATE TABLE answer (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT NOT NULL)");
-			db.execSQL("CREATE TABLE image (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, image TEXT NOT NULL)");
-            db.execSQL("CREATE TABLE answerImage (_id INT NOT NULL PRIMARY KEY, answer_id INT NOT NULL REFERENCES answer(_id) ON DELETE CASCADE, order_index INT NOT NULL, image TEXT NOT NULL)");
-			db.execSQL("CREATE TABLE allImage (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, image_url TEXT NOT NULL, image TEXT NOT NULL)");
 			db.setTransactionSuccessful();
 		} finally {
 			db.endTransaction();
@@ -134,66 +131,13 @@ public class Repository extends SQLiteOpenHelper {
 					if (expectingQuestion) {
                         String qtext = xmlResourceParser.getText();
                         qtext = cleanUpTagText(qtext);
-                        String org_qtext = qtext;
-                        int imgi = 1;
-                        List<String> images = new ArrayList<String>();
-                        while(imgi > 0) {
-                            // String beginstr = "&lt;img src='";
-                            String beginstr = "<img src='";
-                            int pos = qtext.indexOf(beginstr);
-                            if(pos >= 0) {
-                                int endpos = qtext.indexOf("'>");
-                                if (endpos > pos) {
-                                    String img = qtext.substring(pos + beginstr.length(), endpos);
-                                    images.add(img);
-                                    //Log.d("Funktrainer", "found image" + img);
-                                } else {
-                                    endpos = pos + beginstr.length();
-                                }
-                                if(endpos + 2 < qtext.length()) {
-                                    qtext = qtext.substring(0, pos) + qtext.substring(endpos + 2, qtext.length());
-                                } else {
-                                    qtext = qtext.substring(0, pos);
-                                }
-                            }
-                            imgi = pos;
-                        }
-//						currentQuestion.setQuestionText(qtext);
-                        currentQuestion.setQuestionText(org_qtext);
-                        currentQuestion.setImages(images);
+						currentQuestion.setQuestionText(qtext);
 						expectingQuestion = false;
 					}
 					if (expectingAnswer) {
                         String answertext = xmlResourceParser.getText();
                         answertext = cleanUpTagText(answertext);
-                        String org_answertext = answertext;
-                        int imgi = 1;
-                        List<String> images = new ArrayList<String>();
-                        while(imgi > 0) {
-                            // String beginstr = "&lt;img src='";
-                            String beginstr = "<img src='";
-                            int pos = answertext.indexOf(beginstr);
-                            if(pos >= 0) {
-                                int endpos = answertext.indexOf("'>");
-                                if (endpos > 0) {
-                                    String img = answertext.substring(pos + beginstr.length(), endpos);
-                                    images.add(img);
-                                    //Log.d("Funktrainer", "found image" + img);
-                                } else {
-                                    endpos = pos + beginstr.length();
-                                }
-                                if(endpos + 2 < answertext.length()) {
-                                    answertext = answertext.substring(0, pos) + answertext.substring(endpos + 2, answertext.length());
-                                } else {
-                                    answertext = answertext.substring(0, pos);
-                                }
-                            }
-                            imgi = pos;
-                        }
-
-//						currentQuestion.getAnswers().add(answertext);
-                        currentQuestion.getAnswers().add(org_answertext);
-                        currentQuestion.getAnswerImages().add(images);
+						currentQuestion.getAnswers().add(answertext);
 						expectingAnswer = false;
 					}
 				case XmlPullParser.END_TAG:
@@ -522,30 +466,19 @@ public class Repository extends SQLiteOpenHelper {
         // Flush db and create again
         db.beginTransaction();
         try {
-            db.execSQL("DROP TABLE IF EXISTS topic");
-            db.execSQL("DROP TABLE IF EXISTS question");
-            db.execSQL("DROP TABLE IF EXISTS answer");
-            db.execSQL("DROP TABLE IF EXISTS image");
-            db.execSQL("DROP TABLE IF EXISTS answerImage");
+            if(oldVersion <= 6) {
+                db.execSQL("DROP TABLE IF EXISTS image");
+                db.execSQL("DROP TABLE IF EXISTS answerImage");
+            }
+            if(oldVersion <= 7) {
+                db.execSQL("DROP TABLE IF EXISTS topic");
+                db.execSQL("DROP TABLE IF EXISTS question");
+                db.execSQL("DROP TABLE IF EXISTS answer");
+            }
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
         onCreate(db);
-
-
-//		if (oldVersion <= 2) {
-//			final ContentValues updates = new ContentValues();
-//			updates.put("question", "Welches Funkzeugnis ist mindestens erforderlich, um mit einer Seefunkstelle auf einem Sportfahrzeug am Weltweiten Seenot- und Sicherheitsfunksystem (GMDSS) im Seegebiet A3 teilnehmen zu können?");
-//			db.update("question", updates, "_id=?", new String[]{"4408"});
-//		}
-//		if (oldVersion <= 3) {
-//			final ContentValues updates = new ContentValues();
-//			updates.put("answer", "Sportboote ohne Antriebsmaschine oder solche mit einer größten nicht überschreitbaren Nutzleistung von 11,03 Kilowatt (15 PS) oder weniger.");
-//			db.update("answer", updates, "question_id=? AND order_index=?", new String[]{"9664", "0"});
-//			updates.clear();
-//			updates.put("answer", "Sportboote mit Antriebsmaschine mit einer größeren Nutzleistung als 11,03 Kilowatt (15 PS).");
-//			db.update("answer", updates, "question_id=? AND order_index=?", new String[]{"9664", "2"});
-//		}
 	}
 }

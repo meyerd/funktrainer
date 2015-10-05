@@ -138,8 +138,6 @@ public class QuestionAsker extends Activity {
         	topicId = (int) getIntent().getExtras().getLong(getClass().getName()+".topic");
         	nextQuestion();
         }
-        
-
 	}
 
     /**
@@ -371,7 +369,6 @@ public class QuestionAsker extends Activity {
         URLImageParser p = new URLImageParser(textView, this);
         Spanned htmlSpan = Html.fromHtml(safeText(question.getQuestionText()), p, null);
         textView.setText(htmlSpan);
-//		textView.setText(safeText(question.getQuestionText()));
 		
 		final List<RadioButton> radioButtons = getRadioButtons();
 		
@@ -388,19 +385,6 @@ public class QuestionAsker extends Activity {
             URLImageParser p_rb = new URLImageParser(rb, this);
             Spanned htmlSpan_rb = Html.fromHtml(safeText(question.getAnswers().get(i)), p_rb, null);
             rb.setText(htmlSpan_rb);
-//            rb.setText(Html.fromHtml(safeText(question.getAnswers().get(i))));
-//            if(question.getAnswerImages().get(i).size() > 0) {
-//                String iname = question.getAnswerImages().get(i).get(0);
-//                String stripped_iname = iname.substring(0, iname.length() - 4);
-//                int imageResourceId = -1;
-//                Context context = rb.getContext();
-//                imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
-//                Drawable img = context.getResources().getDrawable(imageResourceId);
-//                rb.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
-//                //rb.setBackgroundResource(imageResourceId);
-//            } else {
-//				rb.setCompoundDrawables(null, null, null, null);
-//			}
 		}
 
 		final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
@@ -422,25 +406,24 @@ public class QuestionAsker extends Activity {
 //        for(ImageView iv : questionImages) {
 //            linearLayout.addView(iv, idx++);
 //        }
-
 	}
 	
-    private List<ImageView> getQuestionImage(List<String> inames) {
-        List<ImageView> images = new ArrayList<ImageView>();
-        for(String iname : inames) {
-            String stripped_iname = iname.substring(0, iname.length() - 4);
-            int imageResourceId = -1;
-
-            final ImageView image = new ImageView(this);
-            Context context = image.getContext();
-            imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
-            //imageResourceId = R.drawable.tb111f;
-            // image.setBackgroundColor(Color.WHITE);
-            image.setImageResource(imageResourceId);
-            images.add(image);
-        }
-        return images;
-    }
+//    private List<ImageView> getQuestionImage(List<String> inames) {
+//        List<ImageView> images = new ArrayList<ImageView>();
+//        for(String iname : inames) {
+//            String stripped_iname = iname.substring(0, iname.length() - 4);
+//            int imageResourceId = -1;
+//
+//            final ImageView image = new ImageView(this);
+//            Context context = image.getContext();
+//            imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
+//            //imageResourceId = R.drawable.tb111f;
+//            // image.setBackgroundColor(Color.WHITE);
+//            image.setImageResource(imageResourceId);
+//            images.add(image);
+//        }
+//        return images;
+//    }
 	
 	private void showNextQuestionAt(final Date when) {
 		scheduleTask(new TimerTask() {

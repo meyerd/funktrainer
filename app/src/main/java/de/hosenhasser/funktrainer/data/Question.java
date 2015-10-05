@@ -30,8 +30,6 @@ public class Question {
 	private List<String> answers = new LinkedList<String>();
 	private int level;
 	private Date nextTime;
-	private List<String> images = new LinkedList<String>();
-	private List<List<String>> answerImages = new LinkedList<List<String>>();
 	public int getId() {
 		return id;
 	}
@@ -74,9 +72,4 @@ public class Question {
 	public void setNextTime(Date nextTime) {
 		this.nextTime = nextTime;
 	}
-	public void setImages(List<String> images) { this.images = images; }
-	public List<String> getImages() { return this.images; }
-    public void setAnswerImages(List<List<String>> answerImages) { this.answerImages = answerImages; }
-    public List<List<String>> getAnswerImages() { return this.answerImages; }
-	
 }

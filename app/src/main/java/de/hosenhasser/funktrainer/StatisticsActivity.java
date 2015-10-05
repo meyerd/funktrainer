@@ -27,7 +27,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.data.TopicStats;
 
