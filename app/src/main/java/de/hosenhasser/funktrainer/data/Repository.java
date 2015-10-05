@@ -49,7 +49,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
 	public Repository(final Context context) {
 		super(context, "topics", null, DATABASE_VERSION);
@@ -73,6 +73,7 @@ public class Repository extends SQLiteOpenHelper {
 			db.execSQL("CREATE TABLE answer (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT NOT NULL)");
 			db.execSQL("CREATE TABLE image (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, image TEXT NOT NULL)");
             db.execSQL("CREATE TABLE answerImage (_id INT NOT NULL PRIMARY KEY, answer_id INT NOT NULL REFERENCES answer(_id) ON DELETE CASCADE, order_index INT NOT NULL, image TEXT NOT NULL)");
+			db.execSQL("CREATE TABLE allImage (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, image_url TEXT NOT NULL, image TEXT NOT NULL)");
 			db.setTransactionSuccessful();
 		} finally {
 			db.endTransaction();
@@ -82,7 +83,7 @@ public class Repository extends SQLiteOpenHelper {
 		try {
 			final List<Topic> topics = new LinkedList<Topic>();
 			final List<Question> questions = new LinkedList<Question>();
-			final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen);
+			final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen_nontransform);
 			int eventType = xmlResourceParser.getEventType();
 
 			Topic currentTopic = null;
@@ -133,6 +134,7 @@ public class Repository extends SQLiteOpenHelper {
 					if (expectingQuestion) {
                         String qtext = xmlResourceParser.getText();
                         qtext = cleanUpTagText(qtext);
+                        String org_qtext = qtext;
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
@@ -156,13 +158,15 @@ public class Repository extends SQLiteOpenHelper {
                             }
                             imgi = pos;
                         }
-						currentQuestion.setQuestionText(qtext);
+//						currentQuestion.setQuestionText(qtext);
+                        currentQuestion.setQuestionText(org_qtext);
                         currentQuestion.setImages(images);
 						expectingQuestion = false;
 					}
 					if (expectingAnswer) {
                         String answertext = xmlResourceParser.getText();
                         answertext = cleanUpTagText(answertext);
+                        String org_answertext = answertext;
                         int imgi = 1;
                         List<String> images = new ArrayList<String>();
                         while(imgi > 0) {
@@ -187,7 +191,8 @@ public class Repository extends SQLiteOpenHelper {
                             imgi = pos;
                         }
 
-						currentQuestion.getAnswers().add(answertext);
+//						currentQuestion.getAnswers().add(answertext);
+                        currentQuestion.getAnswers().add(org_answertext);
                         currentQuestion.getAnswerImages().add(images);
 						expectingAnswer = false;
 					}

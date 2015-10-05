@@ -39,6 +39,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spanned;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,6 +52,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.Html;
 
 public class QuestionAsker extends Activity {
 	private Repository repository;
@@ -366,8 +368,10 @@ public class QuestionAsker extends Activity {
 				String.format(getString(R.string.passText), question.getLevel()));
 
 		final TextView textView = (TextView) findViewById(R.id.textViewFrage);
-        
-		textView.setText(safeText(question.getQuestionText()));
+        URLImageParser p = new URLImageParser(textView, this);
+        Spanned htmlSpan = Html.fromHtml(safeText(question.getQuestionText()), p, null);
+        textView.setText(htmlSpan);
+//		textView.setText(safeText(question.getQuestionText()));
 		
 		final List<RadioButton> radioButtons = getRadioButtons();
 		
@@ -381,19 +385,22 @@ public class QuestionAsker extends Activity {
 		correctChoice = radioButtons.get(order.get(0)).getId();
 		for (int i = 0; i < 4; i++) {
             RadioButton rb = radioButtons.get(order.get(i));
-            rb.setText(safeText(question.getAnswers().get(i)));
-            if(question.getAnswerImages().get(i).size() > 0) {
-                String iname = question.getAnswerImages().get(i).get(0);
-                String stripped_iname = iname.substring(0, iname.length() - 4);
-                int imageResourceId = -1;
-                Context context = rb.getContext();
-                imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
-                Drawable img = context.getResources().getDrawable(imageResourceId);
-                rb.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
-                //rb.setBackgroundResource(imageResourceId);
-            } else {
-				rb.setCompoundDrawables(null, null, null, null);
-			}
+            URLImageParser p_rb = new URLImageParser(rb, this);
+            Spanned htmlSpan_rb = Html.fromHtml(safeText(question.getAnswers().get(i)), p_rb, null);
+            rb.setText(htmlSpan_rb);
+//            rb.setText(Html.fromHtml(safeText(question.getAnswers().get(i))));
+//            if(question.getAnswerImages().get(i).size() > 0) {
+//                String iname = question.getAnswerImages().get(i).get(0);
+//                String stripped_iname = iname.substring(0, iname.length() - 4);
+//                int imageResourceId = -1;
+//                Context context = rb.getContext();
+//                imageResourceId = context.getResources().getIdentifier(stripped_iname, "drawable", context.getPackageName());
+//                Drawable img = context.getResources().getDrawable(imageResourceId);
+//                rb.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+//                //rb.setBackgroundResource(imageResourceId);
+//            } else {
+//				rb.setCompoundDrawables(null, null, null, null);
+//			}
 		}
 
 		final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
@@ -410,11 +417,11 @@ public class QuestionAsker extends Activity {
             }
         }
 
-        final List<ImageView> questionImages = getQuestionImage(question.getImages());
-		int idx = 3;
-        for(ImageView iv : questionImages) {
-            linearLayout.addView(iv, idx++);
-        }
+//        final List<ImageView> questionImages = getQuestionImage(question.getImages());
+//		int idx = 3;
+//        for(ImageView iv : questionImages) {
+//            linearLayout.addView(iv, idx++);
+//        }
 
 	}
 	
