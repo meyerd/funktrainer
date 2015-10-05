@@ -109,11 +109,6 @@ public class Repository extends SQLiteOpenHelper {
                         } else {
                             topicPrefixes.add(chaptername);
                         }
-//                        currentTopic = new Topic();
-//                        currentTopic.setId(idcounter++);
-//                        currentTopic.setIndex(index++);
-//                        String tprefix = TextUtils.join(" - ", topicPrefixes);
-//                        currentTopic.setName(tprefix);
                         topiclevel += 1;
                     } else if ("question".equals(tagName)) {
                         currentQuestion = new Question();
@@ -143,9 +138,6 @@ public class Repository extends SQLiteOpenHelper {
 				case XmlPullParser.END_TAG:
 					final String endTagName = xmlResourceParser.getName();
                     if("chapter".equals(endTagName)) {
-//                        if(topiclevel >= 3) {
-//                            topics.add(currentTopic);
-//                        }
                         if(topiclevel <= 1) {
                             topics.add(currentTopic);
                             currentTopic = null;
@@ -154,7 +146,6 @@ public class Repository extends SQLiteOpenHelper {
                         if(topicPrefixes.size() >= 1) {
                             topicPrefixes.remove(topicPrefixes.size() - 1);
                         }
-//                        currentTopic = null;
                     } else if ("question".equals(endTagName)) {
 						questions.add(currentQuestion);
 						currentQuestion = null;
@@ -267,32 +258,10 @@ public class Repository extends SQLiteOpenHelper {
 			while (!answer.isAfterLast()) {
                 int answerId = answer.getInt(0);
 				question.getAnswers().add(answer.getString(1));
-                final Cursor answerImage = getDb().query("answerImage", new String[]{"image"}, "answer_id=?", new String[]{Integer.toString(answerId)}, null, null, "order_index");
-                List<String> imagesForAnswer = new LinkedList<String>();
-                try {
-                    answerImage.moveToNext();
-                    while (!answerImage.isAfterLast()) {
-                        imagesForAnswer.add(answerImage.getString(0));
-                        answerImage.moveToNext();
-                    }
-                } finally {
-                    answerImage.close();
-                }
-                question.getAnswerImages().add(imagesForAnswer);
 				answer.moveToNext();
 			}	
 		} finally {
 			answer.close();
-		}
-		final Cursor image = getDb().query("image", new String[]{"image"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, "order_index");
-		try {
-			image.moveToNext();
-			while (!image.isAfterLast()) {
-				question.getImages().add(image.getString(0));
-				image.moveToNext();
-			}
-		} finally {
-			image.close();
 		}
 		
 		return question;
@@ -429,26 +398,7 @@ public class Repository extends SQLiteOpenHelper {
 			contentValues.put("order_index", answerIndex);
 			contentValues.put("answer", answer);
 			db.insert("answer", null, contentValues);
-            int answerImageIndex = 0;
-            for (final String answerImage : question.getAnswerImages().get(answerIndex)) {
-                contentValues.clear();
-                contentValues.put("_id", ++answerImageSeq);
-                contentValues.put("answer_id", answerIdSeq);
-                contentValues.put("order_index", answerImageIndex++);
-                contentValues.put("image", answerImage);
-                db.insert("answerImage", null, contentValues);
-            }
             answerIndex++;
-		}
-
-		int imageIndex = 0;
-		for(final String image : question.getImages()) {
-			contentValues.clear();
-			contentValues.put("_id", ++imageIdSeq);
-			contentValues.put("question_id", question.getId());
-			contentValues.put("order_index", imageIndex++);
-			contentValues.put("image", image);
-			db.insert("image", null, contentValues);
 		}
 	}
 	
@@ -470,7 +420,7 @@ public class Repository extends SQLiteOpenHelper {
                 db.execSQL("DROP TABLE IF EXISTS image");
                 db.execSQL("DROP TABLE IF EXISTS answerImage");
             }
-            if(oldVersion <= 7) {
+            if(oldVersion <= DATABASE_VERSION) {
                 db.execSQL("DROP TABLE IF EXISTS topic");
                 db.execSQL("DROP TABLE IF EXISTS question");
                 db.execSQL("DROP TABLE IF EXISTS answer");
