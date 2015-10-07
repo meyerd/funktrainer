@@ -23,7 +23,8 @@
 			android:layout_gravity="right"
 			android:layout_margin="6dp"
 			android:text=""
-			android:textAppearance="?android:attr/textAppearanceSmall" />
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:freezesText="true"/>
 
 		<TextView
 		    android:id="@+id/textViewFrage"
@@ -33,7 +34,8 @@
 			android:layout_marginRight="6dp"
 		    android:layout_marginTop="10dp"
 		    android:text=""
-		    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    android:textAppearance="?android:attr/textAppearanceMedium"
+			android:freezesText="true"/>
 
 		<RadioGroup
 		    android:id="@+id/radioGroup1"
@@ -48,28 +50,32 @@
 			    android:layout_height="wrap_content"
 			    android:layout_marginTop="10dp"
 			    android:checked="true"
-			    android:text="" />
+			    android:text=""
+				android:freezesText="true"/>
 
 			<RadioButton
 			    android:id="@+id/radio1"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_marginTop="10dp"
-			    android:text="" />
+			    android:text=""
+				android:freezesText="true"/>
 
 			<RadioButton
 			    android:id="@+id/radio2"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_marginTop="10dp"
-			    android:text="" />
+			    android:text=""
+				android:freezesText="true"/>
 			
 			<RadioButton
 			    android:id="@+id/radio3"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_marginTop="10dp"
-			    android:text="" />
+			    android:text=""
+				android:freezesText="true"/>
 
 		</RadioGroup>
 
@@ -80,7 +86,8 @@
 			android:layout_gravity="right"
 			android:layout_marginRight="6dp"
 		    android:layout_marginTop="10dp"
-		    android:text="@string/continueButtonText" />
+		    android:text="@string/continueButtonText"
+			/>
 
 	</LinearLayout>
 </ScrollView>
