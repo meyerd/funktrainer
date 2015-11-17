@@ -128,8 +128,8 @@ public class QuestionAsker extends Activity {
         	if (orderString != null) {
         		final String[] orderArray = orderString.split(",");
         		order = new LinkedList<Integer>();
-        		for (int i = 0; i < orderArray.length; i++) {
-        			order.add(Integer.parseInt(orderArray[i]));
+        		for(String s: orderArray) {
+        			order.add(Integer.parseInt(s));
         		}
         	}
         	
@@ -170,17 +170,17 @@ public class QuestionAsker extends Activity {
 				intent.putExtra(StatisticsActivity.class.getName() + ".topic", topicId);
 				startActivity(intent);
 				return true;
-			case R.id.help:
-				final StringBuilder uri = new StringBuilder();
-				uri.append("http://funktrainer.hosenhasser.de/app/help?question=");
-				uri.append(currentQuestion);
-				uri.append("&topic=");
-				uri.append(topicId);
-				uri.append("&view=QuestionAsker");
-				final Intent intent2 = new Intent(Intent.ACTION_VIEW);
-				intent2.setData(Uri.parse(uri.toString()));
-				startActivity(intent2);
-				return true;
+//			case R.id.help:
+//				final StringBuilder uri = new StringBuilder();
+//				uri.append("http://funktrainer.hosenhasser.de/app/help?question=");
+//				uri.append(currentQuestion);
+//				uri.append("&topic=");
+//				uri.append(topicId);
+//				uri.append("&view=QuestionAsker");
+//				final Intent intent2 = new Intent(Intent.ACTION_VIEW);
+//				intent2.setData(Uri.parse(uri.toString()));
+//				startActivity(intent2);
+//				return true;
             default:
 				return super.onOptionsItemSelected(item);
         }
@@ -250,7 +250,7 @@ public class QuestionAsker extends Activity {
 
                     nextQuestion();
 
-                    return;
+                    // return;
                 } else if (selectedButton != -1) {
                     repository.answeredIncorrect(currentQuestion);
 
@@ -260,7 +260,7 @@ public class QuestionAsker extends Activity {
                     final RadioButton correctButton = (RadioButton) findViewById(correctChoice);
                     correctButton.setBackgroundResource(R.color.correctAnswer);
 
-                    return;
+                    // return;
                 } else {
                     Toast.makeText(QuestionAsker.this, getString(R.string.noAnswerSelected), Toast.LENGTH_SHORT).show();
                 }
@@ -316,7 +316,7 @@ public class QuestionAsker extends Activity {
             }
 
         });
-		return;
+		// return;
 	}
 	
 	private List<RadioButton> getRadioButtons() {
@@ -348,7 +348,7 @@ public class QuestionAsker extends Activity {
 					cancelTimer();
 					repository.continueNow(topicId);
 					nextQuestion();
-					return;
+					// return;
 				}
 				
 			});

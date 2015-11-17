@@ -134,20 +134,20 @@ public class FunkTrainerActivity extends Activity {
     public boolean onOptionsItemSelected(final MenuItem item) {
 		// handle item selection
 		switch (item.getItemId()) {
-		case R.id.mainHelp:
-			final StringBuilder uri = new StringBuilder();
-			uri.append("http://funktrainer.hosenhasser.de/app/help?view=TrainerActivity");
-			final Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse(uri.toString()));
-			startActivity(intent);
-			return true;
-		case R.id.mainInfo:
-			final StringBuilder uri2 = new StringBuilder();
-			uri2.append("http://funktrainer.hosenhasser.de/app/info?view=TrainerActivity");
-			final Intent intent2 = new Intent(Intent.ACTION_VIEW);
-			intent2.setData(Uri.parse(uri2.toString()));
-			startActivity(intent2);
-			return true;
+//		case R.id.mainHelp:
+//			final StringBuilder uri = new StringBuilder();
+//			uri.append("http://funktrainer.hosenhasser.de/app/help?view=TrainerActivity");
+//			final Intent intent = new Intent(Intent.ACTION_VIEW);
+//			intent.setData(Uri.parse(uri.toString()));
+//			startActivity(intent);
+//			return true;
+//		case R.id.mainInfo:
+//			final StringBuilder uri2 = new StringBuilder();
+//			uri2.append("http://funktrainer.hosenhasser.de/app/info?view=TrainerActivity");
+//			final Intent intent2 = new Intent(Intent.ACTION_VIEW);
+//			intent2.setData(Uri.parse(uri2.toString()));
+//			startActivity(intent2);
+//			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

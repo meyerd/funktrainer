@@ -57,7 +57,7 @@ public class StatisticsActivity extends Activity {
         if (savedInstanceState != null) {
         	topicId = (int) savedInstanceState.getLong(getClass().getName()+".topic");
         } else {
-        	topicId = (int) getIntent().getExtras().getInt(getClass().getName()+".topic");
+        	topicId = getIntent().getExtras().getInt(getClass().getName()+".topic");
         }
         
         setContentView(R.layout.statistics);
@@ -118,13 +118,13 @@ public class StatisticsActivity extends Activity {
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		// handle item selection
 		switch (item.getItemId()) {
-		case R.id.statHelp:
-			final StringBuilder uri = new StringBuilder();
-			uri.append("http://funktrainer.hosenhasser.dei/app/help?view=StatisticsActivity");
-			final Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse(uri.toString()));
-			startActivity(intent);
-			return true;
+//		case R.id.statHelp:
+//			final StringBuilder uri = new StringBuilder();
+//			uri.append("http://funktrainer.hosenhasser.dei/app/help?view=StatisticsActivity");
+//			final Intent intent = new Intent(Intent.ACTION_VIEW);
+//			intent.setData(Uri.parse(uri.toString()));
+//			startActivity(intent);
+//			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
