@@ -13,3 +13,6 @@ questions XML files can be found at
 http://oliver-saal.de/software/afutrainer/download.php
 
 Thanks to everyone for making your projects available.
+
+The questions license is according to German official publications
+(§5 UrhG)
