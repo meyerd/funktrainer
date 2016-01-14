@@ -53,6 +53,9 @@ public class URLImageParser implements Html.ImageGetter {
         int orgwidth = img.getIntrinsicWidth();
 //        int width = Math.min(orgwidth * 2, this.screenwidth - (int) (this.screenwidth + 0.1));
         int width = Math.min((int)(orgwidth * 1.2), containerwidth);
+        if (width <= 0) {
+            width = Math.min((int)(orgwidth * 1.2), this.screenwidth - 10);
+        }
         float ratio = (float)width / (float)orgwidth;
         img.setBounds(0, 0, width, (int)(img.getIntrinsicHeight() * ratio));
 
