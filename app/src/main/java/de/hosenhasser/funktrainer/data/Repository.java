@@ -20,10 +20,13 @@ package de.hosenhasser.funktrainer.data;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -175,6 +178,61 @@ public class Repository extends SQLiteOpenHelper {
 			e.printStackTrace();
 		}
 	}
+
+    public QuestionSelection selectQuestionByReference(final String questionReference) {
+        // TODO; refactor this in order not to replicate the function below
+        final QuestionSelection result = new QuestionSelection();
+        final List<Integer> possibleQuestions = new LinkedList<Integer>();
+        final long now = new Date().getTime();
+
+        int questionCount = 0;
+        int openQuestions = 0;
+        int maxProgress = 0;
+        int currentProgress = 0;
+        long soonestNextTime = 0;
+
+        final Cursor c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
+        try {
+            c.moveToNext();
+            while (!c.isAfterLast()) {
+                final int qId = c.getInt(0);
+                final int level = c.getInt(1);
+                final long nextTime = c.getLong(2);
+
+                questionCount++;
+                maxProgress += NUMBER_LEVELS;
+                currentProgress += level;
+                if (level < NUMBER_LEVELS) {
+                    openQuestions++;
+
+                    if (nextTime > now) {
+                        if (soonestNextTime == 0 || soonestNextTime > nextTime) {
+                            soonestNextTime = nextTime;
+                        }
+                    } else {
+                        possibleQuestions.add(qId);
+                    }
+                }
+
+                c.moveToNext();
+            }
+        } finally {
+            c.close();
+        }
+
+        result.setTotalQuestions(questionCount);
+        result.setMaxProgress(maxProgress);
+        result.setCurrentProgress(currentProgress);
+        result.setOpenQuestions(openQuestions);
+        result.setFinished(possibleQuestions.isEmpty() && soonestNextTime == 0);
+        if (!possibleQuestions.isEmpty()) {
+            result.setSelectedQuestion(possibleQuestions.get(0));
+        } else if (soonestNextTime > 0) {
+            result.setNextQuestion(new Date(soonestNextTime));
+        }
+
+        return result;
+    }
 	
 	public QuestionSelection selectQuestion(final int topicId) {
 		final QuestionSelection result = new QuestionSelection();
@@ -315,6 +373,25 @@ public class Repository extends SQLiteOpenHelper {
 
 		return stats;
     }
+
+	public String[] getAllQuestionIdentifiers() {
+        final HashSet<String> ret = new HashSet<String>();
+		final Cursor c = getDb().query("question", new String[]{"_id", "reference"}, null, null, null, null, "reference", null);
+        try {
+            c.moveToNext();
+            while (!c.isAfterLast()) {
+                ret.add(c.getString(1));
+                c.moveToNext();
+            }
+        } finally {
+            c.close();
+        }
+
+        String[] ret1 = ret.toArray(new String[0]);
+        Arrays.sort(ret1);
+
+        return ret1;
+	}
 	
 	public void answeredCorrect(final int questionId) {
 		final Question question = getQuestion(questionId);

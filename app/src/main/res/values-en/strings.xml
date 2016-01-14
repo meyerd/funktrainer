@@ -25,8 +25,12 @@
 	<string name="menuStatistics">Statistics</string>
 	<string name="menuHelp">Help</string>
 	<string name="menuHelpCondensed">Help</string>
+    <string name="menuReportError">Report Error</string>
+    <string name="menuReportErrorCondensed">Error</string>
 	<string name="menuInfo">Exam information</string>
 	<string name="menuInfoCondensed">Info</string>
+    <string name="menuSearch">Search for Question</string>
+    <string name="menuSearchCondensed">Search</string>
     <string name="chapter">Topic:</string>
     <string name="totalProgress">Total progress:</string>
     <string name="atLevel0">Without correct answer:</string>
@@ -38,4 +42,6 @@
     <string name="warningReset">This will reset your progress. The topic will be restarted.</string>
     <string name="resetOkay">OK</string>
     <string name="resetCancel">Cancel</string>
+    <string name="title_activity_question_search">Search Questions</string>
+    <string name="questionSearchInputHint">Search Questions ...</string>
 </resources>

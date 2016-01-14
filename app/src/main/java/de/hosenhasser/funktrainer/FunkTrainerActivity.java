@@ -91,7 +91,7 @@ public class FunkTrainerActivity extends Activity {
 			//@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				
+
 				final Intent intent = new Intent(FunkTrainerActivity.this, QuestionAsker.class);
 				intent.putExtra(QuestionAsker.class.getName() + ".topic", id);
 				startActivity(intent);
@@ -134,6 +134,11 @@ public class FunkTrainerActivity extends Activity {
     public boolean onOptionsItemSelected(final MenuItem item) {
 		// handle item selection
 		switch (item.getItemId()) {
+			case R.id.mainSearch:
+                final Intent intent = new Intent(FunkTrainerActivity.this, QuestionSearch.class);
+                // intent.putExtra(QuestionAsker.class.getName() + ".topic", id);
+                startActivity(intent);
+
 //		case R.id.mainHelp:
 //			final StringBuilder uri = new StringBuilder();
 //			uri.append("http://funktrainer.hosenhasser.de/app/help?view=TrainerActivity");

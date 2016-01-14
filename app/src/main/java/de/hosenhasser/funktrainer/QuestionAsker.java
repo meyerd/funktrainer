@@ -136,7 +136,12 @@ public class QuestionAsker extends Activity {
         	showQuestion();
         } else {
         	topicId = (int) getIntent().getExtras().getLong(getClass().getName()+".topic");
-        	nextQuestion();
+			if (topicId != 0) {
+				nextQuestion();
+			} else {
+				String questionReference = getIntent().getExtras().getString(getClass().getName()+".questionReference");
+				nextQuestion(questionReference);
+			}
         }
 	}
 
@@ -170,6 +175,13 @@ public class QuestionAsker extends Activity {
 				intent.putExtra(StatisticsActivity.class.getName() + ".topic", topicId);
 				startActivity(intent);
 				return true;
+            case R.id.reportError:
+                final StringBuilder uri = new StringBuilder();
+			    uri.append("http://funktrainer.hosenhasser.de/app/reportError?view=QuestionAsker&Reference=" + Integer.toString(this.currentQuestion));
+			    final Intent intent1 = new Intent(Intent.ACTION_VIEW);
+		    	intent1.setData(Uri.parse(uri.toString()));
+	    		startActivity(intent1);
+    			return true;
 //			case R.id.help:
 //				final StringBuilder uri = new StringBuilder();
 //				uri.append("http://funktrainer.hosenhasser.de/app/help?question=");
@@ -199,11 +211,11 @@ public class QuestionAsker extends Activity {
 			}
 		});
 		builder.setNegativeButton(R.string.resetCancel, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {
 			}
 		});
 		final AlertDialog alert = builder.create();
-		alert.show();
+        alert.show();
     }
 
     private void restartTopic() {
@@ -267,8 +279,12 @@ public class QuestionAsker extends Activity {
             }
         });		
 	}
+
+    private void nextQuestion() {
+        this.nextQuestion(null);
+    }
 	
-	private void nextQuestion() {
+	private void nextQuestion(final String questionReference) {
 		if (!showingStandardView) {
 			showStandardView();
 		}
@@ -284,8 +300,13 @@ public class QuestionAsker extends Activity {
 		radioGroup.clearCheck();
 		final Button contButton = (Button) findViewById(R.id.button1);
 		contButton.setEnabled(false);
-		
-		final QuestionSelection nextQuestion = repository.selectQuestion(topicId);
+
+        QuestionSelection nextQuestion;
+        if (questionReference != null) {
+            nextQuestion = repository.selectQuestionByReference(questionReference);
+        } else {
+            nextQuestion = repository.selectQuestion(topicId);
+        }
 		
 		// any question?
 		final int selectedQuestion = nextQuestion.getSelectedQuestion();
