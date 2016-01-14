@@ -386,6 +386,9 @@ public class QuestionAsker extends Activity {
 				question.getLevel() == 4 ? getString(R.string.fifthPass) :
 				String.format(getString(R.string.passText), question.getLevel()));
 
+		final TextView referenceText = (TextView) findViewById(R.id.referenceText);
+		referenceText.setText(question.getReference());
+
 		final TextView textView = (TextView) findViewById(R.id.textViewFrage);
         URLImageParser p = new URLImageParser(textView, this);
         Spanned htmlSpan = Html.fromHtml(safeText(question.getQuestionText()), p, null);
