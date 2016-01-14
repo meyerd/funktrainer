@@ -175,13 +175,13 @@ public class QuestionAsker extends Activity {
 				intent.putExtra(StatisticsActivity.class.getName() + ".topic", topicId);
 				startActivity(intent);
 				return true;
-            case R.id.reportError:
-                final StringBuilder uri = new StringBuilder();
-			    uri.append("http://funktrainer.hosenhasser.de/app/reportError?view=QuestionAsker&Reference=" + Integer.toString(this.currentQuestion));
-			    final Intent intent1 = new Intent(Intent.ACTION_VIEW);
-		    	intent1.setData(Uri.parse(uri.toString()));
-	    		startActivity(intent1);
-    			return true;
+//            case R.id.reportError:
+//                final StringBuilder uri = new StringBuilder();
+//			    uri.append("http://funktrainer.hosenhasser.de/app/reportError?view=QuestionAsker&Reference=" + Integer.toString(this.currentQuestion));
+//			    final Intent intent1 = new Intent(Intent.ACTION_VIEW);
+//		    	intent1.setData(Uri.parse(uri.toString()));
+//	    		startActivity(intent1);
+//    			return true;
 //			case R.id.help:
 //				final StringBuilder uri = new StringBuilder();
 //				uri.append("http://funktrainer.hosenhasser.de/app/help?question=");
