@@ -41,6 +41,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class Repository extends SQLiteOpenHelper {
 	private final Context context;
@@ -52,7 +53,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
 	public Repository(final Context context) {
 		super(context, "topics", null, DATABASE_VERSION);
@@ -66,13 +67,143 @@ public class Repository extends SQLiteOpenHelper {
 		return text;
 	}
 
+	public void createMixtopics(final SQLiteDatabase db) {
+        // Create mixes
+        // Klasse E
+        //  Technische Kenntnisse (Klasse E)
+        //  Betriebliche Kenntnisse
+        //  Kenntnisse von Vorschriften
+        //
+        // Klasse A
+        //  Technische Kenntnisse (Klasse A)
+        //  Betriebliche Kenntnisse
+        //  Kenntnisse von Vorschriften
+        String[][] mixtopics = new String[][] {
+                new String[] {"Klasse E alle (Technik, Betrieb, Vorschriften)", "Technische Kenntnisse (Klasse E)",
+                    "Betriebliche Kenntnisse", "Kenntnisse von Vorschriften"},
+                new String[] {"Klasse A alle (Technik, Betrieb, Vorschriften)", "Technische Kenntnisse (Klasse A)",
+                    "Betriebliche Kenntnisse", "Kenntnisse von Vorschriften"}
+        };
+		// get max topic id
+		long maxTopicId = 0;
+        long maxTopicOrderIndex = 0;
+		db.beginTransaction();
+		Cursor t = db.query("topic", new String[]{"_id, order_index"}, null, null, null, null, null, null);
+		try {
+			t.moveToNext();
+			while (!t.isAfterLast()) {
+				long tId = t.getInt(0);
+                long tIdx = t.getInt(1);
+				if (tId > maxTopicId) {
+					maxTopicId = tId;
+				}
+                if (tIdx > maxTopicOrderIndex) {
+                    maxTopicOrderIndex = tIdx;
+                }
+				t.moveToNext();
+			}
+		} finally {
+			t.close();
+		}
+        long maxQuestionId = 0;
+        Cursor qt = db.query("question", new String[]{"_id"}, null, null, null, null, null, null);
+        try {
+            qt.moveToNext();
+            while (!qt.isAfterLast()) {
+                long qId = qt.getInt(0);
+                if (qId > maxQuestionId) {
+                    maxQuestionId = qId;
+                }
+                qt.moveToNext();
+            }
+        } finally {
+            qt.close();
+        }
+        long maxAnswerId = 0;
+        Cursor at = db.query("answer", new String[]{"_id"}, null, null, null, null, null, null);
+        try {
+            at.moveToNext();
+            while (!at.isAfterLast()) {
+                long aId = at.getInt(0);
+                if (aId > maxAnswerId) {
+                    maxAnswerId = aId;
+                }
+                at.moveToNext();
+            }
+        } finally {
+            at.close();
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+		// create mixtopics
+        long newAnswerRunningIndex = 1;
+        for (final String[] mix : mixtopics) {
+            final String mixName = mix[0];
+            db.beginTransaction();
+            try {
+                ContentValues mixTopicVals = new ContentValues();
+                long mixId = ++maxTopicId;
+                mixTopicVals.put("_id", mixId);
+                mixTopicVals.put("order_index", ++maxTopicOrderIndex);
+                mixTopicVals.put("name", mixName);
+                db.insert("topic", null, mixTopicVals);
+                for (int i = 1; i < mix.length ; i++) {
+                    Cursor q = db.rawQuery("SELECT _id, topic_id, reference, question, level, next_time, wrong FROM question WHERE topic_id = (SELECT _id FROM topic WHERE name = ?)", new String[]{mix[i]});
+                    try {
+                        q.moveToNext();
+                        while (!q.isAfterLast()) {
+                            long qId = q.getInt(0);
+                            String qReference = q.getString(2);
+                            String qQuestion = q.getString(3);
+                            long newQuestionId = ++maxQuestionId;
+                            ContentValues newQuestionVals = new ContentValues();
+                            newQuestionVals.put("_id", newQuestionId);
+                            newQuestionVals.put("topic_id", mixId);
+                            newQuestionVals.put("reference", qReference);
+                            newQuestionVals.put("question", qQuestion);
+                            newQuestionVals.put("next_time", (new Date()).getTime());
+                            newQuestionVals.put("level", 0L);
+                            newQuestionVals.put("wrong", 0L);
+                            db.insert("question", null, newQuestionVals);
+
+                            Cursor a = db.query("answer", new String[]{"_id", "question_id", "order_index", "answer"}, "question_id = ?", new String[]{Long.toString(qId)}, null, null, null, null);
+                            try {
+                                a.moveToNext();
+                                while (!a.isAfterLast()) {
+                                    String aText = a.getString(3);
+                                    ContentValues newAnswerVals = new ContentValues();
+                                    long newAnswerId = ++maxAnswerId;
+                                    newAnswerVals.put("_id", newAnswerId);
+                                    newAnswerVals.put("question_id", newQuestionId);
+                                    newAnswerVals.put("order_index", newAnswerRunningIndex++);
+                                    newAnswerVals.put("answer", aText);
+                                    db.insert("answer", null, newAnswerVals);
+
+                                    a.moveToNext();
+                                }
+                            } finally {
+                                a.close();
+                            }
+                            q.moveToNext();
+                        }
+                    } finally {
+                        q.close();
+                    }
+                }
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
+    }
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// create databases
 		db.beginTransaction();
 		try {
 			db.execSQL("CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL)");
-			db.execSQL("CREATE TABLE question (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, reference TEXT, question TEXT NOT NULL, level INT NOT NULL, next_time INT NOT NULL)");
+			db.execSQL("CREATE TABLE question (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, reference TEXT, question TEXT NOT NULL, level INT NOT NULL, next_time INT NOT NULL, wrong INT NOT NULL)");
 			db.execSQL("CREATE TABLE answer (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT NOT NULL)");
 			db.setTransactionSuccessful();
 		} finally {
@@ -177,10 +308,11 @@ public class Repository extends SQLiteOpenHelper {
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		}
+        createMixtopics(db);
 	}
 
     public QuestionSelection selectQuestionByReference(final String questionReference) {
-        // TODO; refactor this in order not to replicate the function below
+        // TODO: refactor this in order not to replicate the function below
         final QuestionSelection result = new QuestionSelection();
         final List<Integer> possibleQuestions = new LinkedList<Integer>();
         final long now = new Date().getTime();
@@ -293,7 +425,7 @@ public class Repository extends SQLiteOpenHelper {
 	public Question getQuestion(final int questionId) {
 		final Question question = new Question();
 		
-		final Cursor c = getDb().query("question", new String[]{"_id", "topic_id", "reference", "question", "level", "next_time"}, "_id=?", new String[]{Integer.toString(questionId)}, null, null, null, null);
+		final Cursor c = getDb().query("question", new String[]{"_id", "topic_id", "reference", "question", "level", "next_time", "wrong"}, "_id=?", new String[]{Integer.toString(questionId)}, null, null, null, null);
 		try {
 			c.moveToNext();
 			if (c.isAfterLast()) {
@@ -302,9 +434,10 @@ public class Repository extends SQLiteOpenHelper {
 			question.setId(c.getInt(0));
 			question.setTopicId(c.getInt(1));
 			question.setReference(c.getString(2));
-			question.setQuestionText(c.getString(3));
+            question.setQuestionText(c.getString(3));
 			question.setLevel(c.getInt(4));
-			question.setNextTime(new Date(c.getLong(5)));
+            question.setNextTime(new Date(c.getLong(5)));
+            question.setWrong(c.getInt(6));
 		} finally {
 			c.close();
 		}
@@ -396,15 +529,17 @@ public class Repository extends SQLiteOpenHelper {
 	public void answeredCorrect(final int questionId) {
 		final Question question = getQuestion(questionId);
 		final int newLevel = question.getLevel() + 1;
+        final int newWrong = question.getWrong();
 		
-		updateAnswered(questionId, newLevel);	
+		updateAnswered(questionId, newLevel, newWrong);
 	}
 	
 	public void answeredIncorrect(final int questionId) {
 		final Question question = getQuestion(questionId);
 		final int newLevel = question.getLevel() <= 0 ? 0 : question.getLevel() - 1;
+        final int newWrong = question.getWrong() + 1;
 		
-		updateAnswered(questionId, newLevel);		
+		updateAnswered(questionId, newLevel, newWrong);
 	}
 	
 	public void continueNow(final int topicId) {
@@ -417,6 +552,7 @@ public class Repository extends SQLiteOpenHelper {
 		final ContentValues updates = new ContentValues();
 		updates.put("next_time", new Date().getTime());
 		updates.put("level", 0L);
+        updates.put("wrong", 0L);
 		getDb().update("question", updates, "topic_id=?", new String[]{Integer.toString(topicId)});		
 	}
 	
@@ -430,12 +566,13 @@ public class Repository extends SQLiteOpenHelper {
 		return cursor;
 	}
 	
-	private void updateAnswered(final int questionId, final int newLevel) {
+	private void updateAnswered(final int questionId, final int newLevel, final int newWrong) {
 		final long newNextTime = new Date().getTime() + waitingTimeOnLevel(newLevel);
 		
 		final ContentValues updates = new ContentValues();
 		updates.put("level", newLevel);
 		updates.put("next_time", newNextTime);
+        updates.put("wrong", newWrong);
 		
 		getDb().update("question", updates, "_id=?", new String[]{Integer.toString(questionId)});
 	}
@@ -464,6 +601,7 @@ public class Repository extends SQLiteOpenHelper {
 		contentValues.put("reference", question.getReference());
 		contentValues.put("question", question.getQuestionText());
 		contentValues.put("level", 0);
+        contentValues.put("wrong", 0);
 		contentValues.put("next_time", question.getNextTime().getTime());
 		db.insert("question", null, contentValues);
 			
@@ -489,23 +627,55 @@ public class Repository extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i("Funktrainer", "upgrading database from version " + oldVersion + " to new version "
-                + newVersion);
-        // Flush db and create again
-        db.beginTransaction();
-        try {
-            if(oldVersion <= 6) {
-                db.execSQL("DROP TABLE IF EXISTS image");
-                db.execSQL("DROP TABLE IF EXISTS answerImage");
+				+ newVersion);
+        // TODO: this is not shown?
+        Context context = this.context;
+        CharSequence text = "Updating Database ...";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        if(oldVersion <= 6) {
+			// Flush db and create again
+			db.beginTransaction();
+			try {
+				if (oldVersion <= 6) {
+					db.execSQL("DROP TABLE IF EXISTS image");
+					db.execSQL("DROP TABLE IF EXISTS answerImage");
+				}
+				db.execSQL("DROP TABLE IF EXISTS topic");
+				db.execSQL("DROP TABLE IF EXISTS question");
+				db.execSQL("DROP TABLE IF EXISTS answer");
+
+				db.setTransactionSuccessful();
+			} finally {
+				db.endTransaction();
+			}
+			onCreate(db);
+			// return since onCreate already creates newest version.
+			return;
+		}
+		if(oldVersion <= 7) {
+			// 6 -> 7
+            db.beginTransaction();
+            try {
+                db.execSQL("UPDATE topic SET name = 'Kenntnisse von Vorschriften' WHERE name = 'Prüfungsfragen im Prüfungseil „Kenntnisse von Vorschriften“'");
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
             }
-            if(oldVersion <= DATABASE_VERSION) {
-                db.execSQL("DROP TABLE IF EXISTS topic");
-                db.execSQL("DROP TABLE IF EXISTS question");
-                db.execSQL("DROP TABLE IF EXISTS answer");
-            }
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
-        onCreate(db);
+		}
+		if(oldVersion <= DATABASE_VERSION) {
+			// 7 -> 8
+			// add wrong column to questions table
+			db.beginTransaction();
+			try {
+				db.execSQL("ALTER TABLE question ADD COLUMN wrong INT");
+                db.execSQL("UPDATE question SET wrong = 0;");
+				db.setTransactionSuccessful();
+			} finally {
+				db.endTransaction();
+			}
+            createMixtopics(db);
+		}
 	}
 }

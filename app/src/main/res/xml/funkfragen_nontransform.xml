@@ -1483,6 +1483,7 @@
         <hint question="TL202" author="Oliver Saal (DM1OLI) osaal@gmx.de" date="2004-03-25"><![CDATA[<ul><li>EIRP = Effective <i>Isotropic</i> Radiated Power</li><li>EIRP wird immer auf den <i>isotropen</i> Kugelstrahler bezogen</li><li>Verluste werden immer abgezogen, nicht hinzuaddiert</li><li>G<sub>Antenne</sub> ist eine relative Angabe und wird deswegen mit der Leistung multipliziert.</li></ul>]]></hint>
 
     </hints>
+
     <chapter name="Technische Kenntnisse (Klasse E)" id="T" >
         <chapter name="Allgemeine mathematische Grundkenntnisse und Größen" id="A" >
             <chapter name="Allgemeine mathematische Grundkenntnisse" id="1" >
@@ -13253,7 +13254,7 @@
             </question>
         </chapter>
     </chapter>
-    <chapter name="Prüfungsfragen im Prüfungseil „Kenntnisse von Vorschriften“" id="V" >
+    <chapter name="Kenntnisse von Vorschriften" id="V" >
         <chapter name="Vollzugsordnung für den Funkdienst der Internationalen Fernmeldeunion (ITU)" id="A" >
             <chapter name="Definition des Amateurfunkdienstes und des Amateurfunkdienstes über Satelliten" id="1" >
                 <question id="VA101" >

@@ -19,6 +19,7 @@
 package de.hosenhasser.funktrainer;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import de.hosenhasser.funktrainer.data.Repository;
@@ -56,32 +57,37 @@ public class FunkTrainerActivity extends Activity {
     	
     	final ListView topicList = (ListView) findViewById(R.id.listView1);
         
-        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.topic_list_item, null, new String[]{"name", "status", "next_question"}, new int[]{R.id.topicListItem, R.id.topicStatusView, R.id.nextQuestionTime});
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+                R.layout.topic_list_item,
+                null,
+                new String[]{"name", "status", "next_question"},
+                new int[]{R.id.topicListItem, R.id.topicStatusView, R.id.nextQuestionTime});
+
         adapter.setViewBinder(new ViewBinder() {
-			public boolean setViewValue(View view, Cursor cursor,
-					int columnIndex) {
-				
-				if (columnIndex == 4) {
-					final TextView textView = (TextView) view;
-					if (!cursor.isNull(4)) {
-						final long nextQuestion = cursor.getLong(4);
-						final long now = new Date().getTime();
-						if (nextQuestion > now) {
-							
-							if (nextQuestion - now < 64800000L) {
-								textView.setText(getString(R.string.nextLabel) + " " + DateFormat.getTimeInstance().format(new Date(nextQuestion)));
-							} else {
-								textView.setText(getString(R.string.nextLabel) + " " + DateFormat.getDateTimeInstance().format(new Date(nextQuestion)));
-							}
-							return true;
-						}
-					}
-					textView.setText("");
-					return true;
-				}
-				
-				return false;
-			}
+            public boolean setViewValue(View view, Cursor cursor,
+                                        int columnIndex) {
+
+                if (columnIndex == 4) {
+                    final TextView textView = (TextView) view;
+                    if (!cursor.isNull(4)) {
+                        final long nextQuestion = cursor.getLong(4);
+                        final long now = new Date().getTime();
+                        if (nextQuestion > now) {
+
+                            if (nextQuestion - now < 64800000L) {
+                                textView.setText(getString(R.string.nextLabel) + " " + DateFormat.getTimeInstance().format(new Date(nextQuestion)));
+                            } else {
+                                textView.setText(getString(R.string.nextLabel) + " " + DateFormat.getDateTimeInstance().format(new Date(nextQuestion)));
+                            }
+                            return true;
+                        }
+                    }
+                    textView.setText("");
+                    return true;
+                }
+
+                return false;
+            }
         });
         topicList.setAdapter(adapter);
         repository.setTopicsInSimpleCursorAdapter(adapter);

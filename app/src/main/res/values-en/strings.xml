@@ -3,6 +3,7 @@
     <string name="app_name">Funktrainer</string>
     <string name="infoMessage">This App contains the questions for the German amateur radio license (questions from February 2007/October 2006)</string>
     <string name="selectTopic">Please select a topic:</string>
+    <string name="selectSpecialTopic">Custom question mix:</string>
     <string name="continueButtonText">Continue</string>
     <string name="waitBeforeContinue">Please wait before you continue to learn…</string>
     <string name="nextQuestionAt">You will see the next question at:</string>
@@ -44,4 +45,5 @@
     <string name="resetCancel">Cancel</string>
     <string name="title_activity_question_search">Search Questions</string>
     <string name="questionSearchInputHint">Search Questions ...</string>
+    <string name="messagePreparing">Processing Questions ...</string>
 </resources>

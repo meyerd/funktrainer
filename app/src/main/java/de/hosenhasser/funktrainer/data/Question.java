@@ -29,6 +29,7 @@ public class Question {
 	private String questionText;
 	private List<String> answers = new LinkedList<String>();
 	private int level;
+	private int wrong;
 	private Date nextTime;
 	public int getId() {
 		return id;
@@ -65,6 +66,10 @@ public class Question {
 	}
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	public int getWrong() { return wrong; }
+	public void setWrong(int wrong) {
+		this.wrong = wrong;
 	}
 	public Date getNextTime() {
 		return nextTime;

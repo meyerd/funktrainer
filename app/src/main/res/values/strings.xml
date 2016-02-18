@@ -3,6 +3,7 @@
     <string name="app_name">Funktrainer</string>
     <string name="infoMessage">Diese App enthält die Fragen für die Prüfung für den Amateurfunkschein (Fragen von Februar 2007 [Technische Kenntnisse] bzw. Oktober 2006 [Betriebliche Kenntnisse, Kenntnisse von Vorschriften])</string>
     <string name="selectTopic">Bitte wählen sie ein Kapitel:</string>
+    <string name="selectSpecialTopic">Eigener Fragenmix:</string>
     <string name="continueButtonText">Weiter</string>
     <string name="waitBeforeContinue">Bitte warten Sie etwas bevor Sie weiter lernen …</string>
     <string name="nextQuestionAt">Die nächste Frage sehen Sie um:</string>
@@ -44,4 +45,5 @@
     <string name="resetCancel">Abbrechen</string>
     <string name="title_activity_question_search">Fragen durchsuchen</string>
     <string name="questionSearchInputHint">Durchsuche Fragen ...</string>
+    <string name="messagePreparing">Verarbeite Fragen ...</string>
 </resources>
