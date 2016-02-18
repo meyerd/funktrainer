@@ -1,0 +1,24 @@
+1.0.4.0:
+
+- Verbessertes Datenbankupdate (Fortschritt wird gespeichert)
+- Zwei neue Kategorien mit jeweils allen Fragen einer Klasse
+
+1.0.3.0:
+
+- Anzeige der Fragenummer links oben
+- Suche nach bestimmen Fragen vom Startbildschirm aus
+- Anzeige einiger Grafiken in Fragen verbessert
+
+
+engl:
+
+1.0.4.0:
+
+- Improved database update (retain progress)
+- Two new categories containing all questions for one license class
+
+1.0.3.0:
+
+- Show number of question on the top left
+- Search for specific questions from the main screen
+- Fix display of images for some questions
