@@ -31,14 +31,17 @@ import java.util.Set;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import de.hosenhasser.funktrainer.FunkTrainerActivity;
 import de.hosenhasser.funktrainer.R;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -50,6 +53,8 @@ public class Repository extends SQLiteOpenHelper {
     private int answerImageSeq;
 	private SQLiteDatabase database;
 	private final String done;
+
+	private ProgressDialog pDialog;
 	
 	private static final int NUMBER_LEVELS = 5;
 
@@ -67,248 +72,9 @@ public class Repository extends SQLiteOpenHelper {
 		return text;
 	}
 
-	public void createMixtopics(final SQLiteDatabase db) {
-        // Create mixes
-        // Klasse E
-        //  Technische Kenntnisse (Klasse E)
-        //  Betriebliche Kenntnisse
-        //  Kenntnisse von Vorschriften
-        //
-        // Klasse A
-        //  Technische Kenntnisse (Klasse A)
-        //  Betriebliche Kenntnisse
-        //  Kenntnisse von Vorschriften
-        String[][] mixtopics = new String[][] {
-                new String[] {"Klasse E alle (Technik, Betrieb, Vorschriften)", "Technische Kenntnisse (Klasse E)",
-                    "Betriebliche Kenntnisse", "Kenntnisse von Vorschriften"},
-                new String[] {"Klasse A alle (Technik, Betrieb, Vorschriften)", "Technische Kenntnisse (Klasse A)",
-                    "Betriebliche Kenntnisse", "Kenntnisse von Vorschriften"}
-        };
-		// get max topic id
-		long maxTopicId = 0;
-        long maxTopicOrderIndex = 0;
-		db.beginTransaction();
-		Cursor t = db.query("topic", new String[]{"_id, order_index"}, null, null, null, null, null, null);
-		try {
-			t.moveToNext();
-			while (!t.isAfterLast()) {
-				long tId = t.getInt(0);
-                long tIdx = t.getInt(1);
-				if (tId > maxTopicId) {
-					maxTopicId = tId;
-				}
-                if (tIdx > maxTopicOrderIndex) {
-                    maxTopicOrderIndex = tIdx;
-                }
-				t.moveToNext();
-			}
-		} finally {
-			t.close();
-		}
-        long maxQuestionId = 0;
-        Cursor qt = db.query("question", new String[]{"_id"}, null, null, null, null, null, null);
-        try {
-            qt.moveToNext();
-            while (!qt.isAfterLast()) {
-                long qId = qt.getInt(0);
-                if (qId > maxQuestionId) {
-                    maxQuestionId = qId;
-                }
-                qt.moveToNext();
-            }
-        } finally {
-            qt.close();
-        }
-        long maxAnswerId = 0;
-        Cursor at = db.query("answer", new String[]{"_id"}, null, null, null, null, null, null);
-        try {
-            at.moveToNext();
-            while (!at.isAfterLast()) {
-                long aId = at.getInt(0);
-                if (aId > maxAnswerId) {
-                    maxAnswerId = aId;
-                }
-                at.moveToNext();
-            }
-        } finally {
-            at.close();
-        }
-        db.setTransactionSuccessful();
-        db.endTransaction();
-		// create mixtopics
-        long newAnswerRunningIndex = 1;
-        for (final String[] mix : mixtopics) {
-            final String mixName = mix[0];
-            db.beginTransaction();
-            try {
-                ContentValues mixTopicVals = new ContentValues();
-                long mixId = ++maxTopicId;
-                mixTopicVals.put("_id", mixId);
-                mixTopicVals.put("order_index", ++maxTopicOrderIndex);
-                mixTopicVals.put("name", mixName);
-                db.insert("topic", null, mixTopicVals);
-                for (int i = 1; i < mix.length ; i++) {
-                    Cursor q = db.rawQuery("SELECT _id, topic_id, reference, question, level, next_time, wrong FROM question WHERE topic_id = (SELECT _id FROM topic WHERE name = ?)", new String[]{mix[i]});
-                    try {
-                        q.moveToNext();
-                        while (!q.isAfterLast()) {
-                            long qId = q.getInt(0);
-                            String qReference = q.getString(2);
-                            String qQuestion = q.getString(3);
-                            long newQuestionId = ++maxQuestionId;
-                            ContentValues newQuestionVals = new ContentValues();
-                            newQuestionVals.put("_id", newQuestionId);
-                            newQuestionVals.put("topic_id", mixId);
-                            newQuestionVals.put("reference", qReference);
-                            newQuestionVals.put("question", qQuestion);
-                            newQuestionVals.put("next_time", (new Date()).getTime());
-                            newQuestionVals.put("level", 0L);
-                            newQuestionVals.put("wrong", 0L);
-                            db.insert("question", null, newQuestionVals);
-
-                            Cursor a = db.query("answer", new String[]{"_id", "question_id", "order_index", "answer"}, "question_id = ?", new String[]{Long.toString(qId)}, null, null, null, null);
-                            try {
-                                a.moveToNext();
-                                while (!a.isAfterLast()) {
-                                    String aText = a.getString(3);
-                                    ContentValues newAnswerVals = new ContentValues();
-                                    long newAnswerId = ++maxAnswerId;
-                                    newAnswerVals.put("_id", newAnswerId);
-                                    newAnswerVals.put("question_id", newQuestionId);
-                                    newAnswerVals.put("order_index", newAnswerRunningIndex++);
-                                    newAnswerVals.put("answer", aText);
-                                    db.insert("answer", null, newAnswerVals);
-
-                                    a.moveToNext();
-                                }
-                            } finally {
-                                a.close();
-                            }
-                            q.moveToNext();
-                        }
-                    } finally {
-                        q.close();
-                    }
-                }
-                db.setTransactionSuccessful();
-            } finally {
-                db.endTransaction();
-            }
-        }
-    }
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// create databases
-		db.beginTransaction();
-		try {
-			db.execSQL("CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL)");
-			db.execSQL("CREATE TABLE question (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, reference TEXT, question TEXT NOT NULL, level INT NOT NULL, next_time INT NOT NULL, wrong INT NOT NULL)");
-			db.execSQL("CREATE TABLE answer (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT NOT NULL)");
-			db.setTransactionSuccessful();
-		} finally {
-			db.endTransaction();
-		}
-				
-		// fill with data
-		try {
-			final List<Topic> topics = new LinkedList<Topic>();
-			final List<Question> questions = new LinkedList<Question>();
-			final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen_nontransform);
-			int eventType = xmlResourceParser.getEventType();
-
-			Topic currentTopic = null;
-			Question currentQuestion = null;
-			boolean expectingAnswer = false;
-			boolean expectingQuestion = false;
-
-            List topicPrefixes = new ArrayList<String>();
-            int topiclevel = 0;
-
-			int index = 0;
-            int idcounter = 0;
-			while (eventType != XmlPullParser.END_DOCUMENT) {
-				switch (eventType) {
-				case XmlPullParser.START_TAG:
-					final String tagName = xmlResourceParser.getName();
-                    if("chapter".equals(tagName)) {
-                        String chaptername = xmlResourceParser.getAttributeValue(null, "name");
-                        if(topiclevel <= 0) {
-                            topicPrefixes.clear();
-                            topicPrefixes.add(chaptername);
-                            currentTopic = new Topic();
-                            currentTopic.setId(idcounter++);
-                            currentTopic.setIndex(index++);
-                            currentTopic.setName(chaptername);
-                        } else {
-                            topicPrefixes.add(chaptername);
-                        }
-                        topiclevel += 1;
-                    } else if ("question".equals(tagName)) {
-                        currentQuestion = new Question();
-                        currentQuestion.setId(idcounter++);
-                        currentQuestion.setReference(xmlResourceParser.getAttributeValue(null, "id"));
-                        currentQuestion.setNextTime(new Date());
-                        currentQuestion.setTopicId(currentTopic.getId());
-					} else if ("textquestion".equals(tagName)) {
-						expectingQuestion = true;
-					} else if ("textanswer".equals(tagName)) {
-						expectingAnswer = true;
-					}
-					break;
-				case XmlPullParser.TEXT:
-					if (expectingQuestion) {
-                        String qtext = xmlResourceParser.getText();
-                        qtext = cleanUpTagText(qtext);
-						currentQuestion.setQuestionText(qtext);
-						expectingQuestion = false;
-					}
-					if (expectingAnswer) {
-                        String answertext = xmlResourceParser.getText();
-                        answertext = cleanUpTagText(answertext);
-						currentQuestion.getAnswers().add(answertext);
-						expectingAnswer = false;
-					}
-				case XmlPullParser.END_TAG:
-					final String endTagName = xmlResourceParser.getName();
-                    if("chapter".equals(endTagName)) {
-                        if(topiclevel <= 1) {
-                            topics.add(currentTopic);
-                            currentTopic = null;
-                        }
-                        topiclevel -= 1;
-                        if(topicPrefixes.size() >= 1) {
-                            topicPrefixes.remove(topicPrefixes.size() - 1);
-                        }
-                    } else if ("question".equals(endTagName)) {
-						questions.add(currentQuestion);
-						currentQuestion = null;
-                    }
-					break;
-				}
-                xmlResourceParser.next();
-				eventType = xmlResourceParser.getEventType();
-			}
-			xmlResourceParser.close();
-			
-			db.beginTransaction();
-			try {
-				for (final Topic topic : topics) {
-					save(db, topic);
-				}
-				for (final Question question : questions) {
-					save(db, question);
-				}
-				db.setTransactionSuccessful();
-			} finally {
-				db.endTransaction();
-			}
-		} catch (final IOException ioe) {
-			ioe.printStackTrace();
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-        createMixtopics(db);
+        startLongDatabaseOperation(db, 0, 0, 0);
 	}
 
     public QuestionSelection selectQuestionByReference(final String questionReference) {
@@ -562,7 +328,7 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	public Cursor getTopicsCursor(final SQLiteDatabase db) {
-		final Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS +" THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN question q ON q.topic_id = t._id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
+		final Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN question q ON q.topic_id = t._id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
 		return cursor;
 	}
 	
@@ -624,17 +390,253 @@ public class Repository extends SQLiteOpenHelper {
 		return database;
 	}
 
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i("Funktrainer", "upgrading database from version " + oldVersion + " to new version "
-				+ newVersion);
-        // TODO: this is not shown?
-        Context context = this.context;
-        CharSequence text = "Updating Database ...";
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-        if(oldVersion <= 6) {
+    private void realOnCreate(LongDatabaseOperationTask task, SQLiteDatabase db) {
+        // create databases
+        db.beginTransaction();
+        try {
+            db.execSQL("CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL)");
+            db.execSQL("CREATE TABLE question (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id) ON DELETE CASCADE, reference TEXT, question TEXT NOT NULL, level INT NOT NULL, next_time INT NOT NULL, wrong INT NOT NULL)");
+            db.execSQL("CREATE TABLE answer (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id) ON DELETE CASCADE, order_index INT NOT NULL, answer TEXT NOT NULL)");
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        // fill with data
+        try {
+            final List<Topic> topics = new LinkedList<Topic>();
+            final List<Question> questions = new LinkedList<Question>();
+            final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen_nontransform);
+            int eventType = xmlResourceParser.getEventType();
+
+            Topic currentTopic = null;
+            Question currentQuestion = null;
+            boolean expectingAnswer = false;
+            boolean expectingQuestion = false;
+
+            List topicPrefixes = new ArrayList<String>();
+            int topiclevel = 0;
+
+            int index = 0;
+            int idcounter = 0;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_TAG:
+                        final String tagName = xmlResourceParser.getName();
+                        if("chapter".equals(tagName)) {
+                            String chaptername = xmlResourceParser.getAttributeValue(null, "name");
+                            if(topiclevel <= 0) {
+                                topicPrefixes.clear();
+                                topicPrefixes.add(chaptername);
+                                currentTopic = new Topic();
+                                currentTopic.setId(idcounter++);
+                                currentTopic.setIndex(index++);
+                                currentTopic.setName(chaptername);
+                            } else {
+                                topicPrefixes.add(chaptername);
+                            }
+                            topiclevel += 1;
+                        } else if ("question".equals(tagName)) {
+                            currentQuestion = new Question();
+                            currentQuestion.setId(idcounter++);
+                            currentQuestion.setReference(xmlResourceParser.getAttributeValue(null, "id"));
+                            currentQuestion.setNextTime(new Date());
+                            currentQuestion.setTopicId(currentTopic.getId());
+                        } else if ("textquestion".equals(tagName)) {
+                            expectingQuestion = true;
+                        } else if ("textanswer".equals(tagName)) {
+                            expectingAnswer = true;
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        if (expectingQuestion) {
+                            String qtext = xmlResourceParser.getText();
+                            qtext = cleanUpTagText(qtext);
+                            currentQuestion.setQuestionText(qtext);
+                            expectingQuestion = false;
+                        }
+                        if (expectingAnswer) {
+                            String answertext = xmlResourceParser.getText();
+                            answertext = cleanUpTagText(answertext);
+                            currentQuestion.getAnswers().add(answertext);
+                            expectingAnswer = false;
+                        }
+                    case XmlPullParser.END_TAG:
+                        final String endTagName = xmlResourceParser.getName();
+                        if("chapter".equals(endTagName)) {
+                            if(topiclevel <= 1) {
+                                topics.add(currentTopic);
+                                currentTopic = null;
+                            }
+                            topiclevel -= 1;
+                            if(topicPrefixes.size() >= 1) {
+                                topicPrefixes.remove(topicPrefixes.size() - 1);
+                            }
+                        } else if ("question".equals(endTagName)) {
+                            questions.add(currentQuestion);
+                            currentQuestion = null;
+                        }
+                        break;
+                }
+                xmlResourceParser.next();
+                eventType = xmlResourceParser.getEventType();
+            }
+            xmlResourceParser.close();
+
+            db.beginTransaction();
+            try {
+                for (final Topic topic : topics) {
+                    save(db, topic);
+                }
+                for (final Question question : questions) {
+                    save(db, question);
+                }
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        } catch (final IOException ioe) {
+            ioe.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        createMixtopics(task, db);
+    }
+
+
+    private void createMixtopics(LongDatabaseOperationTask task, final SQLiteDatabase db) {
+        // Create mixes
+        // Klasse E
+        //  Technische Kenntnisse (Klasse E)
+        //  Betriebliche Kenntnisse
+        //  Kenntnisse von Vorschriften
+        //
+        // Klasse A
+        //  Technische Kenntnisse (Klasse A)
+        //  Betriebliche Kenntnisse
+        //  Kenntnisse von Vorschriften
+        String[][] mixtopics = new String[][] {
+                new String[] {"Klasse E alle (Technik, Betrieb, Vorschriften)", "Technische Kenntnisse (Klasse E)",
+                        "Betriebliche Kenntnisse", "Kenntnisse von Vorschriften"},
+                new String[] {"Klasse A alle (Technik, Betrieb, Vorschriften)", "Technische Kenntnisse (Klasse A)",
+                        "Betriebliche Kenntnisse", "Kenntnisse von Vorschriften"}
+        };
+        // get max topic id
+        long maxTopicId = 0;
+        long maxTopicOrderIndex = 0;
+        db.beginTransaction();
+        Cursor t = db.query("topic", new String[]{"_id, order_index"}, null, null, null, null, null, null);
+        try {
+            t.moveToNext();
+            while (!t.isAfterLast()) {
+                long tId = t.getInt(0);
+                long tIdx = t.getInt(1);
+                if (tId > maxTopicId) {
+                    maxTopicId = tId;
+                }
+                if (tIdx > maxTopicOrderIndex) {
+                    maxTopicOrderIndex = tIdx;
+                }
+                t.moveToNext();
+            }
+        } finally {
+            t.close();
+        }
+        long maxQuestionId = 0;
+        Cursor qt = db.query("question", new String[]{"_id"}, null, null, null, null, null, null);
+        try {
+            qt.moveToNext();
+            while (!qt.isAfterLast()) {
+                long qId = qt.getInt(0);
+                if (qId > maxQuestionId) {
+                    maxQuestionId = qId;
+                }
+                qt.moveToNext();
+            }
+        } finally {
+            qt.close();
+        }
+        long maxAnswerId = 0;
+        Cursor at = db.query("answer", new String[]{"_id"}, null, null, null, null, null, null);
+        try {
+            at.moveToNext();
+            while (!at.isAfterLast()) {
+                long aId = at.getInt(0);
+                if (aId > maxAnswerId) {
+                    maxAnswerId = aId;
+                }
+                at.moveToNext();
+            }
+        } finally {
+            at.close();
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        // create mixtopics
+        long newAnswerRunningIndex = 1;
+        for (final String[] mix : mixtopics) {
+            final String mixName = mix[0];
+            db.beginTransaction();
+            try {
+                ContentValues mixTopicVals = new ContentValues();
+                long mixId = ++maxTopicId;
+                mixTopicVals.put("_id", mixId);
+                mixTopicVals.put("order_index", ++maxTopicOrderIndex);
+                mixTopicVals.put("name", mixName);
+                db.insert("topic", null, mixTopicVals);
+                for (int i = 1; i < mix.length ; i++) {
+                    Cursor q = db.rawQuery("SELECT _id, topic_id, reference, question, level, next_time, wrong FROM question WHERE topic_id = (SELECT _id FROM topic WHERE name = ?)", new String[]{mix[i]});
+                    try {
+                        q.moveToNext();
+                        while (!q.isAfterLast()) {
+                            long qId = q.getInt(0);
+                            String qReference = q.getString(2);
+                            String qQuestion = q.getString(3);
+                            long newQuestionId = ++maxQuestionId;
+                            ContentValues newQuestionVals = new ContentValues();
+                            newQuestionVals.put("_id", newQuestionId);
+                            newQuestionVals.put("topic_id", mixId);
+                            newQuestionVals.put("reference", qReference);
+                            newQuestionVals.put("question", qQuestion);
+                            newQuestionVals.put("next_time", (new Date()).getTime());
+                            newQuestionVals.put("level", 0L);
+                            newQuestionVals.put("wrong", 0L);
+                            db.insert("question", null, newQuestionVals);
+
+                            Cursor a = db.query("answer", new String[]{"_id", "question_id", "order_index", "answer"}, "question_id = ?", new String[]{Long.toString(qId)}, null, null, null, null);
+                            try {
+                                a.moveToNext();
+                                while (!a.isAfterLast()) {
+                                    String aText = a.getString(3);
+                                    ContentValues newAnswerVals = new ContentValues();
+                                    long newAnswerId = ++maxAnswerId;
+                                    newAnswerVals.put("_id", newAnswerId);
+                                    newAnswerVals.put("question_id", newQuestionId);
+                                    newAnswerVals.put("order_index", newAnswerRunningIndex++);
+                                    newAnswerVals.put("answer", aText);
+                                    db.insert("answer", null, newAnswerVals);
+
+                                    a.moveToNext();
+                                }
+                            } finally {
+                                a.close();
+                            }
+                            q.moveToNext();
+                        }
+                    } finally {
+                        q.close();
+                    }
+                }
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+
+	void realUpgrade(LongDatabaseOperationTask task, SQLiteDatabase db, int oldVersion, int newVersion) {
+		if(oldVersion <= 6) {
 			// Flush db and create again
 			db.beginTransaction();
 			try {
@@ -656,13 +658,13 @@ public class Repository extends SQLiteOpenHelper {
 		}
 		if(oldVersion <= 7) {
 			// 6 -> 7
-            db.beginTransaction();
-            try {
-                db.execSQL("UPDATE topic SET name = 'Kenntnisse von Vorschriften' WHERE name = 'Prüfungsfragen im Prüfungseil „Kenntnisse von Vorschriften“'");
-                db.setTransactionSuccessful();
-            } finally {
-                db.endTransaction();
-            }
+			db.beginTransaction();
+			try {
+				db.execSQL("UPDATE topic SET name = 'Kenntnisse von Vorschriften' WHERE name = 'Prüfungsfragen im Prüfungseil „Kenntnisse von Vorschriften“'");
+				db.setTransactionSuccessful();
+			} finally {
+				db.endTransaction();
+			}
 		}
 		if(oldVersion <= DATABASE_VERSION) {
 			// 7 -> 8
@@ -670,12 +672,86 @@ public class Repository extends SQLiteOpenHelper {
 			db.beginTransaction();
 			try {
 				db.execSQL("ALTER TABLE question ADD COLUMN wrong INT");
-                db.execSQL("UPDATE question SET wrong = 0;");
+				db.execSQL("UPDATE question SET wrong = 0;");
 				db.setTransactionSuccessful();
 			} finally {
 				db.endTransaction();
 			}
-            createMixtopics(db);
+			createMixtopics(task, db);
 		}
+	}
+
+
+    private static class LongDatabaseOperationTaskParams {
+        public ProgressDialog pDialog;
+        public Context context;
+        public SQLiteDatabase db;
+        public int operation;
+        public int oldVersion;
+        public int newVersion;
+    }
+
+	private class LongDatabaseOperationTask extends AsyncTask<LongDatabaseOperationTaskParams, Integer, Integer> {
+        public LongDatabaseOperationTaskParams params;
+
+        protected Integer doInBackground(LongDatabaseOperationTaskParams... params) {
+            Log.i("Funktrainer", "Starting long database operation.");
+            this.params = params[0];
+
+            switch (this.params.operation) {
+                case 0: // create new
+                    realOnCreate(this, this.params.db);
+                    break;
+                case 1: // upgrade
+                    realUpgrade(this, this.params.db, this.params.oldVersion, this.params.newVersion);
+                    break;
+                default:
+                    throw new RuntimeException("invalid use of startLongDatabaseOperation");
+            }
+
+            Log.i("Funktrainer", "Long database operation done.");
+
+            return 0;
+        }
+
+        protected void onProgressUpdate(Integer percent) {
+            this.params.pDialog.setProgress(percent);
+            FunkTrainerActivity mainactivity = (FunkTrainerActivity)this.params.context;
+            mainactivity.updateAdapter();
+        }
+
+        protected void onPostExecute(Integer res) {
+            this.params.pDialog.dismiss();
+
+        }
+    }
+
+
+	void startLongDatabaseOperation(SQLiteDatabase db, final int operation, int oldVersion,
+									int newVersion) {
+		this.pDialog = ProgressDialog.show(this.context, this.context.getString(R.string.messagePleaseWait),
+				this.context.getString(R.string.messagePreparing), true, false);
+		LongDatabaseOperationTaskParams tp = new LongDatabaseOperationTaskParams();
+        tp.context = this.context;
+        tp.db = db;
+        tp.operation = operation;
+        tp.oldVersion = oldVersion;
+        tp.newVersion = newVersion;
+        tp.pDialog = pDialog;
+
+        new LongDatabaseOperationTask().execute(tp);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.i("Funktrainer", "upgrading database from version " + oldVersion + " to new version "
+				+ newVersion);
+//        // TODO: this is not shown?
+//        Context context = this.context;
+//        CharSequence text = "Updating Database ...";
+//        int duration = Toast.LENGTH_LONG;
+//        Toast toast = Toast.makeText(context, text, duration);
+//        toast.show();
+		startLongDatabaseOperation(db, 1, oldVersion, newVersion);
 	}
 }

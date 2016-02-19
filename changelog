@@ -1,3 +1,7 @@
+1.0.4.1:
+
+- Dialog bei langen Datenbankoperationen
+
 1.0.4.0:
 
 - Verbessertes Datenbankupdate (Fortschritt wird gespeichert)
@@ -11,6 +15,10 @@
 
 
 engl:
+
+1.0.4.1:
+
+- Improved responsiveness: show dialog on long database operations
 
 1.0.4.0:
 

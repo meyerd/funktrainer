@@ -41,6 +41,7 @@ import android.widget.TextView;
 
 public class FunkTrainerActivity extends Activity {
 	private Repository repository;
+    private SimpleCursorAdapter adapter;
 	
     /** Called when the activity is first created. */
     @Override
@@ -50,6 +51,10 @@ public class FunkTrainerActivity extends Activity {
           
         repository = new Repository(this);
     }
+
+    public void updateAdapter() {
+        adapter.notifyDataSetChanged();
+    }
     
     @Override
     public void onResume() {
@@ -57,7 +62,7 @@ public class FunkTrainerActivity extends Activity {
     	
     	final ListView topicList = (ListView) findViewById(R.id.listView1);
         
-        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+        this.adapter = new SimpleCursorAdapter(this,
                 R.layout.topic_list_item,
                 null,
                 new String[]{"name", "status", "next_question"},
