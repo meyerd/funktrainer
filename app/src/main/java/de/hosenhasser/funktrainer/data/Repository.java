@@ -37,6 +37,7 @@ import de.hosenhasser.funktrainer.R;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -716,13 +717,14 @@ public class Repository extends SQLiteOpenHelper {
 
         protected void onProgressUpdate(Integer percent) {
             this.params.pDialog.setProgress(percent);
-            FunkTrainerActivity mainactivity = (FunkTrainerActivity)this.params.context;
-            mainactivity.updateAdapter();
         }
 
         protected void onPostExecute(Integer res) {
             this.params.pDialog.dismiss();
-
+            final Intent intent = new Intent(this.params.context, FunkTrainerActivity.class);
+            this.params.context.startActivity(intent);
+//            FunkTrainerActivity mainactivity = (FunkTrainerActivity)this.params.context;
+//            mainactivity.updateAdapter();
         }
     }
 
