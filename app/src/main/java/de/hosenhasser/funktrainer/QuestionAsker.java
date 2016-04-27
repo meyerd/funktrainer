@@ -30,6 +30,8 @@ import java.util.TimerTask;
 import de.hosenhasser.funktrainer.data.Question;
 import de.hosenhasser.funktrainer.data.QuestionSelection;
 import de.hosenhasser.funktrainer.data.Repository;
+import de.hosenhasser.funktrainer.data.Topic;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -304,6 +306,7 @@ public class QuestionAsker extends Activity {
         QuestionSelection nextQuestion;
         if (questionReference != null) {
             nextQuestion = repository.selectQuestionByReference(questionReference);
+			topicId = repository.getFirstTopicIdForQuestionReference(questionReference);
         } else {
             nextQuestion = repository.selectQuestion(topicId);
         }
@@ -391,7 +394,7 @@ public class QuestionAsker extends Activity {
 
 		final TextView textView = (TextView) findViewById(R.id.textViewFrage);
         URLImageParser p = new URLImageParser(textView, this);
-        Spanned htmlSpan = Html.fromHtml(safeText(question.getQuestionText()), p, null);
+        Spanned htmlSpan = Html.fromHtml(safeText(question.getQuestion()), p, null);
         textView.setText(htmlSpan);
 		
 		final List<RadioButton> radioButtons = getRadioButtons();

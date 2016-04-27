@@ -18,29 +18,29 @@
 
 package de.hosenhasser.funktrainer.data;
 
-public class Topic {
-	private int id;
-	private int index;
-	private String name;
-	private boolean primary;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getIndex() {
-		return index;
-	}
-	public void setIndex(int index) {
-		this.index = index;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+public class Category {
+    private int id;
+    private String name;
+    private String reference;
+    private boolean primary;
+    private int parent;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getReference() { return reference; }
+    public void setReference(String reference) { this.reference = reference; }
     public boolean getPrimary() {return primary; }
     public void setPrimary(boolean isprimary) { this.primary = isprimary; }
+    public int getParent() { return parent; }
+    public void setParent(int parent) { this.parent = parent; }
 }
+

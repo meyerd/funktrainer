@@ -28,6 +28,7 @@ public class QuestionSelection {
 	private int totalQuestions;
 	private int maxProgress;
 	private int currentProgress;
+	private int topicId;
 
 	public int getSelectedQuestion() {
 		return selectedQuestion;
@@ -71,4 +72,6 @@ public class QuestionSelection {
 	public void setCurrentProgress(final int currentProgress) {
 		this.currentProgress = currentProgress;
 	}
+	public int getTopicId() { return topicId; }
+	public void setTopicId(int topicId) { this.topicId = topicId; }
 }

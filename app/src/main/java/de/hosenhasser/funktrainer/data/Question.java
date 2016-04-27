@@ -24,36 +24,42 @@ import java.util.List;
 
 public class Question {
 	private int id;
-	private int topicId;
+//	private int topicId;
+	private int categoryId;
 	private String reference;
-	private String questionText;
+	private String question;
 	private List<String> answers = new LinkedList<String>();
+	private List<String> answersHelp = new LinkedList<String>();
 	private int level;
-	private int wrong;
 	private Date nextTime;
+	private int wrong;
+	private int correct;
+	private String help;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getTopicId() {
-		return topicId;
-	}
-	public void setTopicId(int topicId) {
-		this.topicId = topicId;
-	}
+//	public int getTopicId() {
+//		return topicId;
+//	}
+//	public void setTopicId(int topicId) {
+//		this.topicId = topicId;
+//	}
+	public int getCategoryId() { return categoryId; }
+	public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
 	public String getReference() {
 		return reference;
 	}
 	public void setReference(String reference) {
 		this.reference = reference;
 	}
-	public String getQuestionText() {
-		return questionText;
+	public String getQuestion() {
+		return question;
 	}
-	public void setQuestionText(String questionText) {
-		this.questionText = questionText;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 	public List<String> getAnswers() {
 		return answers;
@@ -61,8 +67,18 @@ public class Question {
 	public void setAnswers(List<String> answers) {
 		this.answers = answers;
 	}
+	public List<String> getAnswersHelp() {
+		return answersHelp;
+	}
+	public void setAnswersHelp(List<String> answersHelp) {
+		this.answersHelp = answersHelp;
+	}
 	public int getLevel() {
 		return level;
+	}
+	public Date getNextTime() { return nextTime; }
+	public void setNextTime(Date nextTime) {
+		this.nextTime = nextTime;
 	}
 	public void setLevel(int level) {
 		this.level = level;
@@ -71,10 +87,8 @@ public class Question {
 	public void setWrong(int wrong) {
 		this.wrong = wrong;
 	}
-	public Date getNextTime() {
-		return nextTime;
-	}
-	public void setNextTime(Date nextTime) {
-		this.nextTime = nextTime;
-	}
+	public int getCorrect() { return correct; }
+	public void setCorrect(int correct) { this.correct = correct; }
+	public String getHelp() { return help; }
+	public void setHelp(String help) { this.help = help; }
 }
