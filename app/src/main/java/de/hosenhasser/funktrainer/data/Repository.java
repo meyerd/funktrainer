@@ -41,6 +41,7 @@ import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -61,7 +62,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
 	public Repository(final Context context) {
 		super(context, "topics", null, DATABASE_VERSION);
@@ -383,12 +384,17 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	public void setTopicsInSimpleCursorAdapter(final SimpleCursorAdapter adapter) {
-		final Cursor c = getTopicsCursor(getDb());
-		adapter.changeCursor(c);
+        final Cursor c = getTopicsCursor(getDb());
+        adapter.changeCursor(c);
 	}
 	
 	public Cursor getTopicsCursor(final SQLiteDatabase db) {
-		final Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
+        Cursor cursor = null;
+        // try {
+            cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
+//        } catch (SQLiteException e) {
+//            cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, NULL AS status, NULL AS next_question FROM topic t;", new String[]{});
+//        }
 		return cursor;
 	}
 	
@@ -761,8 +767,8 @@ public class Repository extends SQLiteOpenHelper {
         }
     }
 
-	void realUpgrade(LongDatabaseOperationTask task, SQLiteDatabase db, int oldVersion, int newVersion) {
-		if(oldVersion <= 6) {
+	void realUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		if(oldVersion < 6) {
 			// Flush db and create again
 			db.beginTransaction();
 			try {
@@ -782,7 +788,7 @@ public class Repository extends SQLiteOpenHelper {
 			// return since onCreate already creates newest version.
 			return;
 		}
-		if(oldVersion <= 7) {
+		if(oldVersion < 7) {
 			// 6 -> 7
 			db.beginTransaction();
 			try {
@@ -792,7 +798,7 @@ public class Repository extends SQLiteOpenHelper {
 				db.endTransaction();
 			}
 		}
-		if(oldVersion <= 8) {
+		if(oldVersion < 8) {
 			// 7 -> 8
 			// add wrong column to questions table
 			db.beginTransaction();
@@ -878,7 +884,7 @@ public class Repository extends SQLiteOpenHelper {
                     realOnCreate(this.params.db);
                     break;
                 case 1: // upgrade
-                    realUpgrade(this, this.params.db, this.params.oldVersion, this.params.newVersion);
+                    realUpgrade(this.params.db, this.params.oldVersion, this.params.newVersion);
                     break;
                 default:
                     throw new RuntimeException("invalid use of startLongDatabaseOperation");
@@ -928,6 +934,7 @@ public class Repository extends SQLiteOpenHelper {
 //        int duration = Toast.LENGTH_LONG;
 //        Toast toast = Toast.makeText(context, text, duration);
 //        toast.show();
-		startLongDatabaseOperation(db, 1, oldVersion, newVersion);
+//		startLongDatabaseOperation(db, 1, oldVersion, newVersion);
+        realUpgrade(db, oldVersion, newVersion);
 	}
 }
