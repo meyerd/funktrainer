@@ -3,7 +3,7 @@
     package="de.hosenhasser.funktrainer"
     android:installLocation="auto"
     android:versionCode="15"
-    android:versionName="1.0.5.0">
+    android:versionName="1.0.5.2">
 
     <uses-sdk
         android:minSdkVersion="7"

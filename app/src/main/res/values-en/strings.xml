@@ -47,4 +47,6 @@
     <string name="questionSearchInputHint">Search Questions ...</string>
     <string name="messagePreparing">Processing Questions ...</string>
     <string name="messagePleaseWait">Please Wait</string>
+    <string name="oldQuestionHeadText">Previous Question</string>
+    <string name="backToQuestionButtonText">Back to Question</string>
 </resources>

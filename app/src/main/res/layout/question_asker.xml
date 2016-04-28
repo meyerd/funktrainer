@@ -1,108 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout">
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/questionAskerViewFlipper"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:id="@+id/questionAskerScrollView">
 
-	<LinearLayout
-		android:id="@+id/linearLayout1"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-		<ProgressBar
-			android:id="@+id/progressBar1"
-			style="?android:attr/progressBarStyleHorizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="6dp" />
+                    <ProgressBar
+                        android:id="@+id/progressBar1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp" />
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
-			<TextView
-				android:id="@+id/referenceText"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="left"
-				android:layout_margin="6dp"
-				android:text=""
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:freezesText="true"
-				/>
-			<TextView
-				android:id="@+id/levelText"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="right"
-				android:layout_margin="6dp"
-				android:text=""
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:freezesText="true"/>
-		</LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/referenceText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_margin="6dp"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:freezesText="true"
+                            />
+                        <TextView
+                            android:id="@+id/levelText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_margin="6dp"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:freezesText="true"/>
+                    </LinearLayout>
 
-		<TextView
-		    android:id="@+id/textViewFrage"
-		    android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="6dp"
-			android:layout_marginRight="6dp"
-		    android:layout_marginTop="10dp"
-		    android:text=""
-		    android:textAppearance="?android:attr/textAppearanceMedium"
-			android:freezesText="true"/>
+                    <TextView
+                        android:id="@+id/textViewFrage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:freezesText="true"/>
 
-		<RadioGroup
-		    android:id="@+id/radioGroup1"
-		    android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="6dp"
-		    android:baselineAligned="true" >
+                    <RadioGroup
+                        android:id="@+id/radioGroup1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:baselineAligned="true" >
 
-			<RadioButton
-			    android:id="@+id/radio0"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_marginTop="10dp"
-			    android:checked="true"
-			    android:text=""
-				android:freezesText="true"/>
+                        <RadioButton
+                            android:id="@+id/radio0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:checked="true"
+                            android:text=""
+                            android:freezesText="true"/>
 
-			<RadioButton
-			    android:id="@+id/radio1"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_marginTop="10dp"
-			    android:text=""
-				android:freezesText="true"/>
+                        <RadioButton
+                            android:id="@+id/radio1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:freezesText="true"/>
 
-			<RadioButton
-			    android:id="@+id/radio2"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_marginTop="10dp"
-			    android:text=""
-				android:freezesText="true"/>
-			
-			<RadioButton
-			    android:id="@+id/radio3"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_marginTop="10dp"
-			    android:text=""
-				android:freezesText="true"/>
+                        <RadioButton
+                            android:id="@+id/radio2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:freezesText="true"/>
 
-		</RadioGroup>
+                        <RadioButton
+                            android:id="@+id/radio3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:freezesText="true"/>
 
-		<Button
-		    android:id="@+id/button1"
-		    android:layout_width="164dp"
-		    android:layout_height="wrap_content"
-			android:layout_gravity="right"
-			android:layout_marginRight="6dp"
-		    android:layout_marginTop="10dp"
-		    android:text="@string/continueButtonText"
-			/>
+                    </RadioGroup>
 
-	</LinearLayout>
-</ScrollView>
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="164dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/continueButtonText"
+                        />
+
+                </LinearLayout>
+            </ScrollView>
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:id="@+id/questionAskerOldScrollView">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1old"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/oldQuestionHeadText"
+                            android:textSize="18sp"
+                            android:textColor="#FF0099CC"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:id="@+id/oldQuestionHeatTextNumber"
+                            android:textSize="18sp"
+                            android:textColor="#FF0099CC"
+                            android:text="0"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/referenceTextold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_margin="6dp"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:freezesText="true"
+                            />
+                        <TextView
+                            android:id="@+id/levelTextold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_margin="6dp"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:freezesText="true"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textViewFrageold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:freezesText="true"/>
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup1old"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:baselineAligned="true" >
+
+                        <RadioButton
+                            android:id="@+id/radio0old"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:checked="true"
+                            android:text=""
+                            android:freezesText="true"/>
+
+                        <RadioButton
+                            android:id="@+id/radio1old"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:freezesText="true"/>
+
+                        <RadioButton
+                            android:id="@+id/radio2old"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:freezesText="true"/>
+
+                        <RadioButton
+                            android:id="@+id/radio3old"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text=""
+                            android:freezesText="true"/>
+
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/backToQuestionButton"
+                        android:layout_width="164dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/backToQuestionButtonText"
+                        />
+
+                </LinearLayout>
+            </ScrollView>
+        </ScrollView>
+    </ViewFlipper>
+</RelativeLayout>
