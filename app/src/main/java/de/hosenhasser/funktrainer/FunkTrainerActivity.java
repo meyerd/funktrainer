@@ -103,8 +103,8 @@ public class FunkTrainerActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 
-				final Intent intent = new Intent(FunkTrainerActivity.this, QuestionAsker.class);
-				intent.putExtra(QuestionAsker.class.getName() + ".topic", id);
+				final Intent intent = new Intent(FunkTrainerActivity.this, AdvancedQuestionAsker.class);
+				intent.putExtra(AdvancedQuestionAsker.class.getName() + ".topic", id);
 				startActivity(intent);
 			}
 		});
@@ -147,7 +147,7 @@ public class FunkTrainerActivity extends Activity {
 		switch (item.getItemId()) {
 			case R.id.mainSearch:
                 final Intent intent = new Intent(FunkTrainerActivity.this, QuestionSearch.class);
-                // intent.putExtra(QuestionAsker.class.getName() + ".topic", id);
+                // intent.putExtra(AdvacnedQuestionAsker.class.getName() + ".topic", id);
                 startActivity(intent);
 
 //		case R.id.mainHelp:

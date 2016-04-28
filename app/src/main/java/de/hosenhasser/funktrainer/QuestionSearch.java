@@ -73,8 +73,8 @@ public class QuestionSearch extends Activity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                final Intent intent = new Intent(QuestionSearch.this, QuestionAsker.class);
-                intent.putExtra(QuestionAsker.class.getName() + ".questionReference", adapter.getItem(position));
+                final Intent intent = new Intent(QuestionSearch.this, AdvancedQuestionAsker.class);
+                intent.putExtra(AdvancedQuestionAsker.class.getName() + ".questionReference", adapter.getItem(position));
                 startActivity(intent);
             }
         });
