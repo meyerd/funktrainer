@@ -27,6 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -58,6 +60,8 @@ public class Repository extends SQLiteOpenHelper {
 	private SQLiteDatabase database;
 	private final String done;
 
+    private final ReentrantLock objlock = new ReentrantLock();
+
 	private ProgressDialog pDialog;
 	
 	private static final int NUMBER_LEVELS = 5;
@@ -78,8 +82,8 @@ public class Repository extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-//        startLongDatabaseOperation(db, 0, 0, 0);
-        realOnCreate(db);
+        startLongDatabaseOperation(db, 0, 0, 0);
+        // realOnCreate(db);
 	}
 
     public int getFirstTopicIdForQuestionReference(final String questionReference) {
@@ -384,7 +388,10 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	public void setTopicsInSimpleCursorAdapter(final SimpleCursorAdapter adapter) {
+        // Lock needed when upgrading simultaneously
+        objlock.lock();
         final Cursor c = getTopicsCursor(getDb());
+        objlock.unlock();
         adapter.changeCursor(c);
 	}
 	
@@ -811,7 +818,7 @@ public class Repository extends SQLiteOpenHelper {
 			}
 			// createMixtopicsOld(db);
 		}
-        if(oldVersion <= DATABASE_VERSION) {
+        if(oldVersion < DATABASE_VERSION) {
             // 8 -> 9
 
             // rename old scheme tables
@@ -901,6 +908,7 @@ public class Repository extends SQLiteOpenHelper {
 
         protected void onPostExecute(Integer res) {
             this.params.pDialog.dismiss();
+            objlock.unlock();
             final Intent intent = new Intent(this.params.context, FunkTrainerActivity.class);
             this.params.context.startActivity(intent);
 //            FunkTrainerActivity mainactivity = (FunkTrainerActivity)this.params.context;
@@ -921,6 +929,8 @@ public class Repository extends SQLiteOpenHelper {
         tp.newVersion = newVersion;
         tp.pDialog = pDialog;
 
+        objlock.lock();
+
         new LongDatabaseOperationTask().execute(tp);
 	}
 
@@ -935,6 +945,10 @@ public class Repository extends SQLiteOpenHelper {
 //        Toast toast = Toast.makeText(context, text, duration);
 //        toast.show();
 //		startLongDatabaseOperation(db, 1, oldVersion, newVersion);
+//
+//        objlock.lock();
+//        Log.i("Funktrainer", "upgrade done.");
+//        objlock.unlock();
         realUpgrade(db, oldVersion, newVersion);
 	}
 }
