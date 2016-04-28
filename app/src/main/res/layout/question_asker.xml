@@ -193,14 +193,14 @@
 
                     <RadioGroup
                         android:id="@+id/radioGroup1old"
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="6dp"
                         android:baselineAligned="true" >
 
                         <RadioButton
                             android:id="@+id/radio0old"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:checked="true"
@@ -209,7 +209,7 @@
 
                         <RadioButton
                             android:id="@+id/radio1old"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text=""
@@ -217,7 +217,7 @@
 
                         <RadioButton
                             android:id="@+id/radio2old"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text=""
@@ -225,7 +225,7 @@
 
                         <RadioButton
                             android:id="@+id/radio3old"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text=""

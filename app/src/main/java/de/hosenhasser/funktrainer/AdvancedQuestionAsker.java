@@ -205,16 +205,21 @@ public class AdvancedQuestionAsker extends Activity {
 
         final List<Integer> historder = histentry.getOrder();
 
+
         for (int i = 0; i < 4; i++) {
             RadioButton rb = localRadioButtons.get(historder.get(i));
             rb.setSelected(false);
             rb.setChecked(false);
             rb.setBackgroundResource(R.color.defaultBackground);
             rb.setClickable(false);
+//            rb.setWidth(rblayoutwidth - 6);
             URLImageParser p_rb = new URLImageParser(rb, this);
             Spanned htmlSpan_rb = Html.fromHtml(safeText(histentry.getAnswersText().get(i)), p_rb, null);
             rb.setText(htmlSpan_rb);
         }
+        LinearLayout rblayout = (LinearLayout) findViewById(R.id.linearLayout1old);
+        rblayout.measure(0, 0);
+        int rblayoutwidth = rblayout.getWidth();
 
         final RadioGroup rgroup = (RadioGroup)findViewById(R.id.radioGroup1old);
         rgroup.setEnabled(false);
