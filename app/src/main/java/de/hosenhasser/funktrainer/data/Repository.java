@@ -396,12 +396,7 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	public Cursor getTopicsCursor(final SQLiteDatabase db) {
-        Cursor cursor = null;
-        // try {
-            cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
-//        } catch (SQLiteException e) {
-//            cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, NULL AS status, NULL AS next_question FROM topic t;", new String[]{});
-//        }
+        Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
 		return cursor;
 	}
 	
@@ -497,7 +492,7 @@ public class Repository extends SQLiteOpenHelper {
             final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen_nontransform);
             int eventType = xmlResourceParser.getEventType();
 
-            Category currentCategory = null;
+            Category currentCategory;
             Question currentQuestion = null;
             boolean expectingAnswer = false;
             boolean expectingQuestion = false;
@@ -516,7 +511,7 @@ public class Repository extends SQLiteOpenHelper {
                             currentCategory = new Category();
                             currentCategory.setId(++categoryIdSeq);
                             currentCategory.setName(chaptername);
-                            currentCategory.setPrimary(chapterLevel <= 0 ? true : false);
+                            currentCategory.setPrimary(chapterLevel <= 0);
                             currentCategory.setParent(chapterLevel <= 0 ? 0 : categoryTrace.get(categoryTrace.size() - 1).getId());
                             currentCategory.setReference(chapterid);
                             categoryTrace.add(currentCategory);
@@ -836,23 +831,35 @@ public class Repository extends SQLiteOpenHelper {
             realOnCreate(db);
 
             // put levels of old questions to new database
+            LinkedList<String> references = new LinkedList<String>();
+            LinkedList<Integer> levels = new LinkedList<Integer>();
+            Cursor q = db.query("question_old", new String[]{"_id, reference, level"}, null, null, null, null, null, null);
+            try {
+                q.moveToNext();
+                while (!q.isAfterLast()) {
+                    String reference = q.getString(1);
+                    int level = q.getInt(2);
+                    if (level > 0) {
+                        references.add(reference);
+                        levels.add(level);
+                    }
+                    q.moveToNext();
+                }
+            } finally {
+                q.close();
+            }
+
+            Log.i("Funktrainer", references.size() + " question to be updated");
+
             db.beginTransaction();
             try {
-                Cursor q = db.query("question_old", new String[]{"_id, reference, level"}, null, null, null, null, null, null);
-                try {
-                    q.moveToNext();
-                    while (!q.isAfterLast()) {
-                        String reference = q.getString(1);
-                        int level = q.getInt(2);
-                        ContentValues cV = new ContentValues();
-                        cV.put("level", level);
-                        db.update("question", cV, "reference=?", new String[]{reference});
-                        q.moveToNext();
-                    }
-                } finally {
-                    q.close();
-                    db.setTransactionSuccessful();
+                ContentValues tmpcV = new ContentValues();
+                for (int i = 0; i < references.size(); i++) {
+                    tmpcV.clear();
+                    tmpcV.put("level", levels.get(i));
+                    db.update("question", tmpcV, "reference=?", new String[]{references.get(i)});
                 }
+                db.setTransactionSuccessful();
             } finally {
                 db.endTransaction();
             }
@@ -950,5 +957,6 @@ public class Repository extends SQLiteOpenHelper {
 //        Log.i("Funktrainer", "upgrade done.");
 //        objlock.unlock();
         realUpgrade(db, oldVersion, newVersion);
+        Log.i("Funktrainer", "Database upgrade finished");
 	}
 }
