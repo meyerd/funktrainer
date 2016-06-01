@@ -1,4 +1,9 @@
+1.0.5.3:
+
+- Suchfunktion verbessert (uneindeutigkeit des reference-Felds)
+
 1.0.5.2:
+
 - Neue Datenbankstruktur
 - Nach links swipen, um die letzten 30 Fragen und Antworten noch einmal anzusehen
 
@@ -20,7 +25,12 @@
 
 engl:
 
+1.0.5.3:
+
+- improved search (nonunique reference fields)
+
 1.0.5.2:
+
 - New database structure
 - Swipe left to see the last 30 questions and answers
 
