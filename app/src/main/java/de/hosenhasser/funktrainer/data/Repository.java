@@ -86,14 +86,28 @@ public class Repository extends SQLiteOpenHelper {
         // realOnCreate(db);
 	}
 
+    public int getFirstTopicIdForQuestionId(final int questionId) {
+        return getFirstTopicIdForQuestion(null, questionId);
+    }
+
     public int getFirstTopicIdForQuestionReference(final String questionReference) {
+        return getFirstTopicIdForQuestion(questionReference, -1);
+    }
+
+    private int getFirstTopicIdForQuestion(final String questionReference, final int questionId) {
         int topicId = 0;
-        final Cursor c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
+        Cursor c;
+        if(questionReference != null) {
+            c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
+        } else {
+            c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "_id = ?", new String[]{Integer.toString(questionId)}, null, null, null, null);
+        }
+
         try {
             c.moveToNext();
             if (!c.isAfterLast()) {
-                int questionId = c.getInt(0);
-                final Cursor d = getDb().rawQuery("SELECT t._id FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id WHERE qt.question_id=? LIMIT 1;", new String[]{Integer.toString(questionId)});
+                int qId = c.getInt(0);
+                final Cursor d = getDb().rawQuery("SELECT t._id FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id WHERE qt.question_id=? LIMIT 1;", new String[]{Integer.toString(qId)});
                 try {
                     d.moveToNext();
                     if (!d.isAfterLast()) {
@@ -109,7 +123,19 @@ public class Repository extends SQLiteOpenHelper {
         return topicId;
     }
 
+    public QuestionSelection selectQuestionByTopicId(final int topicId) {
+        return selectQuestion(null, -1, topicId);
+    }
+
+    public QuestionSelection selectQuestionById(final int questionId) {
+        return selectQuestion(null, questionId, -1);
+    }
+
     public QuestionSelection selectQuestionByReference(final String questionReference) {
+        return selectQuestion(questionReference, -1, -1);
+    }
+
+    public QuestionSelection selectQuestion(final String questionReference, final int questionId, final int topicId) {
         // TODO: refactor this in order not to replicate the function below
         final QuestionSelection result = new QuestionSelection();
         final List<Integer> possibleQuestions = new LinkedList<Integer>();
@@ -121,7 +147,14 @@ public class Repository extends SQLiteOpenHelper {
         int currentProgress = 0;
         long soonestNextTime = 0;
 
-        final Cursor c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
+        Cursor c;
+        if(topicId > -1) {
+            c = getDb().rawQuery("SELECT q._id, q.level, next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=?", new String[]{Integer.toString(topicId)});
+        } else if(questionReference != null) {
+            c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
+        } else {
+            c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "_id = ?", new String[]{Integer.toString(questionId)}, null, null, null, null);
+        }
         try {
             c.moveToNext();
             while (!c.isAfterLast()) {
@@ -163,63 +196,6 @@ public class Repository extends SQLiteOpenHelper {
 
         return result;
     }
-	
-	public QuestionSelection selectQuestion(final int topicId) {
-		final QuestionSelection result = new QuestionSelection();
-		final List<Integer> possibleQuestions = new LinkedList<Integer>();
-		final long now = new Date().getTime();
-		
-		int questionCount = 0;
-		int openQuestions = 0;
-		int maxProgress = 0;
-		int currentProgress = 0;
-		long soonestNextTime = 0;
-		
-		final Cursor c = getDb().rawQuery("SELECT q._id, q.level, next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=?", new String[]{Integer.toString(topicId)});
-        // final Cursor c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "topic_id=?", new String[]{Integer.toString(topicId)}, null, null, null, null);
-		try {
-			c.moveToNext();
-			while (!c.isAfterLast()) {
-				final int questionId = c.getInt(0);
-				final int level = c.getInt(1);
-				final long nextTime = c.getLong(2);
-				
-				questionCount++;
-				maxProgress += NUMBER_LEVELS;
-				currentProgress += level;
-				if (level < NUMBER_LEVELS) {
-					openQuestions++;
-					
-					if (nextTime > now) {
-						if (soonestNextTime == 0 || soonestNextTime > nextTime) {
-							soonestNextTime = nextTime;
-						}
-					} else {
-						possibleQuestions.add(questionId);
-					}	
-				}
-				
-				c.moveToNext();
-			}
-			
-		} finally {
-			c.close();
-		}
-		
-		result.setTotalQuestions(questionCount);
-		result.setMaxProgress(maxProgress);
-		result.setCurrentProgress(currentProgress);
-		result.setOpenQuestions(openQuestions);
-		result.setFinished(possibleQuestions.isEmpty() && soonestNextTime == 0);
-		if (!possibleQuestions.isEmpty()) {
-			Random rand = new Random();
-			result.setSelectedQuestion(possibleQuestions.get(rand.nextInt(possibleQuestions.size())));
-		} else if (soonestNextTime > 0) {
-			result.setNextQuestion(new Date(soonestNextTime));
-		}
-		
-		return result;
-	}
 	
 	public Question getQuestion(final int questionId) {
 		final Question question = new Question();
@@ -309,20 +285,27 @@ public class Repository extends SQLiteOpenHelper {
 		return stats;
     }
 
-	public String[] getAllQuestionIdentifiers() {
-        final HashSet<String> ret = new HashSet<String>();
-		final Cursor c = getDb().query("question", new String[]{"_id", "reference"}, null, null, null, null, "reference", null);
+	public SearchItem[] getAllQuestionIdentifiers() {
+        final HashSet<SearchItem> ret = new HashSet<SearchItem>();
+		// final Cursor c = getDb().query("question", new String[]{"_id", "reference"}, null, null, null, null, "reference", null);
+        final Cursor c = getDb().rawQuery("SELECT q._id, q.reference, cat.name, top.name FROM question q LEFT JOIN question_to_category qc ON qc.question_id = q._id LEFT JOIN category cat ON cat._id = qc.category_id LEFT JOIN category_to_topic ct ON ct.category_id = qc.category_id LEFT JOIN topic top ON top._id = ct.topic_id ORDER BY q.reference", null);
         try {
             c.moveToNext();
             while (!c.isAfterLast()) {
-                ret.add(c.getString(1));
+                int id = c.getInt(0);
+                String reference = c.getString(1);
+                String categoryname = c.getString(2);
+                String topicname = c.getString(3);
+                String label = reference + " (" + topicname + ")";
+                SearchItem n = new SearchItem(id, label, reference, categoryname, topicname);
+                ret.add(n);
                 c.moveToNext();
             }
         } finally {
             c.close();
         }
 
-        String[] ret1 = ret.toArray(new String[0]);
+        SearchItem[] ret1 = ret.toArray(new SearchItem[0]);
         Arrays.sort(ret1);
 
         return ret1;

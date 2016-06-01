@@ -319,8 +319,9 @@ public class AdvancedQuestionAsker extends Activity {
             if (topicId != 0) {
                 nextQuestion();
             } else {
-                String questionReference = getIntent().getExtras().getString(getClass().getName() + ".questionReference");
-                nextQuestion(questionReference);
+                int questionId = getIntent().getExtras().getInt(getClass().getName() + ".questionId");
+                // String questionReference = getIntent().getExtras().getString(getClass().getName() + ".questionReference");
+                nextQuestion(questionId);
             }
         }
     }
@@ -495,10 +496,18 @@ public class AdvancedQuestionAsker extends Activity {
     }
 
     private void nextQuestion() {
-        this.nextQuestion(null);
+        this.nextQuestion(null, -1);
+    }
+
+    private void nextQuestion(final int questionId) {
+        this.nextQuestion(null, questionId);
     }
 
     private void nextQuestion(final String questionReference) {
+        this.nextQuestion(questionReference, -1);
+    }
+
+    private void nextQuestion(final String questionReference, final int questionId) {
         if (!showingStandardView) {
             showStandardView();
         }
@@ -519,8 +528,11 @@ public class AdvancedQuestionAsker extends Activity {
         if (questionReference != null) {
             nextQuestion = repository.selectQuestionByReference(questionReference);
             topicId = repository.getFirstTopicIdForQuestionReference(questionReference);
+        } else if(questionId != -1) {
+            nextQuestion = repository.selectQuestionById(questionId);
+            topicId = repository.getFirstTopicIdForQuestionId(questionId);
         } else {
-            nextQuestion = repository.selectQuestion(topicId);
+            nextQuestion = repository.selectQuestionByTopicId(topicId);
         }
 
         // any question?

@@ -308,7 +308,7 @@ public class QuestionAsker extends Activity {
             nextQuestion = repository.selectQuestionByReference(questionReference);
 			topicId = repository.getFirstTopicIdForQuestionReference(questionReference);
         } else {
-            nextQuestion = repository.selectQuestion(topicId);
+            nextQuestion = repository.selectQuestionByTopicId(topicId);
         }
 		
 		// any question?
