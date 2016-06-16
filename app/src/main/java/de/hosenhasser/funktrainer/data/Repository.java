@@ -136,7 +136,6 @@ public class Repository extends SQLiteOpenHelper {
     }
 
     public QuestionSelection selectQuestion(final String questionReference, final int questionId, final int topicId) {
-        // TODO: refactor this in order not to replicate the function below
         final QuestionSelection result = new QuestionSelection();
         final List<Integer> possibleQuestions = new LinkedList<Integer>();
         final long now = new Date().getTime();
@@ -149,7 +148,7 @@ public class Repository extends SQLiteOpenHelper {
 
         Cursor c;
         if(topicId > -1) {
-            c = getDb().rawQuery("SELECT q._id, q.level, next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=?", new String[]{Integer.toString(topicId)});
+            c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
         } else if(questionReference != null) {
             c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
         } else {
@@ -183,11 +182,14 @@ public class Repository extends SQLiteOpenHelper {
             c.close();
         }
 
+        java.util.Collections.shuffle(possibleQuestions);
+
         result.setTotalQuestions(questionCount);
         result.setMaxProgress(maxProgress);
         result.setCurrentProgress(currentProgress);
         result.setOpenQuestions(openQuestions);
         result.setFinished(possibleQuestions.isEmpty() && soonestNextTime == 0);
+
         if (!possibleQuestions.isEmpty()) {
             result.setSelectedQuestion(possibleQuestions.get(0));
         } else if (soonestNextTime > 0) {
