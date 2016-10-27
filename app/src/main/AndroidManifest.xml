@@ -2,12 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.hosenhasser.funktrainer"
     android:installLocation="auto"
-    android:versionCode="17"
-    android:versionName="1.0.5.4">
+    android:versionCode="18"
+    android:versionName="1.0.6.0">
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="8"
         android:targetSdkVersion="21" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -32,6 +36,14 @@
         <activity
             android:name=".QuestionSearch"
             android:label="@string/title_activity_question_search" />
+        <activity
+            android:name=".LichtblickeViewerActivity"
+            android:label="@string/title_activity_lichtblicke_viewer"
+            android:parentActivityName=".AdvancedQuestionAsker">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hosenhasser.funktrainer.AdvancedQuestionAsker" />
+        </activity>
     </application>
 
 </manifest>

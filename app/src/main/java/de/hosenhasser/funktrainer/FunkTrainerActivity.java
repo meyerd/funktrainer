@@ -149,6 +149,13 @@ public class FunkTrainerActivity extends Activity {
                 final Intent intent = new Intent(FunkTrainerActivity.this, QuestionSearch.class);
                 // intent.putExtra(AdvacnedQuestionAsker.class.getName() + ".topic", id);
                 startActivity(intent);
+                return true;
+            case R.id.mainLichtblick:
+                final Intent intentLichtblick = new Intent(this, LichtblickeViewerActivity.class);
+                final int lichtblickPage = 0;
+                intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickPage", lichtblickPage);
+                startActivity(intentLichtblick);
+                return true;
 
 //		case R.id.mainHelp:
 //			final StringBuilder uri = new StringBuilder();

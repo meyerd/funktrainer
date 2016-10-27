@@ -19,15 +19,11 @@
 package de.hosenhasser.funktrainer.data;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -43,12 +39,10 @@ import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 public class Repository extends SQLiteOpenHelper {
 	private final Context context;
@@ -66,7 +60,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
 	public Repository(final Context context) {
 		super(context, "topics", null, DATABASE_VERSION);
@@ -233,6 +227,18 @@ public class Repository extends SQLiteOpenHelper {
 		} finally {
 			answer.close();
 		}
+
+        final Cursor lichtblick = getDb().query("question_to_lichtblick", new String[]{"_id", "lichtblick"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, null);
+        try {
+            lichtblick.moveToNext();
+            while (!lichtblick.isAfterLast()) {
+                int lichtblickPage = lichtblick.getInt(1);
+                question.setLichtblickPage(lichtblickPage);
+                lichtblick.moveToNext();
+            }
+        } finally {
+            lichtblick.close();
+        }
 		
 		return question;
 	}
@@ -465,7 +471,7 @@ public class Repository extends SQLiteOpenHelper {
 
     private void realOnCreate(SQLiteDatabase db) {
         // create databases
-        createNewDatabaseScheme9(db);
+        createNewDatabaseScheme10(db);
 
         int questionIdSeq = 0;
         int categoryIdSeq = 0;
@@ -532,6 +538,7 @@ public class Repository extends SQLiteOpenHelper {
                             currentQuestion.getAnswersHelp().add(" ");
                             expectingAnswer = false;
                         }
+                        break;
                     case XmlPullParser.END_TAG:
                         final String endTagName = xmlResourceParser.getName();
                         if("chapter".equals(endTagName)) {
@@ -571,6 +578,7 @@ public class Repository extends SQLiteOpenHelper {
         }
         createTopics(db);
         createMixtopics(db);
+        importLichtblickMapping(db);
     }
 
     private void addSubcategoryToTopic(final SQLiteDatabase db, int topicId, int parentCategoryId) {
@@ -737,7 +745,76 @@ public class Repository extends SQLiteOpenHelper {
         }
     }
 
-    void createNewDatabaseScheme9(SQLiteDatabase db) {
+    private void importLichtblickMapping(SQLiteDatabase db) {
+        db.beginTransaction();
+        try {
+            db.execSQL("DELETE FROM question_to_lichtblick");
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        db.beginTransaction();
+        try {
+            final XmlResourceParser xmlResourceParser = context.getResources().getXml(R.xml.funkfragen_nontransform);
+            int eventType = xmlResourceParser.getEventType();
+
+            int currentLichtblickPage = 0;
+            boolean expectingQuestion = false;
+            int lichtblickMappingId = 0;
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_TAG:
+                        final String tagName = xmlResourceParser.getName();
+                        if ("question".equals(tagName)) {
+                            currentLichtblickPage = xmlResourceParser.getAttributeIntValue(null, "lichtblick", 0);
+                        } else if ("textquestion".equals(tagName)) {
+                            expectingQuestion = true;
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        if (expectingQuestion) {
+                            String qtext = xmlResourceParser.getText();
+                            qtext = cleanUpTagText(qtext);
+                            final Cursor c = db.query("question", new String[]{"_id"}, "question=?", new String[]{qtext}, null, null, "_id", null);
+                            try {
+                                c.moveToNext();
+                                while (!c.isAfterLast()) {
+                                    int questionId = c.getInt(0);
+
+                                    ContentValues cV = new ContentValues();
+                                    cV.put("_id", ++lichtblickMappingId);
+                                    cV.put("question_id", questionId);
+                                    cV.put("lichtblick", currentLichtblickPage);
+                                    db.insert("question_to_lichtblick", null, cV);
+
+                                    c.moveToNext();
+                                }
+                            } finally {
+                                c.close();
+                            }
+                            expectingQuestion = false;
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        break;
+                }
+                xmlResourceParser.next();
+                eventType = xmlResourceParser.getEventType();
+            }
+            xmlResourceParser.close();
+            db.setTransactionSuccessful();
+        } catch (final IOException ioe) {
+            ioe.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    void createNewDatabaseScheme10(SQLiteDatabase db) {
         db.beginTransaction();
         try {
             db.execSQL("CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL, isprimary INT);");
@@ -747,6 +824,7 @@ public class Repository extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE question_to_category (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), category_id INT NOT NULL REFERENCES category(_id));");
             db.execSQL("CREATE TABLE question_to_topic (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), topic_id INT NOT NULL REFERENCES topic(_id));");
             db.execSQL("CREATE TABLE category_to_topic (_id INT NOT NULL PRIMARY KEY, category_id INT NOT NULL REFERENCES category(_id), topic_id INT NOT NULL REFERENCES topic(_id));");
+            db.execSQL("CREATE TABLE question_to_lichtblick (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), lichtblick INT);");
 
             db.setTransactionSuccessful();
         } finally {
@@ -798,7 +876,7 @@ public class Repository extends SQLiteOpenHelper {
 			}
 			// createMixtopicsOld(db);
 		}
-        if(oldVersion < DATABASE_VERSION) {
+        if(oldVersion < 9) {
             // 8 -> 9
 
             // rename old scheme tables
@@ -859,6 +937,19 @@ public class Repository extends SQLiteOpenHelper {
             } finally {
                 db.endTransaction();
             }
+        }
+        if(oldVersion < DATABASE_VERSION) {
+            // 9 -> 10
+            // create lichtblick mapping table
+            db.beginTransaction();
+            try {
+                db.execSQL("CREATE TABLE question_to_lichtblick (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), lichtblick INT);");
+                db.setTransactionSuccessful();;
+            } finally {
+                db.endTransaction();
+            }
+            // import lichtblick mapping
+            importLichtblickMapping(db);
         }
 	}
 

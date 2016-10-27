@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item android:id="@+id/statistics" android:visible="true" android:title="@string/menuStatistics" android:enabled="true" android:showAsAction="ifRoom" android:icon="@drawable/ic_statistics"/>
 	<item android:id="@+id/resetTopic" android:title="@string/menuResetTopic" android:titleCondensed="@string/menuResetTopicCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"/>
+	<item android:id="@+id/showLichtblick" android:title="@string/menuShowLichtblick" android:titleCondensed="@string/menuShowLichtblickCondensed" android:enabled="true" android:showAsAction="never"/>
 	<!--<item android:id="@+id/reportError" android:title="@string/menuReportError" android:titleCondensed="@string/menuReportErrorCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"/>-->
 	<!--<item android:id="@+id/help" android:title="@string/menuHelp" android:titleCondensed="@string/menuHelpCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"/>-->
 </menu>

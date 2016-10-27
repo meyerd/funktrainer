@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -90,6 +91,7 @@ class HistoryEntry {
 public class AdvancedQuestionAsker extends Activity {
     private Repository repository;
     private int currentQuestion;
+    private int currentQuestionId;
     private int topicId;
     private int correctChoice;
     private int maxProgress;
@@ -103,6 +105,8 @@ public class AdvancedQuestionAsker extends Activity {
     private boolean replaceNNBSP = Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
     private HashMap<Integer, Integer> radioButtonIdToPositionMap = new HashMap<Integer, Integer>();
+
+    private SharedPreferences mPrefs;
 
     private ViewFlipper viewFlipper;
     private GestureDetector gestureDetector;
@@ -269,6 +273,7 @@ public class AdvancedQuestionAsker extends Activity {
         super.onCreate(savedInstanceState);
 
         repository = new Repository(this);
+        mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
 
         showStandardView();
 
@@ -315,15 +320,29 @@ public class AdvancedQuestionAsker extends Activity {
 
             showQuestion();
         } else {
-            topicId = (int) getIntent().getExtras().getLong(getClass().getName() + ".topic");
-            if (topicId != 0) {
-                nextQuestion();
+            Bundle intbundle = getIntent().getExtras();
+            if(intbundle != null) {
+                topicId = (int) getIntent().getExtras().getLong(getClass().getName() + ".topic");
+                if (topicId != 0) {
+                    nextQuestion();
+                } else {
+                    int questionId = getIntent().getExtras().getInt(getClass().getName() + ".questionId");
+                    // String questionReference = getIntent().getExtras().getString(getClass().getName() + ".questionReference");
+                    nextQuestion(questionId);
+                }
             } else {
-                int questionId = getIntent().getExtras().getInt(getClass().getName() + ".questionId");
-                // String questionReference = getIntent().getExtras().getString(getClass().getName() + ".questionReference");
-                nextQuestion(questionId);
+                int lastQuestionShown = mPrefs.getInt("last_question_shown", 1);
+                currentQuestionId = lastQuestionShown;
+                nextQuestion(lastQuestionShown);
             }
         }
+    }
+
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor ed = mPrefs.edit();
+        ed.putInt("last_question_shown", currentQuestionId);
+        ed.commit();
     }
 
     /**
@@ -355,6 +374,13 @@ public class AdvancedQuestionAsker extends Activity {
                 final Intent intent = new Intent(this, StatisticsActivity.class);
                 intent.putExtra(StatisticsActivity.class.getName() + ".topic", topicId);
                 startActivity(intent);
+                return true;
+            case R.id.showLichtblick:
+                final Intent intentLichtblick = new Intent(this, LichtblickeViewerActivity.class);
+                final Question question = repository.getQuestion(currentQuestion);
+                final int lichtblickPage = question.getLichtblickPage();
+                intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickPage", lichtblickPage);
+                startActivity(intentLichtblick);
                 return true;
 //            case R.id.reportError:
 //                final StringBuilder uri = new StringBuilder();
@@ -613,6 +639,7 @@ public class AdvancedQuestionAsker extends Activity {
         }
 
         final Question question = repository.getQuestion(currentQuestion);
+        currentQuestionId = question.getId();
 
         final TextView levelText = (TextView) findViewById(R.id.levelText);
         levelText.setText(question.getLevel() == 0 ? getString(R.string.firstPass) :

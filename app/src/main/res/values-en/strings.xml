@@ -49,4 +49,7 @@
     <string name="messagePleaseWait">Please Wait</string>
     <string name="oldQuestionHeadText">Previous Question</string>
     <string name="backToQuestionButtonText">Back to Question</string>
+    <string name="title_activity_lichtblicke_viewer">Lichtblicke A</string>
+    <string name="menuShowLichtblick">Show Lichtblick</string>
+    <string name="menuShowLichtblickCondensed">Lichtblick</string>
 </resources>

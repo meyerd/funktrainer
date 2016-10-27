@@ -4,7 +4,7 @@ android {
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId 'de.hosenhasser.funktrainer'
-        minSdkVersion 7
+        minSdkVersion 15
         targetSdkVersion 15
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_5
@@ -22,4 +22,5 @@ android {
 }
 
 dependencies {
+    compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
 }
