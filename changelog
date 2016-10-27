@@ -1,6 +1,10 @@
+1.0.6.0:
+
+- Lichtblicke A integriert
+
 1.0.4.1 - 1.0.5.4:
 
-- Suchfunktion verbessert (uneindeutigkeit des reference-Felds)
+- Suchfunktion verbessert (Uneindeutigkeit des reference-Felds)
 - Neue Datenbankstruktur
 - Nach links swipen, um die letzten 30 Fragen und Antworten noch einmal anzusehen
 
@@ -21,6 +25,10 @@
 
 
 engl:
+
+1.0.6.0:
+
+- Integrate Lichtblicke A
 
 1.0.4.1 - 1.0.5.3:
 
