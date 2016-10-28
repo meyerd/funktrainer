@@ -834,6 +834,7 @@ public class Repository extends SQLiteOpenHelper {
 
 	void realUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if(oldVersion < 6) {
+            Log.i("Funktrainer", "DB upgrade 6");
 			// Flush db and create again
 			db.beginTransaction();
 			try {
@@ -855,6 +856,7 @@ public class Repository extends SQLiteOpenHelper {
 		}
 		if(oldVersion < 7) {
 			// 6 -> 7
+            Log.i("Funktrainer", "DB upgrade 6->7");
 			db.beginTransaction();
 			try {
 				db.execSQL("UPDATE topic SET name = 'Kenntnisse von Vorschriften' WHERE name = 'Prüfungsfragen im Prüfungseil „Kenntnisse von Vorschriften“'");
@@ -865,6 +867,7 @@ public class Repository extends SQLiteOpenHelper {
 		}
 		if(oldVersion < 8) {
 			// 7 -> 8
+            Log.i("Funktrainer", "DB upgrade 7->8");
 			// add wrong column to questions table
 			db.beginTransaction();
 			try {
@@ -878,7 +881,7 @@ public class Repository extends SQLiteOpenHelper {
 		}
         if(oldVersion < 9) {
             // 8 -> 9
-
+            Log.i("Funktrainer", "DB upgrade 8->9");
             // rename old scheme tables
             db.beginTransaction();
             try {
@@ -940,9 +943,11 @@ public class Repository extends SQLiteOpenHelper {
         }
         if(oldVersion < DATABASE_VERSION) {
             // 9 -> 10
+            Log.i("Funktrainer", "DB upgrade 9->10");
             // create lichtblick mapping table
             db.beginTransaction();
             try {
+                db.execSQL("DROP TABLE IF EXISTS question_to_lichtblick;");
                 db.execSQL("CREATE TABLE question_to_lichtblick (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), lichtblick INT);");
                 db.setTransactionSuccessful();;
             } finally {

@@ -1,6 +1,7 @@
-1.0.6.1:
+1.0.6.2:
 
 - Lichtblicke A integriert
+- Update-Fehler behoben
 
 1.0.4.1 - 1.0.5.4:
 
@@ -26,9 +27,10 @@
 
 engl:
 
-1.0.6.1:
+1.0.6.2:
 
 - Integrate Lichtblicke A
+- Fix upgrade issues from older version
 
 1.0.4.1 - 1.0.5.3:
 
