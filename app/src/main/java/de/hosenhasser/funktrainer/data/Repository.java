@@ -36,11 +36,13 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 
@@ -392,7 +394,12 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	private void updateAnswered(final int questionId, final int newLevel, final int newWrong, final int newCorrect) {
-		final long newNextTime = new Date().getTime() + waitingTimeOnLevel(newLevel);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        boolean force_pause = sharedPref.getBoolean("pref_force_pause", true);
+        long newNextTime = 0;
+        if (force_pause) {
+            newNextTime = new Date().getTime() + waitingTimeOnLevel(newLevel);
+        }
 		
 		final ContentValues updates = new ContentValues();
 		updates.put("level", newLevel);

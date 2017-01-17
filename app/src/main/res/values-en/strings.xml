@@ -52,10 +52,17 @@
     <string name="title_activity_lichtblicke_viewer">Lichtblicke A</string>
     <string name="menuShowLichtblick">Show Lichtblick</string>
     <string name="menuShowLichtblickCondensed">Lichtblick</string>
+    <string name="menuSettings">Settings</string>
+    <string name="menuSettingsCondensed">Settings</string>
     <string name="lichtblickeDownloaderMainText">The Lichtblick PDF has not been downloaded yet. To use this functionality, start the download via the button below.</string>
     <string name="lichtblickeDownloaderWarningText">Warning: The download will be serveral megabytes. If you download over mobile data, additional costs can occur.</string>
     <string name="lichtblickeDownloaderLichbtlickADownloadButtonText">Download Lichtblick A</string>
     <string name="lichtblickeDownloaderDownloadProgressText">loading …</string>
     <string name="lichtblickeDownloaderToastTextSuccess">Download successful</string>
     <string name="lichtblickeDownloaderToastTextFailure">Download error: </string>
+
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_force_pause">Recommend breaks</string>
+    <string name="pref_description_force_pause">Recommend a break if a certain number of questions was answered or if all open questions of one category have been answered.</string>
 </resources>

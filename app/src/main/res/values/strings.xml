@@ -52,10 +52,19 @@
     <string name="title_activity_lichtblicke_viewer">Lichtblicke A</string>
     <string name="menuShowLichtblick">Lichtblick Anzeigen</string>
     <string name="menuShowLichtblickCondensed">Lichtblick</string>
+    <string name="menuSettings">Einstellungen</string>
+    <string name="menuSettingsCondensed">Einstellungen</string>
     <string name="lichtblickeDownloaderMainText">Die Lichtblicke wurden noch nicht heruntergeladen. Um diese Funktionalität zu nutzen einfach mittels des Buttons unten den Download starten.</string>
     <string name="lichtblickeDownloaderWarningText">Achtung: Es werden mehrere Megabyte an Daten heruntergeladen. Sollte dieser Download über das Mobilfunknetz geschehen können Zusatzkosten entstehen.</string>
     <string name="lichtblickeDownloaderLichbtlickADownloadButtonText">Lichtblicke A herunterladen</string>
     <string name="lichtblickeDownloaderDownloadProgressText">lade …</string>
     <string name="lichtblickeDownloaderToastTextSuccess">Download erfolgreich</string>
     <string name="lichtblickeDownloaderToastTextFailure">Download Fehler: </string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="pref_header_general">Allgemein</string>
+
+    <string name="pref_title_force_pause">Schlage regelmäßig Pausen vor</string>
+    <string name="pref_description_force_pause">Schlage eine Pause vor, wenn eine gewisse Anzahl an Fragen, oder alle offenen Fragen eines Gebiets einmal bearbeitet wurden.</string>
+    <string name="pref_ringtone_silent">Stumm</string>
 </resources>

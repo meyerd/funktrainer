@@ -156,6 +156,10 @@ public class FunkTrainerActivity extends Activity {
                 intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickPage", lichtblickPage);
                 startActivity(intentLichtblick);
                 return true;
+            case R.id.mainSettings:
+                final Intent intentSettings = new Intent(this, SettingsActivity.class);
+                startActivity(intentSettings);
+                return true;
 
 //		case R.id.mainHelp:
 //			final StringBuilder uri = new StringBuilder();

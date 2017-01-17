@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId 'de.hosenhasser.funktrainer'
         minSdkVersion 11
-        targetSdkVersion 21
+        targetSdkVersion 23
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_5
             targetCompatibility JavaVersion.VERSION_1_5
         }
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -19,8 +20,14 @@ android {
     }
     productFlavors {
     }
+    compileOptions {
+        targetCompatibility 1.6
+        sourceCompatibility 1.6
+    }
 }
 
 dependencies {
     compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:support-vector-drawable:23.4.0'
 }
