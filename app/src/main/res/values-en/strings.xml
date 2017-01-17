@@ -61,8 +61,9 @@
     <string name="lichtblickeDownloaderToastTextSuccess">Download successful</string>
     <string name="lichtblickeDownloaderToastTextFailure">Download error: </string>
 
+    <string name="title_activity_settings">Settings</string>
     <string name="pref_header_general">General</string>
-
     <string name="pref_title_force_pause">Recommend breaks</string>
     <string name="pref_description_force_pause">Recommend a break if a certain number of questions was answered or if all open questions of one category have been answered.</string>
+    <string name="pref_ringtone_silent">Silent</string>
 </resources>

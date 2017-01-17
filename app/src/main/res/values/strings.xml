@@ -60,10 +60,9 @@
     <string name="lichtblickeDownloaderDownloadProgressText">lade …</string>
     <string name="lichtblickeDownloaderToastTextSuccess">Download erfolgreich</string>
     <string name="lichtblickeDownloaderToastTextFailure">Download Fehler: </string>
-    <string name="title_activity_settings">Settings</string>
 
+    <string name="title_activity_settings">Einstellungen</string>
     <string name="pref_header_general">Allgemein</string>
-
     <string name="pref_title_force_pause">Schlage regelmäßig Pausen vor</string>
     <string name="pref_description_force_pause">Schlage eine Pause vor, wenn eine gewisse Anzahl an Fragen, oder alle offenen Fragen eines Gebiets einmal bearbeitet wurden.</string>
     <string name="pref_ringtone_silent">Stumm</string>
