@@ -44,12 +44,18 @@
     <string name="resetOkay">OK</string>
     <string name="resetCancel">Cancel</string>
     <string name="title_activity_question_search">Search Questions</string>
-    <string name="questionSearchInputHint">Search Questions ...</string>
-    <string name="messagePreparing">Processing Questions ...</string>
+    <string name="questionSearchInputHint">Search Questions …</string>
+    <string name="messagePreparing">Processing Questions …</string>
     <string name="messagePleaseWait">Please Wait</string>
     <string name="oldQuestionHeadText">Previous Question</string>
     <string name="backToQuestionButtonText">Back to Question</string>
     <string name="title_activity_lichtblicke_viewer">Lichtblicke A</string>
     <string name="menuShowLichtblick">Show Lichtblick</string>
     <string name="menuShowLichtblickCondensed">Lichtblick</string>
+    <string name="lichtblickeDownloaderMainText">The Lichtblick PDF has not been downloaded yet. To use this functionality, start the download via the button below.</string>
+    <string name="lichtblickeDownloaderWarningText">Warning: The download will be serveral megabytes. If you download over mobile data, additional costs can occur.</string>
+    <string name="lichtblickeDownloaderLichbtlickADownloadButtonText">Download Lichtblick A</string>
+    <string name="lichtblickeDownloaderDownloadProgressText">loading …</string>
+    <string name="lichtblickeDownloaderToastTextSuccess">Download successful</string>
+    <string name="lichtblickeDownloaderToastTextFailure">Download error: </string>
 </resources>

@@ -4,8 +4,8 @@ android {
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId 'de.hosenhasser.funktrainer'
-        minSdkVersion 15
-        targetSdkVersion 15
+        minSdkVersion 11
+        targetSdkVersion 21
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_5
             targetCompatibility JavaVersion.VERSION_1_5
