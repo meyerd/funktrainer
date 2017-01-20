@@ -412,13 +412,17 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private long waitingTimeOnLevel(final int level) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
-        long waiting_time = sharedPref.getLong("pref_waiting_time_on_level_" + level, 0);
+        // long waiting_time = sharedPref.getLong("pref_waiting_time_on_level_" + Integer.toString(level), 0L);
+        //long waiting_time = sharedPref.getLong("pref_waiting_time_on_level_0", 0L);
+        // TODO: whooooot???
+        long waiting_time = Long.valueOf(sharedPref.getString("pref_waiting_time_on_level_" + Integer.toString(level), "0"));
 //		return level <= 0 ? 15000L :
 //			level == 1 ? 60000L :
 //			level == 2 ? 30*60000L :
 //			level == 3 ? 86400000L :
 //			level == 4 ? 3*86400000L :
 //			0;
+        // Log.d("Funktrainer", "waitingTimeOnLevel: " + Long.toString(waiting_time));
         return waiting_time * 1000;
 	}
 
