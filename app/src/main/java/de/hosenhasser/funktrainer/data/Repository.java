@@ -62,7 +62,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
 	public Repository(final Context context) {
 		super(context, "topics", null, DATABASE_VERSION);
@@ -955,7 +955,7 @@ public class Repository extends SQLiteOpenHelper {
                 db.endTransaction();
             }
         }
-        if(oldVersion < DATABASE_VERSION) {
+        if(oldVersion < 10) {
             // 9 -> 10
             Log.i("Funktrainer", "DB upgrade 9->10");
             // create lichtblick mapping table
@@ -968,6 +968,12 @@ public class Repository extends SQLiteOpenHelper {
                 db.endTransaction();
             }
             // import lichtblick mapping
+            importLichtblickMapping(db);
+        }
+        if(oldVersion < DATABASE_VERSION) {
+            // 10 -> 11
+            Log.i("Funktrainer", "DB upgrade 10->11");
+            // reimport lichtblick
             importLichtblickMapping(db);
         }
 	}
