@@ -14,16 +14,16 @@ android {
         }
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 23
-        versionName "1.0.8.1"
+        versionCode 24
+        versionName "1.0.8.2"
     }
     buildTypes {
         debug {
             minifyEnabled false
         }
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
