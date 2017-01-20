@@ -27,7 +27,8 @@ android {
 }
 
 dependencies {
-    compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+//    compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+    compile 'com.github.barteksc:android-pdf-viewer:2.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:support-vector-drawable:23.4.0'
 }

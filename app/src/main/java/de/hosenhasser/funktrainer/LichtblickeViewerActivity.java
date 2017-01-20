@@ -6,17 +6,18 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.text.Layout;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.joanzapata.pdfview.PDFView;
-import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
-import com.joanzapata.pdfview.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -91,6 +92,8 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
 
         if (!lichtblicke_a_downloaded) {
             setContentView(R.layout.activity_lichtblicke_downloader);
+            final TextView downloadLinkTextView = (TextView)findViewById(R.id.lichtblickeDownloaderLinkTextView);
+            downloadLinkTextView.setMovementMethod(LinkMovementMethod.getInstance());
             final Button downloadButton = (Button) findViewById(R.id.lichtblickADownloadButton);
             downloadButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -105,10 +108,10 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
             getActionBar().setDisplayHomeAsUpEnabled(true);
 
             this.pageToShow = getIntent().getExtras().getInt(getClass().getName() + ".lichtblickPage");
-            this.pageToShow += 1;
+//            this.pageToShow += 0;
 
-            if (this.pageToShow <= 1) {
-                this.pageToShow = mPrefs.getInt("last_page_shown", 1);
+            if (this.pageToShow <= 0) {
+                this.pageToShow = mPrefs.getInt("last_page_shown", 0);
             }
             //        if(questionId != 0) {
             //            QuestionSelection questionSel = repository.selectQuestionById(questionId);
@@ -124,8 +127,9 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
             pdfView.fromFile(lichtblick_a_file)
                     //                .pages(0, 1, 2, 3, 4, 5)
                     .defaultPage(this.pageToShow)
-                    .showMinimap(false)
+//                    .showMinimap(false)
                     .enableSwipe(true)
+                    .enableDoubletap(true)
                     //                .onDraw
                     .onLoad(this)
                     .onPageChange(this)

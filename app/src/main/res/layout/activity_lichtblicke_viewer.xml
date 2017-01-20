@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.hosenhasser.funktrainer.LichtblickeViewerActivity">
 
-    <com.joanzapata.pdfview.PDFView
+    <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

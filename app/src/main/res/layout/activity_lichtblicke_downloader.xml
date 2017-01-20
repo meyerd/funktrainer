@@ -19,6 +19,13 @@
         android:id="@+id/textView" />
 
     <TextView
+        android:text="@string/lichtblickeDownloaderLinkText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lichtblickeDownloaderLinkTextView"
+        android:autoLink="web" />
+
+    <TextView
         android:text="@string/lichtblickeDownloaderWarningText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

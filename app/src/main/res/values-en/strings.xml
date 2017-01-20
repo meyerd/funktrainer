@@ -60,6 +60,7 @@
     <string name="lichtblickeDownloaderDownloadProgressText">loading …</string>
     <string name="lichtblickeDownloaderToastTextSuccess">Download successful</string>
     <string name="lichtblickeDownloaderToastTextFailure">Download error: </string>
+    <string name="lichtblickeDownloaderLinkText">Download from: <a href="http://www.dl9hcg.a36.de/lichtblick.html">http://www.dl9hcg.a36.de/lichtblick.html</a></string>
 
     <string name="title_activity_settings">Settings</string>
     <string name="pref_header_general">General</string>
