@@ -2,8 +2,12 @@ package de.hosenhasser.funktrainer;
 
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -19,8 +23,10 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
+import java.util.prefs.PreferenceChangeEvent;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -156,7 +162,8 @@ public class SettingsActivity extends PreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName);
+                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
+                || WaitingTimePreferenceFragment.class.getName().equals(fragmentName);
     }
 
     /**
@@ -180,6 +187,62 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class WaitingTimePreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_waiting_time);
+            setHasOptionsMenu(true);
+            Preference resetButton = findPreference("pref_waiting_time_settings_reset");
+            resetButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                    adb.setTitle(getString(R.string.pref_waiting_time_reset_alert_title));
+                    adb.setMessage(getString(R.string.pref_waiting_time_reset_alert_message));
+                    adb.setIcon(android.R.drawable.ic_dialog_alert);
+                    adb.setPositiveButton(getString(R.string.resetOkay), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            SharedPreferences.Editor ed = prefs.edit();
+                            ed.remove("pref_waiting_time_on_level_0");
+                            ed.remove("pref_waiting_time_on_level_1");
+                            ed.remove("pref_waiting_time_on_level_2");
+                            ed.remove("pref_waiting_time_on_level_3");
+                            ed.remove("pref_waiting_time_on_level_4");
+                            ed.apply();
+                            ed.commit();
+                            PreferenceManager.setDefaultValues(getActivity(), R.xml.pref_waiting_time, true);
+                            Toast.makeText(getActivity(), getText(R.string.pref_waiting_time_successful_reset), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    adb.setNegativeButton(getString(R.string.resetCancel), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    adb.show();
+                    return true;
+                }
+            });
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+        @Override
+        public void onConfigurationChanged(Configuration newConfig) {
+            super.onConfigurationChanged(newConfig);
         }
     }
 }

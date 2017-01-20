@@ -1,0 +1,47 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue = "15"
+        android:key = "pref_waiting_time_on_level_0"
+        android:summary = "@string/pref_description_waiting_time_on_level_0"
+        android:title = "@string/pref_title_waiting_time_on_level_0"
+        android:singleLine="false"
+        android:numeric="integer"
+        android:inputType="number" />
+    <EditTextPreference
+        android:defaultValue = "60"
+        android:key = "pref_waiting_time_on_level_1"
+        android:summary = "@string/pref_description_waiting_time_on_level_1"
+        android:title = "@string/pref_title_waiting_time_on_level_1"
+        android:singleLine="false"
+        android:numeric="integer"
+        android:inputType="number" />
+    <EditTextPreference
+        android:defaultValue = "1800"
+        android:key = "pref_waiting_time_on_level_2"
+        android:summary = "@string/pref_description_waiting_time_on_level_2"
+        android:title = "@string/pref_title_waiting_time_on_level_2"
+        android:singleLine="false"
+        android:numeric="integer"
+        android:inputType="number" />
+    <EditTextPreference
+        android:defaultValue = "86400"
+        android:key = "pref_waiting_time_on_level_3"
+        android:summary = "@string/pref_description_waiting_time_on_level_3"
+        android:title = "@string/pref_title_waiting_time_on_level_3"
+        android:singleLine="false"
+        android:numeric="integer"
+        android:inputType="number" />
+    <EditTextPreference
+        android:defaultValue = "259200"
+        android:key = "pref_waiting_time_on_level_4"
+        android:summary = "@string/pref_description_waiting_time_on_level_4"
+        android:title = "@string/pref_title_waiting_time_on_level_4"
+        android:singleLine="false"
+        android:numeric="integer"
+        android:inputType="number" />
+    <Preference
+        android:title = "@string/pref_title_waiting_time_settings_reset"
+        android:key = "pref_waiting_time_settings_reset" />
+    <!-- android:summary = "@string/pref_description_waiting_time_settings_reset" -->
+
+</PreferenceScreen>

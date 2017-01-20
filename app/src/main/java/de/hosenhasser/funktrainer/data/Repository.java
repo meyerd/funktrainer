@@ -411,12 +411,15 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	private long waitingTimeOnLevel(final int level) {
-		return level <= 0 ? 15000L :
-			level == 1 ? 60000L :
-			level == 2 ? 30*60000L :
-			level == 3 ? 86400000L :
-			level == 4 ? 3*86400000L :
-			0;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        long waiting_time = sharedPref.getLong("pref_waiting_time_on_level_" + level, 0);
+//		return level <= 0 ? 15000L :
+//			level == 1 ? 60000L :
+//			level == 2 ? 30*60000L :
+//			level == 3 ? 86400000L :
+//			level == 4 ? 3*86400000L :
+//			0;
+        return waiting_time * 1000;
 	}
 
 	private void save(final SQLiteDatabase db, Topic topic) {

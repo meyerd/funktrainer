@@ -4,7 +4,12 @@
 
     <header
         android:fragment="de.hosenhasser.funktrainer.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />
+    <!-- android:icon="@drawable/ic_info_black_24dp" -->
+
+    <header
+        android:fragment="de.hosenhasser.funktrainer.SettingsActivity$WaitingTimePreferenceFragment"
+        android:title="@string/pref_header_waiting_times" />
+    <!-- android:icon="@drawable/ic_info_black_24dp" -->
 
 </preference-headers>

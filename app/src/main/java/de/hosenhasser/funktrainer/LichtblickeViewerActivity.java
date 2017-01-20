@@ -1,5 +1,6 @@
 package de.hosenhasser.funktrainer;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -105,7 +106,11 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
             File lichtblick_a_file = getBaseContext().getFileStreamPath(LICHTBLICKE_A_FILE);
 
             setContentView(R.layout.activity_lichtblicke_viewer);
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                // Show the Up button in the action bar.
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
 
             this.pageToShow = getIntent().getExtras().getInt(getClass().getName() + ".lichtblickPage");
 //            this.pageToShow += 0;

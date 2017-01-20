@@ -67,4 +67,20 @@
     <string name="pref_title_force_pause">Recommend breaks</string>
     <string name="pref_description_force_pause">Recommend a break if a certain number of questions was answered or if all open questions of one category have been answered.</string>
     <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_header_waiting_times">Waiting times</string>
+    <string name="pref_title_waiting_time_on_level_0">Base waiting time [s]</string>
+    <string name="pref_title_waiting_time_on_level_1">Waiting time 1 [s]</string>
+    <string name="pref_title_waiting_time_on_level_2">Waiting time 2 [s]</string>
+    <string name="pref_title_waiting_time_on_level_3">Waiting time 3 [s]</string>
+    <string name="pref_title_waiting_time_on_level_4">Waiting time 4 [s]</string>
+    <string name="pref_description_waiting_time_on_level_0">Waiting time if the question has not been answered correctly yet.</string>
+    <string name="pref_description_waiting_time_on_level_1">Waiting time for questions answered correctly one time.</string>
+    <string name="pref_description_waiting_time_on_level_2">Waiting time for questions answered correctly two times.</string>
+    <string name="pref_description_waiting_time_on_level_3">Waiting time for questions answered correctly three times.</string>
+    <string name="pref_description_waiting_time_on_level_4">Waiting time for questions answered correctly four times.</string>
+    <string name="pref_description_waiting_time_settings_reset">Reset waiting times</string>
+    <string name="pref_title_waiting_time_settings_reset">Reset waiting times</string>
+    <string name="pref_waiting_time_reset_alert_message">Really reset waiting times?</string>
+    <string name="pref_waiting_time_reset_alert_title">Reset waiting times</string>
+    <string name="pref_waiting_time_successful_reset">Waiting times reset</string>
 </resources>

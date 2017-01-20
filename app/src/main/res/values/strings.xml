@@ -66,5 +66,22 @@
     <string name="pref_header_general">Allgemein</string>
     <string name="pref_title_force_pause">Schlage regelmäßig Pausen vor</string>
     <string name="pref_description_force_pause">Schlage eine Pause vor, wenn eine gewisse Anzahl an Fragen, oder alle offenen Fragen eines Gebiets einmal bearbeitet wurden.</string>
+
+    <string name="pref_waiting_time_reset_alert_title">Wartezeiten zurücksetzen</string>
+    <string name="pref_waiting_time_reset_alert_message">Wartezeiten wirklich zurücksetzen?</string>
+    <string name="pref_waiting_time_successful_reset">Wartezeiten zurückgesetzt</string>
+    <string name="pref_header_waiting_times">Wartezeiten</string>
+    <string name="pref_title_waiting_time_on_level_0">Basiswartezeit [s]</string>
+    <string name="pref_description_waiting_time_on_level_0">Wartezeit, wenn die Frage noch nicht richtig beantwortet wurde.</string>
+    <string name="pref_title_waiting_time_on_level_1">Wartezeit 1 [s]</string>
+    <string name="pref_description_waiting_time_on_level_1">Wartezeit bei einmalig richtiger Beantwortung</string>
+    <string name="pref_title_waiting_time_on_level_2">Wartezeit 2 [s]</string>
+    <string name="pref_description_waiting_time_on_level_2">Wartezeit bei zweimalig richtiger Beantwortung</string>
+    <string name="pref_title_waiting_time_on_level_3">Wartezeit 3 [s]</string>
+    <string name="pref_description_waiting_time_on_level_3">Wartezeit bei dreimalig richtiger Beantwortung</string>
+    <string name="pref_title_waiting_time_on_level_4">Wartezeit 4 [s]</string>
+    <string name="pref_description_waiting_time_on_level_4">Wartezeit bei viermalig richtiger Beantwortung</string>
+    <string name="pref_title_waiting_time_settings_reset">Wartezeiten zurücksetzen</string>
+    <string name="pref_description_waiting_time_settings_reset">Wartezeiten zurücksetzen</string>
     <string name="pref_ringtone_silent">Stumm</string>
 </resources>
