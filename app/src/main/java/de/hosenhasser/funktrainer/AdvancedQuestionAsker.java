@@ -108,6 +108,7 @@ public class AdvancedQuestionAsker extends Activity {
     private HashMap<Integer, Integer> radioButtonIdToPositionMap = new HashMap<Integer, Integer>();
 
     private SharedPreferences mPrefs;
+    private boolean mUpdateNextAnswered;
 
     private ViewFlipper viewFlipper;
     private GestureDetector gestureDetector;
@@ -272,6 +273,8 @@ public class AdvancedQuestionAsker extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mUpdateNextAnswered = true;
 
         repository = new Repository(this);
         mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
@@ -500,13 +503,19 @@ public class AdvancedQuestionAsker extends Activity {
                 if (selectedButton == correctChoice) {
                     Toast.makeText(AdvancedQuestionAsker.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
 
-                    repository.answeredCorrect(currentQuestion);
+                    if(mUpdateNextAnswered) {
+                        repository.answeredCorrect(currentQuestion);
+                    }
+                    mUpdateNextAnswered = true;
 
                     nextQuestion();
 
                     // return;
                 } else if (selectedButton != -1) {
-                    repository.answeredIncorrect(currentQuestion);
+                    if(mUpdateNextAnswered) {
+                        repository.answeredIncorrect(currentQuestion);
+                    }
+                    mUpdateNextAnswered = true;
 
                     showingCorrectAnswer = true;
                     radioGroup.setEnabled(false);
@@ -555,6 +564,7 @@ public class AdvancedQuestionAsker extends Activity {
         if (questionReference != null) {
             nextQuestion = repository.selectQuestionByReference(questionReference);
             topicId = repository.getFirstTopicIdForQuestionReference(questionReference);
+            this.mUpdateNextAnswered = false;
         } else if(questionId != -1) {
             nextQuestion = repository.selectQuestionById(questionId);
             topicId = repository.getFirstTopicIdForQuestionId(questionId);
