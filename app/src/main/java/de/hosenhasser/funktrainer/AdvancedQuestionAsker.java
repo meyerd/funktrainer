@@ -457,6 +457,7 @@ public class AdvancedQuestionAsker extends Activity {
 
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         final Button contButton = (Button) findViewById(R.id.button1);
+        final Button skipButton = (Button) findViewById(R.id.skipButton);
 
         // only enable continue when answer is selected
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -465,6 +466,21 @@ public class AdvancedQuestionAsker extends Activity {
             }
 
         });
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean show_skip = sharedPref.getBoolean("pref_show_skip_button", false);
+        if (show_skip) {
+            skipButton.setVisibility(View.VISIBLE);
+            skipButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    radioGroup.setEnabled(true);
+                    nextQuestion();
+                    return;
+                }
+            });
+        } else {
+            skipButton.setVisibility(View.INVISIBLE);
+        }
 
         contButton.setOnClickListener(new View.OnClickListener() {
             // @Override

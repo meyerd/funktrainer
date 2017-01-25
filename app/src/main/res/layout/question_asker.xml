@@ -116,6 +116,15 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/continueButtonText"
                         />
+                    <Button
+                        android:id="@+id/skipButton"
+                        android:layout_width="164dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="6dp"
+                        android:layout_margin="10dp"
+                        android:text="@string/skipButtonText"
+                        android:visibility="invisible" />
 
                 </LinearLayout>
             </ScrollView>

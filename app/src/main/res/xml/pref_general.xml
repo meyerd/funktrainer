@@ -6,4 +6,10 @@
         android:summary="@string/pref_description_force_pause"
         android:title="@string/pref_title_force_pause" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_show_skip_button"
+        android:summary="@string/pref_description_show_skip_button"
+        android:title="@string/pref_title_show_skip_button" />
+
 </PreferenceScreen>

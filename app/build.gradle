@@ -14,8 +14,8 @@ android {
         }
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 24
-        versionName "1.0.8.2"
+        versionCode 25
+        versionName "1.0.8.3"
     }
     buildTypes {
         debug {
