@@ -88,4 +88,6 @@
     <string name="pref_title_show_skip_button">Fragen überspringen</string>
     <string name="pref_description_show_skip_button">Einen Button zum Überspringen der aktuellen Frage anzeigen.</string>
     <string name="pref_ringtone_silent">Stumm</string>
+    <string name="exam_simulation">Prüfungssimulation</string>
+    <string name="learning">Lernen</string>
 </resources>

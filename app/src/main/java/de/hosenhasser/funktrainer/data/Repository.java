@@ -392,6 +392,18 @@ public class Repository extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
 		return cursor;
 	}
+
+	public void setExamTopicsInSimpleCursorAdapter(final SimpleCursorAdapter adapter) {
+        objlock.lock();
+        final Cursor c = getExamTopicsCursor(getDb());
+        objlock.unlock();
+        adapter.changeCursor(c);
+    }
+
+	public Cursor getExamTopicsCursor(final SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery("SELECT _id, name from topic", new String[]{});
+        return cursor;
+    }
 	
 	private void updateAnswered(final int questionId, final int newLevel, final int newWrong, final int newCorrect) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);

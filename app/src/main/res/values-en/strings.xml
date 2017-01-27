@@ -87,4 +87,8 @@
 
     <string name="pref_title_show_skip_button">Skip questions</string>
     <string name="pref_description_show_skip_button">Show a button to skip questions.</string>
+
+    <string name="learning">Learning</string>
+    <string name="exam_simulation">Exam Simulation</string>
+
 </resources>
