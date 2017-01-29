@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import de.hosenhasser.funktrainer.data.Repository;
+import de.hosenhasser.funktrainer.exam.QuestionList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -136,17 +138,17 @@ public class FunkTrainerActivity extends Activity {
                 0
         );
 
-        /*
-        examTopicAdapter.setViewBinder(new ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Cursor cursor, int i) {
-                return false;
-            }
-        });
-        */
-
         examTopicList.setAdapter(examTopicAdapter);
         repository.setExamTopicsInSimpleCursorAdapter(examTopicAdapter);
+
+        examTopicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent intent = new Intent(FunkTrainerActivity.this, QuestionList.class);
+                intent.putExtra(QuestionList.class.getName() + ".topic", id);
+                startActivity(intent);
+            }
+        });
     }
     
     @Override
