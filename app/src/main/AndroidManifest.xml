@@ -41,6 +41,13 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".exam.QuestionList" />
+        <activity
+            android:name=".exam.QuestionList"
+            android:label="@string/exam_simulation"
+            android:taskAffinity="de.hosenhasser.funktrainer.exam"/>
+        <activity
+            android:name=".exam.ExamReportActivity"
+            android:label="@string/exam_report"
+            android:taskAffinity="de.hosenhasser.funktrainer.exam"/>
     </application>
 </manifest>

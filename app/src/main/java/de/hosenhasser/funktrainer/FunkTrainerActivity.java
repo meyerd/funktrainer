@@ -146,6 +146,7 @@ public class FunkTrainerActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent intent = new Intent(FunkTrainerActivity.this, QuestionList.class);
                 intent.putExtra(QuestionList.class.getName() + ".topic", id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

@@ -21,6 +21,7 @@ import de.hosenhasser.funktrainer.HistoryEntry;
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.URLImageParser;
 import de.hosenhasser.funktrainer.data.Question;
+import de.hosenhasser.funktrainer.exam.QuestionResult;
 
 import static de.hosenhasser.funktrainer.R.layout.question;
 
@@ -32,6 +33,7 @@ public class QuestionView extends LinearLayout {
     private List<Integer> order;
     private Random rand = new Random();
     private int correctChoice;
+    private Question question;
 
     public QuestionView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -49,7 +51,7 @@ public class QuestionView extends LinearLayout {
     }
 
     private void init() {
-        inflate(getContext(), question, this);
+        inflate(getContext(), R.layout.question, this);
         this.radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         questionTextView = (TextView) findViewById(R.id.textViewQuestion);
     }
@@ -113,6 +115,8 @@ public class QuestionView extends LinearLayout {
     }
 
     public void setQuestion(Question q) {
+        question = q;
+
         setQuestionText(q.getQuestion());
 
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
@@ -172,6 +176,18 @@ public class QuestionView extends LinearLayout {
 
     public List<Integer> getOrder() {
         return order;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public boolean isCorrect() {
+        return getCheckedRadioButtonId() == getCorrectChoice();
+    }
+
+    public QuestionResult getResult() {
+        return new QuestionResult(question, isCorrect());
     }
 
     public void showCorrectAnswer() {

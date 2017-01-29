@@ -90,4 +90,6 @@
     <string name="pref_ringtone_silent">Stumm</string>
     <string name="exam_simulation">Prüfungssimulation</string>
     <string name="learning">Lernen</string>
+    <string name="exam_evaluate">Auswerten</string>
+    <string name="exam_report">Prüfungsergebnisse</string>
 </resources>
