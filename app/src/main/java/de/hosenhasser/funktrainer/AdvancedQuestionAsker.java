@@ -20,17 +20,11 @@ package de.hosenhasser.funktrainer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Html;
-import android.text.Spanned;
-import android.util.ArrayMap;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,74 +32,35 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hosenhasser.funktrainer.data.Question;
 import de.hosenhasser.funktrainer.data.QuestionSelection;
 import de.hosenhasser.funktrainer.data.Repository;
-
-class HistoryEntry {
-    private String questionText;
-    private String helpText;
-    private String referenceText;
-    private List<String> answersText;
-    private List<String> answersHelpText;
-    private List<Integer> order;
-    private int correctAnswer;
-    private int answerGiven;
-
-    public String getQuestionText() {return questionText;}
-    public void setQuestionText(String questionText) {this.questionText = questionText;}
-    public String getHelpText() {return helpText; }
-    public void setHelpText(String helpText) {this.helpText = helpText;}
-    public String getReferenceText() {return referenceText;}
-    public void setReferenceText(String referenceText) {this.referenceText=referenceText;}
-    public List<String> getAnswersText() {return answersText;}
-    public void setAnswersText(List<String> answersText) {this.answersText = answersText;}
-    public List<String> getAnswersHelpText() {return answersHelpText;}
-    public List<Integer> getOrder() {return order;}
-    public void setOrder(List<Integer> order) {this.order=order;}
-    public void setAnswersHelpText(List<String> answersHelpText) {this.answersHelpText = answersHelpText;}
-    public int getCorrectAnswer() {return correctAnswer;}
-    public void setCorrectAnswer(int correctAnswer) {this.correctAnswer=correctAnswer;}
-    public int getAnswerGiven() {return answerGiven;}
-    public void setAnswerGiven(int answerGiven) {this.answerGiven=answerGiven;}
-}
+import de.hosenhasser.funktrainer.views.QuestionView;
 
 public class AdvancedQuestionAsker extends Activity {
     private Repository repository;
     private int currentQuestion;
     private int currentQuestionId;
     private int topicId;
-    private int correctChoice;
     private int maxProgress;
     private int currentProgress;
-    private Random rand = new Random();
-    private List<Integer> order;
     private boolean showingCorrectAnswer;
     private Date nextTime;
     private Timer waitTimer;
     private boolean showingStandardView;
-    private boolean replaceNNBSP = Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH;
-
-    private HashMap<Integer, Integer> radioButtonIdToPositionMap = new HashMap<Integer, Integer>();
 
     private SharedPreferences mPrefs;
     private boolean mUpdateNextAnswered;
@@ -126,8 +81,6 @@ public class AdvancedQuestionAsker extends Activity {
 
         repository.close();
         repository = null;
-        rand = null;
-        order = null;
         nextTime = null;
     }
 
@@ -143,20 +96,9 @@ public class AdvancedQuestionAsker extends Activity {
         if (nextTime != null) {
             outState.putLong(getClass().getName() + ".nextTime", nextTime.getTime());
         }
-
-        if (order != null) {
-            final StringBuilder orderString = new StringBuilder();
-            for (int i = 0; i < order.size(); i++) {
-                if (i > 0) {
-                    orderString.append(',');
-                }
-                orderString.append(order.get(i));
-            }
-            outState.putString(getClass().getName() + ".order", orderString.toString());
-        }
     }
 
-    class CustomGestureDetector extends GestureDetector.SimpleOnGestureListener {
+    private class CustomGestureDetector extends GestureDetector.SimpleOnGestureListener {
         /*
          * inspired by http://codetheory.in/android-viewflipper-and-viewswitcher/
          *         and https://stackoverflow.com/questions/4139288/android-how-to-handle-right-to-left-swipe-gestures
@@ -202,38 +144,9 @@ public class AdvancedQuestionAsker extends Activity {
         final TextView referenceText = (TextView) findViewById(R.id.referenceTextold);
         referenceText.setText(histentry.getReferenceText());
 
-        final TextView textView = (TextView) findViewById(R.id.textViewFrageold);
-        URLImageParser p = new URLImageParser(textView, this);
-        Spanned htmlSpan = Html.fromHtml(safeText(histentry.getQuestionText()), p, null);
-        textView.setText(htmlSpan);
+        final QuestionView questionView = (QuestionView) findViewById(R.id.questionViewOld);
+        questionView.setHistoryEntry(histentry);
 
-        final List<RadioButton> localRadioButtons = getRadioButtonsOld();
-
-        final List<Integer> historder = histentry.getOrder();
-
-
-        for (int i = 0; i < 4; i++) {
-            RadioButton rb = localRadioButtons.get(historder.get(i));
-            rb.setSelected(false);
-            rb.setChecked(false);
-            rb.setBackgroundResource(R.color.defaultBackground);
-            rb.setClickable(false);
-//            rb.setWidth(rblayoutwidth - 6);
-            URLImageParser p_rb = new URLImageParser(rb, this);
-            Spanned htmlSpan_rb = Html.fromHtml(safeText(histentry.getAnswersText().get(i)), p_rb, null);
-            rb.setText(htmlSpan_rb);
-        }
-        LinearLayout rblayout = (LinearLayout) findViewById(R.id.linearLayout1old);
-        rblayout.measure(0, 0);
-        int rblayoutwidth = rblayout.getWidth();
-
-        final RadioGroup rgroup = (RadioGroup)findViewById(R.id.radioGroup1old);
-        rgroup.setEnabled(false);
-
-        final RadioButton correctButton = localRadioButtons.get(historder.get(histentry.getCorrectAnswer()));
-        correctButton.setBackgroundResource(R.color.correctAnswer);
-        final RadioButton chosenButton = localRadioButtons.get(histentry.getAnswerGiven());
-        chosenButton.setChecked(true);
     }
 
     private void flipRight() {
@@ -297,13 +210,6 @@ public class AdvancedQuestionAsker extends Activity {
             }
         });
 
-        // build radio button id to position map
-        radioButtonIdToPositionMap.put((findViewById(R.id.radio0)).getId(), 0);
-        radioButtonIdToPositionMap.put((findViewById(R.id.radio1)).getId(), 1);
-        radioButtonIdToPositionMap.put((findViewById(R.id.radio2)).getId(), 2);
-        radioButtonIdToPositionMap.put((findViewById(R.id.radio3)).getId(), 3);
-
-
         if (savedInstanceState != null) {
             topicId = (int) savedInstanceState.getLong(getClass().getName() + ".topic");
             currentQuestion = savedInstanceState.getInt(getClass().getName() + ".currentQuestion");
@@ -312,15 +218,6 @@ public class AdvancedQuestionAsker extends Activity {
             showingCorrectAnswer = savedInstanceState.getBoolean(getClass().getName() + ".showingCorrectAnswer");
             maxProgress = savedInstanceState.getInt(getClass().getName() + ".maxProgress");
             currentProgress = savedInstanceState.getInt(getClass().getName() + ".currentProgress");
-
-            final String orderString = savedInstanceState.getString(getClass().getName() + ".order");
-            if (orderString != null) {
-                final String[] orderArray = orderString.split(",");
-                order = new LinkedList<Integer>();
-                for (String s : orderArray) {
-                    order.add(Integer.parseInt(s));
-                }
-            }
 
             showQuestion();
         } else {
@@ -346,7 +243,7 @@ public class AdvancedQuestionAsker extends Activity {
         super.onPause();
         SharedPreferences.Editor ed = mPrefs.edit();
         ed.putInt("last_question_shown", currentQuestionId);
-        ed.commit();
+        ed.apply();
     }
 
     /**
@@ -443,9 +340,8 @@ public class AdvancedQuestionAsker extends Activity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        boolean handled = super.dispatchTouchEvent(event);
-        handled = gestureDetector.onTouchEvent(event);
-        return handled;
+        super.dispatchTouchEvent(event);
+        return gestureDetector.onTouchEvent(event);
     }
 
     private void showStandardView() {
@@ -455,14 +351,14 @@ public class AdvancedQuestionAsker extends Activity {
         ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar1);
         progress.setMax(5);
 
-        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+        final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
         final Button contButton = (Button) findViewById(R.id.button1);
         final Button skipButton = (Button) findViewById(R.id.skipButton);
 
         // only enable continue when answer is selected
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        questionView.setOnRadioCheckedListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                contButton.setEnabled(radioGroup.getCheckedRadioButtonId() != -1);
+                contButton.setEnabled(questionView.getCheckedRadioButtonId() != -1);
             }
 
         });
@@ -473,9 +369,8 @@ public class AdvancedQuestionAsker extends Activity {
             skipButton.setVisibility(View.VISIBLE);
             skipButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    radioGroup.setEnabled(true);
+                    questionView.setRadioGroupEnabled(true);
                     nextQuestion();
-                    return;
                 }
             });
         } else {
@@ -488,7 +383,7 @@ public class AdvancedQuestionAsker extends Activity {
                 // find what has been selected
                 if (showingCorrectAnswer) {
                     showingCorrectAnswer = false;
-                    radioGroup.setEnabled(true);
+                    questionView.setRadioGroupEnabled(true);
                     nextQuestion();
                     return;
                 }
@@ -502,21 +397,22 @@ public class AdvancedQuestionAsker extends Activity {
                 histentry.setAnswersHelpText(question.getAnswersHelp());
                 histentry.setCorrectAnswer(0);
                 LinkedList<Integer> historder = new LinkedList<Integer>();
+                List<Integer> order = questionView.getOrder();
                 for(int i = 0; i < order.size(); i++) {
                     historder.add(order.get(i));
                 }
                 histentry.setOrder(historder);
 
-                int selectedButton = radioGroup.getCheckedRadioButtonId();
+                int selectedButton = questionView.getCheckedRadioButtonId();
 
-                histentry.setAnswerGiven(radioButtonIdToPositionMap.get(selectedButton));
+                histentry.setAnswerGiven(questionView.getPositionOfButton(selectedButton));
                 history.add(histentry);
 
                 if(history.size() > MAX_HISTORY_LENGTH) {
                     history.remove();
                 }
 
-                if (selectedButton == correctChoice) {
+                if (selectedButton == questionView.getCorrectChoice()) {
                     Toast.makeText(AdvancedQuestionAsker.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
 
                     if(mUpdateNextAnswered) {
@@ -534,10 +430,8 @@ public class AdvancedQuestionAsker extends Activity {
                     mUpdateNextAnswered = true;
 
                     showingCorrectAnswer = true;
-                    radioGroup.setEnabled(false);
-
-                    final RadioButton correctButton = (RadioButton) findViewById(correctChoice);
-                    correctButton.setBackgroundResource(R.color.correctAnswer);
+                    questionView.setEnabled(false);
+                    questionView.showCorrectAnswer();
 
                     // return;
                 } else {
@@ -555,24 +449,11 @@ public class AdvancedQuestionAsker extends Activity {
         this.nextQuestion(null, questionId);
     }
 
-    private void nextQuestion(final String questionReference) {
-        this.nextQuestion(questionReference, -1);
-    }
-
     private void nextQuestion(final String questionReference, final int questionId) {
         if (!showingStandardView) {
             showStandardView();
         }
 
-        if (correctChoice != 0) {
-            final RadioButton correctButton = (RadioButton) findViewById(correctChoice);
-            correctButton.setBackgroundResource(0);
-        }
-
-        order = null;
-
-        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
-        radioGroup.clearCheck();
         final Button contButton = (Button) findViewById(R.id.button1);
         contButton.setEnabled(false);
 
@@ -620,24 +501,6 @@ public class AdvancedQuestionAsker extends Activity {
         // return;
     }
 
-    private List<RadioButton> getRadioButtons() {
-        final List<RadioButton> radioButtons = new LinkedList<RadioButton>();
-        radioButtons.add((RadioButton) findViewById(R.id.radio0));
-        radioButtons.add((RadioButton) findViewById(R.id.radio1));
-        radioButtons.add((RadioButton) findViewById(R.id.radio2));
-        radioButtons.add((RadioButton) findViewById(R.id.radio3));
-        return radioButtons;
-    }
-
-    private List<RadioButton> getRadioButtonsOld() {
-        final List<RadioButton> radioButtons = new LinkedList<RadioButton>();
-        radioButtons.add((RadioButton) findViewById(R.id.radio0old));
-        radioButtons.add((RadioButton) findViewById(R.id.radio1old));
-        radioButtons.add((RadioButton) findViewById(R.id.radio2old));
-        radioButtons.add((RadioButton) findViewById(R.id.radio3old));
-        return radioButtons;
-    }
-
     private void showQuestion() {
         if (nextTime != null) {
             showingStandardView = false;
@@ -679,27 +542,8 @@ public class AdvancedQuestionAsker extends Activity {
         final TextView referenceText = (TextView) findViewById(R.id.referenceText);
         referenceText.setText(question.getReference());
 
-        final TextView textView = (TextView) findViewById(R.id.textViewFrage);
-        URLImageParser p = new URLImageParser(textView, this);
-        Spanned htmlSpan = Html.fromHtml(safeText(question.getQuestion()), p, null);
-        textView.setText(htmlSpan);
-
-        final List<RadioButton> radioButtons = getRadioButtons();
-
-        if (order == null) {
-            order = new LinkedList<Integer>();
-
-            for (int i = 0; i < 4; i++) {
-                order.add(rand.nextInt(order.size() + 1), i);
-            }
-        }
-        correctChoice = radioButtons.get(order.get(0)).getId();
-        for (int i = 0; i < 4; i++) {
-            RadioButton rb = radioButtons.get(order.get(i));
-            URLImageParser p_rb = new URLImageParser(rb, this);
-            Spanned htmlSpan_rb = Html.fromHtml(safeText(question.getAnswers().get(i)), p_rb, null);
-            rb.setText(htmlSpan_rb);
-        }
+        final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
+        questionView.setQuestion(question);
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         progressBar.setMax(maxProgress);
@@ -742,9 +586,5 @@ public class AdvancedQuestionAsker extends Activity {
             waitTimer.cancel();
             waitTimer = null;
         }
-    }
-
-    private String safeText(final String source) {
-        return replaceNNBSP && source != null ? source.replace('\u202f', '\u00a0') : source;
     }
 }

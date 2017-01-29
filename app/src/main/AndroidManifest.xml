@@ -24,9 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuestionAsker"
-            android:configChanges="orientation" />
-        <activity
             android:name=".AdvancedQuestionAsker"
             android:configChanges="orientation" />
         <activity android:name=".StatisticsActivity" />
