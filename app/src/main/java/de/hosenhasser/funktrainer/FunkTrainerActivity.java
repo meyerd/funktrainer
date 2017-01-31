@@ -156,6 +156,12 @@ public class FunkTrainerActivity extends Activity {
                 intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickPage", lichtblickPage);
                 startActivity(intentLichtblick);
                 return true;
+            case R.id.mainFormelsammlung:
+                final Intent intentFormelsammlung = new Intent(this, FormelsammlungViewerActivity.class);
+                final int formelsammlungPage = 0;
+                intentFormelsammlung.putExtra(FormelsammlungViewerActivity.class.getName() + ".formelsammlungPage", formelsammlungPage);
+                startActivity(intentFormelsammlung);
+                return true;
             case R.id.mainSettings:
                 final Intent intentSettings = new Intent(this, SettingsActivity.class);
                 startActivity(intentSettings);

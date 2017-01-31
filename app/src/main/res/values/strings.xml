@@ -53,6 +53,8 @@
     <string name="title_activity_lichtblicke_viewer">Lichtblicke A</string>
     <string name="menuShowLichtblick">Lichtblick Anzeigen</string>
     <string name="menuShowLichtblickCondensed">Lichtblick</string>
+    <string name="menuShowFormelsammlung">Formelsammlung Anzeigen</string>
+    <string name="menuShowFormelsammlungCondensed">Formelsammlung</string>
     <string name="menuSettings">Einstellungen</string>
     <string name="menuSettingsCondensed">Einstellungen</string>
     <string name="lichtblickeDownloaderMainText">Die Lichtblicke wurden noch nicht heruntergeladen. Um diese Funktionalität zu nutzen einfach mittels des Buttons unten den Download starten.</string>

@@ -379,6 +379,10 @@ public class AdvancedQuestionAsker extends Activity {
                 intent.putExtra(StatisticsActivity.class.getName() + ".topic", topicId);
                 startActivity(intent);
                 return true;
+            case R.id.showFormelsammlung:
+                final Intent intentFormelsammlung = new Intent(this, FormelsammlungViewerActivity.class);
+                startActivity(intentFormelsammlung);
+                return true;
             case R.id.showLichtblick:
                 final Intent intentLichtblick = new Intent(this, LichtblickeViewerActivity.class);
                 final Question question = repository.getQuestion(currentQuestion);

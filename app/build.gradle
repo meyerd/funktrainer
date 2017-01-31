@@ -14,8 +14,8 @@ android {
         }
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 25
-        versionName "1.0.8.3"
+        versionCode 26
+        versionName "1.0.9.0"
     }
     buildTypes {
         debug {
@@ -82,7 +82,7 @@ android {
     }
 
     //versionCode digit for each supported ABI, with 64bit>32bit and x86>armeabi-*
-    project.ext.versionCodes = ['armeabi':1, 'armeabi-v7a':2, 'arm64-v8a':3, 'mips':5, 'mips64':6, 'x86':8, 'x86_64':9]
+    project.ext.versionCodes = ['armeabi': 1, 'armeabi-v7a': 2, 'arm64-v8a': 3, 'mips': 5, 'mips64': 6, 'x86': 8, 'x86_64': 9]
 
     android.applicationVariants.all { variant ->
         // assign different version code for each output
@@ -98,6 +98,7 @@ dependencies {
     compile 'com.github.barteksc:android-pdf-viewer:2.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:support-vector-drawable:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
 }
 
 def getVersionCodeFromManifest() {
