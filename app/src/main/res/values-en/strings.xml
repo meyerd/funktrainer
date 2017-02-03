@@ -87,4 +87,13 @@
 
     <string name="pref_title_show_skip_button">Skip questions</string>
     <string name="pref_description_show_skip_button">Show a button to skip questions.</string>
+    <string name="examStartExamButtonText">Start Exam</string>
+    <string name="examStartHeaderText">Start Exam</string>
+    <string name="menuExamMode">Exam</string>
+    <string name="menuExamModeCondensed">Exam</string>
+    <string name="menuShowFormelsammlung">Show Formulas</string>
+    <string name="menuShowFormelsammlungCondensed">Formulas</string>
+    <string name="pref_description_count_exam_answer_statistics">Treat answers in exam mode the same as in study mode. Wrong and correct answers will becounted towards the statistics.</string>
+    <string name="pref_title_count_exam_answer_statistics">Exam answers statistics</string>
+    <string name="titleExamActivity">Exam</string>
 </resources>

@@ -36,6 +36,7 @@ public class Question {
 	private int correct;
 	private String help;
 	private int lichtblickPage;
+	private int correctAnswer;
 	public int getId() {
 		return id;
 	}
@@ -94,4 +95,6 @@ public class Question {
 	public void setHelp(String help) { this.help = help; }
 	public int getLichtblickPage() { return lichtblickPage; }
 	public void setLichtblickPage(int lichtblickPage) { this.lichtblickPage = lichtblickPage; }
+	public void setCorrectAnswer(int correctAnswer) { this.correctAnswer = correctAnswer; }
+	public int getCorrectAnswer() {return this.correctAnswer; }
 }

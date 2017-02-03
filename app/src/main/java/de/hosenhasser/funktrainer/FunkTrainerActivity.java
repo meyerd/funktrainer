@@ -150,6 +150,10 @@ public class FunkTrainerActivity extends Activity {
                 // intent.putExtra(AdvacnedQuestionAsker.class.getName() + ".topic", id);
                 startActivity(intent);
                 return true;
+//            case R.id.mainExamMode:
+//                final Intent examIntent = new Intent(FunkTrainerActivity.this, ExamActivity.class);
+//                startActivity(examIntent);
+//                return true;
             case R.id.mainLichtblick:
                 final Intent intentLichtblick = new Intent(this, LichtblickeViewerActivity.class);
                 final int lichtblickPage = 0;

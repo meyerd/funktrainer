@@ -51,12 +51,19 @@
     <string name="oldQuestionHeadText">Vorherige Frage</string>
     <string name="backToQuestionButtonText">zurück zur Frage</string>
     <string name="title_activity_lichtblicke_viewer">Lichtblicke A</string>
-    <string name="menuShowLichtblick">Lichtblick Anzeigen</string>
+    <string name="menuShowLichtblick">Lichtblick anzeigen</string>
     <string name="menuShowLichtblickCondensed">Lichtblick</string>
     <string name="menuShowFormelsammlung">Formelsammlung Anzeigen</string>
     <string name="menuShowFormelsammlungCondensed">Formelsammlung</string>
     <string name="menuSettings">Einstellungen</string>
     <string name="menuSettingsCondensed">Einstellungen</string>
+
+    <string name="titleExamActivity">Prüfungssimulation</string>
+    <string name="menuExamMode">Prüfungssimulation</string>
+    <string name="menuExamModeCondensed">Prüfungssimulation</string>
+    <string name="examStartExamButtonText">Prüfung starten</string>
+    <string name="examStartHeaderText">Prüfung starten</string>
+
     <string name="lichtblickeDownloaderMainText">Die Lichtblicke wurden noch nicht heruntergeladen. Um diese Funktionalität zu nutzen einfach mittels des Buttons unten den Download starten.</string>
     <string name="lichtblickeDownloaderWarningText">Achtung: Es werden mehrere Megabyte an Daten heruntergeladen. Sollte dieser Download über das Mobilfunknetz geschehen können Zusatzkosten entstehen.</string>
     <string name="lichtblickeDownloaderLichbtlickADownloadButtonText">Lichtblicke A herunterladen</string>
@@ -89,5 +96,9 @@
 
     <string name="pref_title_show_skip_button">Fragen überspringen</string>
     <string name="pref_description_show_skip_button">Einen Button zum Überspringen der aktuellen Frage anzeigen.</string>
+
+    <string name="pref_title_count_exam_answer_statistics">Prüfungsantworten zählen mit</string>
+    <string name="pref_description_count_exam_answer_statistics">Antworten im Prüfungsmodus gleich wie Antworten im Lernmodus behandeln. Falsche und richtige Antworten im Prüfungsmodus werden in den allgemeinen Statistiken mitgezählt.</string>
+
     <string name="pref_ringtone_silent">Stumm</string>
 </resources>
