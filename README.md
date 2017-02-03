@@ -15,4 +15,4 @@ http://oliver-saal.de/software/afutrainer/download.php
 Thanks to everyone for making your projects available.
 
 The questions license is according to German official publications
-(§5 UrhG)
+(§5 UrhG) as well as `formelsammlung.pdf`.
