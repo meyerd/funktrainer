@@ -23,7 +23,7 @@
         android:text="@string/selectTopic"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ListView
+	<ListView
         android:id="@+id/listView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >

@@ -9,6 +9,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -44,7 +48,10 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".FormelsammlungViewerActivity"></activity>
+        <activity android:name=".FormelsammlungViewerActivity" />
+        <activity
+            android:name=".ExamActivity"
+            android:label="@string/titleExamActivity" />
     </application>
 
 </manifest>
