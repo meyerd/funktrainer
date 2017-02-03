@@ -101,4 +101,8 @@
     <string name="pref_description_count_exam_answer_statistics">Antworten im Prüfungsmodus gleich wie Antworten im Lernmodus behandeln. Falsche und richtige Antworten im Prüfungsmodus werden in den allgemeinen Statistiken mitgezählt.</string>
 
     <string name="pref_ringtone_silent">Stumm</string>
+    <string name="exam_simulation">Prüfungssimulation</string>
+    <string name="learning">Lernen</string>
+    <string name="exam_evaluate">Auswerten</string>
+    <string name="exam_report">Prüfungsergebnisse</string>
 </resources>

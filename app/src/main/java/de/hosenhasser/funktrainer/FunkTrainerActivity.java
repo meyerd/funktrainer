@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import de.hosenhasser.funktrainer.data.Repository;
+import de.hosenhasser.funktrainer.exam.QuestionList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,6 +39,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 public class FunkTrainerActivity extends Activity {
@@ -48,6 +51,20 @@ public class FunkTrainerActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        TabHost th = (TabHost) findViewById(R.id.tabhost);
+        th.setup();
+
+        // TODO strings
+        TabHost.TabSpec ts1 = th.newTabSpec("learn");
+        ts1.setIndicator(getString(R.string.learning));
+        ts1.setContent(R.id.tab1);
+        th.addTab(ts1);
+
+        TabHost.TabSpec ts2 = th.newTabSpec("simulate");
+        ts2.setIndicator(getString(R.string.exam_simulation));
+        ts2.setContent(R.id.tab2);
+        th.addTab(ts2);
           
         repository = new Repository(this);
     }
@@ -60,7 +77,7 @@ public class FunkTrainerActivity extends Activity {
     public void onResume() {
     	super.onResume();
     	
-    	final ListView topicList = (ListView) findViewById(R.id.listView1);
+    	final ListView topicList = (ListView) findViewById(R.id.topic);
         
         this.adapter = new SimpleCursorAdapter(this,
                 R.layout.topic_list_item,
@@ -108,13 +125,38 @@ public class FunkTrainerActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+
+
+        final ListView examTopicList = (ListView) findViewById(R.id.examTopic);
+
+        SimpleCursorAdapter examTopicAdapter = new SimpleCursorAdapter(
+                this,
+                R.layout.exam_list_item,
+                null,
+                new String[]{"name"},
+                new int[]{R.id.topicListItem},
+                0
+        );
+
+        examTopicList.setAdapter(examTopicAdapter);
+        repository.setExamTopicsInSimpleCursorAdapter(examTopicAdapter);
+
+        examTopicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent intent = new Intent(FunkTrainerActivity.this, QuestionList.class);
+                intent.putExtra(QuestionList.class.getName() + ".topic", id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
     
     @Override
     public void onPause() {
     	super.onPause();
     	
-    	final ListView topicList = (ListView) findViewById(R.id.listView1);
+    	final ListView topicList = (ListView) findViewById(R.id.topic);
     	
     	final SimpleCursorAdapter adapter = (SimpleCursorAdapter) topicList.getAdapter();
     	final Cursor previousCursor = adapter.getCursor();
