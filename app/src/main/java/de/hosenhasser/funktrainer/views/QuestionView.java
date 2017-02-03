@@ -21,9 +21,7 @@ import de.hosenhasser.funktrainer.HistoryEntry;
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.URLImageParser;
 import de.hosenhasser.funktrainer.data.Question;
-import de.hosenhasser.funktrainer.exam.QuestionResult;
-
-import static de.hosenhasser.funktrainer.R.layout.question;
+import de.hosenhasser.funktrainer.exam.QuestionResultEntry;
 
 public class QuestionView extends LinearLayout {
     private boolean replaceNNBSP = Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH;
@@ -186,8 +184,8 @@ public class QuestionView extends LinearLayout {
         return getCheckedRadioButtonId() == getCorrectChoice();
     }
 
-    public QuestionResult getResult() {
-        return new QuestionResult(question, isCorrect());
+    public QuestionResultEntry getResult() {
+        return new QuestionResultEntry(question, isCorrect());
     }
 
     public void showCorrectAnswer() {

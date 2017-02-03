@@ -427,7 +427,7 @@ public class Repository extends SQLiteOpenHelper {
         adapter.changeCursor(c);
 	}
 	
-	public Cursor getTopicsCursor(final SQLiteDatabase db) {
+	private Cursor getTopicsCursor(final SQLiteDatabase db) {
         Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
 		return cursor;
 	}
@@ -439,11 +439,32 @@ public class Repository extends SQLiteOpenHelper {
         adapter.changeCursor(c);
     }
 
-	public Cursor getExamTopicsCursor(final SQLiteDatabase db) {
-        Cursor cursor = db.rawQuery("SELECT _id, name from topic", new String[]{});
+	private Cursor getExamTopicsCursor(final SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery("SELECT _id, name from topic t ORDER BY t.order_index", new String[]{});
         return cursor;
     }
-	
+
+    public ExamSettings getExamSettings(final int topicId) {
+        final ExamSettings exs = new ExamSettings();
+
+        final Cursor c = getDb().query("topic_exam_settings", new String[]{"_id", "topic_id", "number_questions", "number_questions_pass", "seconds_available"}, "topic_id=?", new String[]{Integer.toString(topicId)}, null, null, null);
+        try {
+            c.moveToNext();
+            if (c.isAfterLast()) {
+                return null;
+            }
+            exs.setId(c.getInt(0));
+            exs.setTopicId(c.getInt(1));
+            exs.setnQuestions(c.getInt(2));
+            exs.setnRequired(c.getInt(3));
+            exs.setnSecondsAvailable(c.getInt(4));
+        } finally {
+            c.close();
+        }
+
+        return exs;
+    }
+
 	private void updateAnswered(final int questionId, final int newLevel, final int newWrong, final int newCorrect) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
         boolean force_pause = sharedPref.getBoolean("pref_force_pause", true);

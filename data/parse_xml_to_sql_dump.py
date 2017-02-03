@@ -13,6 +13,7 @@ global_question_to_category_id_seq = 0
 global_answer_id_seq = 0
 global_question_to_lichtblick_id_seq = 0
 global_question_to_topic_id_seq = 0
+global_exam_settings_id_seq = 0
 
 topics = []
 categories = []
@@ -22,6 +23,7 @@ question_to_category = []
 question_to_topic = []
 category_to_topic = []
 question_to_lichtblick = []
+exam_settings = []
 
 mixtopics = {u"Klasse E alle (Technik, Betrieb, Vorschriften)":
              [u"Technische Kenntnisse (Klasse E)",
@@ -29,12 +31,45 @@ mixtopics = {u"Klasse E alle (Technik, Betrieb, Vorschriften)":
               u"Kenntnisse von Vorschriften"],
             }
 
+# [ nQuestions, nRequired, nSeconds ]
+examsettings = {
+    u"Technische Kenntnisse (Klasse E)":
+      [34, 34 * .73, 60 * 60],
+    u"Technische Kenntnisse (Klasse A)":
+      [51, 51 * .73, 60 * 60],
+    u"Betriebliche Kenntnisse":
+      [34, 34 * .73, 60 * 60],
+    u"Kenntnisse von Vorschriften":
+      [34, 34 * .73, 60 * 60],
+    # TODO: sampling here is definitely wrong, as we uniformly sample
+    #       from all categories, but should sample 34 each from each 
+    #       category
+    u"Klasse E alle (Technik, Betrieb, Vorschriften)":
+      [34 * 3, 34 * 3 * .73, 60 * 3 * 60],
+}
+
 
 def cleanuptagtext(text):
     r = re.sub(r'\n', " ", text)
     r = re.sub(r'[\t]{1,}', " ", r)
     r = re.sub(r'\'', "''", r)
     return r
+
+
+def createExamsettings():
+    global global_exam_settings_id_seq
+    for k, v in examsettings.iteritems():
+        topicname = k
+        nquestions, nrequired, nseconds = v
+        ref_topic_id = 0
+        for topicid, order, name, primary in topics:
+            if name == topicname:
+                ref_topic_id = topicid
+                break
+        assert ref_topic_id != 0
+        global_exam_settings_id_seq += 1
+        exam_settings.append((global_exam_settings_id_seq, ref_topic_id,
+                              nquestions, nrequired, nseconds))
 
 
 def createMixtopics():
@@ -135,6 +170,7 @@ def main(funkfragen, output_dir):
         parseChapter(chapter, 0, global_topic_id_seq, 1)
 
     createMixtopics()
+    createExamsettings()
         
     with open(os.path.join(output_dir, 'scheme_and_data.sql'), 'w') as o:
         print >>o, "BEGIN;"
@@ -147,7 +183,7 @@ def main(funkfragen, output_dir):
         print >>o, "DROP TABLE IF EXISTS category_to_topic;"
         print >>o, "DROP TABLE IF EXISTS question_to_lichtblick;"
         print >>o, "DROP TABLE IF EXISTS topic_exam_settings;"
-        print >>o, "DROP TABLE IF EXISTS exam;"
+#        print >>o, "DROP TABLE IF EXISTS exam;"
         print >>o, ""
         print >>o, "CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL, isprimary INT);"
         print >>o, "CREATE TABLE category (_id INT NOT NULL PRIMARY KEY, name TEXT NOT NULL, reference TEXT NOT NULL, isprimary INT, parent INT REFERENCES category(_id));"
@@ -157,8 +193,8 @@ def main(funkfragen, output_dir):
         print >>o, "CREATE TABLE question_to_topic (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), topic_id INT NOT NULL REFERENCES topic(_id));"
         print >>o, "CREATE TABLE category_to_topic (_id INT NOT NULL PRIMARY KEY, category_id INT NOT NULL REFERENCES category(_id), topic_id INT NOT NULL REFERENCES topic(_id));"
         print >>o, "CREATE TABLE question_to_lichtblick (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), lichtblick INT);"
-        print >>o, "CREATE TABLE topic_exam_settings (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), number_questions INT, number_question_pass INT);"
-        print >>o, "CREATE TABLE exam (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), time_started INT NOT NULL, time_left INT, exam_json STRING);"
+        print >>o, "CREATE TABLE topic_exam_settings (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), number_questions INT, number_questions_pass INT, seconds_available INT);"
+#        print >>o, "CREATE TABLE exam (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), time_started INT NOT NULL, time_left INT, exam_json STRING);"
         print >>o, ""
         # TODO: fix unicode
         for t in topics:
@@ -186,6 +222,9 @@ def main(funkfragen, output_dir):
             print >>o, bla.encode('utf-8')
         for qtl in question_to_lichtblick:
             bla = u"INSERT INTO question_to_lichtblick VALUES (%i, %i, %i);" % qtl
+            print >>o, bla.encode('utf-8')
+        for exs in exam_settings:
+            bla = u"INSERT INTO topic_exam_settings VALUES (%i, %i, %i, %i, %i);" % exs
             print >>o, bla.encode('utf-8')
         print >>o, "COMMIT;"
 

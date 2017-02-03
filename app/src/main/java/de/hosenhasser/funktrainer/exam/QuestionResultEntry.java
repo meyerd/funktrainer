@@ -1,14 +1,13 @@
 package de.hosenhasser.funktrainer.exam;
 
 import java.io.Serializable;
-
 import de.hosenhasser.funktrainer.data.Question;
 
-public class QuestionResult implements Serializable {
+public class QuestionResultEntry implements Serializable {
     private String questionReference;
     private boolean result;
 
-    public QuestionResult(Question q, boolean r) {
+    public QuestionResultEntry(Question q, boolean r) {
         this.questionReference = q.getReference();
         this.result = r;
     }

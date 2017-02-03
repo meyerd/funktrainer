@@ -21,7 +21,7 @@ public class ExamReportActivity extends Activity {
 
         setContentView(R.layout.exam_report);
 
-        final ArrayList<QuestionResult> results = (ArrayList<QuestionResult>) getIntent().getSerializableExtra(getClass().getName() + ".result");
+        final QuestionResults results = (QuestionResults) getIntent().getSerializableExtra(getClass().getName() + ".result");
         ListView resultsListView = (ListView) findViewById(R.id.resultList);
         resultsListView.setAdapter(new ListAdapter() {
             @Override
@@ -46,12 +46,12 @@ public class ExamReportActivity extends Activity {
 
             @Override
             public int getCount() {
-                return results.size();
+                return results.getResults().size();
             }
 
             @Override
             public Object getItem(int position) {
-                return results.get(position);
+                return results.getResults().get(position);
             }
 
             @Override
@@ -74,7 +74,7 @@ public class ExamReportActivity extends Activity {
                 }
                 TextView reference = (TextView) v.findViewById(R.id.questionReference);
                 TextView result = (TextView) v.findViewById(R.id.questionResult);
-                QuestionResult r = results.get(position);
+                QuestionResultEntry r = results.getResults().get(position);
                 reference.setText(r.getReference());
                 result.setText(Boolean.toString(r.getResult()));
                 return v;

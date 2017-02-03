@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS question_to_topic;
 DROP TABLE IF EXISTS category_to_topic;
 DROP TABLE IF EXISTS question_to_lichtblick;
 DROP TABLE IF EXISTS topic_exam_settings;
-DROP TABLE IF EXISTS exam;
 
 CREATE TABLE topic (_id INT NOT NULL PRIMARY KEY, order_index INT NOT NULL UNIQUE, name TEXT NOT NULL, isprimary INT);
 CREATE TABLE category (_id INT NOT NULL PRIMARY KEY, name TEXT NOT NULL, reference TEXT NOT NULL, isprimary INT, parent INT REFERENCES category(_id));
@@ -18,8 +17,7 @@ CREATE TABLE question_to_category (_id INT NOT NULL PRIMARY KEY, question_id INT
 CREATE TABLE question_to_topic (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), topic_id INT NOT NULL REFERENCES topic(_id));
 CREATE TABLE category_to_topic (_id INT NOT NULL PRIMARY KEY, category_id INT NOT NULL REFERENCES category(_id), topic_id INT NOT NULL REFERENCES topic(_id));
 CREATE TABLE question_to_lichtblick (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), lichtblick INT);
-CREATE TABLE topic_exam_settings (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), number_questions INT, number_question_pass INT);
-CREATE TABLE exam (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), time_started INT NOT NULL, time_left INT, exam_json STRING);
+CREATE TABLE topic_exam_settings (_id INT NOT NULL PRIMARY KEY, topic_id INT NOT NULL REFERENCES topic(_id), number_questions INT, number_questions_pass INT, seconds_available INT);
 
 INSERT INTO topic VALUES (1, 1, 'Technische Kenntnisse (Klasse E)', 1);
 INSERT INTO topic VALUES (2, 2, 'Technische Kenntnisse (Klasse A)', 1);
@@ -16745,4 +16743,9 @@ INSERT INTO question_to_lichtblick VALUES (1921, 1921, 0);
 INSERT INTO question_to_lichtblick VALUES (1922, 1922, 0);
 INSERT INTO question_to_lichtblick VALUES (1923, 1923, 0);
 INSERT INTO question_to_lichtblick VALUES (1924, 1924, 0);
+INSERT INTO topic_exam_settings VALUES (1, 3, 34, 24, 3600);
+INSERT INTO topic_exam_settings VALUES (2, 2, 51, 37, 3600);
+INSERT INTO topic_exam_settings VALUES (3, 5, 102, 74, 10800);
+INSERT INTO topic_exam_settings VALUES (4, 4, 34, 24, 3600);
+INSERT INTO topic_exam_settings VALUES (5, 1, 34, 24, 3600);
 COMMIT;

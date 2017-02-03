@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hosenhasser.funktrainer.R;
+import de.hosenhasser.funktrainer.data.ExamSettings;
 import de.hosenhasser.funktrainer.data.Question;
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.views.QuestionView;
@@ -25,13 +26,11 @@ public class QuestionList extends Activity {
 
     private int topicId;
     private Repository repository;
+    private ExamSettings examSettings;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // TODO this should be dynamic
-        final int numQuestions = 10;
 
         repository = new Repository(this);
 
@@ -46,13 +45,15 @@ public class QuestionList extends Activity {
             }
         }
 
+        examSettings = repository.getExamSettings(topicId);
+
         final List<Question> questions = new ArrayList<Question>();
-        for (int i = 0; i < numQuestions; i++) {
+        for (int i = 0; i < examSettings.getnQuestions(); i++) {
             int selected = repository.selectQuestionByTopicId(topicId).getSelectedQuestion();
             questions.add(repository.getQuestion(selected));
         }
 
-        final QuestionView[] questionViews = new QuestionView[numQuestions];
+        final QuestionView[] questionViews = new QuestionView[examSettings.getnQuestions()];
 
         final ListView questionListView = (ListView) findViewById(R.id.questionListView);
         questionListView.setAdapter(new ListAdapter() {
@@ -126,17 +127,19 @@ public class QuestionList extends Activity {
         evaluateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<QuestionResult> result = new ArrayList<QuestionResult>();
+                ArrayList<QuestionResultEntry> resultlist = new ArrayList<QuestionResultEntry>();
 
-                for (int i = 0; i < numQuestions; i++) {
+                for (int i = 0; i < examSettings.getnQuestions(); i++) {
                     QuestionView qv = questionViews[i];
                     if (qv != null) {
                         Log.d(TAG, "question: " + qv.getQuestion().getReference() + ", answer: " + qv.isCorrect());
-                        result.add(qv.getResult());
+                        resultlist.add(qv.getResult());
                     } else {
-                        result.add(new QuestionResult(questions.get(i), false));
+                        resultlist.add(new QuestionResultEntry(questions.get(i), false));
                     }
                 }
+
+                QuestionResults result = new QuestionResults(resultlist, examSettings);
 
                 Intent i = new Intent(QuestionList.this, ExamReportActivity.class);
                 i.putExtra(ExamReportActivity.class.getName() + ".result", result);
