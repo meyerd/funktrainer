@@ -52,7 +52,6 @@ def createMixtopics():
                 if name == submix:
                     for _, qid, tid in question_to_topic:
                         if tid == topicid:
-                            print tid
                             global_question_to_topic_id_seq +=1
                             question_to_topic.append((global_question_to_topic_id_seq,
                                                       qid, mixtopicid))
