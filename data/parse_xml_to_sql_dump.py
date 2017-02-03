@@ -23,12 +23,47 @@ question_to_topic = []
 category_to_topic = []
 question_to_lichtblick = []
 
+mixtopics = {u"Klasse E alle (Technik, Betrieb, Vorschriften)":
+             [u"Technische Kenntnisse (Klasse E)",
+              u"Betriebliche Kenntnisse",
+              u"Kenntnisse von Vorschriften"],
+            }
+
 
 def cleanuptagtext(text):
     r = re.sub(r'\n', " ", text)
     r = re.sub(r'[\t]{1,}', " ", r)
     r = re.sub(r'\'', "''", r)
     return r
+
+
+def createMixtopics():
+    global global_topic_id_seq
+    global global_question_to_topic_id_seq
+    global global_category_to_topic_id_seq
+    for k, v in mixtopics.iteritems():
+        mixtopicname = k
+        global_topic_id_seq += 1
+        mixtopicid = global_topic_id_seq
+        mixtopicorder = global_topic_id_seq
+        mixtopicprimary = 0
+        for submix in v:
+            for topicid, order, name, primary in topics:
+                if name == submix:
+                    for _, qid, tid in question_to_topic:
+                        if tid == topicid:
+                            print tid
+                            global_question_to_topic_id_seq +=1
+                            question_to_topic.append((global_question_to_topic_id_seq,
+                                                      qid, mixtopicid))
+                    for _, cid, tid in category_to_topic:
+                        if tid == topicid:
+                            global_category_to_topic_id_seq += 1
+                            category_to_topic.append((global_category_to_topic_id_seq,
+                                                     cid, mixtopicid))
+
+        topics.append((mixtopicid, mixtopicorder, mixtopicname, mixtopicprimary))
+
 
 
 def parseChapter(chapter, parent, topic_id, primary=0):
@@ -99,6 +134,8 @@ def main(funkfragen, output_dir):
         category_to_topic.append((global_category_to_topic_id_seq,
                                   global_category_id_seq, global_topic_id_seq))
         parseChapter(chapter, 0, global_topic_id_seq, 1)
+
+    createMixtopics()
         
     with open(os.path.join(output_dir, 'scheme_and_data.sql'), 'w') as o:
         print >>o, "BEGIN;"
