@@ -2,8 +2,10 @@ package de.hosenhasser.funktrainer.exam;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -101,6 +103,9 @@ public class QuestionList extends Activity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (questionViews[position] == null) {
                     QuestionView v = new QuestionView(QuestionList.this);
+                    // TODO: fix bad design: setListPosition has to be called before setQuestion in order
+                    //       for the number to show up.
+                    v.setListPosition(position + 1);
                     v.setQuestion((Question)getItem(position));
                     questionViews[position] = v;
                 }
@@ -133,6 +138,15 @@ public class QuestionList extends Activity {
                     QuestionView qv = questionViews[i];
                     if (qv != null) {
                         Log.d(TAG, "question: " + qv.getQuestion().getReference() + ", answer: " + qv.isCorrect());
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        boolean count_statistics = sharedPref.getBoolean("pref_count_exam_answer_statistics", false);
+                        if(count_statistics) {
+                            if(qv.isCorrect()) {
+                                repository.answeredCorrect(qv.getQuestion().getId());
+                            } else {
+                                repository.answeredIncorrect(qv.getQuestion().getId());
+                            }
+                        }
                         resultlist.add(qv.getResult());
                     } else {
                         resultlist.add(new QuestionResultEntry(questions.get(i), false));

@@ -105,4 +105,6 @@
     <string name="learning">Lernen</string>
     <string name="exam_evaluate">Auswerten</string>
     <string name="exam_report">Prüfungsergebnisse</string>
+
+    <string name="exam_report_result_text">Ergebnis: </string>
 </resources>

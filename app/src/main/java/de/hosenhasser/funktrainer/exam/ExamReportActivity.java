@@ -2,6 +2,7 @@ package de.hosenhasser.funktrainer.exam;
 
 import android.app.Activity;
 import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -23,6 +24,25 @@ public class ExamReportActivity extends Activity {
 
         final QuestionResults results = (QuestionResults) getIntent().getSerializableExtra(getClass().getName() + ".result");
         ListView resultsListView = (ListView) findViewById(R.id.resultList);
+        TextView resultsTopText = (TextView) findViewById(R.id.examResultTopText);
+
+        int nCorrect = 0;
+        for(QuestionResultEntry r : results.getResults()) {
+            if(r.getResult()) {
+                nCorrect++;
+            }
+        }
+        int nRequired = results.getExamSettings().getnRequired();
+        boolean passed = nCorrect >= nRequired;
+
+        resultsTopText.setText(getString(R.string.exam_report_result_text) + nCorrect + "/" + nRequired);
+        if(passed) {
+            resultsTopText.setTextColor(Color.GREEN);
+        } else {
+            resultsTopText.setTextColor(Color.RED);
+        }
+
+
         resultsListView.setAdapter(new ListAdapter() {
             @Override
             public boolean areAllItemsEnabled() {

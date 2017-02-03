@@ -32,6 +32,7 @@ public class QuestionView extends LinearLayout {
     private Random rand = new Random();
     private int correctChoice;
     private Question question;
+    private int listPosition;
 
     public QuestionView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -49,6 +50,7 @@ public class QuestionView extends LinearLayout {
     }
 
     private void init() {
+        listPosition = -1;
         inflate(getContext(), R.layout.question, this);
         this.radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         questionTextView = (TextView) findViewById(R.id.textViewQuestion);
@@ -90,6 +92,10 @@ public class QuestionView extends LinearLayout {
             state.putString(getClass().getName() + ".order", orderString.toString());
         }
         return state;
+    }
+
+    public void setListPosition(final int listPosition) {
+        this.listPosition = listPosition;
     }
 
     public void setOnRadioCheckedListener(RadioGroup.OnCheckedChangeListener l) {
@@ -195,6 +201,9 @@ public class QuestionView extends LinearLayout {
 
     private void setQuestionText(String text) {
         URLImageParser p = new URLImageParser(questionTextView, getContext());
+        if(this.listPosition > 0) {
+            text = this.listPosition + ") " + text;
+        }
         Spanned htmlSpan = Html.fromHtml(safeText(text), p, null);
         questionTextView.setText(htmlSpan);
     }
