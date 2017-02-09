@@ -32,7 +32,7 @@ public class FormelsammlungViewerActivity extends Activity implements OnLoadComp
         super.onPause();
         if(pdfView != null) {
             SharedPreferences.Editor ed = mPrefs.edit();
-            ed.putInt("last_page_shown", pdfView.getCurrentPage() + 1);
+            ed.putInt("last_page_shown", pdfView.getCurrentPage());
             ed.commit();
         }
     }
