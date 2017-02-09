@@ -48,8 +48,6 @@ import android.widget.SimpleCursorAdapter;
 
 public class Repository extends SQLiteOpenHelper {
 	private final Context context;
-    private int categoryToTopicIdSeq = 0;
-    private int topicIdSeq = 0;
 	private SQLiteDatabase database;
 	private final String done;
 
@@ -181,7 +179,7 @@ public class Repository extends SQLiteOpenHelper {
         return selectQuestion(questionReference, -1, -1);
     }
 
-    public QuestionSelection selectQuestion(final String questionReference, final int questionId, final int topicId) {
+    private QuestionSelection selectQuestion(final String questionReference, final int questionId, final int topicId) {
         final QuestionSelection result = new QuestionSelection();
         final List<Integer> possibleQuestions = new LinkedList<Integer>();
         final long now = new Date().getTime();
@@ -270,7 +268,7 @@ public class Repository extends SQLiteOpenHelper {
 		try {
 			answer.moveToNext();
 			while (!answer.isAfterLast()) {
-                int answerId = answer.getInt(0);
+//                int answerId = answer.getInt(0);
 				question.getAnswers().add(answer.getString(1));
                 question.getAnswersHelp().add(answer.getString(2));
 				answer.moveToNext();
