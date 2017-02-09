@@ -2,20 +2,20 @@ apply plugin: 'com.android.application'
 import java.util.regex.Pattern
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId 'de.hosenhasser.funktrainer'
         minSdkVersion 11
-        targetSdkVersion 23
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_5
-            targetCompatibility JavaVersion.VERSION_1_5
-        }
+        targetSdkVersion 25
+//        compileOptions {
+//            sourceCompatibility JavaVersion.VERSION_1_5
+//            targetCompatibility JavaVersion.VERSION_1_5
+//        }
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 26
-        versionName "1.0.9.0"
+        versionCode 27
+        versionName "1.1.0.0"
     }
     buildTypes {
         debug {
@@ -27,10 +27,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    compileOptions {
-        targetCompatibility 1.6
-        sourceCompatibility 1.6
-    }
+//    compileOptions {
+//        targetCompatibility 1.7
+//        sourceCompatibility 1.7
+//    }
 //    productFlavors {
 //        x86_64 {
 //            ndk {
@@ -96,10 +96,10 @@ android {
 dependencies {
 //    compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     compile 'com.github.barteksc:android-pdf-viewer:2.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:support-vector-drawable:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:support-vector-drawable:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'com.google.guava:guava:21.0'
 //    compile 'com.google.code.gson:gson:2.8.0'
 }
