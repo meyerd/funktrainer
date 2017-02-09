@@ -23,9 +23,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import de.hosenhasser.funktrainer.data.Repository;
+import de.hosenhasser.funktrainer.data.sync.SyncAuthenticator;
+import de.hosenhasser.funktrainer.data.sync.SyncAuthenticatorService;
+import de.hosenhasser.funktrainer.data.sync.SyncContentProvider;
 import de.hosenhasser.funktrainer.data.sync.SyncUtils;
 import de.hosenhasser.funktrainer.exam.QuestionList;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,7 +53,8 @@ import android.widget.TextView;
 public class FunkTrainerActivity extends Activity {
 	private Repository repository;
     private SimpleCursorAdapter adapter;
-	
+    private Account mAccount;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,14 @@ public class FunkTrainerActivity extends Activity {
         boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
         if (sync_enabled) {
             SyncUtils.CreateSyncAccount(this);
+//            Account account = SyncAuthenticatorService.GetAccount();
+//            AccountManager accountManager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
+//
+//            if (accountManager.addAccountExplicitly(account, null, null)) {
+//                // all well
+//            } else {
+//                // fail
+//            }
         }
     }
 

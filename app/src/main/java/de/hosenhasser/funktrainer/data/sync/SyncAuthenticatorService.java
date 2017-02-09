@@ -11,7 +11,7 @@ import android.os.IBinder;
  */
 public class SyncAuthenticatorService extends Service {
     private static final String ACCOUNT_TYPE = "de.hosenhasser.funktrainer.sync";
-    private static final String ACCOUNT_NAME = "funtrainer_sync";
+    private static final String ACCOUNT_NAME = "funktrainer_sync";
 
     public static Account GetAccount() {
         final String accountName = ACCOUNT_NAME;

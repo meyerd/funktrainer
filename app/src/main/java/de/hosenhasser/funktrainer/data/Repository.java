@@ -524,7 +524,7 @@ public class Repository extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             db.execSQL("DROP TABLE IF EXISTS sync;");
-            db.execSQL("CREATE TABLE sync (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), modified INT);");
+            db.execSQL("CREATE TABLE sync (_id INT PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), modified INT);");
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

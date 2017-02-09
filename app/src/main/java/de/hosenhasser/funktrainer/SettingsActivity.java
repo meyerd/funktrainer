@@ -31,6 +31,7 @@ import java.util.prefs.PreferenceChangeEvent;
 
 import de.hosenhasser.funktrainer.data.sync.SyncAuthenticatorService;
 import de.hosenhasser.funktrainer.data.sync.SyncContentProvider;
+import de.hosenhasser.funktrainer.data.sync.SyncUtils;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -279,7 +280,10 @@ public class SettingsActivity extends PreferenceActivity {
                     if (sync_enabled) {
 //                        Toast.makeText(getActivity(), getString(R.string.pref_sync_now_toast_message),
 //                                Toast.LENGTH_LONG).show();
-                        ContentResolver.requestSync(SyncAuthenticatorService.GetAccount(), SyncContentProvider.AUTHORITY, null);
+//                        Bundle extras = new Bundle();
+//                        extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+//                        ContentResolver.requestSync(SyncAuthenticatorService.GetAccount(), SyncContentProvider.AUTHORITY, extras);
+                        SyncUtils.TriggerRefresh();
                     }
                     return true;
                 }
@@ -299,6 +303,11 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public void onConfigurationChanged(Configuration newConfig) {
             super.onConfigurationChanged(newConfig);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
+            if (sync_enabled) {
+                SyncUtils.CreateSyncAccount(getActivity());
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ import android.preference.PreferenceManager;
 public class SyncUtils {
     private static final long SYNC_FREQUENCY = 60 * 60;  // 1 hour (in seconds)
     private static final String CONTENT_AUTHORITY = SyncContentProvider.AUTHORITY;
-    private static final String PREF_SETUP_COMPLETE = "setup_complete";
+    private static final String PREF_SETUP_COMPLETE = "sync_setup_complete";
 
     /**
      * Create an entry for this application in the system account list, if it isn't already there.
@@ -33,11 +33,11 @@ public class SyncUtils {
             // Inform the system that this account supports sync
             ContentResolver.setIsSyncable(account, CONTENT_AUTHORITY, 1);
             // Inform the system that this account is eligible for auto sync when the network is up
-            ContentResolver.setSyncAutomatically(account, CONTENT_AUTHORITY, true);
+//            ContentResolver.setSyncAutomatically(account, CONTENT_AUTHORITY, true);
             // Recommend a schedule for automatic synchronization. The system may modify this based
             // on other scheduled syncs and network utilization.
-            ContentResolver.addPeriodicSync(
-                    account, CONTENT_AUTHORITY, new Bundle(),SYNC_FREQUENCY);
+//            ContentResolver.addPeriodicSync(
+//                    account, CONTENT_AUTHORITY, new Bundle(), SYNC_FREQUENCY);
             newAccount = true;
         }
 
