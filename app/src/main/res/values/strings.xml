@@ -100,6 +100,14 @@
     <string name="pref_title_count_exam_answer_statistics">Prüfungsantworten zählen mit</string>
     <string name="pref_description_count_exam_answer_statistics">Antworten im Prüfungsmodus gleich wie Antworten im Lernmodus behandeln. Falsche und richtige Antworten im Prüfungsmodus werden in den allgemeinen Statistiken mitgezählt.</string>
 
+    <string name="pref_header_sync_settings">Synchronisation</string>
+    <string name="pref_description_enable_sync">Fortschritt synchronisieren</string>
+    <string name="pref_title_enable_sync">Synchronisation</string>
+    <string name="pref_title_sync_now">Jetzt synchronisieren</string>
+    <string name="pref_sync_now_toast_message">Synchronisierung läuft ...</string>
+    <string name="pref_sync_done_toast_message">synchronisiert</string>
+    <string name="pref_title_sync_key">API Token</string>
+
     <string name="pref_ringtone_silent">Stumm</string>
     <string name="exam_simulation">Prüfungssimulation</string>
     <string name="learning">Lernen</string>

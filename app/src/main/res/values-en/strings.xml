@@ -102,5 +102,12 @@
     <string name="exam_evaluate">Evaluate</string>
     <string name="exam_report">Exam results</string>
     <string name="exam_report_result_text">"Result: "</string>
+    <string name="pref_header_sync_settings">Synchronization</string>
+    <string name="pref_title_enable_sync">Synchronization</string>
+    <string name="pref_description_enable_sync">Sync progress</string>
+    <string name="pref_title_sync_now">Sync now</string>
+    <string name="pref_sync_now_toast_message">Syncing ...</string>
+    <string name="pref_title_sync_key">API Token</string>
+    <string name="pref_sync_done_toast_message">sync done</string>
 
 </resources>

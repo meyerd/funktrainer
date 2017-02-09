@@ -34,6 +34,7 @@ import de.hosenhasser.funktrainer.FunkTrainerActivity;
 import de.hosenhasser.funktrainer.R;
 
 import android.app.ProgressDialog;
+import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -57,7 +58,7 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
 
     private static final String DATABASE_SOURCE_SQL_12 = "database_scheme_and_data_12.sql";
 
@@ -390,10 +391,13 @@ public class Repository extends SQLiteOpenHelper {
         SQLiteDatabase db = getDb();
         db.beginTransaction();
         try {
-            Cursor c = db.rawQuery("UPDATE question SET next_time = 1 WHERE _id IN (SELECT question_id FROM question_to_category WHERE category_id IN (SELECT category_id FROM category_to_topic WHERE topic_id=?))", new String[]{Integer.toString(topicId)});
+            Cursor c = db.rawQuery("UPDATE question SET next_time = 1 WHERE _id IN (SELECT question_id FROM question_to_category WHERE category_id IN (SELECT category_id FROM category_to_topic WHERE topic_id=?));", new String[]{Integer.toString(topicId)});
             c.moveToFirst();
             c.close();
-
+            long now = System.currentTimeMillis() / 1000L;
+            Cursor c1 = db.rawQuery("UPDATE sync SET modified = ? WHERE question_id IN (SELECT question_id FROM question_to_category WHERE category_id IN (SELECT category_id FROM category_to_topic WHERE topic_id=?));", new String[]{Long.toString(now), Integer.toString(topicId)});
+            c1.moveToNext();
+            c1.close();
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -408,6 +412,10 @@ public class Repository extends SQLiteOpenHelper {
             Cursor c = db.rawQuery("UPDATE question SET next_time = 1, level = 0, wrong = 0, correct = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});
             c.moveToFirst();
             c.close();
+            long now = System.currentTimeMillis() / 1000L;
+            Cursor c1 = db.rawQuery("UPDATE sync SET modified = ? WHERE question_id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Long.toString(now), Integer.toString(topicId)});
+            c1.moveToNext();
+            c1.close();
             /* db.rawQuery("UPDATE question SET level = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});
             db.rawQuery("UPDATE question SET wrong = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});
             db.rawQuery("UPDATE question SET correct = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});*/
@@ -478,6 +486,15 @@ public class Repository extends SQLiteOpenHelper {
         updates.put("correct", newCorrect);
 		
 		getDb().update("question", updates, "_id=?", new String[]{Integer.toString(questionId)});
+
+        long now = System.currentTimeMillis() / 1000L;
+        final ContentValues updates_sync = new ContentValues();
+        updates_sync.put("question_id",  questionId);
+        updates_sync.put("modified", now);
+        long u = getDb().update("sync", updates_sync, "question_id=?", new String[]{Integer.toString(questionId)});
+        if(u == 0) {
+            getDb().insert("sync", null, updates_sync);
+        }
 	}
 	
 	private long waitingTimeOnLevel(final int level) {
@@ -502,6 +519,17 @@ public class Repository extends SQLiteOpenHelper {
 		}
 		return database;
 	}
+
+    private void createAuxiliarySyncTables(SQLiteDatabase db) {
+        db.beginTransaction();
+        try {
+            db.execSQL("DROP TABLE IF EXISTS sync;");
+            db.execSQL("CREATE TABLE sync (_id INT NOT NULL PRIMARY KEY, question_id INT NOT NULL REFERENCES question(_id), modified INT);");
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
 
     private void importDatabaseFromSQL(SQLiteDatabase db) {
         db.beginTransaction();
@@ -530,6 +558,7 @@ public class Repository extends SQLiteOpenHelper {
 
     private void realOnCreate(SQLiteDatabase db) {
         importDatabaseFromSQL(db);
+        createAuxiliarySyncTables(db);
     }
 
 	void realUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -590,6 +619,10 @@ public class Repository extends SQLiteOpenHelper {
             } finally {
                 db.endTransaction();
             }
+        }
+        if(oldVersion < 13) {
+            // upgrade 12 -> 13
+            createAuxiliarySyncTables(db);
         }
 	}
 
