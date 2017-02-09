@@ -267,11 +267,11 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_waiting_time);
+            addPreferencesFromResource(R.xml.pref_sync_settings);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("pref_sync_key"));
-            Preference syncNOwButton = findPreference("pref_sync_now");
-            syncNOwButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Preference syncNowButton = findPreference("pref_sync_now");
+            syncNowButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
