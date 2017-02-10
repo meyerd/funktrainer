@@ -71,9 +71,9 @@
             android:syncable="true" />
         <service
             android:name="de.hosenhasser.funktrainer.data.sync.SyncService"
-            android:exported="true">
+            android:exported="true"
+            android:process=":sync">
             <!-- TODO: change this back to service -->
-            <!--android:process=":sync">-->
             <intent-filter>
                 <action android:name="android.content.SyncAdapter"/>
             </intent-filter>

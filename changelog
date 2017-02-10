@@ -1,6 +1,12 @@
-1.0.9.0:
+Permissions:
+- Internet: Download Lichtblicke
+- Sync Settings + Accounts: Synchronisation
+
+
+1.1.0.0:
 - Prüfungsmodus
 - Formelsammlung
+- Synchronisation (Beta)
 
 1.0.8.3:
 - Lichtblicke A als download
@@ -36,9 +42,14 @@
 
 engl:
 
-1.0.9.0:
+Permissions:
+- Internet: Download Lichtblicke
+- Sync Settings + Accounts: Synchronization
+
+1.1.0.0:
 - Exam Mode
 - BNetzA Formulas
+- Synchronization (Beta)
 
 1.0.8.3:
 - Lichtblicke A as a Download

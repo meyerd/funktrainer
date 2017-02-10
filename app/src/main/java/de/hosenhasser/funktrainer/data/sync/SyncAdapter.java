@@ -96,7 +96,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 //                                Toast.LENGTH_LONG).show();
         boolean waserror = false;
         try {
-            final String host = "http://129.187.105.219:8080";
+            final String host = "http://q2k.mooo.com:9876";
             final String path = "/funktrainer/api/v1.0/questions";
             final URL location = new URL(host + path);
 
