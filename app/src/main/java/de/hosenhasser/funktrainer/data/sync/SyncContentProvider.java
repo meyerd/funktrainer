@@ -67,7 +67,22 @@ public class SyncContentProvider extends ContentProvider {
         SQLiteDatabase db = mRepository.getReadableDatabase();
         SelectionBuilder builder = new SelectionBuilder();
         int uriMatch = sUriMatcher.match(uri);
+//        String sql = "SELECT";
+//        for(String p: projection) {
+//            sql += " " + p + " ";
+//        }
+//        sql += "FROM question ";
+//        Cursor c;
         switch (uriMatch) {
+//            case ROUTE_QUESTIONS_ID:
+//                String id = uri.getLastPathSegment();
+//                sql += "WHERE _id=? AND _id IN (SELECT s.question_id FROM sync s);";
+//                c = db.rawQuery(sql, new String[]{id});
+//            case ROUTE_QUESTIONS:
+//                sql += "WHERE ";
+//                sql += selection;
+//                sql += " AND _id IN (SELECT s.question_id FROM sync s);";
+//                c = db.rawQuery(sql, selectionArgs);
             case ROUTE_QUESTIONS_ID:
                 String id = uri.getLastPathSegment();
                 builder.where("_id=?", id);

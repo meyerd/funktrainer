@@ -34,7 +34,6 @@ import de.hosenhasser.funktrainer.FunkTrainerActivity;
 import de.hosenhasser.funktrainer.R;
 
 import android.app.ProgressDialog;
-import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -374,7 +373,7 @@ public class Repository extends SQLiteOpenHelper {
 		final int newLevel = question.getLevel() + 1;
         final int newWrong = question.getWrong();
         final int newCorrect = question.getCorrect() + 1;
-		
+
 		updateAnswered(questionId, newLevel, newWrong, newCorrect);
 	}
 	
@@ -487,6 +486,7 @@ public class Repository extends SQLiteOpenHelper {
 		
 		getDb().update("question", updates, "_id=?", new String[]{Integer.toString(questionId)});
 
+        // TODO: What happens when the server and the other clients have different local times?
         long now = System.currentTimeMillis() / 1000L;
         final ContentValues updates_sync = new ContentValues();
         updates_sync.put("question_id",  questionId);
@@ -520,7 +520,7 @@ public class Repository extends SQLiteOpenHelper {
 		return database;
 	}
 
-    private void createAuxiliarySyncTables(SQLiteDatabase db) {
+    public void resetAuxiliarySyncTables(SQLiteDatabase db) {
         db.beginTransaction();
         try {
             db.execSQL("DROP TABLE IF EXISTS sync;");
@@ -558,7 +558,7 @@ public class Repository extends SQLiteOpenHelper {
 
     private void realOnCreate(SQLiteDatabase db) {
         importDatabaseFromSQL(db);
-        createAuxiliarySyncTables(db);
+        resetAuxiliarySyncTables(db);
     }
 
 	void realUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -622,7 +622,7 @@ public class Repository extends SQLiteOpenHelper {
         }
         if(oldVersion < 13) {
             // upgrade 12 -> 13
-            createAuxiliarySyncTables(db);
+            resetAuxiliarySyncTables(db);
         }
 	}
 

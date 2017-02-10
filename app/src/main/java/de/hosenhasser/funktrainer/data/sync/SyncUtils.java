@@ -10,6 +10,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class SyncUtils {
     private static final long SYNC_FREQUENCY = 60 * 60;  // 1 hour (in seconds)
@@ -21,7 +22,7 @@ public class SyncUtils {
      *
      * @param context Context
      */
-    public static void CreateSyncAccount(Context context) {
+    public static Account CreateSyncAccount(Context context) {
         boolean newAccount = false;
         boolean setupComplete = PreferenceManager
                 .getDefaultSharedPreferences(context).getBoolean(PREF_SETUP_COMPLETE, false);
@@ -33,7 +34,7 @@ public class SyncUtils {
             // Inform the system that this account supports sync
             ContentResolver.setIsSyncable(account, CONTENT_AUTHORITY, 1);
             // Inform the system that this account is eligible for auto sync when the network is up
-//            ContentResolver.setSyncAutomatically(account, CONTENT_AUTHORITY, true);
+            ContentResolver.setSyncAutomatically(account, CONTENT_AUTHORITY, true);
             // Recommend a schedule for automatic synchronization. The system may modify this based
             // on other scheduled syncs and network utilization.
 //            ContentResolver.addPeriodicSync(
@@ -49,6 +50,8 @@ public class SyncUtils {
             PreferenceManager.getDefaultSharedPreferences(context).edit()
                     .putBoolean(PREF_SETUP_COMPLETE, true).commit();
         }
+
+        return account;
     }
 
     /**
@@ -67,8 +70,14 @@ public class SyncUtils {
         // Disable sync backoff and ignore sync preferences. In other words...perform sync NOW!
         b.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         b.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        Account acc = SyncAuthenticatorService.GetAccount();
+        if (ContentResolver.isSyncPending(acc, SyncContentProvider.AUTHORITY)  ||
+                ContentResolver.isSyncActive(acc, SyncContentProvider.AUTHORITY)) {
+            Log.i("Funktrainer", "SyncPending, canceling");
+            ContentResolver.cancelSync(acc, SyncContentProvider.AUTHORITY);
+        }
         ContentResolver.requestSync(
-                SyncAuthenticatorService.GetAccount(),      // Sync account
+                acc,      // Sync account
                 SyncContentProvider.AUTHORITY, // Content authority
                 b);                                      // Extras
     }

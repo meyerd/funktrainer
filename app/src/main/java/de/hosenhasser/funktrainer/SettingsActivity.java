@@ -271,6 +271,7 @@ public class SettingsActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.pref_sync_settings);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("pref_sync_key"));
+            bindPreferenceSummaryToValue(findPreference("pref_sync_secret"));
             Preference syncNowButton = findPreference("pref_sync_now");
             syncNowButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -284,6 +285,17 @@ public class SettingsActivity extends PreferenceActivity {
 //                        extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 //                        ContentResolver.requestSync(SyncAuthenticatorService.GetAccount(), SyncContentProvider.AUTHORITY, extras);
                         SyncUtils.TriggerRefresh();
+                    }
+                    return true;
+                }
+            });
+            Preference syncEnabled = findPreference("pref_enable_sync");
+            syncEnabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    boolean sync_enabled = (boolean)newValue;
+                    if (sync_enabled) {
+                        SyncUtils.CreateSyncAccount(getActivity());
                     }
                     return true;
                 }
@@ -303,11 +315,6 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public void onConfigurationChanged(Configuration newConfig) {
             super.onConfigurationChanged(newConfig);
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
-            if (sync_enabled) {
-                SyncUtils.CreateSyncAccount(getActivity());
-            }
         }
     }
 }

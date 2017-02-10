@@ -11,6 +11,12 @@
         android:title = "@string/pref_title_sync_key"
         android:singleLine="false" />
 
+    <EditTextPreference
+        android:defaultValue = ""
+        android:key = "pref_sync_secret"
+        android:title = "@string/pref_title_sync_secret"
+        android:singleLine="false" />
+
     <Preference
         android:title = "@string/pref_title_sync_now"
         android:key = "pref_sync_now" />
