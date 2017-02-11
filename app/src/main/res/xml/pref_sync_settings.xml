@@ -21,4 +21,9 @@
         android:title = "@string/pref_title_sync_now"
         android:key = "pref_sync_now" />
 
+    <Preference
+        android:title = "@string/pref_title_sync_force_upload"
+        android:key = "pref_sync_force_upload" />
+
+
 </PreferenceScreen>

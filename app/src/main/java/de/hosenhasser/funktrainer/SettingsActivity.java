@@ -29,6 +29,7 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.prefs.PreferenceChangeEvent;
 
+import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.data.sync.SyncAuthenticatorService;
 import de.hosenhasser.funktrainer.data.sync.SyncContentProvider;
 import de.hosenhasser.funktrainer.data.sync.SyncUtils;
@@ -285,6 +286,34 @@ public class SettingsActivity extends PreferenceActivity {
 //                        extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 //                        ContentResolver.requestSync(SyncAuthenticatorService.GetAccount(), SyncContentProvider.AUTHORITY, extras);
                         SyncUtils.TriggerRefresh();
+                    }
+                    return true;
+                }
+            });
+            Preference forceUploadButton = findPreference("pref_sync_force_upload");
+            forceUploadButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
+                    if (sync_enabled) {
+                        AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                        adb.setTitle(getString(R.string.pref_sync_force_upload_alert_title));
+                        adb.setMessage(getString(R.string.pref_sync_force_upload_alert_message));
+                        adb.setIcon(android.R.drawable.ic_dialog_alert);
+                        adb.setPositiveButton(getString(R.string.resetOkay), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Repository repo = new Repository(getActivity());
+                                repo.resetAuxiliarySyncTables(repo.getWritableDatabase());
+                                repo.forceSyncUploadOfAllQuestions();
+                                SyncUtils.TriggerRefresh();
+                            }
+                        });
+                        adb.setNegativeButton(getString(R.string.resetCancel), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        adb.show();
                     }
                     return true;
                 }

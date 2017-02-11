@@ -531,6 +531,18 @@ public class Repository extends SQLiteOpenHelper {
         }
     }
 
+    public void forceSyncUploadOfAllQuestions() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long now = System.currentTimeMillis() / 1000L;
+        db.beginTransaction();
+        try {
+            db.execSQL("INSERT INTO sync SELECT _id, ? FROM question;", new String[]{Long.toString(now)});
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
     private void importDatabaseFromSQL(SQLiteDatabase db) {
         db.beginTransaction();
         try {

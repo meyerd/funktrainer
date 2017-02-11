@@ -104,11 +104,14 @@
     <string name="pref_description_enable_sync">Fortschritt synchronisieren</string>
     <string name="pref_title_enable_sync">Synchronisierung</string>
     <string name="pref_title_sync_now">Jetzt synchronisieren</string>
+    <string name="pref_title_sync_force_upload">Hochladen erzwingen</string>
     <string name="pref_sync_now_toast_message">Synchronisierung läuft ...</string>
     <string name="pref_sync_done_toast_message">synchronisiert</string>
     <string name="pref_sync_error_toast_message">Synchronisierungsfehler</string>
     <string name="pref_title_sync_key">API Key</string>
     <string name="pref_title_sync_secret">API Secret</string>
+    <string name="pref_sync_force_upload_alert_title">Hochladen erzwingen</string>
+    <string name="pref_sync_force_upload_alert_message">Hochladen erzwingen? Dies wird alle auf dem Server gespeicherten Daten überschreiben.</string>
 
     <string name="pref_ringtone_silent">Stumm</string>
     <string name="exam_simulation">Prüfungssimulation</string>
