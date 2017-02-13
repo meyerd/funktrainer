@@ -69,6 +69,7 @@ public class Repository extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+        // TODO: is the deferred database creation interfering on slow devices; lock necessary?
 //        startLongDatabaseOperation(db, 0, 0, 0);
          realOnCreate(db);
 	}
