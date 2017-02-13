@@ -34,10 +34,13 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Iterator;
 
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.data.Repository;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private final ContentResolver mContentResolver;
@@ -82,6 +85,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority,
                               ContentProviderClient provider, SyncResult syncResult) {
+        SharedPreferences ownPrefs = getContext().getSharedPreferences("sync_shared_preferences", MODE_PRIVATE);
+        long last_sync = ownPrefs.getLong("last_sync", 0L);
+        long time_now = System.currentTimeMillis() / 1000L;
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         String sync_key = sharedPref.getString("pref_sync_key", "");
         String sync_secret = sharedPref.getString("pref_sync_secret", "");
@@ -102,12 +108,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             // build json request
             JSONObject json_request = new JSONObject();
+            json_request.put("last_sync", last_sync);
+            json_request.put("time_now", time_now);
+            JSONObject json_questions = new JSONObject();
             final ContentResolver contentResolver = getContext().getContentResolver();
 //                Uri uri = Uri.parse("content://" + SyncContentProvider.AUTHORITY).buildUpon().appendPath("questions").build();
 //                Cursor c = contentResolver.query(uri, PROJECTION_QUESTION, null, null, null);
             Repository repo = new Repository(getContext());
             SQLiteDatabase db = repo.getReadableDatabase();
-            boolean got_updates = false;
             Cursor c = db.rawQuery("SELECT q._id, q.level, q.next_time, q.wrong, q.correct, s.modified FROM question q, sync s WHERE q._id == s.question_id AND q._id IN (SELECT ss.question_id FROM sync ss);", new String[]{});
             while (c.moveToNext()) {
                 int qid = c.getInt(0);
@@ -122,15 +130,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 qobj.put("w", qwrong);
                 qobj.put("c", qcorrect);
                 qobj.put("m", qmodified);
-                json_request.put(Integer.toString(qid), qobj);
-                got_updates = true;
+                json_questions.put(Integer.toString(qid), qobj);
             }
             c.close();
+            json_request.put("sync_data", json_questions);
             // calculate MAC
-            String req = "{}";
-            if(got_updates) {
-                req = json_request.toString();
-            }
+            String req = json_request.toString();
             MessageDigest mac = MessageDigest.getInstance("SHA-256");
             mac.update(sync_key.getBytes());
             mac.update(sync_secret.getBytes());
@@ -264,6 +269,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 //                    Toast.LENGTH_LONG).show();
             Repository repo = new Repository(getContext());
             repo.resetAuxiliarySyncTables(repo.getWritableDatabase());
+            SharedPreferences.Editor ed = ownPrefs.edit();
+            ed.putLong("last_sync", time_now);
+            ed.commit();
         }
 //        } else {
 //            Toast.makeText(getContext(), getContext().getString(R.string.pref_sync_error_toast_message),
