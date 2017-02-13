@@ -69,8 +69,8 @@ public class Repository extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-        startLongDatabaseOperation(db, 0, 0, 0);
-        // realOnCreate(db);
+//        startLongDatabaseOperation(db, 0, 0, 0);
+         realOnCreate(db);
 	}
 
     public int getFirstTopicIdForQuestionId(final int questionId) {
@@ -536,7 +536,7 @@ public class Repository extends SQLiteOpenHelper {
         long now = System.currentTimeMillis() / 1000L;
         db.beginTransaction();
         try {
-            db.execSQL("INSERT INTO sync SELECT _id, ? FROM question;", new String[]{Long.toString(now)});
+            db.execSQL("INSERT INTO sync (question_id, modified) SELECT _id, ? FROM question;", new String[]{Long.toString(now)});
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

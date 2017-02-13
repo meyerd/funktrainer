@@ -107,6 +107,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 //                Cursor c = contentResolver.query(uri, PROJECTION_QUESTION, null, null, null);
             Repository repo = new Repository(getContext());
             SQLiteDatabase db = repo.getReadableDatabase();
+            boolean got_updates = false;
             Cursor c = db.rawQuery("SELECT q._id, q.level, q.next_time, q.wrong, q.correct, s.modified FROM question q, sync s WHERE q._id == s.question_id AND q._id IN (SELECT ss.question_id FROM sync ss);", new String[]{});
             while (c.moveToNext()) {
                 int qid = c.getInt(0);
@@ -122,10 +123,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 qobj.put("c", qcorrect);
                 qobj.put("m", qmodified);
                 json_request.put(Integer.toString(qid), qobj);
+                got_updates = true;
             }
             c.close();
             // calculate MAC
-            String req = json_request.toString();
+            String req = "{}";
+            if(got_updates) {
+                req = json_request.toString();
+            }
             MessageDigest mac = MessageDigest.getInstance("SHA-256");
             mac.update(sync_key.getBytes());
             mac.update(sync_secret.getBytes());
