@@ -74,7 +74,11 @@ public class QuestionView extends LinearLayout {
                 order.add(Integer.parseInt(s));
             }
         }
-
+//        final Question q = (Question)state.getParcelable(getClass().getName() + ".question_parcel");
+//        if(q != null) {
+//            this.question = q;
+//            setQuestion(this.question);
+//        }
     }
 
     @Override
@@ -91,6 +95,7 @@ public class QuestionView extends LinearLayout {
             }
             state.putString(getClass().getName() + ".order", orderString.toString());
         }
+//        state.putParcelable(getClass().getName() + ".question_parcel", question);
         return state;
     }
 
@@ -126,10 +131,12 @@ public class QuestionView extends LinearLayout {
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         final List<RadioButton> radioButtons = getRadioButtons();
 
-        order = new LinkedList<Integer>();
+        if(order == null) {
+            order = new LinkedList<Integer>();
 
-        for (int i = 0; i < 4; i++) {
-            order.add(rand.nextInt(order.size() + 1), i);
+            for (int i = 0; i < 4; i++) {
+                order.add(rand.nextInt(order.size() + 1), i);
+            }
         }
         correctChoice = radioButtons.get(order.get(0)).getId();
         for (int i = 0; i < 4; i++) {

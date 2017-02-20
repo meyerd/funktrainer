@@ -18,37 +18,41 @@
 
 package de.hosenhasser.funktrainer.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Question {
-	private int id;
-//	private int topicId;
-	private int categoryId;
-	private String reference;
-	private String question;
+public class Question implements Parcelable {
+	private int id = 0;
+	private int topicId = 0;
+	private int categoryId = 0;
+	private String reference = "";
+	private String question = "";
 	private List<String> answers = new LinkedList<String>();
 	private List<String> answersHelp = new LinkedList<String>();
-	private int level;
-	private Date nextTime;
-	private int wrong;
-	private int correct;
-	private String help;
-	private int lichtblickPage;
-	private int correctAnswer;
+	private int level = 0;
+	private Date nextTime = new Date();
+	private int wrong = 0;
+	private int correct = 0;
+	private String help = "";
+	private int lichtblickPage = 0;
+	private int correctAnswer = 0;
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-//	public int getTopicId() {
-//		return topicId;
-//	}
-//	public void setTopicId(int topicId) {
-//		this.topicId = topicId;
-//	}
+	public int getTopicId() {
+		return topicId;
+	}
+	public void setTopicId(int topicId) {
+		this.topicId = topicId;
+	}
 	public int getCategoryId() { return categoryId; }
 	public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
 	public String getReference() {
@@ -97,4 +101,58 @@ public class Question {
 	public void setLichtblickPage(int lichtblickPage) { this.lichtblickPage = lichtblickPage; }
 	public void setCorrectAnswer(int correctAnswer) { this.correctAnswer = correctAnswer; }
 	public int getCorrectAnswer() {return this.correctAnswer; }
+
+	@Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel pc, int flags) {
+        pc.writeInt(id);
+        pc.writeInt(topicId);
+        pc.writeInt(categoryId);
+        pc.writeString(reference);
+        pc.writeString(question);
+        pc.writeStringList(answers);
+        pc.writeStringList(answersHelp);
+        pc.writeInt(level);
+        pc.writeLong(nextTime.getTime());
+        pc.writeInt(wrong);
+        pc.writeInt(correct);
+        pc.writeString(help);
+        pc.writeInt(lichtblickPage);
+        pc.writeInt(correctAnswer);
+    }
+
+    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
+        public Question createFromParcel(Parcel pc) {
+            return new Question(pc);
+        }
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
+
+    public Question() {
+
+    }
+
+    public Question(Parcel pc) {
+        id = pc.readInt();
+        topicId = pc.readInt();
+        categoryId = pc.readInt();
+        reference = pc.readString();
+        question = pc.readString();
+        pc.readStringList(answers);
+        pc.readStringList(answersHelp);
+        level = pc.readInt();
+        nextTime = new Date();
+        nextTime.setTime(pc.readLong());
+        wrong = pc.readInt();
+        correct = pc.readInt();
+        help = pc.readString();
+        lichtblickPage = pc.readInt();
+        correctAnswer = pc.readInt();
+    }
 }
