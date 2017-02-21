@@ -30,6 +30,7 @@
                         android:layout_margin="6dp" />
 
                     <LinearLayout
+                        android:id="@+id/linearLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -66,8 +67,7 @@
                         android:layout_gravity="right"
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/continueButtonText"
-                        />
+                        android:text="@string/continueButtonText" />
                     <Button
                         android:id="@+id/skipButton"
                         android:layout_width="164dp"
@@ -95,6 +95,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/linearLayout2old"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -104,8 +105,7 @@
                             android:layout_margin="6dp"
                             android:text="@string/oldQuestionHeadText"
                             android:textSize="18sp"
-                            android:textColor="#FF0099CC"
-                            />
+                            android:textColor="#FF0099CC" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                             android:id="@+id/oldQuestionHeatTextNumber"
                             android:textSize="18sp"
                             android:textColor="#FF0099CC"
-                            android:text="0"/>
+                            android:text="0" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -128,8 +128,7 @@
                             android:layout_margin="6dp"
                             android:text=""
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:freezesText="true"
-                            />
+                            android:freezesText="true" />
                         <TextView
                             android:id="@+id/levelTextold"
                             android:layout_width="wrap_content"
@@ -138,7 +137,7 @@
                             android:layout_margin="6dp"
                             android:text=""
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:freezesText="true"/>
+                            android:freezesText="true" />
                     </LinearLayout>
 
                     <de.hosenhasser.funktrainer.views.QuestionView
@@ -153,9 +152,7 @@
                         android:layout_gravity="right"
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/backToQuestionButtonText"
-                        />
-
+                        android:text="@string/backToQuestionButtonText" />
                 </LinearLayout>
             </ScrollView>
         </ScrollView>
