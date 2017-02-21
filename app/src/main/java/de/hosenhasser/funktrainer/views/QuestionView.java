@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -61,28 +62,10 @@ public class QuestionView extends LinearLayout {
     protected void onRestoreInstanceState(Parcelable state) {
         QuestionViewSavedState ss = (QuestionViewSavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
+        for (int i = 0; i < getChildCount(); i++) {
+            getChildAt(i).restoreHierarchyState(ss.childrenStates);
+        }
         this.order = ss.order;
-//        if (parcelable == null) {
-//            super.onRestoreInstanceState(null);
-//            return;
-//        }
-//
-//        Bundle state = (Bundle) parcelable;
-//        super.onRestoreInstanceState(state.getParcelable("superState"));
-//
-//        final String orderString = state.getString(getClass().getName() + ".order");
-//        if (orderString != null) {
-//            final String[] orderArray = orderString.split(",");
-//            order = new LinkedList<Integer>();
-//            for (String s : orderArray) {
-//                order.add(Integer.parseInt(s));
-//            }
-//        }
-////        final Question q = (Question)state.getParcelable(getClass().getName() + ".question_parcel");
-////        if(q != null) {
-////            this.question = q;
-////            setQuestion(this.question);
-////        }
     }
 
     @Override
@@ -90,32 +73,33 @@ public class QuestionView extends LinearLayout {
         Parcelable superState = super.onSaveInstanceState();
         QuestionViewSavedState ss = new QuestionViewSavedState(superState);
         ss.order = this.order;
+        for (int i =0; i < getChildCount(); i++) {
+            getChildAt(i).saveHierarchyState(ss.childrenStates);
+        }
         return ss;
-//        Bundle state = new Bundle();
-//        state.putParcelable("superState", super.onSaveInstanceState());
-//        if (order != null) {
-//            final StringBuilder orderString = new StringBuilder();
-//            for (int i = 0; i < order.size(); i++) {
-//                if (i > 0) {
-//                    orderString.append(',');
-//                }
-//                orderString.append(order.get(i));
-//            }
-//            state.putString(getClass().getName() + ".order", orderString.toString());
-//        }
-////        state.putParcelable(getClass().getName() + ".question_parcel", question);
-//        return state;
+    }
+
+    @Override
+    protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
+        dispatchFreezeSelfOnly(container);
+    }
+
+    @Override
+    protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
+        dispatchThawSelfOnly(container);
     }
 
     static class QuestionViewSavedState extends BaseSavedState {
         List<Integer> order;
+        SparseArray childrenStates = new SparseArray<>();
 
         QuestionViewSavedState(Parcelable superState) {
             super(superState);
         }
 
-        private QuestionViewSavedState(Parcel in) {
+        private QuestionViewSavedState(Parcel in, ClassLoader classLoader) {
             super(in);
+            childrenStates = in.readSparseArray(classLoader);
             final String orderString = in.readString();
             if (orderString != null) {
                 final String[] orderArray = orderString.split(",");
@@ -129,7 +113,7 @@ public class QuestionView extends LinearLayout {
         @Override
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
-
+            out.writeSparseArray(childrenStates);
             if (order != null) {
                 final StringBuilder orderString = new StringBuilder();
                 for (int i = 0; i < order.size(); i++) {
@@ -144,10 +128,16 @@ public class QuestionView extends LinearLayout {
             }
         }
 
-        public static final Parcelable.Creator<QuestionViewSavedState> CREATOR
-                = new Parcelable.Creator<QuestionViewSavedState>() {
+        public static final ClassLoaderCreator<QuestionViewSavedState> CREATOR
+                = new ClassLoaderCreator<QuestionViewSavedState>() {
+            @Override
+            public QuestionViewSavedState createFromParcel(Parcel in, ClassLoader loader) {
+                return new QuestionViewSavedState(in, loader);
+            }
+
+            @Override
             public QuestionViewSavedState createFromParcel(Parcel in) {
-                return new QuestionViewSavedState(in);
+                return createFromParcel(null);
             }
 
             public QuestionViewSavedState[] newArray(int size) {

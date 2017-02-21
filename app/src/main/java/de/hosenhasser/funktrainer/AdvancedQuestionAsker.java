@@ -39,6 +39,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class AdvancedQuestionAsker extends Activity {
     private GestureDetector gestureDetector;
 
     private int historyPosition = 0;
-    private LinkedList<HistoryEntry> history = new LinkedList<HistoryEntry>();
+    private ArrayList<HistoryEntry> history = new ArrayList<HistoryEntry>();
 
     private static final int MAX_HISTORY_LENGTH = 30;
 
@@ -96,6 +97,8 @@ public class AdvancedQuestionAsker extends Activity {
         if (nextTime != null) {
             outState.putLong(getClass().getName() + ".nextTime", nextTime.getTime());
         }
+        outState.putInt(getClass().getName() + ".historyPosition", historyPosition);
+        outState.putParcelableArrayList(getClass().getName() + ".history", history);
     }
 
     private class CustomGestureDetector extends GestureDetector.SimpleOnGestureListener {
@@ -219,7 +222,15 @@ public class AdvancedQuestionAsker extends Activity {
             maxProgress = savedInstanceState.getInt(getClass().getName() + ".maxProgress");
             currentProgress = savedInstanceState.getInt(getClass().getName() + ".currentProgress");
 
+            historyPosition = savedInstanceState.getInt(getClass().getName() + ".historyPosition");
+            history = savedInstanceState.getParcelableArrayList(getClass().getName() + ".history");
+
             showQuestion();
+
+            if (historyPosition > 0) {
+                viewFlipper.showPrevious();
+                updateHistoryView();
+            }
         } else {
             Bundle intbundle = getIntent().getExtras();
             if(intbundle != null) {
@@ -413,7 +424,7 @@ public class AdvancedQuestionAsker extends Activity {
                 history.add(histentry);
 
                 if(history.size() > MAX_HISTORY_LENGTH) {
-                    history.remove();
+                    history.remove(0);
                 }
 
                 if (selectedButton == questionView.getCorrectChoice()) {
