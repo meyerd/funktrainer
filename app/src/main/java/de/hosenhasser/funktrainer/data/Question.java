@@ -144,8 +144,8 @@ public class Question implements Parcelable {
         categoryId = pc.readInt();
         reference = pc.readString();
         question = pc.readString();
-        pc.readStringList(answers);
-        pc.readStringList(answersHelp);
+        answers = pc.createStringArrayList();
+        answersHelp = pc.createStringArrayList();
         level = pc.readInt();
         nextTime = new Date();
         nextTime.setTime(pc.readLong());

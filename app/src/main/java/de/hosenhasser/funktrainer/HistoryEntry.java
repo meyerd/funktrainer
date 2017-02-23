@@ -82,8 +82,8 @@ public class HistoryEntry implements Parcelable {
         questionText = pc.readString();
         helpText = pc.readString();
         referenceText = pc.readString();
-        pc.readStringList(answersText);
-        pc.readStringList(answersHelpText);
+        answersText = pc.createStringArrayList();
+        answersHelpText = pc.createStringArrayList();
         final int orderlen = pc.readInt();
         int[] ordertmp = new int[orderlen];
         pc.readIntArray(ordertmp);

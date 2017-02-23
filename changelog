@@ -3,10 +3,11 @@ Permissions:
 - Sync Settings + Accounts: Synchronisation
 
 
-1.1.0.0:
+1.1.1.1:
 - Prüfungsmodus
 - Formelsammlung
 - Synchronisation (Beta)
+- Bugfixes
 
 1.0.8.3:
 - Lichtblicke A als download
@@ -46,10 +47,11 @@ Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronization
 
-1.1.0.0:
+1.1.1.1:
 - Exam Mode
 - BNetzA Formulas
 - Synchronization (Beta)
+- Bugfixes
 
 1.0.8.3:
 - Lichtblicke A as a Download
