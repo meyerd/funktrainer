@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class QuestionState implements Serializable, Parcelable {
         questionId = in.readInt();
         in.readList(order, QuestionState.class.getClassLoader());
         answer = in.readInt();
+        listeners = new ArrayList<>();
     }
 
     public static final Creator<QuestionState> CREATOR = new Creator<QuestionState>() {
@@ -42,6 +44,11 @@ public class QuestionState implements Serializable, Parcelable {
         parcel.writeInt(answer);
     }
 
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        listeners = new ArrayList<>();
+    }
+
     public int getAnswer() {
         return answer;
     }
@@ -54,13 +61,14 @@ public class QuestionState implements Serializable, Parcelable {
     private int questionId;
     private List<Integer> order;
     private int answer = -1;
-    private transient List<QuestionStateListener> listeners = new ArrayList<>();
+    private transient List<QuestionStateListener> listeners;
 
     private static final Random rand = new Random();
 
     public QuestionState(Question q) {
         this.question = q;
         this.questionId = question.getId();
+        listeners = new ArrayList<>();
 
         this.order = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

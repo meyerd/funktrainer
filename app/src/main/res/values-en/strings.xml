@@ -116,5 +116,7 @@
     <string name="pref_sync_force_upload_alert_message">Force upload? This will overwrite all data on server.</string>
     <string name="pref_description_through_mode">Ask all questions only up to level two. When answered all questions twice, then answer up to level five.</string>
     <string name="pref_title_through_mode">Get-it-done-mode</string>
+    <string name="correct">Correct</string>
+    <string name="wrong">Wrong</string>
 
 </resources>

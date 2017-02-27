@@ -122,4 +122,6 @@
     <string name="exam_report">Prüfungsergebnisse</string>
 
     <string name="exam_report_result_text">Ergebnis: </string>
+    <string name="correct">Richtig</string>
+    <string name="wrong">Falsch</string>
 </resources>
