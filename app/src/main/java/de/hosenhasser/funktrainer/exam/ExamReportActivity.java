@@ -32,6 +32,7 @@ public class ExamReportActivity extends Activity {
         final QuestionResults results = (QuestionResults) getIntent().getSerializableExtra(getClass().getName() + ".result");
         ExpandableListView resultsListView = (ExpandableListView) findViewById(R.id.resultList);
         TextView resultsTopText = (TextView) findViewById(R.id.examResultTopText);
+        TextView resultsRecommendation = (TextView) findViewById(R.id.examResultRecommendation);
 
         int nCorrect = 0;
         for(QuestionState r : results.getResults()) {
@@ -42,11 +43,13 @@ public class ExamReportActivity extends Activity {
         int nRequired = results.getExamSettings().getnRequired();
         boolean passed = nCorrect >= nRequired;
 
-        resultsTopText.setText(getString(R.string.exam_report_result_text) + nCorrect + "/" + nRequired);
+        resultsTopText.setText(String.format(getString(R.string.exam_report_result_text), nCorrect, nRequired));
         if (passed) {
             resultsTopText.setTextColor(Color.GREEN);
+            resultsRecommendation.setText(getString(R.string.exam_result_recommendation_passed));
         } else {
             resultsTopText.setTextColor(Color.RED);
+            resultsRecommendation.setText(getString(R.string.exam_result_recommendation_failed));
         }
 
         resultsListView.setAdapter(new ExpandableListAdapter() {
@@ -113,8 +116,13 @@ public class ExamReportActivity extends Activity {
                 TextView result = (TextView) v.findViewById(R.id.questionResult);
                 QuestionState qs = results.getResults().get(i);
                 reference.setText(qs.getQuestion(repository).getReference());
-                result.setText(getResources().getString(qs.isCorrect() ? R.string.correct : R.string.wrong));
-                result.setTextColor(qs.isCorrect() ? Color.GREEN : Color.RED);
+                if (qs.hasAnswer()) {
+                    result.setText(getResources().getString(qs.isCorrect() ? R.string.correct : R.string.wrong));
+                    result.setTextColor(qs.isCorrect() ? Color.GREEN : Color.RED);
+                } else {
+                    result.setText(getResources().getString(R.string.not_answered));
+                    result.setTextColor(getResources().getColor(android.R.color.secondary_text_dark, getTheme()));
+                }
                 return v;
             }
 

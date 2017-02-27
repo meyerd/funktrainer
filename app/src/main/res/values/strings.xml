@@ -121,7 +121,10 @@
     <string name="exam_evaluate">Auswerten</string>
     <string name="exam_report">Prüfungsergebnisse</string>
 
-    <string name="exam_report_result_text">Ergebnis: </string>
+    <string name="exam_report_result_text">%1$d von %2$d Fragen korrekt beantwortet.</string>
     <string name="correct">Richtig</string>
     <string name="wrong">Falsch</string>
+    <string name="exam_result_recommendation_passed">Prüfung bestanden! Auf zur BNetzA!</string>
+    <string name="exam_result_recommendation_failed">Schade, das war\'s noch nicht. Zum Bestehen dieses Prüfungsteils müssen 75% erreicht werden.</string>
+    <string name="not_answered">nicht bearbeitet</string>
 </resources>

@@ -101,7 +101,7 @@
     <string name="exam_simulation">Exam Simulation</string>
     <string name="exam_evaluate">Evaluate</string>
     <string name="exam_report">Exam results</string>
-    <string name="exam_report_result_text">"Result: "</string>
+    <string name="exam_report_result_text">%1$d out of %2$d questions answered correctly.</string>
     <string name="pref_header_sync_settings">Synchronization (beta)</string>
     <string name="pref_title_enable_sync">Synchronization</string>
     <string name="pref_description_enable_sync">Sync learning progress</string>
@@ -118,5 +118,8 @@
     <string name="pref_title_through_mode">Get-it-done-mode</string>
     <string name="correct">Correct</string>
     <string name="wrong">Wrong</string>
+    <string name="exam_result_recommendation_passed">Exam Passed! Let\'s go to the BNetzA!</string>
+    <string name="exam_result_recommendation_failed">Sorry, but that was not it. In order to pass this exam you need ad least 75% correct answers.</string>
+    <string name="not_answered">not answered</string>
 
 </resources>
