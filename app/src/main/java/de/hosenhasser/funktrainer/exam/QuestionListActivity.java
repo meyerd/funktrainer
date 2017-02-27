@@ -15,7 +15,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.data.ExamSettings;
@@ -24,12 +23,21 @@ import de.hosenhasser.funktrainer.data.QuestionState;
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.views.QuestionView;
 
-public class QuestionList extends Activity {
-    private static final String TAG = QuestionList.class.getName();
+public class QuestionListActivity extends Activity {
+    private static final String TAG = QuestionListActivity.class.getName();
 
     private int topicId;
     private Repository repository;
     private ExamSettings examSettings;
+    private ArrayList<QuestionState> questions;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(getClass().getName() + ".topic", topicId);
+        outState.putParcelableArrayList(getClass().getName() + ".questions", questions);
+        outState.putSerializable(getClass().getName() + ".examSettings", examSettings);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +49,8 @@ public class QuestionList extends Activity {
 
         if (savedInstanceState != null) {
             topicId = savedInstanceState.getInt(getClass().getName() + ".topic");
+            questions = savedInstanceState.getParcelableArrayList(getClass().getName() + ".questions");
+            examSettings = (ExamSettings) savedInstanceState.getSerializable(getClass().getName() + ".examSettings");
         } else {
             Bundle intbundle = getIntent().getExtras();
             if(intbundle != null) {
@@ -48,14 +58,19 @@ public class QuestionList extends Activity {
             }
         }
 
-        examSettings = repository.getExamSettings(topicId);
-
-        final List<QuestionState> questions = new ArrayList<QuestionState>();
-        for (int i = 0; i < examSettings.getnQuestions(); i++) {
-            int selected = repository.selectQuestionByTopicId(topicId).getSelectedQuestion();
-            Question q = repository.getQuestion(selected);
-            questions.add(new QuestionState(q));
+        if (examSettings == null) {
+            examSettings = repository.getExamSettings(topicId);
         }
+
+        if (questions == null ) {
+            questions = new ArrayList<>();
+            for (int i = 0; i < examSettings.getnQuestions(); i++) {
+                int selected = repository.selectQuestionByTopicId(topicId).getSelectedQuestion();
+                Question q = repository.getQuestion(selected);
+                questions.add(new QuestionState(q));
+            }
+        }
+
 
         final ListView questionListView = (ListView) findViewById(R.id.questionListView);
         questionListView.setAdapter(new ListAdapter() {
@@ -103,7 +118,7 @@ public class QuestionList extends Activity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 QuestionView qv;
                 if (convertView == null) {
-                    qv = new QuestionView(QuestionList.this);
+                    qv = new QuestionView(QuestionListActivity.this);
                 } else {
                     qv = (QuestionView) convertView;
                 }
@@ -158,7 +173,7 @@ public class QuestionList extends Activity {
 
                 QuestionResults result = new QuestionResults(questions, examSettings);
 
-                Intent i = new Intent(QuestionList.this, ExamReportActivity.class);
+                Intent i = new Intent(QuestionListActivity.this, ExamReportActivity.class);
                 i.putExtra(ExamReportActivity.class.getName() + ".result", result);
                 startActivity(i);
                 finish();

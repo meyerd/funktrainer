@@ -19,24 +19,18 @@
 package de.hosenhasser.funktrainer;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import de.hosenhasser.funktrainer.data.Repository;
-import de.hosenhasser.funktrainer.data.sync.SyncAuthenticator;
-import de.hosenhasser.funktrainer.data.sync.SyncAuthenticatorService;
-import de.hosenhasser.funktrainer.data.sync.SyncContentProvider;
 import de.hosenhasser.funktrainer.data.sync.SyncUtils;
-import de.hosenhasser.funktrainer.exam.QuestionList;
+import de.hosenhasser.funktrainer.exam.QuestionListActivity;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -167,8 +161,8 @@ public class FunkTrainerActivity extends Activity {
         examTopicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(FunkTrainerActivity.this, QuestionList.class);
-                intent.putExtra(QuestionList.class.getName() + ".topic", id);
+                final Intent intent = new Intent(FunkTrainerActivity.this, QuestionListActivity.class);
+                intent.putExtra(QuestionListActivity.class.getName() + ".topic", id);
                 startActivity(intent);
             }
         });

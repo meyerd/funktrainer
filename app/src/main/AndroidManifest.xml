@@ -48,7 +48,7 @@
         <activity android:name=".FormelsammlungViewerActivity" />
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".exam.QuestionList"
+            android:name=".exam.QuestionListActivity"
             android:label="@string/exam_simulation"
             android:taskAffinity="de.hosenhasser.funktrainer.exam"/>
         <activity
