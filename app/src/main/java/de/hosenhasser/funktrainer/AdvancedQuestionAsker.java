@@ -68,7 +68,7 @@ public class AdvancedQuestionAsker extends Activity {
     private GestureDetector gestureDetector;
 
     private int historyPosition = 0;
-    private ArrayList<HistoryEntry> history = new ArrayList<>();
+    private ArrayList<QuestionState> history = new ArrayList<>();
 
     private static final int MAX_HISTORY_LENGTH = 30;
 
@@ -138,16 +138,17 @@ public class AdvancedQuestionAsker extends Activity {
     }
 
     private void updateHistoryView() {
-        final HistoryEntry histentry = history.get(history.size() - historyPosition);
+        final QuestionState histentry = history.get(history.size() - historyPosition);
         TextView oldQuestionTextNumber = (TextView)findViewById(R.id.oldQuestionHeatTextNumber);
         oldQuestionTextNumber.setText(Integer.toString(-historyPosition));
 
         final TextView referenceText = (TextView) findViewById(R.id.referenceTextold);
-        referenceText.setText(histentry.getReferenceText());
+        referenceText.setText(histentry.getQuestion(repository).getReference());
 
         final QuestionView questionView = (QuestionView) findViewById(R.id.questionViewOld);
-        questionView.setHistoryEntry(histentry);
-
+        questionView.setQuestionState(histentry);
+        questionView.showCorrectAnswer();
+        questionView.setRadioGroupEnabled(false);
     }
 
     private void flipRight() {
@@ -394,26 +395,7 @@ public class AdvancedQuestionAsker extends Activity {
                 }
 
                 final Question question = repository.getQuestion(currentQuestion);
-                HistoryEntry histentry = new HistoryEntry();
-                histentry.setReferenceText(question.getReference());
-                histentry.setQuestionText(question.getQuestion());
-                histentry.setHelpText(question.getHelp());
-                histentry.setAnswersText(question.getAnswers());
-                histentry.setAnswersHelpText(question.getAnswersHelp());
-                histentry.setCorrectAnswer(0);
-                /*
-                LinkedList<Integer> historder = new LinkedList<Integer>();
-                List<Integer> order = questionView.getOrder();
-                for(int i = 0; i < order.size(); i++) {
-                    historder.add(order.get(i));
-                }
-                histentry.setOrder(historder);
-
-                int selectedButton = questionView.getCheckedRadioButtonId();
-
-                histentry.setAnswerGiven(questionView.getPositionOfButton(selectedButton));
-                */
-                history.add(histentry);
+                history.add(questionView.getQuestionState());
 
                 if(history.size() > MAX_HISTORY_LENGTH) {
                     history.remove(0);
@@ -552,7 +534,7 @@ public class AdvancedQuestionAsker extends Activity {
         referenceText.setText(question.getReference());
 
         final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
-        questionView.setQuestion(question);
+        questionView.setQuestionState(new QuestionState(question));
         final Button contButton = (Button) findViewById(R.id.button1);
         questionView.getQuestionState().addQuestionStateListener(new QuestionState.QuestionStateListener() {
             @Override

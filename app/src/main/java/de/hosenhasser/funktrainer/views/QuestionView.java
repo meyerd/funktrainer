@@ -18,7 +18,6 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.hosenhasser.funktrainer.HistoryEntry;
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.URLImageParser;
 import de.hosenhasser.funktrainer.data.Question;
@@ -166,6 +165,7 @@ public class QuestionView extends LinearLayout {
 
     public void setRadioGroupEnabled(boolean enabled) {
         radioGroup.setEnabled(enabled);
+        for (RadioButton b : getRadioButtons()) b.setEnabled(enabled);
     }
 
     public void setQuestionState(QuestionState qs) {
@@ -189,40 +189,11 @@ public class QuestionView extends LinearLayout {
             b.setBackgroundResource(0);
         }
 
-        radioGroup.clearCheck();
-    }
-
-    @Deprecated
-    public void setQuestion(Question q) {
-        setQuestionState(new QuestionState(q));
-    }
-
-    @Deprecated
-    public void setHistoryEntry(HistoryEntry e) {
-        setQuestionText(e.getQuestionText());
-
-        final List<RadioButton> localRadioButtons = getRadioButtons();
-
-        final List<Integer> historder = e.getOrder();
-
-        for (int i = 0; i < 4; i++) {
-            RadioButton rb = localRadioButtons.get(historder.get(i));
-            rb.setSelected(false);
-            rb.setChecked(false);
-            rb.setBackgroundResource(R.color.defaultBackground);
-            rb.setClickable(false);
-//            rb.setWidth(rblayoutwidth - 6);
-            URLImageParser p_rb = new URLImageParser(rb, getContext());
-            Spanned htmlSpan_rb = Html.fromHtml(safeText(e.getAnswersText().get(i)), p_rb, null);
-            rb.setText(htmlSpan_rb);
+        if (qs.hasAnswer()) {
+            radioGroup.check(getRadioButtons().get(qs.getAnswer()).getId());
+        } else {
+            radioGroup.clearCheck();
         }
-
-        final RadioButton correctButton = localRadioButtons.get(historder.get(e.getCorrectAnswer()));
-        correctButton.setBackgroundResource(R.color.correctAnswer);
-        final RadioButton chosenButton = localRadioButtons.get(e.getAnswerGiven());
-        chosenButton.setChecked(true);
-
-        setRadioGroupEnabled(false);
     }
 
     public QuestionState getQuestionState() {
