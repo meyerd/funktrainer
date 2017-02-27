@@ -157,8 +157,8 @@ public class QuestionList extends Activity {
 
                 Intent i = new Intent(QuestionList.this, ExamReportActivity.class);
                 i.putExtra(ExamReportActivity.class.getName() + ".result", result);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
+                finish();
             }
         });
     }
