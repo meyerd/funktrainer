@@ -1,0 +1,77 @@
+package de.hosenhasser.funktrainer.data;
+
+import android.util.Log;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class QuestionState implements Serializable {
+    private static final String TAG = QuestionState.class.getName();
+
+    public static interface QuestionStateListener {
+        public void onAnswerSelected(int answer);
+    }
+
+    private transient Question question;
+    private int questionId;
+    private List<Integer> order;
+    private int answer = -1;
+    private transient List<QuestionStateListener> listeners = new ArrayList<>();
+
+    private static final Random rand = new Random();
+
+    public QuestionState(Question q) {
+        this.question = q;
+        this.questionId = question.getId();
+
+        this.order = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            order.add(rand.nextInt(order.size() + 1), i);
+        }
+
+        Log.d(TAG, "generated new order: " + order);
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public Question getQuestion(Repository repository) {
+        if (question == null) {
+            question = repository.getQuestion(questionId);
+        }
+        return question;
+    }
+
+    public List<Integer> getOrder() {
+        return order;
+    }
+
+    public boolean hasAnswer() {
+        return answer >= 0;
+    }
+
+    public boolean isCorrect() {
+        return getCorrectAnswer() == answer;
+    }
+
+    public void setAnswer(int answer) {
+        Log.d(TAG, "selected answer: " + answer);
+        this.answer = answer;
+        for (QuestionStateListener l : listeners) l.onAnswerSelected(answer);
+    }
+
+    public int getCorrectAnswer() {
+        return order.get(0);
+    }
+
+    public void addQuestionStateListener(QuestionStateListener l) {
+        listeners.add(l);
+    }
+
+    public void removeQuestionStateListener(QuestionStateListener l) {
+        listeners.remove(l);
+    }
+}

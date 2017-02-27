@@ -33,7 +33,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -41,13 +40,12 @@ import android.widget.ViewFlipper;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hosenhasser.funktrainer.data.Question;
 import de.hosenhasser.funktrainer.data.QuestionSelection;
+import de.hosenhasser.funktrainer.data.QuestionState;
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.views.QuestionView;
 
@@ -70,7 +68,7 @@ public class AdvancedQuestionAsker extends Activity {
     private GestureDetector gestureDetector;
 
     private int historyPosition = 0;
-    private ArrayList<HistoryEntry> history = new ArrayList<HistoryEntry>();
+    private ArrayList<HistoryEntry> history = new ArrayList<>();
 
     private static final int MAX_HISTORY_LENGTH = 30;
 
@@ -370,14 +368,6 @@ public class AdvancedQuestionAsker extends Activity {
         final Button contButton = (Button) findViewById(R.id.button1);
         final Button skipButton = (Button) findViewById(R.id.skipButton);
 
-        // only enable continue when answer is selected
-        questionView.setOnRadioCheckedListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                contButton.setEnabled(questionView.getCheckedRadioButtonId() != -1);
-            }
-
-        });
-
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean show_skip = sharedPref.getBoolean("pref_show_skip_button", false);
         if (show_skip) {
@@ -411,6 +401,7 @@ public class AdvancedQuestionAsker extends Activity {
                 histentry.setAnswersText(question.getAnswers());
                 histentry.setAnswersHelpText(question.getAnswersHelp());
                 histentry.setCorrectAnswer(0);
+                /*
                 LinkedList<Integer> historder = new LinkedList<Integer>();
                 List<Integer> order = questionView.getOrder();
                 for(int i = 0; i < order.size(); i++) {
@@ -421,13 +412,16 @@ public class AdvancedQuestionAsker extends Activity {
                 int selectedButton = questionView.getCheckedRadioButtonId();
 
                 histentry.setAnswerGiven(questionView.getPositionOfButton(selectedButton));
+                */
                 history.add(histentry);
 
                 if(history.size() > MAX_HISTORY_LENGTH) {
                     history.remove(0);
                 }
 
-                if (selectedButton == questionView.getCorrectChoice()) {
+                QuestionState state = questionView.getQuestionState();
+
+                if (state.isCorrect()) {
                     Toast.makeText(AdvancedQuestionAsker.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
 
                     if(mUpdateNextAnswered) {
@@ -438,7 +432,7 @@ public class AdvancedQuestionAsker extends Activity {
                     nextQuestion();
 
                     // return;
-                } else if (selectedButton != -1) {
+                } else if (state.hasAnswer()) {
                     if(mUpdateNextAnswered) {
                         repository.answeredIncorrect(currentQuestion);
                     }
@@ -559,6 +553,14 @@ public class AdvancedQuestionAsker extends Activity {
 
         final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
         questionView.setQuestion(question);
+        final Button contButton = (Button) findViewById(R.id.button1);
+        questionView.getQuestionState().addQuestionStateListener(new QuestionState.QuestionStateListener() {
+            @Override
+            public void onAnswerSelected(int answer) {
+                contButton.setEnabled(answer >= 0);
+            }
+        });
+
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         progressBar.setMax(maxProgress);

@@ -11,14 +11,18 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import de.hosenhasser.funktrainer.R;
+import de.hosenhasser.funktrainer.data.QuestionState;
+import de.hosenhasser.funktrainer.data.Repository;
 
 public class ExamReportActivity extends Activity {
+    private Repository repository;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        repository = new Repository(this);
 
         setContentView(R.layout.exam_report);
 
@@ -27,8 +31,8 @@ public class ExamReportActivity extends Activity {
         TextView resultsTopText = (TextView) findViewById(R.id.examResultTopText);
 
         int nCorrect = 0;
-        for(QuestionResultEntry r : results.getResults()) {
-            if(r.getResult()) {
+        for(QuestionState r : results.getResults()) {
+            if(r.isCorrect()) {
                 nCorrect++;
             }
         }
@@ -94,9 +98,9 @@ public class ExamReportActivity extends Activity {
                 }
                 TextView reference = (TextView) v.findViewById(R.id.questionReference);
                 TextView result = (TextView) v.findViewById(R.id.questionResult);
-                QuestionResultEntry r = results.getResults().get(position);
-                reference.setText(r.getReference());
-                result.setText(Boolean.toString(r.getResult()));
+                QuestionState qs = results.getResults().get(position);
+                reference.setText(qs.getQuestion(repository).getReference());
+                result.setText(Boolean.toString(qs.isCorrect()));
                 return v;
             }
 

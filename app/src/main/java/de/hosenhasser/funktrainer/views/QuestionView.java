@@ -2,9 +2,9 @@ package de.hosenhasser.funktrainer.views;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.Spanned;
@@ -17,24 +17,22 @@ import android.widget.TextView;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import de.hosenhasser.funktrainer.HistoryEntry;
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.URLImageParser;
 import de.hosenhasser.funktrainer.data.Question;
-import de.hosenhasser.funktrainer.exam.QuestionResultEntry;
+import de.hosenhasser.funktrainer.data.QuestionState;
+import de.hosenhasser.funktrainer.data.Repository;
 
 public class QuestionView extends LinearLayout {
     private boolean replaceNNBSP = Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
     private RadioGroup radioGroup;
     private TextView questionTextView;
-    private List<Integer> order;
-    private Random rand = new Random();
-    private int correctChoice;
-    private Question question;
+    private QuestionState questionState;
     private int listPosition;
+    private Repository repository;
 
     public QuestionView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -56,6 +54,14 @@ public class QuestionView extends LinearLayout {
         inflate(getContext(), R.layout.question, this);
         this.radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         questionTextView = (TextView) findViewById(R.id.textViewQuestion);
+        repository = new Repository(getContext());
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                questionState.setAnswer(getPositionOfButton(i));
+            }
+        });
     }
 
     @Override
@@ -65,14 +71,14 @@ public class QuestionView extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             getChildAt(i).restoreHierarchyState(ss.childrenStates);
         }
-        this.order = ss.order;
+        //this.order = ss.order;
     }
 
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         QuestionViewSavedState ss = new QuestionViewSavedState(superState);
-        ss.order = this.order;
+        //ss.order = this.order;
         for (int i =0; i < getChildCount(); i++) {
             getChildAt(i).saveHierarchyState(ss.childrenStates);
         }
@@ -89,7 +95,7 @@ public class QuestionView extends LinearLayout {
         dispatchThawSelfOnly(container);
     }
 
-    static class QuestionViewSavedState extends BaseSavedState {
+    private static class QuestionViewSavedState extends BaseSavedState {
         List<Integer> order;
         SparseArray childrenStates = new SparseArray<>();
 
@@ -150,42 +156,27 @@ public class QuestionView extends LinearLayout {
         this.listPosition = listPosition;
     }
 
-    public void setOnRadioCheckedListener(RadioGroup.OnCheckedChangeListener l) {
-        radioGroup.setOnCheckedChangeListener(l);
-    }
-
-    public int getCheckedRadioButtonId() {
-        return radioGroup.getCheckedRadioButtonId();
-    }
-
     public int getPositionOfButton(int id) {
-        RadioGroup group = (RadioGroup) findViewById(R.id.radioGroup1);
         for (int i = 0; i < 4; i++) {
-            if (group.getChildAt(i).getId() == id) return i;
+            if (radioGroup.getChildAt(i).getId() == id) return i;
         }
         return -1;
     }
+
 
     public void setRadioGroupEnabled(boolean enabled) {
         radioGroup.setEnabled(enabled);
     }
 
-    public void setQuestion(Question q) {
-        question = q;
+    public void setQuestionState(QuestionState qs) {
+        this.questionState = qs;
+        Question q = qs.getQuestion(repository);
+        List<Integer> order = qs.getOrder();
 
         setQuestionText(q.getQuestion());
 
-        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         final List<RadioButton> radioButtons = getRadioButtons();
 
-        if(order == null) {
-            order = new LinkedList<Integer>();
-
-            for (int i = 0; i < 4; i++) {
-                order.add(rand.nextInt(order.size() + 1), i);
-            }
-        }
-        correctChoice = radioButtons.get(order.get(0)).getId();
         for (int i = 0; i < 4; i++) {
             RadioButton rb = radioButtons.get(order.get(i));
             URLImageParser p_rb = new URLImageParser(rb, getContext());
@@ -201,6 +192,12 @@ public class QuestionView extends LinearLayout {
         radioGroup.clearCheck();
     }
 
+    @Deprecated
+    public void setQuestion(Question q) {
+        setQuestionState(new QuestionState(q));
+    }
+
+    @Deprecated
     public void setHistoryEntry(HistoryEntry e) {
         setQuestionText(e.getQuestionText());
 
@@ -228,28 +225,12 @@ public class QuestionView extends LinearLayout {
         setRadioGroupEnabled(false);
     }
 
-    public int getCorrectChoice() {
-        return correctChoice;
-    }
-
-    public List<Integer> getOrder() {
-        return order;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public boolean isCorrect() {
-        return getCheckedRadioButtonId() == getCorrectChoice();
-    }
-
-    public QuestionResultEntry getResult() {
-        return new QuestionResultEntry(question, isCorrect());
+    public QuestionState getQuestionState() {
+        return questionState;
     }
 
     public void showCorrectAnswer() {
-        final RadioButton correctButton = (RadioButton) findViewById(getCorrectChoice());
+        final RadioButton correctButton = getRadioButtons().get(questionState.getCorrectAnswer());
         correctButton.setBackgroundResource(R.color.correctAnswer);
     }
 
@@ -267,7 +248,7 @@ public class QuestionView extends LinearLayout {
     }
 
     private List<RadioButton> getRadioButtons() {
-        final List<RadioButton> radioButtons = new LinkedList<RadioButton>();
+        final List<RadioButton> radioButtons = new LinkedList<>();
         radioButtons.add((RadioButton) findViewById(R.id.radio0));
         radioButtons.add((RadioButton) findViewById(R.id.radio1));
         radioButtons.add((RadioButton) findViewById(R.id.radio2));

@@ -1,19 +1,21 @@
 package de.hosenhasser.funktrainer.exam;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
+
 import de.hosenhasser.funktrainer.data.ExamSettings;
+import de.hosenhasser.funktrainer.data.QuestionState;
 
 public class QuestionResults implements Serializable {
-    private ArrayList<QuestionResultEntry> results;
+    private List<QuestionState> results;
     private ExamSettings examSettings;
 
-    public QuestionResults(final ArrayList<QuestionResultEntry> rl, final ExamSettings e) {
+    public QuestionResults(final List<QuestionState> rl, final ExamSettings e) {
         this.results = rl;
         this.examSettings = e;
     }
 
-    public ArrayList<QuestionResultEntry> getResults() {
+    public List<QuestionState> getResults() {
         return results;
     }
 

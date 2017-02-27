@@ -20,6 +20,7 @@ import java.util.List;
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.data.ExamSettings;
 import de.hosenhasser.funktrainer.data.Question;
+import de.hosenhasser.funktrainer.data.QuestionState;
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.views.QuestionView;
 
@@ -49,13 +50,12 @@ public class QuestionList extends Activity {
 
         examSettings = repository.getExamSettings(topicId);
 
-        final List<Question> questions = new ArrayList<Question>();
+        final List<QuestionState> questions = new ArrayList<QuestionState>();
         for (int i = 0; i < examSettings.getnQuestions(); i++) {
             int selected = repository.selectQuestionByTopicId(topicId).getSelectedQuestion();
-            questions.add(repository.getQuestion(selected));
+            Question q = repository.getQuestion(selected);
+            questions.add(new QuestionState(q));
         }
-
-        final QuestionView[] questionViews = new QuestionView[examSettings.getnQuestions()];
 
         final ListView questionListView = (ListView) findViewById(R.id.questionListView);
         questionListView.setAdapter(new ListAdapter() {
@@ -91,7 +91,7 @@ public class QuestionList extends Activity {
 
             @Override
             public long getItemId(int position) {
-                return ((Question) getItem(position)).getId();
+                return ((QuestionState) getItem(position)).getQuestion(repository).getId();
             }
 
             @Override
@@ -101,6 +101,13 @@ public class QuestionList extends Activity {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
+                QuestionView qv;
+                if (convertView == null) {
+                    qv = new QuestionView(QuestionList.this);
+                } else {
+                    qv = (QuestionView) convertView;
+                }
+                /*
                 if (questionViews[position] == null) {
                     QuestionView v = new QuestionView(QuestionList.this);
                     // TODO: fix bad design: setListPosition has to be called before setQuestion in order
@@ -109,7 +116,10 @@ public class QuestionList extends Activity {
                     v.setQuestion((Question)getItem(position));
                     questionViews[position] = v;
                 }
-                return questionViews[position];
+                */
+                qv.setListPosition(position + 1);
+                qv.setQuestionState((QuestionState) getItem(position));
+                return qv;
             }
 
             @Override
@@ -132,28 +142,21 @@ public class QuestionList extends Activity {
         evaluateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<QuestionResultEntry> resultlist = new ArrayList<QuestionResultEntry>();
-
                 for (int i = 0; i < examSettings.getnQuestions(); i++) {
-                    QuestionView qv = questionViews[i];
-                    if (qv != null) {
-                        Log.d(TAG, "question: " + qv.getQuestion().getReference() + ", answer: " + qv.isCorrect());
-                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        boolean count_statistics = sharedPref.getBoolean("pref_count_exam_answer_statistics", false);
-                        if(count_statistics) {
-                            if(qv.isCorrect()) {
-                                repository.answeredCorrect(qv.getQuestion().getId());
-                            } else {
-                                repository.answeredIncorrect(qv.getQuestion().getId());
-                            }
+                    QuestionState qs = questions.get(i);
+                    Log.d(TAG, "question: " + qs.getQuestion(repository).getReference() + ", answer: " + qs.isCorrect());
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    boolean count_statistics = sharedPref.getBoolean("pref_count_exam_answer_statistics", false);
+                    if(count_statistics) {
+                        if(qs.isCorrect()) {
+                            repository.answeredCorrect(qs.getQuestionId());
+                        } else {
+                            repository.answeredIncorrect(qs.getQuestionId());
                         }
-                        resultlist.add(qv.getResult());
-                    } else {
-                        resultlist.add(new QuestionResultEntry(questions.get(i), false));
                     }
                 }
 
-                QuestionResults result = new QuestionResults(resultlist, examSettings);
+                QuestionResults result = new QuestionResults(questions, examSettings);
 
                 Intent i = new Intent(QuestionList.this, ExamReportActivity.class);
                 i.putExtra(ExamReportActivity.class.getName() + ".result", result);
