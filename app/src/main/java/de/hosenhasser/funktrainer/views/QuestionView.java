@@ -101,7 +101,7 @@ public class QuestionView extends LinearLayout {
             super(in);
             childrenStates = in.readSparseArray(classLoader);
             final String orderString = in.readString();
-            if (orderString != null) {
+            if (orderString != null && !orderString.equals("")) {
                 final String[] orderArray = orderString.split(",");
                 order = new LinkedList<Integer>();
                 for (String s : orderArray) {
