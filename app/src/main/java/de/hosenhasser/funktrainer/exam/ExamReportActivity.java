@@ -1,16 +1,15 @@
 package de.hosenhasser.funktrainer.exam;
 
 import android.app.Activity;
+import android.content.res.ColorStateList;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import de.hosenhasser.funktrainer.R;
@@ -40,10 +39,10 @@ public class ExamReportActivity extends Activity {
                 nCorrect++;
             }
         }
-        int nRequired = results.getExamSettings().getnRequired();
-        boolean passed = nCorrect >= nRequired;
+        int nQuestions = results.getExamSettings().getnQuestions();
+        boolean passed = nCorrect >= nQuestions;
 
-        resultsTopText.setText(String.format(getString(R.string.exam_report_result_text), nCorrect, nRequired));
+        resultsTopText.setText(String.format(getString(R.string.exam_report_result_text), nCorrect, nQuestions));
         if (passed) {
             resultsTopText.setTextColor(Color.GREEN);
             resultsRecommendation.setText(getString(R.string.exam_result_recommendation_passed));
@@ -108,7 +107,7 @@ public class ExamReportActivity extends Activity {
             public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
                 View v;
                 if (view == null) {
-                    v = ExamReportActivity.this.getLayoutInflater().inflate(R.layout.exam_report_result_item, null);
+                    v = ExamReportActivity.this.getLayoutInflater().inflate(R.layout.exam_report_result_item, viewGroup, false);
                 } else {
                     v = view;
                 }
@@ -120,8 +119,12 @@ public class ExamReportActivity extends Activity {
                     result.setText(getResources().getString(qs.isCorrect() ? R.string.correct : R.string.wrong));
                     result.setTextColor(qs.isCorrect() ? Color.GREEN : Color.RED);
                 } else {
+                    // did a lot of googling on how to get the default color back. this is about as simple as i could find.
+                    // even though it's not really what i was looking for, it should get the job done.
+                    ColorStateList color = new TextView(ExamReportActivity.this).getTextColors();
+
                     result.setText(getResources().getString(R.string.not_answered));
-                    result.setTextColor(getResources().getColor(android.R.color.secondary_text_dark, getTheme()));
+                    result.setTextColor(color);
                 }
                 return v;
             }

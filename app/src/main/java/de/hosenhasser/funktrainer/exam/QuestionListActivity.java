@@ -122,16 +122,6 @@ public class QuestionListActivity extends Activity {
                 } else {
                     qv = (QuestionView) convertView;
                 }
-                /*
-                if (questionViews[position] == null) {
-                    QuestionView v = new QuestionView(QuestionList.this);
-                    // TODO: fix bad design: setListPosition has to be called before setQuestion in order
-                    //       for the number to show up.
-                    v.setListPosition(position + 1);
-                    v.setQuestion((Question)getItem(position));
-                    questionViews[position] = v;
-                }
-                */
                 qv.setListPosition(position + 1);
                 qv.setQuestionState((QuestionState) getItem(position));
                 return qv;
