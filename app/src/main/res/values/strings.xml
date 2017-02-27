@@ -112,6 +112,8 @@
     <string name="pref_title_sync_secret">API Secret</string>
     <string name="pref_sync_force_upload_alert_title">Hochladen erzwingen</string>
     <string name="pref_sync_force_upload_alert_message">Hochladen erzwingen? Dies wird alle auf dem Server gespeicherten Daten überschreiben.</string>
+    <string name="pref_title_through_mode">Fertig-werden-Modus</string>
+    <string name="pref_description_through_mode">Stelle alle Fragen zuerst nur bis zur zweiten Wiederholung. Dann erst stelle die Fragen nochmals bis zur fünften Wiederholung.</string>
 
     <string name="pref_ringtone_silent">Stumm</string>
     <string name="exam_simulation">Prüfungssimulation</string>

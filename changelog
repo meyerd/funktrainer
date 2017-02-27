@@ -2,6 +2,8 @@ Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronisation
 
+1.1.2.1:
+- Fertig-werden-Modus
 
 1.1.1.1:
 - Prüfungsmodus
@@ -46,6 +48,9 @@ engl:
 Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronization
+
+1.1.2.1:
+- Get-it-done-mode
 
 1.1.1.1:
 - Exam Mode

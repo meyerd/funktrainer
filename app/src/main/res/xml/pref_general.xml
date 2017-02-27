@@ -14,6 +14,12 @@
 
     <SwitchPreference
         android:defaultValue="false"
+        android:key="pref_through_mode"
+        android:summary="@string/pref_description_through_mode"
+        android:title="@string/pref_title_through_mode" />
+
+    <SwitchPreference
+        android:defaultValue="false"
         android:key="pref_count_exam_answer_statistics"
         android:summary="@string/pref_description_count_exam_answer_statistics"
         android:title="@string/pref_title_count_exam_answer_statistics" />

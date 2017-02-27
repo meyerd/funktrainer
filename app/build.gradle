@@ -14,8 +14,8 @@ android {
 //        }
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 32
-        versionName "1.1.1.1"
+        versionCode 33
+        versionName "1.1.2.1"
 //        jackOptions {
 //            enabled true
 //        }

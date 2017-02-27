@@ -191,9 +191,20 @@ public class Repository extends SQLiteOpenHelper {
         int currentProgress = 0;
         long soonestNextTime = 0;
 
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        boolean through_mode = sharedPref.getBoolean("pref_through_mode", false);
+
         Cursor c;
         if(topicId > -1) {
-            c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+            if (through_mode) {
+                c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? AND q.level <= 2 ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+                if (c.getCount() <= 0) {
+                    c.close();
+                    c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+                }
+            } else {
+                c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+            }
         } else if(questionReference != null) {
             c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
         } else {
