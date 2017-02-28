@@ -66,8 +66,12 @@ public class QuestionState implements Serializable, Parcelable {
     private static final Random rand = new Random();
 
     public QuestionState(Question q) {
+        this(q.getId());
         this.question = q;
-        this.questionId = question.getId();
+    }
+
+    public QuestionState(int questionId) {
+        this.questionId = questionId;
         listeners = new ArrayList<>();
 
         this.order = new ArrayList<>();

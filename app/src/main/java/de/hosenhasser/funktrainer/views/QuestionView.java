@@ -70,14 +70,12 @@ public class QuestionView extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             getChildAt(i).restoreHierarchyState(ss.childrenStates);
         }
-        //this.order = ss.order;
     }
 
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         QuestionViewSavedState ss = new QuestionViewSavedState(superState);
-        //ss.order = this.order;
         for (int i =0; i < getChildCount(); i++) {
             getChildAt(i).saveHierarchyState(ss.childrenStates);
         }
@@ -95,7 +93,6 @@ public class QuestionView extends LinearLayout {
     }
 
     private static class QuestionViewSavedState extends BaseSavedState {
-        List<Integer> order;
         SparseArray childrenStates = new SparseArray<>();
 
         QuestionViewSavedState(Parcelable superState) {
@@ -105,32 +102,12 @@ public class QuestionView extends LinearLayout {
         private QuestionViewSavedState(Parcel in, ClassLoader classLoader) {
             super(in);
             childrenStates = in.readSparseArray(classLoader);
-            final String orderString = in.readString();
-            if (orderString != null && !orderString.equals("")) {
-                final String[] orderArray = orderString.split(",");
-                order = new LinkedList<Integer>();
-                for (String s : orderArray) {
-                    order.add(Integer.parseInt(s));
-                }
-            }
         }
 
         @Override
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeSparseArray(childrenStates);
-            if (order != null) {
-                final StringBuilder orderString = new StringBuilder();
-                for (int i = 0; i < order.size(); i++) {
-                    if (i > 0) {
-                        orderString.append(',');
-                    }
-                    orderString.append(order.get(i));
-                }
-                out.writeString(orderString.toString());
-            } else {
-                out.writeString("");
-            }
         }
 
         public static final ClassLoaderCreator<QuestionViewSavedState> CREATOR
@@ -171,14 +148,13 @@ public class QuestionView extends LinearLayout {
     public void setQuestionState(QuestionState qs) {
         this.questionState = qs;
         Question q = qs.getQuestion(repository);
-        List<Integer> order = qs.getOrder();
 
         setQuestionText(q.getQuestion());
 
         final List<RadioButton> radioButtons = getRadioButtons();
 
         for (int i = 0; i < 4; i++) {
-            RadioButton rb = radioButtons.get(order.get(i));
+            RadioButton rb = radioButtons.get(qs.getOrder().get(i));
             URLImageParser p_rb = new URLImageParser(rb, getContext());
             Spanned htmlSpan_rb = Html.fromHtml(safeText(q.getAnswers().get(i)), p_rb, null);
             rb.setText(htmlSpan_rb);

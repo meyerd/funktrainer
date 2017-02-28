@@ -51,8 +51,7 @@ import de.hosenhasser.funktrainer.views.QuestionView;
 
 public class AdvancedQuestionAsker extends Activity {
     private Repository repository;
-    private int currentQuestion;
-    private int currentQuestionId;
+    private QuestionState currentQuestionState;
     private int topicId;
     private int maxProgress;
     private int currentProgress;
@@ -61,7 +60,6 @@ public class AdvancedQuestionAsker extends Activity {
     private Timer waitTimer;
     private boolean showingStandardView;
 
-    private SharedPreferences mPrefs;
     private boolean mUpdateNextAnswered;
 
     private ViewFlipper viewFlipper;
@@ -88,7 +86,7 @@ public class AdvancedQuestionAsker extends Activity {
         super.onSaveInstanceState(outState);
 
         outState.putBoolean(getClass().getName() + ".showingCorrectAnswer", showingCorrectAnswer);
-        outState.putInt(getClass().getName() + ".currentQuestion", currentQuestion);
+        outState.putParcelable(getClass().getName() + ".currentQuestionState", currentQuestionState);
         outState.putInt(getClass().getName() + ".maxProgress", maxProgress);
         outState.putInt(getClass().getName() + ".currentProgress", currentProgress);
         outState.putLong(getClass().getName() + ".topic", topicId);
@@ -192,7 +190,7 @@ public class AdvancedQuestionAsker extends Activity {
         mUpdateNextAnswered = true;
 
         repository = new Repository(this);
-        mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
+        SharedPreferences mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
 
         showStandardView();
 
@@ -214,7 +212,7 @@ public class AdvancedQuestionAsker extends Activity {
 
         if (savedInstanceState != null) {
             topicId = (int) savedInstanceState.getLong(getClass().getName() + ".topic");
-            currentQuestion = savedInstanceState.getInt(getClass().getName() + ".currentQuestion");
+            currentQuestionState = savedInstanceState.getParcelable(getClass().getName() + ".currentQuestionState");
             final long nextTimeLong = savedInstanceState.getLong(getClass().getName() + ".nextTime");
             nextTime = nextTimeLong > 0L ? new Date(nextTimeLong) : null;
             showingCorrectAnswer = savedInstanceState.getBoolean(getClass().getName() + ".showingCorrectAnswer");
@@ -243,17 +241,9 @@ public class AdvancedQuestionAsker extends Activity {
                 }
             } else {
                 int lastQuestionShown = mPrefs.getInt("last_question_shown", 1);
-                currentQuestionId = lastQuestionShown;
                 nextQuestion(lastQuestionShown);
             }
         }
-    }
-
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor ed = mPrefs.edit();
-        ed.putInt("last_question_shown", currentQuestionId);
-        ed.apply();
     }
 
     /**
@@ -292,7 +282,7 @@ public class AdvancedQuestionAsker extends Activity {
                 return true;
             case R.id.showLichtblick:
                 final Intent intentLichtblick = new Intent(this, LichtblickeViewerActivity.class);
-                final Question question = repository.getQuestion(currentQuestion);
+                final Question question = currentQuestionState.getQuestion(repository);
                 final int lichtblickPage = question.getLichtblickPage();
                 intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickPage", lichtblickPage);
                 startActivity(intentLichtblick);
@@ -394,7 +384,6 @@ public class AdvancedQuestionAsker extends Activity {
                     return;
                 }
 
-                final Question question = repository.getQuestion(currentQuestion);
                 history.add(questionView.getQuestionState());
 
                 if(history.size() > MAX_HISTORY_LENGTH) {
@@ -402,12 +391,13 @@ public class AdvancedQuestionAsker extends Activity {
                 }
 
                 QuestionState state = questionView.getQuestionState();
+                int currentQuestionId = state.getQuestion(repository).getId();
 
                 if (state.isCorrect()) {
                     Toast.makeText(AdvancedQuestionAsker.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
 
                     if(mUpdateNextAnswered) {
-                        repository.answeredCorrect(currentQuestion);
+                        repository.answeredCorrect(currentQuestionId);
                     }
                     mUpdateNextAnswered = true;
 
@@ -416,7 +406,7 @@ public class AdvancedQuestionAsker extends Activity {
                     // return;
                 } else if (state.hasAnswer()) {
                     if(mUpdateNextAnswered) {
-                        repository.answeredIncorrect(currentQuestion);
+                        repository.answeredIncorrect(currentQuestionId);
                     }
                     mUpdateNextAnswered = true;
 
@@ -463,7 +453,7 @@ public class AdvancedQuestionAsker extends Activity {
         // any question?
         final int selectedQuestion = nextQuestion.getSelectedQuestion();
         if (selectedQuestion != 0) {
-            currentQuestion = selectedQuestion;
+            currentQuestionState = new QuestionState(selectedQuestion);
             maxProgress = nextQuestion.getMaxProgress();
             currentProgress = nextQuestion.getCurrentProgress();
             nextTime = null;
@@ -519,8 +509,7 @@ public class AdvancedQuestionAsker extends Activity {
             return;
         }
 
-        final Question question = repository.getQuestion(currentQuestion);
-        currentQuestionId = question.getId();
+        final Question question = currentQuestionState.getQuestion(repository);
 
         final TextView levelText = (TextView) findViewById(R.id.levelText);
         levelText.setText(question.getLevel() == 0 ? getString(R.string.firstPass) :
@@ -534,7 +523,7 @@ public class AdvancedQuestionAsker extends Activity {
         referenceText.setText(question.getReference());
 
         final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
-        questionView.setQuestionState(new QuestionState(question));
+        questionView.setQuestionState(currentQuestionState);
         final Button contButton = (Button) findViewById(R.id.button1);
         questionView.getQuestionState().addQuestionStateListener(new QuestionState.QuestionStateListener() {
             @Override
