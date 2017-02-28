@@ -33,6 +33,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -60,6 +61,7 @@ public class AdvancedQuestionAsker extends Activity {
     private Timer waitTimer;
     private boolean showingStandardView;
 
+    private SharedPreferences mPrefs;
     private boolean mUpdateNextAnswered;
 
     private ViewFlipper viewFlipper;
@@ -190,7 +192,7 @@ public class AdvancedQuestionAsker extends Activity {
         mUpdateNextAnswered = true;
 
         repository = new Repository(this);
-        SharedPreferences mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
+        mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
 
         showStandardView();
 
@@ -245,6 +247,14 @@ public class AdvancedQuestionAsker extends Activity {
             }
         }
     }
+
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor ed = mPrefs.edit();
+        ed.putInt("last_question_shown", currentQuestionState.getQuestionId());
+        ed.apply();
+    }
+
 
     /**
      * Populate the options menu.
@@ -434,6 +444,9 @@ public class AdvancedQuestionAsker extends Activity {
         if (!showingStandardView) {
             showStandardView();
         }
+
+        final ScrollView scrollView = (ScrollView) findViewById(R.id.questionAskerScrollView);
+        scrollView.fullScroll(View.FOCUS_UP);
 
         final Button contButton = (Button) findViewById(R.id.button1);
         contButton.setEnabled(false);
