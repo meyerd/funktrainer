@@ -2,7 +2,6 @@ package de.hosenhasser.funktrainer.views;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -64,25 +63,6 @@ public class QuestionView extends LinearLayout {
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        QuestionViewSavedState ss = (QuestionViewSavedState) state;
-        super.onRestoreInstanceState(ss.getSuperState());
-        for (int i = 0; i < getChildCount(); i++) {
-            getChildAt(i).restoreHierarchyState(ss.childrenStates);
-        }
-    }
-
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        QuestionViewSavedState ss = new QuestionViewSavedState(superState);
-        for (int i =0; i < getChildCount(); i++) {
-            getChildAt(i).saveHierarchyState(ss.childrenStates);
-        }
-        return ss;
-    }
-
-    @Override
     protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
         dispatchFreezeSelfOnly(container);
     }
@@ -90,42 +70,6 @@ public class QuestionView extends LinearLayout {
     @Override
     protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
         dispatchThawSelfOnly(container);
-    }
-
-    private static class QuestionViewSavedState extends BaseSavedState {
-        SparseArray childrenStates = new SparseArray<>();
-
-        QuestionViewSavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        private QuestionViewSavedState(Parcel in, ClassLoader classLoader) {
-            super(in);
-            childrenStates = in.readSparseArray(classLoader);
-        }
-
-        @Override
-        public void writeToParcel(Parcel out, int flags) {
-            super.writeToParcel(out, flags);
-            out.writeSparseArray(childrenStates);
-        }
-
-        public static final ClassLoaderCreator<QuestionViewSavedState> CREATOR
-                = new ClassLoaderCreator<QuestionViewSavedState>() {
-            @Override
-            public QuestionViewSavedState createFromParcel(Parcel in, ClassLoader loader) {
-                return new QuestionViewSavedState(in, loader);
-            }
-
-            @Override
-            public QuestionViewSavedState createFromParcel(Parcel in) {
-                return createFromParcel(null);
-            }
-
-            public QuestionViewSavedState[] newArray(int size) {
-                return new QuestionViewSavedState[size];
-            }
-        };
     }
 
     public void setListPosition(final int listPosition) {
