@@ -545,6 +545,8 @@ public class AdvancedQuestionAsker extends Activity {
             }
         });
 
+        contButton.setEnabled(currentQuestionState.hasAnswer());
+
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         progressBar.setMax(maxProgress);
