@@ -197,7 +197,7 @@ public class Repository extends SQLiteOpenHelper {
         Cursor c;
         if(topicId > -1) {
             if (through_mode) {
-                c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? AND q.level <= 2 ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+                c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? AND q.level <= 1 ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
                 if (c.getCount() <= 0) {
                     c.close();
                     c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});

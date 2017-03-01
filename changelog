@@ -2,6 +2,9 @@ Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronisation
 
+1.2.0.0:
+- Prüfungssimulation überarbeitet
+
 1.1.2.1:
 - Fertig-werden-Modus
 
@@ -48,6 +51,9 @@ engl:
 Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronization
+
+1.2.0.0:
+- Exam simulator overhaul
 
 1.1.2.1:
 - Get-it-done-mode
