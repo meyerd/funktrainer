@@ -40,7 +40,8 @@ public class ExamReportActivity extends Activity {
             }
         }
         int nQuestions = results.getExamSettings().getnQuestions();
-        boolean passed = nCorrect >= nQuestions;
+        int nRequired = results.getExamSettings().getnRequired();
+        boolean passed = nCorrect >= nRequired;
 
         resultsTopText.setText(String.format(getString(R.string.exam_report_result_text), nCorrect, nQuestions));
         if (passed) {
