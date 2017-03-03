@@ -250,9 +250,11 @@ public class AdvancedQuestionAsker extends Activity {
 
     protected void onPause() {
         super.onPause();
-        SharedPreferences.Editor ed = mPrefs.edit();
-        ed.putInt("last_question_shown", currentQuestionState.getQuestionId());
-        ed.apply();
+        if (currentQuestionState != null) {
+            SharedPreferences.Editor ed = mPrefs.edit();
+            ed.putInt("last_question_shown", currentQuestionState.getQuestionId());
+            ed.apply();
+        }
     }
 
 

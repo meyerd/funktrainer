@@ -15,6 +15,7 @@ public class QuestionState implements Serializable, Parcelable {
 
     private QuestionState(Parcel in) {
         questionId = in.readInt();
+        order = new ArrayList<>();
         in.readList(order, QuestionState.class.getClassLoader());
         answer = in.readInt();
         listeners = new ArrayList<>();
