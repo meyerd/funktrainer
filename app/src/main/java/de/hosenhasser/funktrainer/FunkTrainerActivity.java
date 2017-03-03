@@ -22,7 +22,6 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import de.hosenhasser.funktrainer.data.Repository;
-import de.hosenhasser.funktrainer.data.sync.SyncUtils;
 import de.hosenhasser.funktrainer.exam.QuestionListActivity;
 
 import android.accounts.Account;
@@ -70,20 +69,6 @@ public class FunkTrainerActivity extends Activity {
         th.addTab(ts2);
           
         repository = new Repository(this);
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
-        if (sync_enabled) {
-            SyncUtils.CreateSyncAccount(this);
-//            Account account = SyncAuthenticatorService.GetAccount();
-//            AccountManager accountManager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
-//
-//            if (accountManager.addAccountExplicitly(account, null, null)) {
-//                // all well
-//            } else {
-//                // fail
-//            }
-        }
     }
 
     public void updateAdapter() {

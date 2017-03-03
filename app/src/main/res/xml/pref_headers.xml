@@ -12,8 +12,4 @@
         android:title="@string/pref_header_waiting_times" />
     <!-- android:icon="@drawable/ic_info_black_24dp" -->
 
-    <header
-        android:fragment="de.hosenhasser.funktrainer.SettingsActivity$SyncSettingsPreferenceFragment"
-        android:title="@string/pref_header_sync_settings" />
-
 </preference-headers>

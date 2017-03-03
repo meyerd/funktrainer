@@ -27,12 +27,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.prefs.PreferenceChangeEvent;
-
-import de.hosenhasser.funktrainer.data.Repository;
-import de.hosenhasser.funktrainer.data.sync.SyncAuthenticatorService;
-import de.hosenhasser.funktrainer.data.sync.SyncContentProvider;
-import de.hosenhasser.funktrainer.data.sync.SyncUtils;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -169,8 +163,7 @@ public class SettingsActivity extends PreferenceActivity {
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || WaitingTimePreferenceFragment.class.getName().equals(fragmentName)
-                || SyncSettingsPreferenceFragment.class.getName().equals(fragmentName);
+                || WaitingTimePreferenceFragment.class.getName().equals(fragmentName);
     }
 
     @Override
@@ -243,89 +236,6 @@ public class SettingsActivity extends PreferenceActivity {
                         }
                     });
                     adb.show();
-                    return true;
-                }
-            });
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-
-        @Override
-        public void onConfigurationChanged(Configuration newConfig) {
-            super.onConfigurationChanged(newConfig);
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class SyncSettingsPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_sync_settings);
-            setHasOptionsMenu(true);
-            bindPreferenceSummaryToValue(findPreference("pref_sync_key"));
-            bindPreferenceSummaryToValue(findPreference("pref_sync_secret"));
-            Preference syncNowButton = findPreference("pref_sync_now");
-            syncNowButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
-                    if (sync_enabled) {
-//                        Toast.makeText(getActivity(), getString(R.string.pref_sync_now_toast_message),
-//                                Toast.LENGTH_LONG).show();
-//                        Bundle extras = new Bundle();
-//                        extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-//                        ContentResolver.requestSync(SyncAuthenticatorService.GetAccount(), SyncContentProvider.AUTHORITY, extras);
-                        SyncUtils.TriggerRefresh();
-                    }
-                    return true;
-                }
-            });
-            Preference forceUploadButton = findPreference("pref_sync_force_upload");
-            forceUploadButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    boolean sync_enabled = sharedPref.getBoolean("pref_enable_sync", false);
-                    if (sync_enabled) {
-                        AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                        adb.setTitle(getString(R.string.pref_sync_force_upload_alert_title));
-                        adb.setMessage(getString(R.string.pref_sync_force_upload_alert_message));
-                        adb.setIcon(android.R.drawable.ic_dialog_alert);
-                        adb.setPositiveButton(getString(R.string.resetOkay), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Repository repo = new Repository(getActivity());
-                                repo.resetAuxiliarySyncTables(repo.getWritableDatabase());
-                                repo.forceSyncUploadOfAllQuestions();
-                                SyncUtils.TriggerRefresh();
-                            }
-                        });
-                        adb.setNegativeButton(getString(R.string.resetCancel), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        adb.show();
-                    }
-                    return true;
-                }
-            });
-            Preference syncEnabled = findPreference("pref_enable_sync");
-            syncEnabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    boolean sync_enabled = (boolean)newValue;
-                    if (sync_enabled) {
-                        SyncUtils.CreateSyncAccount(getActivity());
-                    }
                     return true;
                 }
             });
