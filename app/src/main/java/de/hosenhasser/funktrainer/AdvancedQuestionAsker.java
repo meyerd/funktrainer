@@ -31,6 +31,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -193,6 +194,12 @@ public class AdvancedQuestionAsker extends Activity {
 
         repository = new Repository(this);
         mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean keep_screen_on = sharedPref.getBoolean("pref_keep_screen_on", false);
+        if (keep_screen_on) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
 
         showStandardView();
 

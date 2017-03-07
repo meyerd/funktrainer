@@ -103,6 +103,9 @@
     <string name="pref_title_through_mode">Fertig-werden-Modus</string>
     <string name="pref_description_through_mode">Stelle alle Fragen zuerst nur bis zur zweiten Wiederholung. Dann erst stelle die Fragen nochmals bis zur fünften Wiederholung.</string>
 
+    <string name="pref_title_keep_screen_on">Bildschirm nicht abschalten</string>
+    <string name="pref_description_keep_screen_on">Bildschirm im Fragemodus nicht abschalten.</string>
+
     <string name="pref_ringtone_silent">Stumm</string>
     <string name="exam_simulation">Prüfungssimulation</string>
     <string name="learning">Lernen</string>

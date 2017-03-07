@@ -68,6 +68,7 @@
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="10dp"
                         android:text="@string/continueButtonText" />
+
                     <Button
                         android:id="@+id/skipButton"
                         android:layout_width="164dp"

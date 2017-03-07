@@ -2,6 +2,10 @@ Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronisation
 
+1.2.1.0:
+- Bugfixes
+- Bildschirm nicht ausschalten als Option
+
 1.2.0.0:
 - Prüfungssimulation überarbeitet
 
@@ -51,6 +55,10 @@ engl:
 Permissions:
 - Internet: Download Lichtblicke
 - Sync Settings + Accounts: Synchronization
+
+1.2.1.0:
+- Bugfixes
+- Option to keep screen on
 
 1.2.0.0:
 - Exam simulator overhaul

@@ -23,4 +23,10 @@
         android:key="pref_count_exam_answer_statistics"
         android:summary="@string/pref_description_count_exam_answer_statistics"
         android:title="@string/pref_title_count_exam_answer_statistics" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_keep_screen_on"
+        android:summary="@string/pref_description_keep_screen_on"
+        android:title="@string/pref_title_keep_screen_on" />
 </PreferenceScreen>
