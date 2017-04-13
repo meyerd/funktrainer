@@ -1,10 +1,11 @@
 Permissions:
 - Internet: Download Lichtblicke
 
-1.2.2.0:
+1.2.2.1:
 - Bugfixes
 - Synchronisation entfernt
 - Fragenauswahl im Prüfungsmodus überarbeitet
+- Unbenötigte Permissions entfernt
 
 1.2.1.0:
 - Bugfixes
@@ -63,6 +64,7 @@ Permissions:
 - Bugfixes
 - Remove sync
 - Fixup question selection for exam mode
+- Remove unused permission requests
 
 1.2.1.0:
 - Bugfixes

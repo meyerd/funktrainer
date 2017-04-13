@@ -14,8 +14,8 @@ android {
 //        }
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 38
-        versionName "1.2.2.0"
+        versionCode 39
+        versionName "1.2.2.1"
 //        jackOptions {
 //            enabled true
 //        }
@@ -25,7 +25,7 @@ android {
             minifyEnabled false
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
