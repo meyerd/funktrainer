@@ -107,7 +107,7 @@
     <string name="correct">Correct</string>
     <string name="wrong">Wrong</string>
     <string name="exam_result_recommendation_passed">Exam Passed! Let\'s go to the BNetzA!</string>
-    <string name="exam_result_recommendation_failed">Sorry, but that was not it. In order to pass this exam you need ad least 75% correct answers.</string>
+    <string name="exam_result_recommendation_failed">Sorry, but that was not it. In order to pass this exam you need at least 75% correct answers.</string>
     <string name="not_answered">not answered</string>
     <string name="pref_description_keep_screen_on">Keep screen on when displaying question</string>
     <string name="pref_title_keep_screen_on">Keep screen on</string>

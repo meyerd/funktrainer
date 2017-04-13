@@ -115,21 +115,56 @@ public class Repository extends SQLiteOpenHelper {
         // TODO: remove code duplication with selectQuestion function
         final List<Question> ret = new LinkedList<Question>();
         final List<Integer> possibleQuestions = new LinkedList<Integer>();
+        final List<Integer> categories = new LinkedList<Integer>();
 
+        final int minPerCategory = 2;
+
+        // Select categories from topic
         Cursor c;
-        c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+        c = getDb().rawQuery("SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?", new String[]{Integer.toString(topicId)});
         try {
             c.moveToNext();
             while (!c.isAfterLast()) {
-                final int qId = c.getInt(0);
-//                final int level = c.getInt(1);
-//                final long nextTime = c.getLong(2);
-                possibleQuestions.add(qId);
+                final int cId = c.getInt(0);
+                categories.add(cId);
                 c.moveToNext();
             }
         } finally {
             c.close();
         }
+
+        int selectPerCategory = Math.max(minPerCategory, (int)Math.ceil((double)nQuestions / categories.size()));
+
+        // Select nQuestion/#categories from each category
+        // TODO: think about a sql-only way to do this
+        for(int ct: categories) {
+            c = getDb().rawQuery("SELECT q._id FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id WHERE qt.category_id=? ORDER BY RANDOM() LIMIT ?",
+                    new String[]{Integer.toString(ct), Integer.toString(selectPerCategory)});
+            try {
+                c.moveToNext();
+                while (!c.isAfterLast()) {
+                    final int qId = c.getInt(0);
+                    possibleQuestions.add(qId);
+                    c.moveToNext();
+                }
+            } finally {
+                c.close();
+            }
+        }
+
+//        c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+//        try {
+//            c.moveToNext();
+//            while (!c.isAfterLast()) {
+//                final int qId = c.getInt(0);
+////                final int level = c.getInt(1);
+////                final long nextTime = c.getLong(2);
+//                possibleQuestions.add(qId);
+//                c.moveToNext();
+//            }
+//        } finally {
+//            c.close();
+//        }
 
         // shuffle questions and select nQuestions
         final int questionsInList = possibleQuestions.size();
@@ -142,31 +177,31 @@ public class Repository extends SQLiteOpenHelper {
             ret.add(q);
         }
 
-        // go through the list of questions and shuffle answers for exam mode
-        for(Question q: ret) {
-            // TODO: easier solution? this seems very stupid
-            List<String> answers = q.getAnswers();
-            List<String> answersHelp = q.getAnswersHelp();
-            final int nAnswers = answers.size();
-            List<String> newAnswers = new LinkedList<String>();
-            List<String> newAnswersHelp = new LinkedList<String>();
-            List<Integer> shuf = new ArrayList<Integer>(nAnswers);
-            for(int i = 0; i < nAnswers; i++) shuf.set(i, i);
-            java.util.Collections.shuffle(shuf);
-            for(int i = 0; i < nAnswers; i++) {
-                int from = shuf.get(i);
-                if(from == 0) {
-                    q.setCorrectAnswer(i);
-                }
-                newAnswers.add(answers.get(from));
-                newAnswersHelp.add(answersHelp.get(from));
-            }
-            q.setAnswers(newAnswers);
-            q.setAnswersHelp(newAnswersHelp);
-        }
+//        // go through the list of questions and shuffle answers for exam mode
+//        for(Question q: ret) {
+//            // TODO: easier solution? this seems very stupid
+//            List<String> answers = q.getAnswers();
+//            List<String> answersHelp = q.getAnswersHelp();
+//            final int nAnswers = answers.size();
+//            List<String> newAnswers = new LinkedList<String>();
+//            List<String> newAnswersHelp = new LinkedList<String>();
+//            List<Integer> shuf = new ArrayList<Integer>(nAnswers);
+//            for(int i = 0; i < nAnswers; i++) shuf.set(i, i);
+//            java.util.Collections.shuffle(shuf);
+//            for(int i = 0; i < nAnswers; i++) {
+//                int from = shuf.get(i);
+//                if(from == 0) {
+//                    q.setCorrectAnswer(i);
+//                }
+//                newAnswers.add(answers.get(from));
+//                newAnswersHelp.add(answersHelp.get(from));
+//            }
+//            q.setAnswers(newAnswers);
+//            q.setAnswersHelp(newAnswersHelp);
+//        }
 
         return ret;
-     }
+    }
 
     public QuestionSelection selectQuestionByTopicId(final int topicId) {
         return selectQuestion(null, -1, topicId);
@@ -646,8 +681,13 @@ public class Repository extends SQLiteOpenHelper {
         }
         if(oldVersion < 13) {
             // upgrade 12 -> 13
+            Log.i("Funktrainer", "DB upgrade 12->13");
             resetAuxiliarySyncTables(db);
         }
+//        if(oldVersion < 14) {
+//            // upgrade 13/12 -> 14
+//            Log.i("Funktrainer", "DB upgrade 13->14");
+//        }
 	}
 
     private static class LongDatabaseOperationTaskParams {

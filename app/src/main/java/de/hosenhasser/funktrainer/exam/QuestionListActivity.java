@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,8 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hosenhasser.funktrainer.R;
 import de.hosenhasser.funktrainer.data.ExamSettings;
@@ -64,9 +69,8 @@ public class QuestionListActivity extends Activity {
 
         if (questions == null ) {
             questions = new ArrayList<>();
-            for (int i = 0; i < examSettings.getnQuestions(); i++) {
-                int selected = repository.selectQuestionByTopicId(topicId).getSelectedQuestion();
-                Question q = repository.getQuestion(selected);
+            List<Question> qlist = repository.getQuestionsForExam(topicId, examSettings.getnQuestions());
+            for(Question q: qlist) {
                 questions.add(new QuestionState(q));
             }
         }
@@ -147,7 +151,7 @@ public class QuestionListActivity extends Activity {
         evaluateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < examSettings.getnQuestions(); i++) {
+                for (int i = 0; i < questions.size(); i++) {
                     QuestionState qs = questions.get(i);
                     Log.d(TAG, "question: " + qs.getQuestion(repository).getReference() + ", answer: " + qs.isCorrect());
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -169,5 +173,18 @@ public class QuestionListActivity extends Activity {
                 finish();
             }
         });
+
+        final TextView countdownText = (TextView)findViewById(R.id.countdownTimerText);
+
+        new CountDownTimer(examSettings.getnSecondsAvailable() * 1000L, 60 * 1000L) {
+            public void onTick(long millisUntilFinished) {
+                long minutes = (millisUntilFinished / (1000L * 60L)) % 60;
+                long hours = (millisUntilFinished / (1000L * 60L * 60L)) % 24;
+                countdownText.setText(hours + ":" + minutes);
+            }
+            public void onFinish() {
+                countdownText.setText("00:00");
+            }
+        }.start();
     }
 }

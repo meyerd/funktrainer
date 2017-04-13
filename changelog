@@ -1,6 +1,10 @@
 Permissions:
 - Internet: Download Lichtblicke
-- Sync Settings + Accounts: Synchronisation
+
+1.2.2.0:
+- Bugfixes
+- Synchronisation entfernt
+- Fragenauswahl im Prüfungsmodus überarbeitet
 
 1.2.1.0:
 - Bugfixes
@@ -54,7 +58,11 @@ engl:
 
 Permissions:
 - Internet: Download Lichtblicke
-- Sync Settings + Accounts: Synchronization
+
+1.2.2.0:
+- Bugfixes
+- Remove sync
+- Fixup question selection for exam mode
 
 1.2.1.0:
 - Bugfixes
