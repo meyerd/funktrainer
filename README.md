@@ -2,6 +2,9 @@ Funktrainer
 ===========
 
 This is an Android App for studying for your german Amateurfunklizenz.
+Install through the Play Store here: 
+
+https://play.google.com/store/apps/details?id=de.hosenhasser.funktrainer
 
 It is based on source code from Matthias Wimmer
 
