@@ -140,13 +140,13 @@ public class AdvancedQuestionAsker extends Activity {
 
     private void updateHistoryView() {
         final QuestionState histentry = history.get(history.size() - historyPosition);
-        TextView oldQuestionTextNumber = (TextView)findViewById(R.id.oldQuestionHeatTextNumber);
+        TextView oldQuestionTextNumber = findViewById(R.id.oldQuestionHeatTextNumber);
         oldQuestionTextNumber.setText(Integer.toString(-historyPosition));
 
-        final TextView referenceText = (TextView) findViewById(R.id.referenceTextold);
+        final TextView referenceText = findViewById(R.id.referenceTextold);
         referenceText.setText(histentry.getQuestion(repository).getReference());
 
-        final QuestionView questionView = (QuestionView) findViewById(R.id.questionViewOld);
+        final QuestionView questionView = findViewById(R.id.questionViewOld);
         questionView.setQuestionState(histentry);
         questionView.showCorrectAnswer();
         questionView.setRadioGroupEnabled(false);
@@ -203,13 +203,13 @@ public class AdvancedQuestionAsker extends Activity {
 
         showStandardView();
 
-        viewFlipper = (ViewFlipper)findViewById(R.id.questionAskerViewFlipper);
+        viewFlipper = findViewById(R.id.questionAskerViewFlipper);
         viewFlipper.setInAnimation(this, android.R.anim.fade_in);
         viewFlipper.setOutAnimation(this, android.R.anim.fade_out);
         CustomGestureDetector customGestureDetector = new CustomGestureDetector();
         gestureDetector = new GestureDetector(this, customGestureDetector);
 
-        final Button backToQuestionButton = (Button)findViewById(R.id.backToQuestionButton);
+        final Button backToQuestionButton = findViewById(R.id.backToQuestionButton);
         backToQuestionButton.setOnClickListener(new View.OnClickListener() {
 
             // @Override
@@ -371,12 +371,12 @@ public class AdvancedQuestionAsker extends Activity {
         setContentView(R.layout.question_asker);
         showingStandardView = true;
 
-        ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar1);
+        ProgressBar progress = findViewById(R.id.progressBar1);
         progress.setMax(5);
 
-        final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
-        final Button contButton = (Button) findViewById(R.id.button1);
-        final Button skipButton = (Button) findViewById(R.id.skipButton);
+        final QuestionView questionView = findViewById(R.id.questionView);
+        final Button contButton = findViewById(R.id.button1);
+        final Button skipButton = findViewById(R.id.skipButton);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean show_skip = sharedPref.getBoolean("pref_show_skip_button", false);
@@ -454,10 +454,10 @@ public class AdvancedQuestionAsker extends Activity {
             showStandardView();
         }
 
-        final ScrollView scrollView = (ScrollView) findViewById(R.id.questionAskerScrollView);
+        final ScrollView scrollView = findViewById(R.id.questionAskerScrollView);
         scrollView.fullScroll(View.FOCUS_UP);
 
-        final Button contButton = (Button) findViewById(R.id.button1);
+        final Button contButton = findViewById(R.id.button1);
         contButton.setEnabled(false);
 
         QuestionSelection nextQuestion;
@@ -492,7 +492,7 @@ public class AdvancedQuestionAsker extends Activity {
         showingStandardView = false;
         setContentView(R.layout.no_more_questions_finished);
 
-        final Button restartTopicButton = (Button) findViewById(R.id.restartTopic);
+        final Button restartTopicButton = findViewById(R.id.restartTopic);
         restartTopicButton.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
@@ -509,7 +509,7 @@ public class AdvancedQuestionAsker extends Activity {
             showingStandardView = false;
             setContentView(R.layout.no_more_questions_wait);
 
-            final TextView nextTimeText = (TextView) findViewById(R.id.nextTimeText);
+            final TextView nextTimeText = findViewById(R.id.nextTimeText);
             if (nextTime.getTime() - new Date().getTime() < 64800000L) {
                 nextTimeText.setText(DateFormat.getTimeInstance().format(nextTime));
             } else {
@@ -517,7 +517,7 @@ public class AdvancedQuestionAsker extends Activity {
             }
             showNextQuestionAt(nextTime);
 
-            final Button resetWaitButton = (Button) findViewById(R.id.resetWait);
+            final Button resetWaitButton = findViewById(R.id.resetWait);
             resetWaitButton.setOnClickListener(new View.OnClickListener() {
                 //@Override
                 public void onClick(View v) {
@@ -533,7 +533,7 @@ public class AdvancedQuestionAsker extends Activity {
 
         final Question question = currentQuestionState.getQuestion(repository);
 
-        final TextView levelText = (TextView) findViewById(R.id.levelText);
+        final TextView levelText = findViewById(R.id.levelText);
         levelText.setText(question.getLevel() == 0 ? getString(R.string.firstPass) :
                 question.getLevel() == 1 ? getString(R.string.secondPass) :
                         question.getLevel() == 2 ? getString(R.string.thirdPass) :
@@ -541,12 +541,12 @@ public class AdvancedQuestionAsker extends Activity {
                                         question.getLevel() == 4 ? getString(R.string.fifthPass) :
                                                 String.format(getString(R.string.passText), question.getLevel()));
 
-        final TextView referenceText = (TextView) findViewById(R.id.referenceText);
+        final TextView referenceText = findViewById(R.id.referenceText);
         referenceText.setText(question.getReference());
 
-        final QuestionView questionView = (QuestionView) findViewById(R.id.questionView);
+        final QuestionView questionView = findViewById(R.id.questionView);
         questionView.setQuestionState(currentQuestionState);
-        final Button contButton = (Button) findViewById(R.id.button1);
+        final Button contButton = findViewById(R.id.button1);
         questionView.getQuestionState().addQuestionStateListener(new QuestionState.QuestionStateListener() {
             @Override
             public void onAnswerSelected(int answer) {
@@ -557,19 +557,9 @@ public class AdvancedQuestionAsker extends Activity {
         contButton.setEnabled(currentQuestionState.hasAnswer());
 
 
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        final ProgressBar progressBar = findViewById(R.id.progressBar1);
         progressBar.setMax(maxProgress);
         progressBar.setProgress(currentProgress);
-
-//        // remove previous question image if any
-//        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
-//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-//            final View childAtIndex = linearLayout.getChildAt(i);
-//            if (childAtIndex instanceof ImageView) {
-//                linearLayout.removeViewAt(i);
-//                break;
-//            }
-//        }
     }
 
     private void showNextQuestionAt(final Date when) {

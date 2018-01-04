@@ -76,7 +76,7 @@ public class QuestionListActivity extends Activity {
         }
 
 
-        final ListView questionListView = (ListView) findViewById(R.id.questionListView);
+        final ListView questionListView = findViewById(R.id.questionListView);
         questionListView.setAdapter(new ListAdapter() {
             @Override
             public boolean areAllItemsEnabled() {
@@ -147,7 +147,7 @@ public class QuestionListActivity extends Activity {
             }
         });
 
-        Button evaluateButton = (Button) findViewById(R.id.evaluateButton);
+        Button evaluateButton = findViewById(R.id.evaluateButton);
         evaluateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +174,7 @@ public class QuestionListActivity extends Activity {
             }
         });
 
-        final TextView countdownText = (TextView)findViewById(R.id.countdownTimerText);
+        final TextView countdownText = findViewById(R.id.countdownTimerText);
 
         new CountDownTimer(examSettings.getnSecondsAvailable() * 1000L, 60 * 1000L) {
             public void onTick(long millisUntilFinished) {

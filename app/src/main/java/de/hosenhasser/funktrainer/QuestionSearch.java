@@ -78,8 +78,12 @@ public class QuestionSearch extends Activity {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(this.resource, parent, false);
             }
-            TextView tvListItem = (TextView) convertView.findViewById(this.textViewResourceId);
-            tvListItem.setText(n.label);
+            TextView tvListItem = convertView.findViewById(this.textViewResourceId);
+            if(n != null) {
+                tvListItem.setText(n.label);
+            } else {
+                tvListItem.setText("");
+            }
             return convertView;
         }
 
@@ -142,8 +146,8 @@ public class QuestionSearch extends Activity {
         repository = new Repository(this);
         SearchItem[] qs = repository.getAllQuestionIdentifiers();
 
-        lv = (ListView)findViewById(R.id.questionSearchList);
-        inputSearch = (EditText)findViewById(R.id.questionSearchInput);
+        lv = findViewById(R.id.questionSearchList);
+        inputSearch = findViewById(R.id.questionSearchInput);
 
         adapter = new SearchItemArrayAdapter(this, R.layout.question_search_list_item,
                 R.id.search_list_item, qs);
@@ -166,7 +170,12 @@ public class QuestionSearch extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 final Intent intent = new Intent(QuestionSearch.this, AdvancedQuestionAsker.class);
-                intent.putExtra(AdvancedQuestionAsker.class.getName() + ".questionId", adapter.getItem(position).id);
+                SearchItem si = adapter.getItem(position);
+                if(si != null) {
+                    intent.putExtra(AdvancedQuestionAsker.class.getName() + ".questionId", si.id);
+                } else {
+                    intent.putExtra(AdvancedQuestionAsker.class.getName() + ".questionId", 0);
+                }
                 startActivity(intent);
             }
         });

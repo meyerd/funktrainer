@@ -61,13 +61,13 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
         if(pdfView != null) {
             SharedPreferences.Editor ed = mPrefs.edit();
             ed.putInt("last_page_shown", pdfView.getCurrentPage());
-            ed.commit();
+            ed.apply();
         }
     }
 
     protected void showDownloadProgress(boolean show) {
-        final LinearLayout progressLayout = (LinearLayout)findViewById(R.id.lichtblickDownloadProgress);
-        final Button downloadButton = (Button) findViewById(R.id.lichtblickADownloadButton);
+        final LinearLayout progressLayout = findViewById(R.id.lichtblickDownloadProgress);
+        final Button downloadButton = findViewById(R.id.lichtblickADownloadButton);
         if (show) {
             progressLayout.setVisibility(View.VISIBLE);
             downloadButton.setEnabled(false);
@@ -93,9 +93,9 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
 
         if (!lichtblicke_a_downloaded) {
             setContentView(R.layout.activity_lichtblicke_downloader);
-            final TextView downloadLinkTextView = (TextView)findViewById(R.id.lichtblickeDownloaderLinkTextView);
+            final TextView downloadLinkTextView = findViewById(R.id.lichtblickeDownloaderLinkTextView);
             downloadLinkTextView.setMovementMethod(LinkMovementMethod.getInstance());
-            final Button downloadButton = (Button) findViewById(R.id.lichtblickADownloadButton);
+            final Button downloadButton = findViewById(R.id.lichtblickADownloadButton);
             downloadButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     downloadButton.setEnabled(false);
@@ -112,30 +112,17 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
 
-            this.pageToShow = getIntent().getExtras().getInt(getClass().getName() + ".lichtblickPage");
-//            this.pageToShow += 0;
+            this.pageToShow = getIntent().getExtras().getInt(getClass().getName() + ".lichtblickPage", 0);
 
             if (this.pageToShow <= 0) {
                 this.pageToShow = mPrefs.getInt("last_page_shown", 0);
             }
-            //        if(questionId != 0) {
-            //            QuestionSelection questionSel = repository.selectQuestionById(questionId);
-            //            int selectedQuestion = questionSel.getSelectedQuestion();
-            //            if(selectedQuestion != 0) {
-            //                final Question question = repository.getQuestion(selectedQuestion);
-            //                pageToShow = question.getLichtblickPage();
-            //            }
-            //        }
 
-            pdfView = (PDFView) findViewById(R.id.pdfview);
-            // pdfView.fromAsset(LICHTBLICKE_A_FILE)
+            pdfView = findViewById(R.id.pdfview);
             pdfView.fromFile(lichtblick_a_file)
-                    //                .pages(0, 1, 2, 3, 4, 5)
                     .defaultPage(this.pageToShow)
-//                    .showMinimap(false)
                     .enableSwipe(true)
                     .enableDoubletap(true)
-                    //                .onDraw
                     .onLoad(this)
                     .onPageChange(this)
                     .load();
@@ -266,7 +253,7 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
 
         protected void onProgressUpdate(Integer... progress) {
             Log.d("Funktrainer", "DownloadLichtblickFileAsync: " + progress[0]);
-            final ProgressBar pbar = (ProgressBar)findViewById(R.id.lichtblickeDownloaderProgressBar);
+            final ProgressBar pbar = findViewById(R.id.lichtblickeDownloaderProgressBar);
             pbar.setIndeterminate(false);
             pbar.setProgress(progress[0]);
         }
@@ -286,7 +273,7 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
                 mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
                 SharedPreferences.Editor ed = mPrefs.edit();
                 ed.putBoolean("lichtblicke_a_downloaded", true);
-                ed.commit();
+                ed.apply();
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);

@@ -29,9 +29,9 @@ public class ExamReportActivity extends Activity {
         setContentView(R.layout.exam_report);
 
         final QuestionResults results = (QuestionResults) getIntent().getSerializableExtra(getClass().getName() + ".result");
-        ExpandableListView resultsListView = (ExpandableListView) findViewById(R.id.resultList);
-        TextView resultsTopText = (TextView) findViewById(R.id.examResultTopText);
-        TextView resultsRecommendation = (TextView) findViewById(R.id.examResultRecommendation);
+        ExpandableListView resultsListView = findViewById(R.id.resultList);
+        TextView resultsTopText = findViewById(R.id.examResultTopText);
+        TextView resultsRecommendation = findViewById(R.id.examResultRecommendation);
 
         int nCorrect = 0;
         for(QuestionState r : results.getResults()) {
@@ -112,8 +112,8 @@ public class ExamReportActivity extends Activity {
                 } else {
                     v = view;
                 }
-                TextView reference = (TextView) v.findViewById(R.id.questionReference);
-                TextView result = (TextView) v.findViewById(R.id.questionResult);
+                TextView reference = v.findViewById(R.id.questionReference);
+                TextView result = v.findViewById(R.id.questionResult);
                 QuestionState qs = results.getResults().get(i);
                 reference.setText(qs.getQuestion(repository).getReference());
                 if (qs.hasAnswer()) {

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-	<item android:id="@+id/mainSettings" android:title="@string/menuSettings" android:titleCondensed="@string/menuSettingsCondensed" android:visible="true" android:enabled="true" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_preferences"></item>
-	<item android:id="@+id/mainSearch" android:title="@string/menuSearch" android:titleCondensed="@string/menuSearchCondensed" android:visible="true" android:enabled="true" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_search"></item>
-	<!--<item android:id="@+id/mainExamMode" android:title="@string/menuExamMode" android:titleCondensed="@string/menuExamModeCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>-->
-	<item android:id="@+id/mainLichtblick" android:title="@string/menuShowLichtblick" android:titleCondensed="@string/menuShowLichtblickCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>
-	<item android:id="@+id/mainFormelsammlung" android:title="@string/menuShowFormelsammlung" android:titleCondensed="@string/menuShowFormelsammlungCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>
-	<!--<item android:id="@+id/mainInfo" android:title="@string/menuInfo" android:titleCondensed="@string/menuInfoCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>-->
-	<!--<item android:id="@+id/mainHelp" android:title="@string/menuHelp" android:titleCondensed="@string/menuHelpCondensed" android:visible="true" android:enabled="true" android:showAsAction="never"></item>-->
+	<item android:id="@+id/mainSettings" android:title="@string/menuSettings" android:titleCondensed="@string/menuSettingsCondensed" android:visible="true" android:enabled="true" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_preferences" />
+	<item android:id="@+id/mainSearch" android:title="@string/menuSearch" android:titleCondensed="@string/menuSearchCondensed" android:visible="true" android:enabled="true" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_search" />
+	<item android:id="@+id/mainLichtblick" android:title="@string/menuShowLichtblick" android:titleCondensed="@string/menuShowLichtblickCondensed" android:visible="true" android:enabled="true" android:showAsAction="never" />
+	<item android:id="@+id/mainFormelsammlung" android:title="@string/menuShowFormelsammlung" android:titleCondensed="@string/menuShowFormelsammlungCondensed" android:visible="true" android:enabled="true" android:showAsAction="never" />
 </menu>

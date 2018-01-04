@@ -3,10 +3,6 @@
     package="de.hosenhasser.funktrainer"
     android:installLocation="auto">
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="21" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <!--<uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />-->
     <!--<uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />-->
@@ -16,8 +12,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:label="@string/app_name">
         <activity
             android:name=".FunkTrainerActivity"
             android:label="@string/app_name">
@@ -45,8 +40,13 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".FormelsammlungViewerActivity" />
-            android:label="@string/title_activity_settings" />
+        <activity android:name=".FormelsammlungViewerActivity"
+            android:label="@string/menuShowFormelsammlungCondensed"
+            android:parentActivityName=".AdvancedQuestionAsker">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hosenhasser.funktrainer.AdvancedQuestionAsker" />
+        </activity>
         <activity
             android:name=".exam.QuestionListActivity"
             android:label="@string/exam_simulation"

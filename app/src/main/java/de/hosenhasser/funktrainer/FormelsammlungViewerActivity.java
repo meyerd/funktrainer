@@ -33,7 +33,7 @@ public class FormelsammlungViewerActivity extends Activity implements OnLoadComp
         if(pdfView != null) {
             SharedPreferences.Editor ed = mPrefs.edit();
             ed.putInt("last_page_shown", pdfView.getCurrentPage());
-            ed.commit();
+            ed.apply();
         }
     }
 
@@ -54,7 +54,6 @@ public class FormelsammlungViewerActivity extends Activity implements OnLoadComp
         Bundle bund = getIntent().getExtras();
         if(bund != null) {
             this.pageToShow = bund.getInt(getClass().getName() + ".lichtblickPage");
-            // this.pageToShow += 0;
         } else {
             this.pageToShow = 0;
         }
@@ -62,23 +61,12 @@ public class FormelsammlungViewerActivity extends Activity implements OnLoadComp
         if (this.pageToShow <= 0) {
             this.pageToShow = mPrefs.getInt("last_page_shown", 0);
         }
-        //        if(questionId != 0) {
-        //            QuestionSelection questionSel = repository.selectQuestionById(questionId);
-        //            int selectedQuestion = questionSel.getSelectedQuestion();
-        //            if(selectedQuestion != 0) {
-        //                final Question question = repository.getQuestion(selectedQuestion);
-        //                pageToShow = question.getLichtblickPage();
-        //            }
-        //        }
 
-        pdfView = (PDFView) findViewById(R.id.formelsammlung_pdfview);
+        pdfView = findViewById(R.id.formelsammlung_pdfview);
         pdfView.fromAsset(FORMELSAMMLUNG_FILE)
-                //                .pages(0, 1, 2, 3, 4, 5)
                 .defaultPage(this.pageToShow)
-//                    .showMinimap(false)
                 .enableSwipe(true)
                 .enableDoubletap(true)
-                //                .onDraw
                 .onLoad(this)
                 .onPageChange(this)
                 .load();

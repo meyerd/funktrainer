@@ -54,7 +54,7 @@ public class FunkTrainerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        TabHost th = (TabHost) findViewById(R.id.tabhost);
+        TabHost th = findViewById(R.id.tabhost);
         th.setup();
 
         // TODO strings
@@ -79,7 +79,7 @@ public class FunkTrainerActivity extends Activity {
     public void onResume() {
     	super.onResume();
     	
-    	final ListView topicList = (ListView) findViewById(R.id.topic);
+    	final ListView topicList = findViewById(R.id.topic);
         
         this.adapter = new SimpleCursorAdapter(this,
                 R.layout.topic_list_item,
@@ -129,7 +129,7 @@ public class FunkTrainerActivity extends Activity {
 		});
 
 
-        final ListView examTopicList = (ListView) findViewById(R.id.examTopic);
+        final ListView examTopicList = findViewById(R.id.examTopic);
 
         SimpleCursorAdapter examTopicAdapter = new SimpleCursorAdapter(
                 this,
@@ -157,7 +157,7 @@ public class FunkTrainerActivity extends Activity {
     public void onPause() {
     	super.onPause();
     	
-    	final ListView topicList = (ListView) findViewById(R.id.topic);
+    	final ListView topicList = findViewById(R.id.topic);
     	
     	final SimpleCursorAdapter adapter = (SimpleCursorAdapter) topicList.getAdapter();
     	final Cursor previousCursor = adapter.getCursor();

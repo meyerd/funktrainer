@@ -52,7 +52,7 @@ public class SearchItem implements Comparable<SearchItem> {
 		if (getClass() != obj.getClass())
 			return false;
 		SearchItem other = (SearchItem)obj;
-		if (other.label == this.label)
+		if (other.label.equals(this.label))
 			return true;
 		return false;
 	}
