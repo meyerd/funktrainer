@@ -9,8 +9,8 @@ android {
         targetSdkVersion 26
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 41
-        versionName "1.2.2.3"
+        versionCode 42
+        versionName "1.2.2.4"
     }
     buildTypes {
         debug {
