@@ -52,7 +52,7 @@ public class QuestionView extends LinearLayout {
         inflate(getContext(), R.layout.question, this);
         this.radioGroup = findViewById(R.id.radioGroup1);
         questionTextView = findViewById(R.id.textViewQuestion);
-        repository = new Repository(getContext());
+        repository = Repository.getInstance();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

@@ -22,7 +22,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +30,7 @@ import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 import de.hosenhasser.funktrainer.FunkTrainerActivity;
+import de.hosenhasser.funktrainer.FunktrainerApplication;
 import de.hosenhasser.funktrainer.R;
 
 import android.app.ProgressDialog;
@@ -47,6 +47,8 @@ import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 
 public class Repository extends SQLiteOpenHelper {
+    private static volatile Repository sRepositorySingletonInstance;
+
 	private final Context context;
 	private SQLiteDatabase database;
 	private final String done;
@@ -57,15 +59,31 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 14;
 
-    private static final String DATABASE_SOURCE_SQL_12 = "database_scheme_and_data_12.sql";
+    private static final String DATABASE_SOURCE_SQL_14 = "database_scheme_and_data_14.sql";
+    private static final String DATABASE_SOURCE_SQL_13_TO_14 = "outdated_questions_scheme_and_data_14.sql";
 
-	public Repository(final Context context) {
-		super(context, "topics", null, DATABASE_VERSION);
-		done = context.getString(R.string.done);
-		this.context = context;
-	}
+    private Repository() {
+        super(FunktrainerApplication.getAppContext(), "topics", null, DATABASE_VERSION);
+        final Context context = FunktrainerApplication.getAppContext();
+        done = context.getString(R.string.done);
+        this.context = context;
+    }
+
+    public static Repository getInstance() {
+        if (sRepositorySingletonInstance == null) {
+            synchronized (Repository.class) {
+                if (sRepositorySingletonInstance == null) sRepositorySingletonInstance = new Repository();
+            }
+        }
+
+        return sRepositorySingletonInstance;
+    }
+
+    protected Repository readResolve() {
+        return getInstance();
+    }
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -137,8 +155,18 @@ public class Repository extends SQLiteOpenHelper {
 
         // Select nQuestion/#categories from each category
         // TODO: think about a sql-only way to do this
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        boolean show_outdated = sharedPref.getBoolean("pref_show_outdated", false);
+
         for(int ct: categories) {
-            c = getDb().rawQuery("SELECT q._id FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id WHERE qt.category_id=? ORDER BY RANDOM() LIMIT ?",
+            String query = "";
+            if(show_outdated) {
+                query = "SELECT q._id FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id WHERE qt.category_id=? ORDER BY RANDOM() LIMIT ?";
+            } else {
+                query = "SELECT q._id FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL AND qt.category_id=? ORDER BY RANDOM() LIMIT ?";
+            }
+            c = getDb().rawQuery(query,
                     new String[]{Integer.toString(ct), Integer.toString(selectPerCategory)});
             try {
                 c.moveToNext();
@@ -152,20 +180,6 @@ public class Repository extends SQLiteOpenHelper {
             }
         }
 
-//        c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
-//        try {
-//            c.moveToNext();
-//            while (!c.isAfterLast()) {
-//                final int qId = c.getInt(0);
-////                final int level = c.getInt(1);
-////                final long nextTime = c.getLong(2);
-//                possibleQuestions.add(qId);
-//                c.moveToNext();
-//            }
-//        } finally {
-//            c.close();
-//        }
-
         // shuffle questions and select nQuestions
         final int questionsInList = possibleQuestions.size();
         final int selectNQuestions = Math.min(questionsInList, nQuestions);
@@ -176,29 +190,6 @@ public class Repository extends SQLiteOpenHelper {
             Question q = this.getQuestion(possibleQuestions.remove(0));
             ret.add(q);
         }
-
-//        // go through the list of questions and shuffle answers for exam mode
-//        for(Question q: ret) {
-//            // TODO: easier solution? this seems very stupid
-//            List<String> answers = q.getAnswers();
-//            List<String> answersHelp = q.getAnswersHelp();
-//            final int nAnswers = answers.size();
-//            List<String> newAnswers = new LinkedList<String>();
-//            List<String> newAnswersHelp = new LinkedList<String>();
-//            List<Integer> shuf = new ArrayList<Integer>(nAnswers);
-//            for(int i = 0; i < nAnswers; i++) shuf.set(i, i);
-//            java.util.Collections.shuffle(shuf);
-//            for(int i = 0; i < nAnswers; i++) {
-//                int from = shuf.get(i);
-//                if(from == 0) {
-//                    q.setCorrectAnswer(i);
-//                }
-//                newAnswers.add(answers.get(from));
-//                newAnswersHelp.add(answersHelp.get(from));
-//            }
-//            q.setAnswers(newAnswers);
-//            q.setAnswersHelp(newAnswersHelp);
-//        }
 
         return ret;
     }
@@ -228,17 +219,28 @@ public class Repository extends SQLiteOpenHelper {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
         boolean through_mode = sharedPref.getBoolean("pref_through_mode", false);
+        boolean show_outdated = sharedPref.getBoolean("pref_show_outdated", false);
+
+        String query_through_mode = "SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL AND ct.topic_id=? AND q.level <= 1 ORDER BY q.next_time";
+        String query_through_mode_second_query = "SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL AND ct.topic_id=? ORDER BY q.next_time";
+        String query_not_through_mode = "SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL AND ct.topic_id=? ORDER BY q.next_time";
+
+        if(show_outdated) {
+            query_through_mode = "SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? AND q.level <= 1 ORDER BY q.next_time";
+            query_through_mode_second_query = "SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time";
+            query_not_through_mode = "SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time";
+        }
 
         Cursor c;
         if(topicId > -1) {
             if (through_mode) {
-                c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? AND q.level <= 1 ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+                c = getDb().rawQuery(query_through_mode, new String[]{Integer.toString(topicId)});
                 if (c.getCount() <= 0) {
                     c.close();
-                    c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+                    c = getDb().rawQuery(query_through_mode_second_query, new String[]{Integer.toString(topicId)});
                 }
             } else {
-                c = getDb().rawQuery("SELECT q._id, q.level, q.next_time FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=? ORDER BY q.next_time", new String[]{Integer.toString(topicId)});
+                c = getDb().rawQuery(query_not_through_mode, new String[]{Integer.toString(topicId)});
             }
         } else if(questionReference != null) {
             c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
@@ -337,6 +339,14 @@ public class Repository extends SQLiteOpenHelper {
         } finally {
             lichtblick.close();
         }
+
+        final Cursor outdated = getDb().query("outdated_questions", new String[]{"_id", "question_id"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, null);
+        if(outdated.getCount() > 0) {
+            question.setOutdated(true);
+        } else {
+            question.setOutdated(false);
+        }
+        outdated.close();
 		
 		return question;
 	}
@@ -369,7 +379,15 @@ public class Repository extends SQLiteOpenHelper {
 		int maxProgress = 0;
 		int questionCount = 0;
 
-        final Cursor c = getDb().rawQuery("SELECT q._id, q.level FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=?", new String[]{Integer.toString(topicId)});
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        boolean show_outdated = sharedPref.getBoolean("pref_show_outdated", false);
+
+        String query = "SELECT q._id, q.level FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL AND ct.topic_id=?";
+        if(show_outdated) {
+            query = "SELECT q._id, q.level FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN category_to_topic ct ON ct.category_id = qt.category_id WHERE ct.topic_id=?";
+        }
+
+        final Cursor c = getDb().rawQuery(query, new String[]{Integer.toString(topicId)});
 		try {
 			c.moveToNext();
 			while (!c.isAfterLast()) {
@@ -462,9 +480,6 @@ public class Repository extends SQLiteOpenHelper {
             Cursor c1 = db.rawQuery("UPDATE sync SET modified = ? WHERE question_id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Long.toString(now), Integer.toString(topicId)});
             c1.moveToNext();
             c1.close();
-            /* db.rawQuery("UPDATE question SET level = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});
-            db.rawQuery("UPDATE question SET wrong = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});
-            db.rawQuery("UPDATE question SET correct = 0 WHERE _id IN (SELECT qt.question_id FROM question_to_category qt WHERE qt.category_id IN (SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?));", new String[]{Integer.toString(topicId)});*/
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -546,17 +561,8 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private long waitingTimeOnLevel(final int level) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
-        // long waiting_time = sharedPref.getLong("pref_waiting_time_on_level_" + Integer.toString(level), 0L);
-        //long waiting_time = sharedPref.getLong("pref_waiting_time_on_level_0", 0L);
         // TODO: whooooot??? get it as string and then parse long again?
         long waiting_time = Long.valueOf(sharedPref.getString("pref_waiting_time_on_level_" + Integer.toString(level), "0"));
-//		return level <= 0 ? 15000L :
-//			level == 1 ? 60000L :
-//			level == 2 ? 30*60000L :
-//			level == 3 ? 86400000L :
-//			level == 4 ? 3*86400000L :
-//			0;
-        // Log.d("Funktrainer", "waitingTimeOnLevel: " + Long.toString(waiting_time));
         return waiting_time * 1000;
 	}
 	
@@ -590,10 +596,10 @@ public class Repository extends SQLiteOpenHelper {
         }
     }
 
-    private void importDatabaseFromSQL(SQLiteDatabase db) {
+    private void importDatabaseFromSQLFile(SQLiteDatabase db, final String file) {
         db.beginTransaction();
         try {
-            InputStream is = context.getResources().getAssets().open(DATABASE_SOURCE_SQL_12);
+            InputStream is = context.getResources().getAssets().open(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             String line;
@@ -613,6 +619,14 @@ public class Repository extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+
+    private void importDatabaseUpgrade13to14FromSQL(SQLiteDatabase db) {
+        this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_13_TO_14);
+    }
+
+    private void importDatabaseFromSQL(SQLiteDatabase db) {
+	    this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14);
     }
 
     private void realOnCreate(SQLiteDatabase db) {
@@ -684,10 +698,11 @@ public class Repository extends SQLiteOpenHelper {
             Log.i("Funktrainer", "DB upgrade 12->13");
             resetAuxiliarySyncTables(db);
         }
-//        if(oldVersion < 14) {
-//            // upgrade 13/12 -> 14
-//            Log.i("Funktrainer", "DB upgrade 13->14");
-//        }
+        if(oldVersion < 14) {
+            // upgrade 13/12 -> 14
+            Log.i("Funktrainer", "DB upgrade 13->14");
+            importDatabaseUpgrade13to14FromSQL(db);
+        }
 	}
 
     private static class LongDatabaseOperationTaskParams {

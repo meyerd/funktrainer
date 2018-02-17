@@ -40,6 +40,7 @@ public class Question implements Parcelable {
 	private String help = "";
 	private int lichtblickPage = 0;
 	private int correctAnswer = 0;
+	private boolean outdated = false;
 
 	public int getId() {
 		return id;
@@ -101,6 +102,8 @@ public class Question implements Parcelable {
 	public void setLichtblickPage(int lichtblickPage) { this.lichtblickPage = lichtblickPage; }
 	public void setCorrectAnswer(int correctAnswer) { this.correctAnswer = correctAnswer; }
 	public int getCorrectAnswer() {return this.correctAnswer; }
+	public void setOutdated(boolean outdated) { this.outdated = outdated; }
+	public boolean getOutdated() {return this.outdated; }
 
 	@Override
     public int describeContents() {
@@ -123,6 +126,7 @@ public class Question implements Parcelable {
         pc.writeString(help);
         pc.writeInt(lichtblickPage);
         pc.writeInt(correctAnswer);
+        pc.writeInt(outdated ? 1 : 0);
     }
 
     public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
@@ -154,5 +158,6 @@ public class Question implements Parcelable {
         help = pc.readString();
         lichtblickPage = pc.readInt();
         correctAnswer = pc.readInt();
+        outdated = (pc.readInt() != 0);
     }
 }

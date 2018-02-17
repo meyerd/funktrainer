@@ -111,5 +111,6 @@
     <string name="not_answered">not answered</string>
     <string name="pref_description_keep_screen_on">Keep screen on when displaying question</string>
     <string name="pref_title_keep_screen_on">Keep screen on</string>
-
+    <string name="show_outdated_title">Show outdated questions</string>
+    <string name="show_outdated">Show questions, that are no longer used in exams.</string>
 </resources>

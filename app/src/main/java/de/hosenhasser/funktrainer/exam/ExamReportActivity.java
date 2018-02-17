@@ -24,7 +24,7 @@ public class ExamReportActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        repository = new Repository(this);
+        repository = Repository.getInstance();
 
         setContentView(R.layout.exam_report);
 

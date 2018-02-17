@@ -37,7 +37,6 @@ public class StatisticsActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		repository.close();
 		repository = null;
 	}
 	
@@ -52,7 +51,7 @@ public class StatisticsActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        repository = new Repository(this);
+        repository = Repository.getInstance();
         
         if (savedInstanceState != null) {
         	topicId = (int) savedInstanceState.getLong(getClass().getName()+".topic");

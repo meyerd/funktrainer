@@ -23,6 +23,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.GestureDetector;
@@ -73,13 +75,14 @@ public class AdvancedQuestionAsker extends Activity {
 
     private static final int MAX_HISTORY_LENGTH = 30;
 
+    private ColorStateList oldTextColor;
+
     @Override
     public void onDestroy() {
         super.onDestroy();
 
         cancelTimer();
 
-        repository.close();
         repository = null;
         nextTime = null;
     }
@@ -145,6 +148,11 @@ public class AdvancedQuestionAsker extends Activity {
 
         final TextView referenceText = findViewById(R.id.referenceTextold);
         referenceText.setText(histentry.getQuestion(repository).getReference());
+        if(histentry.getQuestion(repository).getOutdated()) {
+            referenceText.setTextColor(Color.RED);
+        } else {
+            referenceText.setTextColor(this.oldTextColor);
+        }
 
         final QuestionView questionView = findViewById(R.id.questionViewOld);
         questionView.setQuestionState(histentry);
@@ -192,7 +200,7 @@ public class AdvancedQuestionAsker extends Activity {
 
         mUpdateNextAnswered = true;
 
-        repository = new Repository(this);
+        repository = Repository.getInstance();
         mPrefs = getSharedPreferences("advanced_question_asker_shared_preferences", MODE_PRIVATE);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -218,6 +226,9 @@ public class AdvancedQuestionAsker extends Activity {
                 viewFlipper.showNext();
             }
         });
+
+        final TextView referenceText = findViewById(R.id.referenceText);
+        this.oldTextColor = referenceText.getTextColors();
 
         if (savedInstanceState != null) {
             topicId = (int) savedInstanceState.getLong(getClass().getName() + ".topic");
@@ -543,6 +554,11 @@ public class AdvancedQuestionAsker extends Activity {
 
         final TextView referenceText = findViewById(R.id.referenceText);
         referenceText.setText(question.getReference());
+        if(question.getOutdated()) {
+            referenceText.setTextColor(Color.RED);
+        } else {
+            referenceText.setTextColor(this.oldTextColor);
+        }
 
         final QuestionView questionView = findViewById(R.id.questionView);
         questionView.setQuestionState(currentQuestionState);

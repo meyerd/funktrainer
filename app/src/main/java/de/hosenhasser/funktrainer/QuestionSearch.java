@@ -143,7 +143,7 @@ public class QuestionSearch extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_search);
 
-        repository = new Repository(this);
+        repository = Repository.getInstance();
         SearchItem[] qs = repository.getAllQuestionIdentifiers();
 
         lv = findViewById(R.id.questionSearchList);

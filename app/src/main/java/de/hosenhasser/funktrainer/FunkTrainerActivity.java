@@ -68,7 +68,7 @@ public class FunkTrainerActivity extends Activity {
         ts2.setContent(R.id.tab2);
         th.addTab(ts2);
           
-        repository = new Repository(this);
+        repository = Repository.getInstance();
     }
 
     public void updateAdapter() {
