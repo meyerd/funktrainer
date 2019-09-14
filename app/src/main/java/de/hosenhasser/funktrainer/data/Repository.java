@@ -180,6 +180,30 @@ public class Repository extends SQLiteOpenHelper {
             }
         }
 
+        // in case we don't have enough questions, select some more globally until
+        // enough unique questions are there
+        while(possibleQuestions.size() < nQuestions) {
+            String query = "";
+            if(show_outdated) {
+                query = "SELECT q._id FROM question q ORDER BY RANDOM() LIMIT ?";
+            } else {
+                query = "SELECT q._id FROM question q LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL ORDER BY RANDOM() LIMIT ?";
+            }
+            c = getDb().rawQuery(query,
+                    new String[]{Integer.toString(10)});
+            try {
+                c.moveToNext();
+                while (!c.isAfterLast()) {
+                    final int qId = c.getInt(0);
+                    if(!possibleQuestions.contains(qId))
+                        possibleQuestions.add(qId);
+                    c.moveToNext();
+                }
+            } finally {
+                c.close();
+            }
+        }
+
         // shuffle questions and select nQuestions
         final int questionsInList = possibleQuestions.size();
         final int selectNQuestions = Math.min(questionsInList, nQuestions);
