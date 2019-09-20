@@ -4,11 +4,11 @@ sudo: false
 
 android:
     components:
-      - build-tools-26.1.1
-      - platform-tools-29.0.4
+      - build-tools
+      - platform-tools
       - android-28
       - android-27
-      - tools-26.1.1
+      - tools
       # - extra-google-google_play_services
       - extra-google-m2repository
       - extra-android-m2repository
