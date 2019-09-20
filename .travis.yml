@@ -25,9 +25,9 @@ android:
 #  - adb shell input keyevent 82 &
 
 script:
-  - gradle clean buildDependents
-  - gradle check
-  - gradle test
+  - ./gradlew clean buildDependents
+  - ./gradlew check
+  - ./gradlew test
 #  - ./gradlew connectedAndroidTest
 
 
