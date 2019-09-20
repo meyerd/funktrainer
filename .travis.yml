@@ -10,11 +10,9 @@ android:
       - emulator
 #      - android-27
       - tools
-#      - extra-google-m2repository
-      - extras;android;m2repository
-#      - extra-android-m2repository
-      - extras;google;m2repository
-#      - sys-img-x86-android-27
+      - extra-google-m2repository
+      - extra-android-m2repository
+      - sys-img-x86-android-27
 
 # before_install:
 #   - yes | sdkmanager "platforms;android-27"
