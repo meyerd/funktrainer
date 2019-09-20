@@ -2,7 +2,7 @@
 .idea/
 app/build/
 build/
-gradle/
+gradle/wrapper/gradle-wrapper.jar
 import-summary.txt
 local.properties
 server/
