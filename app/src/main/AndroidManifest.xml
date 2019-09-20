@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="de.hosenhasser.funktrainer"
     android:installLocation="auto">
 
@@ -14,7 +15,10 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name=".FunktrainerApplication">
+        android:fullBackupContent="@xml/app_backup_rules"
+        android:name=".FunktrainerApplication"
+        android:supportsRtl="false"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".FunkTrainerActivity"
             android:label="@string/app_name">

@@ -1,5 +1,6 @@
 package de.hosenhasser.funktrainer.exam;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -177,11 +178,13 @@ public class QuestionListActivity extends Activity {
         final TextView countdownText = findViewById(R.id.countdownTimerText);
 
         new CountDownTimer(examSettings.getnSecondsAvailable() * 1000L, 60 * 1000L) {
+            @SuppressLint("SetTextI18n")
             public void onTick(long millisUntilFinished) {
                 long minutes = (millisUntilFinished / (1000L * 60L)) % 60;
                 long hours = (millisUntilFinished / (1000L * 60L * 60L)) % 24;
                 countdownText.setText(hours + ":" + minutes);
             }
+            @SuppressLint("SetTextI18n")
             public void onFinish() {
                 countdownText.setText("00:00");
             }

@@ -116,8 +116,10 @@
     <string name="correct">Richtig</string>
     <string name="wrong">Falsch</string>
     <string name="exam_result_recommendation_passed">Prüfung bestanden! Auf zur BNetzA!</string>
-    <string name="exam_result_recommendation_failed">Schade, das war\'s noch nicht. Zum Bestehen dieses Prüfungsteils müssen 75% erreicht werden.</string>
+    <string name="exam_result_recommendation_failed">Schade, das war\'s noch nicht. Zum Bestehen dieses Prüfungsteils müssen 75\% erreicht werden.</string>
     <string name="not_answered">nicht bearbeitet</string>
     <string name="show_outdated_title">Zeige nicht mehr relevante Prüfungsfragen</string>
     <string name="show_outdated">Zeige Prüfungsfragen, die nicht mehr in Prüfungen verwendet werden.</string>
+    <string name="midnightTime">00:00</string>
+    <string name="zeroString">0</string>
 </resources>

@@ -20,10 +20,10 @@
             android:id="@+id/countdownTimerText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:padding="10sp"
-            android:text="00:00"
+            android:text="@string/midnightTime"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="?android:attr/textColorHighlightInverse" />
 
@@ -31,7 +31,7 @@
             android:id="@+id/evaluateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:text="@string/exam_evaluate" />
     </LinearLayout>
 

@@ -1,7 +1,7 @@
 /*  vim: set sw=4 tabstop=4 fileencoding=UTF-8:
  *
  *  Copyright 2014 Matthias Wimmer
- *  		  2015 Dominik Meyer
+ *  		  2019 Dominik Meyer
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -29,19 +29,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import de.hosenhasser.funktrainer.FunkTrainerActivity;
 import de.hosenhasser.funktrainer.FunktrainerApplication;
 import de.hosenhasser.funktrainer.R;
 
-import android.app.ProgressDialog;
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
@@ -49,13 +46,11 @@ import android.widget.SimpleCursorAdapter;
 public class Repository extends SQLiteOpenHelper {
     private static volatile Repository sRepositorySingletonInstance;
 
-	private final Context context;
+	private Context context;
 	private SQLiteDatabase database;
 	private final String done;
 
     private final ReentrantLock objlock = new ReentrantLock();
-
-	private ProgressDialog pDialog;
 	
 	private static final int NUMBER_LEVELS = 5;
 
@@ -88,8 +83,7 @@ public class Repository extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
         // TODO: is the deferred database creation interfering on slow devices; lock necessary?
-//        startLongDatabaseOperation(db, 0, 0, 0);
-         realOnCreate(db);
+        realOnCreate(db);
 	}
 
     public int getFirstTopicIdForQuestionId(final int questionId) {
@@ -729,85 +723,10 @@ public class Repository extends SQLiteOpenHelper {
         }
 	}
 
-    private static class LongDatabaseOperationTaskParams {
-        public ProgressDialog pDialog;
-        public Context context;
-        public SQLiteDatabase db;
-        public int operation;
-        public int oldVersion;
-        public int newVersion;
-    }
-
-	private class LongDatabaseOperationTask extends AsyncTask<LongDatabaseOperationTaskParams, Integer, Integer> {
-        public LongDatabaseOperationTaskParams params;
-
-        protected Integer doInBackground(LongDatabaseOperationTaskParams... params) {
-            Log.i("Funktrainer", "Starting long database operation.");
-            this.params = params[0];
-
-            switch (this.params.operation) {
-                case 0: // create new
-                    realOnCreate(this.params.db);
-                    break;
-                case 1: // upgrade
-                    realUpgrade(this.params.db, this.params.oldVersion, this.params.newVersion);
-                    break;
-                default:
-                    throw new RuntimeException("invalid use of startLongDatabaseOperation");
-            }
-
-            Log.i("Funktrainer", "Long database operation done.");
-
-            return 0;
-        }
-
-        protected void onProgressUpdate(Integer percent) {
-            this.params.pDialog.setProgress(percent);
-        }
-
-        protected void onPostExecute(Integer res) {
-            this.params.pDialog.dismiss();
-            objlock.unlock();
-            final Intent intent = new Intent(this.params.context, FunkTrainerActivity.class);
-            this.params.context.startActivity(intent);
-//            FunkTrainerActivity mainactivity = (FunkTrainerActivity)this.params.context;
-//            mainactivity.updateAdapter();
-        }
-    }
-
-
-	void startLongDatabaseOperation(SQLiteDatabase db, final int operation, int oldVersion,
-									int newVersion) {
-		this.pDialog = ProgressDialog.show(this.context, this.context.getString(R.string.messagePleaseWait),
-				this.context.getString(R.string.messagePreparing), true, false);
-		LongDatabaseOperationTaskParams tp = new LongDatabaseOperationTaskParams();
-        tp.context = this.context;
-        tp.db = db;
-        tp.operation = operation;
-        tp.oldVersion = oldVersion;
-        tp.newVersion = newVersion;
-        tp.pDialog = pDialog;
-
-        objlock.lock();
-
-        new LongDatabaseOperationTask().execute(tp);
-	}
-
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i("Funktrainer", "upgrading database from version " + oldVersion + " to new version "
 				+ newVersion);
-//        // TODO: this is not shown?
-//        Context context = this.context;
-//        CharSequence text = "Updating Database ...";
-//        int duration = Toast.LENGTH_LONG;
-//        Toast toast = Toast.makeText(context, text, duration);
-//        toast.show();
-//		startLongDatabaseOperation(db, 1, oldVersion, newVersion);
-//
-//        objlock.lock();
-//        Log.i("Funktrainer", "upgrade done.");
-//        objlock.unlock();
         realUpgrade(db, oldVersion, newVersion);
         Log.i("Funktrainer", "Database upgrade finished");
 	}

@@ -2,7 +2,7 @@
 <resources>
     <!--<color name="correctAnswer">#040</color>-->
     <color name="correctAnswer">#99CC00</color>
-    <color name="defaultBackground">#00000000</color>
+<!--    <color name="defaultBackground">#00000000</color>-->
 
     <!--<color name="primary">#4caf50</color>-->
     <!--<color name="primary_dark">#388e3c</color>-->

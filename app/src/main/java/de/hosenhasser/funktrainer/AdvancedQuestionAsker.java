@@ -44,6 +44,7 @@ import android.widget.ViewFlipper;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -144,7 +145,8 @@ public class AdvancedQuestionAsker extends Activity {
     private void updateHistoryView() {
         final QuestionState histentry = history.get(history.size() - historyPosition);
         TextView oldQuestionTextNumber = findViewById(R.id.oldQuestionHeatTextNumber);
-        oldQuestionTextNumber.setText(Integer.toString(-historyPosition));
+//        oldQuestionTextNumber.setText(Integer.toString(-historyPosition));
+        oldQuestionTextNumber.setText(String.format(Locale.getDefault(), "%d", -historyPosition));
 
         final TextView referenceText = findViewById(R.id.referenceTextold);
         referenceText.setText(histentry.getQuestion(repository).getReference());

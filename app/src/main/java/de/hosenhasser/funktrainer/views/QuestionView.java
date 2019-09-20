@@ -24,7 +24,6 @@ import de.hosenhasser.funktrainer.data.QuestionState;
 import de.hosenhasser.funktrainer.data.Repository;
 
 public class QuestionView extends LinearLayout {
-    private boolean replaceNNBSP = Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
     private RadioGroup radioGroup;
     private TextView questionTextView;
@@ -135,6 +134,7 @@ public class QuestionView extends LinearLayout {
     }
 
     private String safeText(final String source) {
+        boolean replaceNNBSP = false;
         return replaceNNBSP && source != null ? source.replace('\u202f', '\u00a0') : source;
     }
 

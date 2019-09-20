@@ -38,6 +38,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.data.SearchItem;
@@ -108,7 +109,8 @@ public class QuestionSearch extends Activity {
                     } else {
                         List<SearchItem> n = new ArrayList<SearchItem>();
                         for (SearchItem s : originalSearchItems) {
-                            if (s.label.toUpperCase().startsWith(constraint.toString().toUpperCase())) {
+                            if (s.label.toUpperCase(Locale.getDefault()).startsWith(
+                                    constraint.toString().toUpperCase(Locale.getDefault()))) {
                                 n.add(s);
                             }
                         }

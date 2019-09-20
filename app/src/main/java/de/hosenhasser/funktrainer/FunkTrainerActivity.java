@@ -25,6 +25,7 @@ import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.exam.QuestionListActivity;
 
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -88,6 +89,7 @@ public class FunkTrainerActivity extends Activity {
                 new int[]{R.id.topicListItem, R.id.topicStatusView, R.id.nextQuestionTime});
 
         adapter.setViewBinder(new ViewBinder() {
+            @SuppressLint("SetTextI18n")
             public boolean setViewValue(View view, Cursor cursor,
                                         int columnIndex) {
 

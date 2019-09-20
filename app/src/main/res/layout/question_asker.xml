@@ -1,161 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ViewFlipper
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativeLayout">
-    <ViewFlipper
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/questionAskerViewFlipper"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent" android:layout_height="fill_parent"
-                android:orientation="vertical"
-                android:id="@+id/questionAskerScrollView">
+    android:id="@+id/questionAskerViewFlipper"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
+    <ScrollView
+            android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/questionAskerScrollView">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout1"
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ProgressBar
-                        android:id="@+id/progressBar1"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/referenceText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_margin="6dp"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:freezesText="true"
-                            />
-                        <TextView
-                            android:id="@+id/levelText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_margin="6dp"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:freezesText="true"/>
-                    </LinearLayout>
-
-                    <de.hosenhasser.funktrainer.views.QuestionView
-                        android:id="@+id/questionView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <Button
-                        android:id="@+id/button1"
-                        android:layout_width="164dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="6dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/continueButtonText" />
-
-                    <Button
-                        android:id="@+id/skipButton"
-                        android:layout_width="164dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="6dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/skipButtonText"
-                        android:visibility="invisible" />
-
-                </LinearLayout>
-            </ScrollView>
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent" android:layout_height="fill_parent"
-                android:orientation="vertical"
-                android:id="@+id/questionAskerOldScrollView">
+                    android:layout_margin="6dp" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout1old"
-                    android:layout_width="fill_parent"
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout2old"
-                        android:layout_width="fill_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/referenceText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
-                            android:text="@string/oldQuestionHeadText"
-                            android:textSize="18sp"
-                            android:textColor="#FF0099CC" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
-                            android:id="@+id/oldQuestionHeatTextNumber"
-                            android:textSize="18sp"
-                            android:textColor="#FF0099CC"
-                            android:text="0" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_gravity="start"
+                        android:layout_margin="6dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:freezesText="true"
+                        />
+                    <TextView
+                        android:id="@+id/levelText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/referenceTextold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_margin="6dp"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:freezesText="true" />
-                        <TextView
-                            android:id="@+id/levelTextold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_margin="6dp"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:freezesText="true" />
-                    </LinearLayout>
-
-                    <de.hosenhasser.funktrainer.views.QuestionView
-                        android:id="@+id/questionViewOld"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <Button
-                        android:id="@+id/backToQuestionButton"
-                        android:layout_width="164dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="6dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/backToQuestionButtonText" />
+                        android:layout_gravity="end"
+                        android:layout_margin="6dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:freezesText="true"/>
                 </LinearLayout>
-            </ScrollView>
+
+                <de.hosenhasser.funktrainer.views.QuestionView
+                    android:id="@+id/questionView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="164dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/continueButtonText" />
+
+                <Button
+                    android:id="@+id/skipButton"
+                    android:layout_width="164dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/skipButtonText"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
         </ScrollView>
-    </ViewFlipper>
-</RelativeLayout>
+        <ScrollView
+            android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/questionAskerOldScrollView">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1old"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2old"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="@string/oldQuestionHeadText"
+                        android:textSize="18sp"
+                        android:textColor="#FF0099CC" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:id="@+id/oldQuestionHeatTextNumber"
+                        android:textSize="18sp"
+                        android:textColor="#FF0099CC"
+                        android:text="@string/zeroString" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/referenceTextold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="6dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:freezesText="true" />
+                    <TextView
+                        android:id="@+id/levelTextold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_margin="6dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:freezesText="true" />
+                </LinearLayout>
+
+                <de.hosenhasser.funktrainer.views.QuestionView
+                    android:id="@+id/questionViewOld"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/backToQuestionButton"
+                    android:layout_width="164dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/backToQuestionButtonText" />
+            </LinearLayout>
+        </ScrollView>
+</ViewFlipper>
