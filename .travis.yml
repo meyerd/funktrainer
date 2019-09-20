@@ -1,0 +1,22 @@
+language: android
+jdk: oraclejdk8
+
+android:
+    components
+      - build-tools-26.1.1
+      - platform-tools-29.0.4
+      - android-28
+      - tools-26.1.1
+      - extra-android-m2repository
+
+script: ./gradlew connectedAndroidTest
+
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
