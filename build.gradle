@@ -19,3 +19,7 @@ allprojects {
         google()
     }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '5.4.1'
+}
