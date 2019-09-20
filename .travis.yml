@@ -24,7 +24,6 @@ android:
 #  - adb shell input keyevent 82 &
 
 script:
-  - gradle wrapper
   - ./gradlew clean buildDependents
   - ./gradlew check
   - ./gradlew test
