@@ -32,7 +32,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import de.hosenhasser.funktrainer.FunktrainerApplication;
 import de.hosenhasser.funktrainer.R;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -54,10 +53,11 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 15;
 
     private static final String DATABASE_SOURCE_SQL_14 = "database_scheme_and_data_14.sql";
     private static final String DATABASE_SOURCE_SQL_13_TO_14 = "outdated_questions_scheme_and_data_14.sql";
+    private static final String DATABASE_SOURCE_SQL_14_TO_15 = "question_to_lichtblick_scheme_and_data_15.sql";
 
     private Repository() {
         super(FunktrainerApplication.getAppContext(), "topics", null, DATABASE_VERSION);
@@ -346,12 +346,20 @@ public class Repository extends SQLiteOpenHelper {
         // for now always the first entry is the correct one
         question.setCorrectAnswer(0);
 
-        final Cursor lichtblick = getDb().query("question_to_lichtblick", new String[]{"_id", "lichtblick"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, null);
+        final Cursor lichtblick = getDb().query("question_to_lichtblick", new String[]{"_id", "lichtblick", "lichtblick_type"}, "question_id=?", new String[]{Integer.toString(questionId)}, null, null, null);
         try {
             lichtblick.moveToNext();
             while (!lichtblick.isAfterLast()) {
                 int lichtblickPage = lichtblick.getInt(1);
+                int lichtblickTypeInt = lichtblick.getInt(2);
+                LichtblickType lichtblickType = LichtblickType.A;
+                if(lichtblickTypeInt == 0) {
+                    lichtblickType = LichtblickType.A;
+                } else if(lichtblickTypeInt == 1) {
+                    lichtblickType = LichtblickType.E;
+                }
                 question.setLichtblickPage(lichtblickPage);
+                question.setLichtblickType(lichtblickType);
                 lichtblick.moveToNext();
             }
         } finally {
@@ -643,8 +651,13 @@ public class Repository extends SQLiteOpenHelper {
         this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_13_TO_14);
     }
 
+    private void importDatabaseUpgrade14to15FromSQL(SQLiteDatabase db) {
+        this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14_TO_15);
+    }
+
     private void importDatabaseFromSQL(SQLiteDatabase db) {
 	    this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14);
+	    this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14_TO_15);
     }
 
     private void realOnCreate(SQLiteDatabase db) {
@@ -720,6 +733,10 @@ public class Repository extends SQLiteOpenHelper {
             // upgrade 13/12 -> 14
             Log.i("Funktrainer", "DB upgrade 13->14");
             importDatabaseUpgrade13to14FromSQL(db);
+        }
+        if(oldVersion < 15) {
+            Log.i("Funtrainer", "DB upgrade 14->15");
+            importDatabaseUpgrade14to15FromSQL(db);
         }
 	}
 

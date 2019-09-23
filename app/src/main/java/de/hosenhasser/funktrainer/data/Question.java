@@ -39,6 +39,7 @@ public class Question implements Parcelable {
 	private int correct = 0;
 	private String help = "";
 	private int lichtblickPage = 0;
+	private LichtblickType lichtblickType = LichtblickType.A;
 	private int correctAnswer = 0;
 	private boolean outdated = false;
 
@@ -100,6 +101,8 @@ public class Question implements Parcelable {
 	public void setHelp(String help) { this.help = help; }
 	public int getLichtblickPage() { return lichtblickPage; }
 	public void setLichtblickPage(int lichtblickPage) { this.lichtblickPage = lichtblickPage; }
+	public LichtblickType getLichtblickType() { return lichtblickType; }
+	public void setLichtblickType(LichtblickType lichtblickType) { this.lichtblickType = lichtblickType; }
 	public void setCorrectAnswer(int correctAnswer) { this.correctAnswer = correctAnswer; }
 	public int getCorrectAnswer() {return this.correctAnswer; }
 	public void setOutdated(boolean outdated) { this.outdated = outdated; }
@@ -125,6 +128,7 @@ public class Question implements Parcelable {
         pc.writeInt(correct);
         pc.writeString(help);
         pc.writeInt(lichtblickPage);
+        pc.writeInt(lichtblickType.ordinal());
         pc.writeInt(correctAnswer);
         pc.writeInt(outdated ? 1 : 0);
     }
@@ -157,6 +161,7 @@ public class Question implements Parcelable {
         correct = pc.readInt();
         help = pc.readString();
         lichtblickPage = pc.readInt();
+        lichtblickType = LichtblickType.values()[pc.readInt()];
         correctAnswer = pc.readInt();
         outdated = (pc.readInt() != 0);
     }

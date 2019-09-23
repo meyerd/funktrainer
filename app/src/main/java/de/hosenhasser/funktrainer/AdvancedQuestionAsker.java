@@ -48,6 +48,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hosenhasser.funktrainer.data.LichtblickType;
 import de.hosenhasser.funktrainer.data.Question;
 import de.hosenhasser.funktrainer.data.QuestionSelection;
 import de.hosenhasser.funktrainer.data.QuestionState;
@@ -316,7 +317,9 @@ public class AdvancedQuestionAsker extends Activity {
                 final Intent intentLichtblick = new Intent(this, LichtblickeViewerActivity.class);
                 final Question question = currentQuestionState.getQuestion(repository);
                 final int lichtblickPage = question.getLichtblickPage();
+                final LichtblickType lichtblickType = question.getLichtblickType();
                 intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickPage", lichtblickPage);
+                intentLichtblick.putExtra(LichtblickeViewerActivity.class.getName() + ".lichtblickType", lichtblickType.ordinal());
                 startActivity(intentLichtblick);
                 return true;
 //            case R.id.reportError:

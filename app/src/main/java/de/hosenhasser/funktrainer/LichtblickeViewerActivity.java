@@ -35,6 +35,8 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import de.hosenhasser.funktrainer.data.LichtblickType;
+
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -48,6 +50,7 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
 
     int nbPages = 0;
     int pageToShow = 0;
+    LichtblickType lichtblickType = LichtblickType.A;
 
     @Override
     public void onDestroy() {
@@ -77,13 +80,18 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
         }
 
         this.pageToShow = getIntent().getExtras().getInt(getClass().getName() + ".lichtblickPage", 0);
+        this.lichtblickType = LichtblickType.values()[getIntent().getExtras().getInt(getClass().getName() + ".lichtblickType", 0)];
 
         if (this.pageToShow <= 0) {
             this.pageToShow = mPrefs.getInt("last_page_shown", 0);
         }
 
         pdfView = findViewById(R.id.pdfview);
-        pdfView.fromAsset(LICHTBLICKE_A_FILE)
+        String fileToLoad = LICHTBLICKE_A_FILE;
+        if(this.lichtblickType.equals(LichtblickType.E)) {
+            fileToLoad = LICHTBLICKE_E_FILE;
+        }
+        pdfView.fromAsset(fileToLoad)
                 .defaultPage(this.pageToShow)
                 .enableSwipe(true)
                 .enableDoubletap(true)
