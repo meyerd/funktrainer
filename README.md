@@ -22,6 +22,8 @@ questions XML files can be found at
 
 http://oliver-saal.de/software/afutrainer/download.php
 
+The Lichtblicke PDF is available at https://www.dl9hcg.a36.de
+
 Thanks to everyone for making your projects available.
 
 The questions license is according to German official publications
