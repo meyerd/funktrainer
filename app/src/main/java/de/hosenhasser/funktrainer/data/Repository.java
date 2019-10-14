@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -39,8 +40,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
+
+import com.google.common.collect.ObjectArrays;
 
 public class Repository extends SQLiteOpenHelper {
     private static volatile Repository sRepositorySingletonInstance;
@@ -176,15 +180,24 @@ public class Repository extends SQLiteOpenHelper {
 
         // in case we don't have enough questions, select some more globally until
         // enough unique questions are there
+        List<String> categoriesString = new ArrayList<>();
+        List<String> categoriesParameters = new ArrayList<>();
+        for (Integer ct : categories) {
+            categoriesString.add(Integer.toString(ct));
+            categoriesParameters.add("?");
+        }
         while(possibleQuestions.size() < nQuestions) {
             String query = "";
             if(show_outdated) {
-                query = "SELECT q._id FROM question q ORDER BY RANDOM() LIMIT ?";
+                query = "SELECT q._id FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id WHERE qt.category_id IN " +
+                            "(" + TextUtils.join(",", categoriesParameters) + ")" + " ORDER BY RANDOM() LIMIT ?";
             } else {
-                query = "SELECT q._id FROM question q LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL ORDER BY RANDOM() LIMIT ?";
+                query = "SELECT q._id FROM question q LEFT JOIN question_to_category qt ON qt.question_id = q._id LEFT JOIN outdated_questions oq ON oq.question_id = q._id WHERE oq.question_id IS NULL AND qt.category_id IN " +
+                            "(" + TextUtils.join(",", categoriesParameters) + ")" + " ORDER BY RANDOM() LIMIT ?";
             }
-            c = getDb().rawQuery(query,
-                    new String[]{Integer.toString(10)});
+            String[] allParams = ObjectArrays.concat(categoriesString.toArray(new String[0]),
+                    new String[]{Integer.toString(10)}, String.class);
+            c = getDb().rawQuery(query, allParams);
             try {
                 c.moveToNext();
                 while (!c.isAfterLast()) {
