@@ -1,0 +1,3 @@
+Mit dieser App kann auf die Amateurfunkprüfung gelernt werden. Die Fragen werden 
+in zufälliger Reihenfolge gestellt mit dem Fokus darauf falsch beantwortete
+öfter zu wiederholen.

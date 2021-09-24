@@ -1,0 +1,2 @@
+This app will ask you the official questions of the German ham radio (amateur radio)
+exam. The questions are shuffled and preferably wrong answered questions will be asked. 
