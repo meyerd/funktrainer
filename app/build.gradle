@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 import java.util.regex.Pattern
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
     defaultConfig {
         applicationId 'de.hosenhasser.funktrainer'
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 30
         vectorDrawables.useSupportLibrary = true
-        // versionCode getVersionCodeFromManifest()
-        versionCode 47
-        versionName "1.3.1.3"
+        // versionCode getVersionCodeFrsomManifest()
+        versionCode 48
+        versionName "1.3.1.4"
     }
     buildTypes {
         debug {
