@@ -1,6 +1,6 @@
-    1.3.1.4:
-    - Tippfehler korrigiert
-    - F-Droid Metadaten
+1.3.1.4:
+- Tippfehler korrigiert
+- F-Droid Metadaten
 
 1.3.1.3:
 - Prüfungsmodus: bugfix
@@ -45,27 +45,22 @@
 - Ŭberspringen von Fragen möglich
 
 1.0.6.2:
-
 - Lichtblicke A integriert
 - Update-Fehler behoben
 
 1.0.4.1 - 1.0.5.4:
-
 - Suchfunktion verbessert (Uneindeutigkeit des reference-Felds)
 - Neue Datenbankstruktur
 - Nach links swipen, um die letzten 30 Fragen und Antworten noch einmal anzusehen
 
 1.0.4.1:
-
 - Dialog bei langen Datenbankoperationen
 
 1.0.4.0:
-
 - Verbessertes Datenbankupdate (Fortschritt wird gespeichert)
 - Zwei neue Kategorien mit jeweils allen Fragen einer Klasse
 
 1.0.3.0:
-
 - Anzeige der Fragenummer links oben
 - Suche nach bestimmen Fragen vom Startbildschirm aus
 - Anzeige einiger Grafiken in Fragen verbessert
@@ -116,27 +111,22 @@ engl:
 - Skip questions
 
 1.0.6.2:
-
 - Integrate Lichtblicke A
 - Fix upgrade issues from older version
 
 1.0.4.1 - 1.0.5.3:
-
 - improved search (nonunique reference fields)
 - New database structure
 - Swipe left to see the last 30 questions and answers
 
 1.0.4.1:
-
 - Improved responsiveness: show dialog on long database operations
 
 1.0.4.0:
-
 - Improved database update (retain progress)
 - Two new categories containing all questions for one license class
 
 1.0.3.0:
-
 - Show number of question on the top left
 - Search for specific questions from the main screen
 - Fix display of images for some questions
