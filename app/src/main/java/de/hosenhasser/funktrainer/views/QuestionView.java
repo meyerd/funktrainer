@@ -1,10 +1,9 @@
 package de.hosenhasser.funktrainer.views;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.AttributeSet;

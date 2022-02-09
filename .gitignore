@@ -5,3 +5,5 @@ build/
 import-summary.txt
 local.properties
 server/
+Funktrainer.zip
+topics.sqlite
