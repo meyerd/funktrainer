@@ -765,7 +765,7 @@ INSERT INTO question VALUES (562, 'TC512', 'Welche der folgenden Kennlinien ist 
 INSERT INTO question VALUES (563, 'TC513', 'In welcher Zeile sind die Diodentypen der entsprechenden Kennlinie richtig zugeordnet?<p><img src=''tc512f.jpg''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (564, 'TC514', 'In welcher der folgenden Schaltungen ist die Z-Diode zur Spannungsstabilisierung richtig eingesetzt?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (565, 'TC515', 'In welcher der folgenden Schaltungen ist die Z-Diode zur Spannungsstabilisierung richtig eingesetzt?', 0, 1, 0, 0, '');
-INSERT INTO question VALUES (566, 'TC516', 'Eine unbelastete Z-Diode soll eine 12-VBetriebsspannung auf 5 V stabilisieren. Dabei soll ein Strom von 25 mA durch die Z-Diode fließen. Berechnen Sie den Vorwiderstand. Die Werte des benötigten Vorwiderstandes betragen<p><img src=''tc516f.jpg''></p>', 0, 1, 0, 0, '');
+INSERT INTO question VALUES (566, 'TC516', 'Eine unbelastete Z-Diode soll eine 12-V-Betriebsspannung auf 5 V stabilisieren. Dabei soll ein Strom von 25 mA durch die Z-Diode fließen. Berechnen Sie den Vorwiderstand. Die Werte des benötigten Vorwiderstandes betragen<p><img src=''tc516f.jpg''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (567, 'TC517', 'Folgende Schaltung einer Stabilisierungsschaltung mit Z-Diode ist gegeben. Der Strom durch die Z-Diode soll 25 mA betragen und der Laststrom ist 20 mA. Der Wert des notwendigen Vorwiderstandes beträgt<p><img src=''tc517f.jpg''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (568, 'TC518', 'Eine Leuchtdiode mit einer Durchlassspannung von 1,4 V und einem Durchlassstrom von 20 mA soll an eine Spannungsquelle von 5,0 V angeschlossen werden. Berechnen Sie den Vorwiderstand. Die Größe des benötigten Vorwiderstandes beträgt', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (569, 'TC519', 'Folgende Schaltung einer Leuchtdiode wird an einer Betriebsspannung von 5,5 V betrieben. Der Strom durch die Leuchtdiode soll 25 mA betragen, wobei die Durchlassspannung 1,75 V beträgt. Der notwendige Vorwiderstand muss folgende Werte haben.<p><img src=''tc519f.jpg''></p>', 0, 1, 0, 0, '');
@@ -849,7 +849,7 @@ INSERT INTO question VALUES (646, 'TD120', 'Wie groß ist die Gesamtkapazität d
 INSERT INTO question VALUES (647, 'TD121', 'Wenn R<sub>1</sub> und R<sub>3</sub> je 2 k&Omega; hat und R<sub>2</sub> und R<sub>4</sub> je 200 &Omega; betragen, hat die Schaltung einen Gesamtwiderstand von<p><img src=''td121f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (648, 'TD122', 'In welchem Bereich bewegt sich der Eingangswiderstand der folgenden Schaltung, wenn R alle Werte von 0 bis unendlich durchläuft?<p><img src=''td122fj.jpg''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (649, 'TD123', 'Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R<sub>1</sub> = 30 k&Omega;, R<sub>2</sub> = 15 k&Omega;, R<sub>3</sub> = 30 k&Omega; und R<sub>4</sub> = 2,7 k&Omega; betragen?<p><img src=''td123f.png''></p>', 0, 1, 0, 0, '');
-INSERT INTO question VALUES (650, 'TD124', 'Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R<sub>1</sub> = 12 k&Omega;, R<sub>2</sub> = 12 k&Omega;, R<sub>3</sub> = 6 k&Omega; und R<sub>4</sub> = 1,5 k &Omega;betragen?<p><img src=''td123f.png''></p>', 0, 1, 0, 0, '');
+INSERT INTO question VALUES (650, 'TD124', 'Wie groß ist der Gesamtwiderstand dieser Schaltung, wenn R<sub>1</sub> = 12 k&Omega;, R<sub>2</sub> = 12 k&Omega;, R<sub>3</sub> = 6 k&Omega; und R<sub>4</sub> = 1,5 k &Omega; betragen?<p><img src=''td123f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (651, 'TD201', 'Der Impedanzfrequenzgang in der Abbildung zeigt die Kennlinie<p><img src=''td201f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (652, 'TD202', 'Der im folgenden Bild dargestellte Impedanzfrequenzgang ist typisch für<p><img src=''td202f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (653, 'TD203', 'Was ist im Resonanzfall bei der Reihenschaltung einer Induktivität mit einer Kapazität erfüllt?', 0, 1, 0, 0, '');
@@ -1421,7 +1421,7 @@ INSERT INTO question VALUES (1218, 'TI223', 'Die höchste Frequenz, bei der eine
 INSERT INTO question VALUES (1219, 'TI224', 'Die MUF für eine Funkstrecke ist', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1220, 'TI225', 'Eine stärkere Ionisierung der F2-Schicht führt zu', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1221, 'TI226', 'Die höchste brauchbare Frequenz (MUF) für eine Funkstrecke', 0, 1, 0, 0, '');
-INSERT INTO question VALUES (1222, 'TI227', 'Wie groß ist die obere brauchbare Frequenz (MUF) und die optimale Frequenz fopt bei Verwendung einer Antenne, die einen Abstrahlwinkel von 45° hat, wenn die kritische Frequenz fk mit 3 MHz gemessen wurde?', 0, 1, 0, 0, '');
+INSERT INTO question VALUES (1222, 'TI227', 'Wie groß ist die obere brauchbare Frequenz (MUF) und die optimale Frequenz f<sub>opt</sub> bei Verwendung einer Antenne, die einen Abstrahlwinkel von 45° hat, wenn die kritische Frequenz f<sub>k</sub> mit 3 MHz gemessen wurde?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1223, 'TI228', 'Was bedeutet die Aussage: "Die kritische Frequenz liegt bei 22 MHz"?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1224, 'TI229', 'Was bedeutet die Aussage: "Die LUF liegt bei 6 MHz"?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1225, 'TI230', 'Die LUF für eine Funkstrecke ist', 0, 1, 0, 0, '');
@@ -1453,7 +1453,7 @@ INSERT INTO question VALUES (1250, 'TI316', 'In welcher Region der Erde kommt "S
 INSERT INTO question VALUES (1251, 'TI317', 'Welche Aussage ist für das Sonnenfleckenmaximum richtig?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1252, 'TJ101', 'Das Prinzip eines Drehspulmessgeräts beruht auf', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1253, 'TJ102', 'Das Drehspulmesswerk in der folgenden Schaltung hat einen maximalen Messstrom I<sub>M</sub> = 100 µA und einen Messwerkwiderstand R<sub>M</sub> = 1 k&Omega;. R<sub>V</sub> = 499 k&Omega; Welche Gleichspannung muss an die Gesamtschaltung angelegt werden, damit das Messwerk Vollausschlag anzeigt?<p><img src=''tj102f.png''></p>', 0, 1, 0, 0, '');
-INSERT INTO question VALUES (1254, 'TJ103', 'Das Drehspulmesswerk in der folgenden Schaltung hat einen maximalen Messstrom I<sub>M</sub> = 0,3 mA und einen Messwerkwiderstand R<sub>M</sub> = 300 &Omega;. R<sub>V</sub> = 9,7 k Welche Gleichspannung muss an die Gesamtschaltung angelegt werden, damit das Messwerk Vollausschlag anzeigt?<p><img src=''tj102f.png''></p>', 0, 1, 0, 0, '');
+INSERT INTO question VALUES (1254, 'TJ103', 'Das Drehspulmesswerk in der folgenden Schaltung hat einen maximalen Messstrom I<sub>M</sub> = 0,3 mA und einen Messwerkwiderstand R<sub>M</sub> = 300 &Omega;. R<sub>V</sub> = 9,7 k&Omega;. Welche Gleichspannung muss an die Gesamtschaltung angelegt werden, damit das Messwerk Vollausschlag anzeigt?<p><img src=''tj102f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1255, 'TJ104', 'Das Drehspulmesswerk in der folgenden Schaltung hat einen maximalen Messstrom I<sub>M</sub> = 100 µA und einen Messwerkwiderstand R<sub>M</sub> = 1 k&Omega;. Wie groß muss R<sub>P</sub> gewählt werden, damit das Messwerk in der Gesamtschaltung bei I = 100 mA Vollausschlag anzeigt?<p><img src=''tj104f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1256, 'TJ105', 'Wenn bei dieser Messschaltung I = 1 A zu einem Vollausschlag des Instruments führt, beträgt der Strom durch R<sub>P</sub><p><img src=''tj105f.png''></p>', 0, 1, 0, 0, '');
 INSERT INTO question VALUES (1257, 'TJ106', 'Wie groß muss R<sub>P</sub> bei der folgenden Schaltung gewählt werden, wenn I = 1 A zum Vollausschlag des Instruments mit 300 &Omega; Innenwiderstand führen soll?<p><img src=''tj105f.png''></p>', 0, 1, 0, 0, '');
@@ -7008,10 +7008,10 @@ INSERT INTO answer VALUES (4881, 1221, 0, 'wird höher als die kritische Grenzfr
 INSERT INTO answer VALUES (4882, 1221, 1, 'wird kleiner als die kritische Grenzfrequenz, wenn der Abstrahlwinkel der Sendeantenne kleiner wird.', ' ');
 INSERT INTO answer VALUES (4883, 1221, 2, 'wird kleiner als die kritische Grenzfrequenz, wenn der Abstrahlwinkel der Sendeantenne höher wird.', ' ');
 INSERT INTO answer VALUES (4884, 1221, 3, 'ist nur abhängig vom Ionisierungsgrad der D-, E- und F-Schichten.', ' ');
-INSERT INTO answer VALUES (4885, 1222, 0, 'Die MUF liegt bei 4,2 MHz und fopt bei 3,6 MHz.', ' ');
-INSERT INTO answer VALUES (4886, 1222, 1, 'Die MUF liegt bei 2,1 MHz und fopt bei 1,8 MHz.', ' ');
-INSERT INTO answer VALUES (4887, 1222, 2, 'Die MUF liegt bei 2,1 MHz und fopt bei 2,5 MHz.', ' ');
-INSERT INTO answer VALUES (4888, 1222, 3, 'Die MUF liegt bei 4,2 MHz und fopt bei 4,9 MHz.', ' ');
+INSERT INTO answer VALUES (4885, 1222, 0, 'Die MUF liegt bei 4,2 MHz und f<sub>opt</sub> bei 3,6 MHz.', ' ');
+INSERT INTO answer VALUES (4886, 1222, 1, 'Die MUF liegt bei 2,1 MHz und f<sub>opt</sub> bei 1,8 MHz.', ' ');
+INSERT INTO answer VALUES (4887, 1222, 2, 'Die MUF liegt bei 2,1 MHz und f<sub>opt</sub> bei 2,5 MHz.', ' ');
+INSERT INTO answer VALUES (4888, 1222, 3, 'Die MUF liegt bei 4,2 MHz und f<sub>opt</sub> bei 4,9 MHz.', ' ');
 INSERT INTO answer VALUES (4889, 1223, 0, 'Bei Einstrahlung in die Ionosphäre unter einem Winkel von 90° liegt die höchste noch reflektierte Signalfrequenz bei 22 MHz.', ' ');
 INSERT INTO answer VALUES (4890, 1223, 1, 'Bei Einstrahlung in die Ionosphäre unter einem Winkel von 90° liegt die niedrigste noch reflektierte Signalfrequenz bei 22 MHz.', ' ');
 INSERT INTO answer VALUES (4891, 1223, 2, 'Bei Einstrahlung in die Ionosphäre unter einem Winkel von 45° liegt die höchste noch reflektierte Signalfrequenz bei 22 MHz.', ' ');
