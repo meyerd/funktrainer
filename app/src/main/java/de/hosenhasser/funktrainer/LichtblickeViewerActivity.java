@@ -1,39 +1,13 @@
 package de.hosenhasser.funktrainer;
 
 import android.app.ActionBar;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import de.hosenhasser.funktrainer.data.LichtblickType;
 
@@ -43,14 +17,14 @@ import static java.lang.Math.min;
 public class LichtblickeViewerActivity extends Activity implements OnLoadCompleteListener, OnPageChangeListener{
     private SharedPreferences mPrefs;
 
-    public static final String LICHTBLICKE_A_FILE = "Lichtblick-A.pdf";
-    public static final String LICHTBLICKE_E_FILE = "Lichtblick-E.pdf";
+    public static final String LICHTBLICKE_A_FILE = "Lichtblick-A_v1.pdf";
+    public static final String LICHTBLICKE_E_FILE = "Lichtblick-E_v1.pdf";
 
     PDFView pdfView;
 
     int nbPages = 0;
     int pageToShow = 0;
-    LichtblickType lichtblickType = LichtblickType.A;
+    LichtblickType lichtblickType = LichtblickType.A_v1;
 
     @Override
     public void onDestroy() {
@@ -80,7 +54,7 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
         }
 
         this.pageToShow = getIntent().getExtras().getInt(getClass().getName() + ".lichtblickPage", 0);
-        this.lichtblickType = LichtblickType.values()[getIntent().getExtras().getInt(getClass().getName() + ".lichtblickType", 0)];
+        this.lichtblickType = LichtblickType.values()[getIntent().getExtras().getInt(getClass().getName() + ".lichtblickType", LichtblickType.NONE.ordinal())];
 
         if (this.pageToShow <= 0) {
             this.pageToShow = mPrefs.getInt("last_page_shown", 0);
@@ -88,7 +62,9 @@ public class LichtblickeViewerActivity extends Activity implements OnLoadComplet
 
         pdfView = findViewById(R.id.pdfview);
         String fileToLoad = LICHTBLICKE_A_FILE;
-        if(this.lichtblickType.equals(LichtblickType.E)) {
+        if(this.lichtblickType.equals(LichtblickType.A_v1) || this.lichtblickType.equals(LichtblickType.NONE)) {
+            fileToLoad = LICHTBLICKE_A_FILE;
+        } else if(this.lichtblickType.equals(LichtblickType.E_v1)) {
             fileToLoad = LICHTBLICKE_E_FILE;
         }
         pdfView.fromAsset(fileToLoad)

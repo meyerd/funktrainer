@@ -23,7 +23,9 @@
 package de.hosenhasser.funktrainer;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -34,6 +36,8 @@ public class URLImageParser implements Html.ImageGetter {
     int screenwidth;
     int screenheight;
 
+    String name_prefix;
+
     public URLImageParser(View t, Context c) {
         this.c = c;
         this.container = t;
@@ -42,12 +46,31 @@ public class URLImageParser implements Html.ImageGetter {
         int screenheight = metrics.heightPixels;
         this.screenwidth = screenwidth;
         this.screenheight = screenheight;
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+        final String questionsVersion = sharedPref.getString("pref_questions_version", "2");
+
+        name_prefix = "v2_";
+        if(questionsVersion.equals("1")) {
+            name_prefix = "v1_";
+        } else if(questionsVersion.equals("2")) {
+            name_prefix = "v2_";
+        }
     }
 
     public Drawable getDrawable(String source) {
+        /*
+          parse url images in the form of <img="asdf.png"/>
+          first strip the part 'img="'
+          then construct the resource locator depending on the selected questions version
+         */
+        // TODO: fix this logic somehow otherwise always looking up preferences and then determine
+        //       the path might be sub-optima, unclear?
+
         String stripped_iname = source.substring(0, source.length() - 4);
         int imageResourceId = -1;
-        imageResourceId = this.c.getResources().getIdentifier(stripped_iname, "drawable", this.c.getPackageName());
+        imageResourceId = this.c.getResources().getIdentifier(this.name_prefix + stripped_iname,
+                "drawable", this.c.getPackageName());
         Drawable img = this.c.getResources().getDrawable(imageResourceId);
         int containerwidth = this.container.getMeasuredWidth();
         int orgwidth = img.getIntrinsicWidth();

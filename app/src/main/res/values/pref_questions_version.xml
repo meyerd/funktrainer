@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_questions_version_entries">
+        <item>2006/2007</item>
+        <item>2024</item>
+    </string-array>
+
+    <string-array name="pref_questions_version_entryValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

@@ -57,11 +57,13 @@ public class Repository extends SQLiteOpenHelper {
 	
 	private static final int NUMBER_LEVELS = 5;
 
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
 
     private static final String DATABASE_SOURCE_SQL_14 = "database_scheme_and_data_14.sql";
     private static final String DATABASE_SOURCE_SQL_13_TO_14 = "outdated_questions_scheme_and_data_14.sql";
     private static final String DATABASE_SOURCE_SQL_14_TO_15 = "question_to_lichtblick_scheme_and_data_15.sql";
+    private static final String DATABASE_SOURCE_SQL_15_TO_16 = "questions_update_15_to_16.sql";
+    private static final String DATABASE_SOURCE_SQL_16 = "database_scheme_and_data_16.sql";
 
     private Repository() {
         super(FunktrainerApplication.getAppContext(), "topics", null, DATABASE_VERSION);
@@ -102,16 +104,22 @@ public class Repository extends SQLiteOpenHelper {
         int topicId = 0;
         Cursor c;
         if(questionReference != null) {
-            c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "reference = ?", new String[]{questionReference}, null, null, null, null);
+            c = getDb().query(
+                    "question", new String[]{"_id", "level", "next_time"}, "reference = ?",
+                    new String[]{questionReference}, null, null, null, null);
         } else {
-            c = getDb().query("question", new String[]{"_id", "level", "next_time"}, "_id = ?", new String[]{Integer.toString(questionId)}, null, null, null, null);
+            c = getDb().query(
+                    "question", new String[]{"_id", "level", "next_time"}, "_id = ?",
+                    new String[]{Integer.toString(questionId)}, null, null, null, null);
         }
 
         try {
             c.moveToNext();
             if (!c.isAfterLast()) {
                 int qId = c.getInt(0);
-                final Cursor d = getDb().rawQuery("SELECT t._id FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id WHERE qt.question_id=? LIMIT 1;", new String[]{Integer.toString(qId)});
+                final Cursor d = getDb().rawQuery(
+                        "SELECT t._id FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id WHERE qt.question_id=? LIMIT 1;",
+                        new String[]{Integer.toString(qId)});
                 try {
                     d.moveToNext();
                     if (!d.isAfterLast()) {
@@ -137,7 +145,9 @@ public class Repository extends SQLiteOpenHelper {
 
         // Select categories from topic
         Cursor c;
-        c = getDb().rawQuery("SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?", new String[]{Integer.toString(topicId)});
+        c = getDb().rawQuery(
+                "SELECT ct.category_id FROM category_to_topic ct WHERE ct.topic_id=?",
+                new String[]{Integer.toString(topicId)});
         try {
             c.moveToNext();
             while (!c.isAfterLast()) {
@@ -365,11 +375,11 @@ public class Repository extends SQLiteOpenHelper {
             while (!lichtblick.isAfterLast()) {
                 int lichtblickPage = lichtblick.getInt(1);
                 int lichtblickTypeInt = lichtblick.getInt(2);
-                LichtblickType lichtblickType = LichtblickType.A;
+                LichtblickType lichtblickType = LichtblickType.A_v1;
                 if(lichtblickTypeInt == 0) {
-                    lichtblickType = LichtblickType.A;
+                    lichtblickType = LichtblickType.A_v1;
                 } else if(lichtblickTypeInt == 1) {
-                    lichtblickType = LichtblickType.E;
+                    lichtblickType = LichtblickType.E_v1;
                 }
                 question.setLichtblickPage(lichtblickPage);
                 question.setLichtblickType(lichtblickType);
@@ -447,9 +457,25 @@ public class Repository extends SQLiteOpenHelper {
 		return stats;
     }
 
-	public SearchItem[] getAllQuestionIdentifiers() {
+    public SearchItem[] getAllQuestionIdentifiers() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        final int questionsVersion = Integer.parseInt(sharedPref.getString("pref_questions_version", "2"));
+
         final HashSet<SearchItem> ret = new HashSet<SearchItem>();
-        final Cursor c = getDb().rawQuery("SELECT q._id, q.reference, cat.name, top.name FROM question q LEFT JOIN question_to_category qc ON qc.question_id = q._id LEFT JOIN category cat ON cat._id = qc.category_id LEFT JOIN category_to_topic ct ON ct.category_id = qc.category_id LEFT JOIN topic top ON top._id = ct.topic_id ORDER BY q.reference", null);
+        final Cursor c = getDb().rawQuery(
+                "SELECT q._id, q.reference, cat.name, top.name " +
+                        "FROM question q " +
+                        "LEFT JOIN question_to_category qc " +
+                        "ON qc.question_id = q._id " +
+                        "LEFT JOIN category cat " +
+                        "ON cat._id = qc.category_id " +
+                        "LEFT JOIN category_to_topic ct " +
+                        "ON ct.category_id = qc.category_id " +
+                        "LEFT JOIN topic top " +
+                        "ON top._id = ct.topic_id " +
+                        "WHERE top.version = ?" +
+                        "ORDER BY q.reference ",
+                new String[]{String.valueOf(questionsVersion)});
         try {
             c.moveToNext();
             while (!c.isAfterLast()) {
@@ -470,7 +496,7 @@ public class Repository extends SQLiteOpenHelper {
         Arrays.sort(ret1);
 
         return ret1;
-	}
+    }
 	
 	public void answeredCorrect(final int questionId) {
 		final Question question = getQuestion(questionId);
@@ -534,7 +560,23 @@ public class Repository extends SQLiteOpenHelper {
 	}
 	
 	private Cursor getTopicsCursor(final SQLiteDatabase db) {
-        Cursor cursor = db.rawQuery("SELECT t._id AS _id, t.order_index AS order_index, t.name AS name, CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question FROM topic t LEFT JOIN category_to_topic ct ON ct.topic_id = t._id LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id LEFT JOIN question q ON q._id = qt.question_id GROUP BY t._id, t.order_index, t.name ORDER BY t.order_index", new String[]{done});
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        final int questionsVersion = Integer.parseInt(sharedPref.getString("pref_questions_version", "2"));
+
+        Cursor cursor = db.rawQuery(
+                "SELECT t._id AS _id, " +
+                        "t.order_index AS order_index, " +
+                        "t.name AS name, " +
+                        "CASE WHEN MIN(level) >= " + NUMBER_LEVELS + " THEN ? ELSE SUM(CASE WHEN level < " + NUMBER_LEVELS + " THEN 1 ELSE 0 END) END AS status, " +
+                        "MIN(CASE WHEN level >= " + NUMBER_LEVELS + " THEN NULL ELSE next_time END) AS next_question " +
+                        "FROM topic t " +
+                        "LEFT JOIN category_to_topic ct ON ct.topic_id = t._id " +
+                        "LEFT JOIN question_to_category qt ON qt.category_id = ct.category_id " +
+                        "LEFT JOIN question q ON q._id = qt.question_id " +
+                        "WHERE t.version = ? " +
+                        "GROUP BY t._id, t.order_index, t.name " +
+                        "ORDER BY t.order_index",
+                new String[]{done, String.valueOf(questionsVersion)});
 		return cursor;
 	}
 
@@ -546,14 +588,22 @@ public class Repository extends SQLiteOpenHelper {
     }
 
 	private Cursor getExamTopicsCursor(final SQLiteDatabase db) {
-        Cursor cursor = db.rawQuery("SELECT _id, name from topic t ORDER BY t.order_index", new String[]{});
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        final int questionsVersion = Integer.parseInt(sharedPref.getString("pref_questions_version", "2"));
+        Cursor cursor = db.rawQuery(
+                "SELECT _id, name from topic t WHERE t.version = ? ORDER BY t.order_index",
+                new String[]{String.valueOf(questionsVersion)});
         return cursor;
     }
 
     public ExamSettings getExamSettings(final int topicId) {
         final ExamSettings exs = new ExamSettings();
 
-        final Cursor c = getDb().query("topic_exam_settings", new String[]{"_id", "topic_id", "number_questions", "number_questions_pass", "seconds_available"}, "topic_id=?", new String[]{Integer.toString(topicId)}, null, null, null);
+        final Cursor c = getDb().query(
+                "topic_exam_settings",
+                new String[]{"_id", "topic_id", "number_questions", "number_questions_pass", "seconds_available"},
+                "topic_id=?",
+                new String[]{Integer.toString(topicId)}, null, null, null);
         try {
             c.moveToNext();
             if (c.isAfterLast()) {
@@ -668,9 +718,12 @@ public class Repository extends SQLiteOpenHelper {
         this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14_TO_15);
     }
 
+    private void importDatabaseUpgrade15to16FromSQL(SQLiteDatabase db) {
+        this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_15_TO_16);
+    }
+
     private void importDatabaseFromSQL(SQLiteDatabase db) {
-	    this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14);
-	    this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_14_TO_15);
+	    this.importDatabaseFromSQLFile(db, DATABASE_SOURCE_SQL_16);
     }
 
     private void realOnCreate(SQLiteDatabase db) {
@@ -750,6 +803,10 @@ public class Repository extends SQLiteOpenHelper {
         if(oldVersion < 15) {
             Log.i("Funtrainer", "DB upgrade 14->15");
             importDatabaseUpgrade14to15FromSQL(db);
+        }
+        if(oldVersion < 16) {
+            Log.i("Funktrainer", "DB upgrade 15->16");
+            importDatabaseUpgrade15to16FromSQL(db);
         }
 	}
 

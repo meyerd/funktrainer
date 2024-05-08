@@ -23,6 +23,7 @@ public class Topic {
 	private int index;
 	private String name;
 	private boolean primary;
+	private int version;
 	public int getId() {
 		return id;
 	}
@@ -43,4 +44,6 @@ public class Topic {
 	}
     public boolean getPrimary() {return primary; }
     public void setPrimary(boolean isprimary) { this.primary = isprimary; }
+	public void setVersion(int version) {this.version = version; }
+	public int getVersion() {return version; }
 }

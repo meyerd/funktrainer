@@ -114,4 +114,6 @@
     <string name="show_outdated">Zeige Prüfungsfragen, die nicht mehr in Prüfungen verwendet werden.</string>
     <string name="midnightTime">00:00</string>
     <string name="zeroString">0</string>
+    <string name="pref_description_questions_version">Veröffentlichungsjahr des Fragenkatalogs</string>
+    <string name="pref_title_questions_version_title">Verwende Prüfungsfragen aus einem älteren Fragenkatalog</string>
 </resources>

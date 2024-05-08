@@ -1,10 +1,10 @@
 package de.hosenhasser.funktrainer;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
@@ -14,7 +14,8 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class FormelsammlungViewerActivity extends Activity implements OnLoadCompleteListener, OnPageChangeListener {
-    public static final String FORMELSAMMLUNG_FILE = "formelsammlung.pdf";
+    public static final String FORMELSAMMLUNG_FILE_V1 = "formelsammlung_v1.pdf";
+    public static final String FORMELSAMMLUNG_FILE_V2 = "formelsammlung_v2.pdf";
 
     private SharedPreferences mPrefs;
 
@@ -63,7 +64,17 @@ public class FormelsammlungViewerActivity extends Activity implements OnLoadComp
         }
 
         pdfView = findViewById(R.id.formelsammlung_pdfview);
-        pdfView.fromAsset(FORMELSAMMLUNG_FILE)
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final String questionsVersion = preferences.getString("pref_questions_version", "2");
+        String formelsammlung_file = FORMELSAMMLUNG_FILE_V2;
+        if(questionsVersion.equals("1")) {
+            formelsammlung_file = FORMELSAMMLUNG_FILE_V1;
+        } else if(questionsVersion.equals("2")) {
+            formelsammlung_file = FORMELSAMMLUNG_FILE_V2;
+        }
+
+        pdfView.fromAsset(formelsammlung_file)
                 .defaultPage(this.pageToShow)
                 .enableSwipe(true)
                 .enableDoubletap(true)
