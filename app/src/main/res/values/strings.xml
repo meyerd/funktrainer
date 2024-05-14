@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Funktrainer</string>
-    <string name="infoMessage">Diese App enthält die Fragen für die Prüfung für den Amateurfunkschein (Fragen von Februar 2007 [Technische Kenntnisse] bzw. Oktober 2006 [Betriebliche Kenntnisse, Kenntnisse von Vorschriften])</string>
+    <string name="infoMessage">Diese App enthält die Fragen für die Prüfung für den Amateurfunkschein (Fragenkatalog von März 2024)</string>
     <string name="selectTopic">Bitte wählen sie ein Kapitel:</string>
     <string name="selectSpecialTopic">Eigener Fragenmix:</string>
     <string name="continueButtonText">Weiter</string>
