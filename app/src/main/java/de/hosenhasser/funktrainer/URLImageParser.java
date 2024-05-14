@@ -24,11 +24,20 @@ package de.hosenhasser.funktrainer;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+
+import java.util.Locale;
 
 public class URLImageParser implements Html.ImageGetter {
     Context c;
@@ -64,23 +73,37 @@ public class URLImageParser implements Html.ImageGetter {
           first strip the part 'img="'
           then construct the resource locator depending on the selected questions version
          */
-        // TODO: fix this logic somehow otherwise always looking up preferences and then determine
-        //       the path might be sub-optima, unclear?
 
         String stripped_iname = source.substring(0, source.length() - 4);
+        stripped_iname = stripped_iname.toLowerCase(Locale.ROOT);
         int imageResourceId = -1;
         imageResourceId = this.c.getResources().getIdentifier(this.name_prefix + stripped_iname,
                 "drawable", this.c.getPackageName());
+        if(imageResourceId == 0x0) Log.e("debug", "no resource " + stripped_iname);
+
         Drawable img = this.c.getResources().getDrawable(imageResourceId);
-        int containerwidth = this.container.getMeasuredWidth();
-        int orgwidth = img.getIntrinsicWidth();
-//        int width = Math.min(orgwidth * 2, this.screenwidth - (int) (this.screenwidth + 0.1));
-        int width = Math.min((int)(orgwidth * 1.2), containerwidth);
-        if (width <= 0) {
-            width = Math.min((int)(orgwidth * 1.2), this.screenwidth - 10);
+
+        /* TODO: dirty hack to detect if an image is to be displayed inline in text or as a answer
+           or question part
+         */
+        int widthset = 0;
+        int heightset = 0;
+        if(stripped_iname.startsWith("texrender")) {
+            widthset = (int)(img.getIntrinsicWidth() * 0.8);
+            heightset = (int)(img.getIntrinsicHeight() * 0.8);
+        } else {
+            int containerwidth = this.container.getMeasuredWidth();
+            int orgwidth = img.getIntrinsicWidth();
+            //        int width = Math.min(orgwidth * 2, this.screenwidth - (int) (this.screenwidth + 0.1));
+            int width = Math.min((int) (orgwidth * 1.2), containerwidth);
+            if (width <= 0) {
+                width = Math.min((int) (orgwidth * 1.2), this.screenwidth - 10);
+            }
+            float ratio = (float) width / (float) orgwidth;
+            widthset = width;
+            heightset = (int)(img.getIntrinsicHeight() * ratio);
         }
-        float ratio = (float)width / (float)orgwidth;
-        img.setBounds(0, 0, width, (int)(img.getIntrinsicHeight() * ratio));
+        img.setBounds(0, 0, widthset, heightset);
 
         return img;
     }

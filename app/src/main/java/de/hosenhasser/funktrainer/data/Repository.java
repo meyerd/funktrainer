@@ -634,8 +634,8 @@ public class Repository extends SQLiteOpenHelper {
 		updates.put("next_time", newNextTime);
         updates.put("wrong", newWrong);
         updates.put("correct", newCorrect);
-		
-		getDb().update("question", updates, "_id=?", new String[]{Integer.toString(questionId)});
+
+        getDb().update("question", updates, "_id=?", new String[]{Integer.toString(questionId)});
 
         // TODO: What happens when the server and the other clients have different local times?
         long now = System.currentTimeMillis() / 1000L;
