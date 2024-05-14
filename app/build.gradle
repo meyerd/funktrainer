@@ -5,12 +5,12 @@ android {
     compileSdk 34
     defaultConfig {
         applicationId 'de.hosenhasser.funktrainer'
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdk 34
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 49
-        versionName '1.3.1.5'
+        versionCode 50
+        versionName '1.4.0.0'
     }
     buildTypes {
         debug {
@@ -23,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 17
+        sourceCompatibility 17
     }
 
     splits {
@@ -52,19 +52,30 @@ android {
 }
 
 dependencies {
-     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+     //implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     // switch back to above as soon as original author moves to mavencentral
-//    implementation 'com.github.mhiew:android-pdf-viewer:2.8.2'
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'com.google.guava:guava:32.1.3-jre'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
-
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:5.7.0'
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+        // constraints {
+        //        implementation(project(":kotlin-sdklib-jdk7"))
+        //        implementation(project(":kotlin-sdklib-jdk8"))
+        // }
+    }
 }
 
 def getVersionCodeFromManifest() {

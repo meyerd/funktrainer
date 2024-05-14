@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Funktrainer</string>
-    <string name="infoMessage">This App contains the questions for the German amateur radio license (questions from February 2007/October 2006)</string>
+    <string name="infoMessage">This App contains the questions for the German amateur radio license (questions from March 2024)</string>
     <string name="selectTopic">Please select a topic:</string>
     <string name="selectSpecialTopic">Custom question mix:</string>
     <string name="continueButtonText">Continue</string>
@@ -108,4 +108,6 @@
     <string name="show_outdated">Show questions, that are no longer used in exams.</string>
     <string name="midnightTime">00:00</string>
     <string name="zeroString">0</string>
+    <string name="pref_description_questions_version">Questions publishing date</string>
+    <string name="pref_title_questions_version_title">Use questions from an older version of the published catalog</string>
 </resources>

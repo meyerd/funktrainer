@@ -1,6 +1,7 @@
 package de.hosenhasser.funktrainer.data;
 
 public enum LichtblickType {
-    A,
-    E
+    A_v1,
+    E_v1,
+    NONE
 }

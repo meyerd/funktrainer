@@ -39,7 +39,7 @@ public class Question implements Parcelable {
 	private int correct = 0;
 	private String help = "";
 	private int lichtblickPage = 0;
-	private LichtblickType lichtblickType = LichtblickType.A;
+	private LichtblickType lichtblickType = LichtblickType.NONE;
 	private int correctAnswer = 0;
 	private boolean outdated = false;
 
