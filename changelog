@@ -1,4 +1,4 @@
-1.4.0.0:
+1.4.0.1:
 - neue Prüfungsfragen gültig ab Juni 2024
 - update android sdk + dependencies
 
@@ -75,7 +75,7 @@
 
 engl:
 
-1.4.0.0:
+1.4.0.1:
 - new questions in effect from june 2024
 - update android sdk + dependencies
 
