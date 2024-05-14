@@ -1925,8 +1925,7 @@ INSERT INTO question VALUES(3583, 'VD741', 'In welchem der folgenden Amateurfunk
 INSERT INTO question VALUES(3584, 'VD740', 'In welchem der folgenden Amateurfunkfrequenzbereiche beträgt die maximal zulässige belegte Bandbreite einer Aussendung 7 kHz?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES(3585, 'VD739', 'In welchem der folgenden Amateurfunkfrequenzbereiche beträgt die maximal zulässige belegte Bandbreite einer Aussendung 2,7 kHz?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES(3586, 'VD738', 'In welchen Amateurfunkfrequenzbereichen beträgt die maximal zulässige belegte Bandbreite einer Aussendung 800 Hz?', 0, 1, 0, 0, '');
-INSERT INTO question VALUES(3587, 'VD737', 'Wie hoch ist die maximal zulässige Senderausgangsleistung für Rufzeicheninhaber der
-Klasse E in den Amateurfunkbändern zwischen 1300 MHz und 250 GHz?', 0, 1, 0, 0, '');
+INSERT INTO question VALUES(3587, 'VD737', 'Wie hoch ist die maximal zulässige Senderausgangsleistung für Rufzeicheninhaber der Klasse E in den Amateurfunkbändern zwischen 1300 MHz und 250 GHz?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES(3588, 'VD736', 'Wie hoch ist die maximal zulässige Senderausgangsleistung für Rufzeicheninhaber der Klasse A in den Amateurfunkbändern zwischen 1300 MHz und 250 GHz?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES(3589, 'VD735', 'Wie hoch ist die maximal zulässige Sendeleistung für Rufzeicheninhaber der Klasse A im Frequenzbereich 1240 bis 1300 MHz?', 0, 1, 0, 0, '');
 INSERT INTO question VALUES(3590, 'VD734', 'Welche Leistungsgrenzen gelten für die Rufzeicheninhaber der Klasse A und E in den Frequenzbereichen 144 bis 146 MHz und 430 bis 440 MHz?', 0, 1, 0, 0, '');
@@ -2308,8 +2307,7 @@ INSERT INTO answer VALUES(9511, 2378, 3, 'Pluspol schwarz, Minuspol grüngelb', 
 INSERT INTO answer VALUES(9512, 2378, 4, 'Pluspol braun, Minuspol grüngelb', '');
 INSERT INTO answer VALUES(9513, 2379, 1, 'Damit der Stromkreis über den Transceiver geschlossen werden kann.', '');
 INSERT INTO answer VALUES(9514, 2379, 2, 'Damit von beiden Polen des Netzteils der Strom zum Transceiver fließen kann.', '');
-INSERT INTO answer VALUES(9515, 2379, 3, 'Der Transceiver nutzt eine Leitung, die andere Leitung dient zur Erdung.
-', '');
+INSERT INTO answer VALUES(9515, 2379, 3, 'Der Transceiver nutzt eine Leitung, die andere Leitung dient zur Erdung.', '');
 INSERT INTO answer VALUES(9516, 2379, 4, 'Damit die Spannungsreduzierung nicht zu hoch wird.', '');
 INSERT INTO answer VALUES(9517, 2380, 1, 'Der Strom fließt in einem Leiter hin und im anderen Leiter wieder zurück.', '');
 INSERT INTO answer VALUES(9518, 2380, 2, 'Der Strom fließt in beide Leiter hinein und über die Erde zum Netzteil zurück.', '');
@@ -2535,32 +2533,10 @@ INSERT INTO answer VALUES(10773, 2694, 1, 'den gewünschten Frequenzbereich durc
 INSERT INTO answer VALUES(10774, 2694, 2, 'alle Oberschwingungen durchlassen.', '');
 INSERT INTO answer VALUES(10775, 2694, 3, 'die Abstrahlung aller Nebenaussendungen zulassen.', '');
 INSERT INTO answer VALUES(10776, 2694, 4, 'den gewünschten Frequenzbereich sperren.', '');
-INSERT INTO answer VALUES(10777, 2695, 1, '1 NF-Verstärker;
-2 Mischer;
-3 HF-Oszillator;
-4 Filter;
-5 HF-Verstärker;
-6 Filter', '');
-INSERT INTO answer VALUES(10778, 2695, 2, '1 HF-Verstärker;
-2 Mischer;
-3 HF-Oszillator;
-4 Filter;
-5 NF-Verstärker;
-6 Filter
-', '');
-INSERT INTO answer VALUES(10779, 2695, 3, '1 NF-Verstärker;
-2 Filter;
-3 HF-Oszillator;
-4 Mischer;
-5 HF-Verstärker;
-6 Mischer', '');
-INSERT INTO answer VALUES(10780, 2695, 4, '1 HF-Verstärker;
-2 Filter;
-3 HF-Oszillator;
-4 NF-Verstärker;
-5 Mischer;
-6 NF-Verstärker
-', '');
+INSERT INTO answer VALUES(10777, 2695, 1, '1 NF-Verstärker; 2 Mischer; 3 HF-Oszillator;  4 Filter; 5 HF-Verstärker; 6 Filter', '');
+INSERT INTO answer VALUES(10778, 2695, 2, '1 HF-Verstärker; 2 Mischer; 3 HF-Oszillator;  4 Filter; 5 NF-Verstärker; 6 Filter ', '');
+INSERT INTO answer VALUES(10779, 2695, 3, '1 NF-Verstärker; 2 Filter; 3 HF-Oszillator;  4 Mischer; 5 HF-Verstärker; 6 Mischer', '');
+INSERT INTO answer VALUES(10780, 2695, 4, '1 HF-Verstärker; 2 Filter; 3 HF-Oszillator;  4 NF-Verstärker; 5 Mischer; 6 NF-Verstärker ', '');
 INSERT INTO answer VALUES(10781, 2696, 1, 'Oszillator, Mischer, Filter, Leistungsverstärker', '');
 INSERT INTO answer VALUES(10782, 2696, 2, 'Vorverstärker, Filter, Demodulator, NF-Verstärker', '');
 INSERT INTO answer VALUES(10783, 2696, 3, 'Vorverstärker, Filter, NF-Verstärker, Antenne', '');
@@ -3712,8 +3688,7 @@ INSERT INTO answer VALUES(10248, 2562, 4, 'Zeitgleich auf unterschiedlichen Wege
 INSERT INTO answer VALUES(10249, 2563, 1, 'Ein durch Frequenzumtastung erzeugtes NF-Signal, mit dem ein Hochfrequenzträger (z. B. mittels FM) moduliert werden kann', '');
 INSERT INTO answer VALUES(10250, 2563, 2, 'Ein hochfrequentes PSK-Signal, das mittels automatischer Umtastung auf zwei NF-Träger übertragen wird, um Bandbreite zu sparen', '');
 INSERT INTO answer VALUES(10251, 2563, 3, 'Eine Kombination aus digitaler Amplituden- und Frequenzmodulation, um zwei Informationen gleichzeitig zu übertragen', '');
-INSERT INTO answer VALUES(10252, 2563, 4, 'Ein unmodulierter Hochfrequenzträger, bei dem die Frequenzabweichung im hörbaren Bereich liegt
- ', '');
+INSERT INTO answer VALUES(10252, 2563, 4, 'Ein unmodulierter Hochfrequenzträger, bei dem die Frequenzabweichung im hörbaren Bereich liegt ', '');
 INSERT INTO answer VALUES(10253, 2564, 1, '<img src=''EE407_a.svg''>', '');
 INSERT INTO answer VALUES(10254, 2564, 2, '<img src=''EE407_b.svg''>', '');
 INSERT INTO answer VALUES(10255, 2564, 3, '<img src=''EE407_c.svg''>', '');
@@ -3870,11 +3845,9 @@ INSERT INTO answer VALUES(10901, 2726, 1, 'Sie sollte gegen HF-Einstrahlung gut 
 INSERT INTO answer VALUES(10902, 2726, 2, 'Sie sollte möglichst hochohmig sein.', '');
 INSERT INTO answer VALUES(10903, 2726, 3, 'Sie sollte über das Leistungsverstärkergehäuse geführt werden.', '');
 INSERT INTO answer VALUES(10904, 2726, 4, 'Sie sollte mit möglichst wenig Kapazität gegen Masse ausgelegt werden. ', '');
-INSERT INTO answer VALUES(10905, 2727, 1, 'Wenn der Arbeitspunkt der Endstufe neu justiert wurde.
-', '');
+INSERT INTO answer VALUES(10905, 2727, 1, 'Wenn der Arbeitspunkt der Endstufe neu justiert wurde.  ', '');
 INSERT INTO answer VALUES(10906, 2727, 2, 'Bei Empfang eines Störsignals.', '');
-INSERT INTO answer VALUES(10907, 2727, 3, 'Vor jedem Sendebetrieb.
-', '');
+INSERT INTO answer VALUES(10907, 2727, 3, 'Vor jedem Sendebetrieb.  ', '');
 INSERT INTO answer VALUES(10908, 2727, 4, 'Wenn Splatter-Störungen zu hören sind.', '');
 INSERT INTO answer VALUES(10909, 2728, 1, 'Als linearer Verstärker', '');
 INSERT INTO answer VALUES(10910, 2728, 2, 'Als Begrenzerverstärker', '');
@@ -5108,14 +5081,10 @@ INSERT INTO answer VALUES(8925, 2232, 1, 'Selbstsperrender N-Kanal-Isolierschich
 INSERT INTO answer VALUES(8926, 2232, 2, 'Selbstsperrender P-Kanal-Isolierschicht-FET (MOSFET).', '');
 INSERT INTO answer VALUES(8927, 2232, 3, 'Selbstleitender N-Kanal-Isolierschicht-FET (MOSFET).', '');
 INSERT INTO answer VALUES(8928, 2232, 4, 'Selbstleitender P-Kanal-Isolierschicht-FET (MOSFET).', '');
-INSERT INTO answer VALUES(8929, 2233, 1, '1: Selbstleitender N-Kanal-Sperrschicht-FET
-2: Selbstleitender P-Kanal-Sperrschicht-FET', '');
-INSERT INTO answer VALUES(8930, 2233, 2, '1: Selbstsperrender N-Kanal-Sperrschicht-FET
-2: Selbstsperrender P-Kanal-Sperrschicht-FET', '');
-INSERT INTO answer VALUES(8931, 2233, 3, '1: Selbstleitender P-Kanal-Sperrschicht-FET
-2: Selbstleitender N-Kanal-Sperrschicht-FET', '');
-INSERT INTO answer VALUES(8932, 2233, 4, '1: Selbstsperrender P-Kanal-Sperrschicht-FET
-2: Selbstsperrender N-Kanal-Sperrschicht-FET', '');
+INSERT INTO answer VALUES(8929, 2233, 1, '1: Selbstleitender N-Kanal-Sperrschicht-FET 2: Selbstleitender P-Kanal-Sperrschicht-FET', '');
+INSERT INTO answer VALUES(8930, 2233, 2, '1: Selbstsperrender N-Kanal-Sperrschicht-FET 2: Selbstsperrender P-Kanal-Sperrschicht-FET', '');
+INSERT INTO answer VALUES(8931, 2233, 3, '1: Selbstleitender P-Kanal-Sperrschicht-FET 2: Selbstleitender N-Kanal-Sperrschicht-FET', '');
+INSERT INTO answer VALUES(8932, 2233, 4, '1: Selbstsperrender P-Kanal-Sperrschicht-FET 2: Selbstsperrender N-Kanal-Sperrschicht-FET', '');
 INSERT INTO answer VALUES(8933, 2234, 1, 'Feldeffekttransistor', '');
 INSERT INTO answer VALUES(8934, 2234, 2, 'Bipolartransistor', '');
 INSERT INTO answer VALUES(8935, 2234, 3, 'Diode', '');
@@ -5836,8 +5805,7 @@ INSERT INTO answer VALUES(10061, 2516, 1, 'FM-Sprechfunk, weil hier die wichtige
 INSERT INTO answer VALUES(10062, 2516, 2, 'CW-Morsetelegrafie, weil hier die wichtige Information in der Amplitude von zwei Seitenbändern liegt.', '');
 INSERT INTO answer VALUES(10063, 2516, 3, 'SSB-Sprechfunk, weil hier die wichtige Information in der Amplitude eines Seitenbandes enthalten ist.', '');
 INSERT INTO answer VALUES(10064, 2516, 4, 'AM-Sprechfunk, weil hier die wichtige Information in den Amplituden der beiden Seitenbänder enthalten ist.', '');
-INSERT INTO answer VALUES(10065, 2517, 1, 'In welcher Häufigkeit sich der HF-Träger ändert.
-', '');
+INSERT INTO answer VALUES(10065, 2517, 1, 'In welcher Häufigkeit sich der HF-Träger ändert.  ', '');
 INSERT INTO answer VALUES(10066, 2517, 2, 'Wie schnell sich die Trägeramplitude ändert.', '');
 INSERT INTO answer VALUES(10067, 2517, 3, 'Wie weit sich die Trägerfrequenz ändert.', '');
 INSERT INTO answer VALUES(10068, 2517, 4, 'Wie weit sich die Trägeramplitude ändert.', '');
@@ -6302,8 +6270,7 @@ INSERT INTO answer VALUES(10898, 2725, 2, 'Als Verhältnis der Stärke der erwü
 INSERT INTO answer VALUES(10899, 2725, 3, 'Als Verhältnis der HF-Leistung zu der Verlustleistung der Endstufenröhre bzw. des Endstufentransistors.', '');
 INSERT INTO answer VALUES(10900, 2725, 4, 'Als Erhöhung der Ausgangsleistung  bezogen auf die Eingangsleistung.', '');
 INSERT INTO answer VALUES(10921, 2731, 1, '44,667 MHz und 44,889 MHz', '');
-INSERT INTO answer VALUES(10922, 2731, 2, '44,444 MHz und
-44,667 MHz', '');
+INSERT INTO answer VALUES(10922, 2731, 2, '44,444 MHz und 44,667 MHz', '');
 INSERT INTO answer VALUES(10923, 2731, 3, '44,889 MHz und 45,111 MHz', '');
 INSERT INTO answer VALUES(10924, 2731, 4, '45,111 MHz und 45,333 MHz', '');
 INSERT INTO answer VALUES(10925, 2732, 1, '45,333 MHz und 45,556 MHz', '');
@@ -6768,8 +6735,7 @@ INSERT INTO answer VALUES(11607, 2902, 3, 'PE-Schaumkabel mit Massivschirm und 1
 INSERT INTO answer VALUES(11608, 2902, 4, 'PE-Schaumkabel mit 10,3 mm Durchmesser.', '');
 INSERT INTO answer VALUES(11609, 2903, 1, 'PE-Schaumkabel mit 12,7 mm Durchmesser.', '');
 INSERT INTO answer VALUES(11610, 2903, 2, 'PE-Schaumkabel mit 7,3 mm Durchmesser.', '');
-INSERT INTO answer VALUES(11611, 2903, 3, 'Voll-PE-Kabel mit 10,3 mm Durchmesser (Typ RG213).
-', '');
+INSERT INTO answer VALUES(11611, 2903, 3, 'Voll-PE-Kabel mit 10,3 mm Durchmesser (Typ RG213).  ', '');
 INSERT INTO answer VALUES(11612, 2903, 4, 'PE-Schaumkabel mit 10,3 mm Durchmesser.', '');
 INSERT INTO answer VALUES(11613, 2904, 1, 'PE-Schaumkabel mit 10,3 mm Durchmesser.', '');
 INSERT INTO answer VALUES(11614, 2904, 2, 'Voll-PE-Kabel mit 4,95 mm Durchmesser (Typ RG58).', '');
@@ -6823,8 +6789,7 @@ INSERT INTO answer VALUES(11757, 2940, 1, 'Gleichtaktanteile vorhanden sind.', '
 INSERT INTO answer VALUES(11758, 2940, 2, 'der Schirm geerdet ist.', '');
 INSERT INTO answer VALUES(11759, 2940, 3, 'Stehwellen vorhanden sind.', '');
 INSERT INTO answer VALUES(11760, 2940, 4, 'vor- und rücklaufende Leistung nicht identisch sind.', '');
-INSERT INTO answer VALUES(11761, 2941, 1, 'Der <img src=''texrender_answer_11761_0.svg''>/2-Faltdipol hat an jedem seiner Anschlüsse eine Impedanz von 120 Ohm gegen Erde. Durch die <img src=''texrender_answer_11761_1.svg''>/2-Umwegleitung erfolgt eine 1:1-Widerstandstransformation mit Phasendrehung um 180 °. An der Seite der Antennenleitung erfolgt eine phasenrichtige Parallelschaltung von 2 mal 120 Ohm gegen Erde, womit eine Ausgangsimpedanz von 60 Ohm erreicht wird.
-', '');
+INSERT INTO answer VALUES(11761, 2941, 1, 'Der <img src=''texrender_answer_11761_0.svg''>/2-Faltdipol hat an jedem seiner Anschlüsse eine Impedanz von 120 Ohm gegen Erde. Durch die <img src=''texrender_answer_11761_1.svg''>/2-Umwegleitung erfolgt eine 1:1-Widerstandstransformation mit Phasendrehung um 180 °. An der Seite der Antennenleitung erfolgt eine phasenrichtige Parallelschaltung von 2 mal 120 Ohm gegen Erde, womit eine Ausgangsimpedanz von 60 Ohm erreicht wird.  ', '');
 INSERT INTO answer VALUES(11762, 2941, 2, 'Der <img src=''texrender_answer_11762_0.svg''>/2-Faltdipol hat eine Impedanz von 240 Ohm. Durch die <img src=''texrender_answer_11762_1.svg''>/2-Umwegleitung erfolgt eine Widerstandstransformation von 4:1 mit Phasendrehung um 360 °, womit an der Seite der Antennenleitung eine Ausgangsimpedanz von 60 Ohm erreicht wird.', '');
 INSERT INTO answer VALUES(11763, 2941, 3, 'Der <img src=''texrender_answer_11763_0.svg''>/2-Dipol hat eine Impedanz von 60 Ohm. Durch die <img src=''texrender_answer_11763_1.svg''>/2-Umwegleitung erfolgt eine Widerstandstransformation von 1:2 mit Phasendrehung um 180 °. An der Seite der Antennenleitung erfolgt eine phasenrichtige Parallelschaltung von 2 mal 120 Ohm gegen Erde, womit eine Ausgangsimpedanz von 60 Ohm erreicht wird.', '');
 INSERT INTO answer VALUES(11764, 2941, 4, 'Der <img src=''texrender_answer_11764_0.svg''>/2-Dipol hat eine Impedanz von 240 Ohm. Durch die <img src=''texrender_answer_11764_1.svg''>/2-Umwegleitung erfolgt eine Widerstandstransformation von 4:1 mit Phasendrehung um 360 °, womit an der Seite der Antennenleitung eine Ausgangsimpedanz von 60 Ohm erreicht wird.', '');
@@ -7033,8 +6998,7 @@ INSERT INTO answer VALUES(12106, 3027, 2, 'der Mittelwert aus der höchsten und 
 INSERT INTO answer VALUES(12107, 3027, 3, 'die niedrigste brauchbare Frequenz.', '');
 INSERT INTO answer VALUES(12108, 3027, 4, 'die vorgeschriebene nutzbare Frequenz.', '');
 INSERT INTO answer VALUES(12109, 3028, 1, 'höchste nutzbare Frequenz bezeichnet (MUF).', '');
-INSERT INTO answer VALUES(12110, 3028, 2, 'optimale Arbeitsfrequenz bezeichnet (f<img src=''texrender_answer_12110_0.svg''>, FOT).
-', '');
+INSERT INTO answer VALUES(12110, 3028, 2, 'optimale Arbeitsfrequenz bezeichnet (f<img src=''texrender_answer_12110_0.svg''>, FOT).  ', '');
 INSERT INTO answer VALUES(12111, 3028, 3, 'kritische Frequenz bezeichnet (f<img src=''texrender_answer_12111_0.svg''>, foF2).', '');
 INSERT INTO answer VALUES(12112, 3028, 4, 'höchste durchlässige Frequenz bezeichnet (LUF).', '');
 INSERT INTO answer VALUES(12113, 3029, 1, '90 ° liegt die höchste noch zur Erde zurückgeworfene Signalfrequenz bei 12 MHz.', '');
@@ -7519,10 +7483,8 @@ INSERT INTO answer VALUES(13039, 3260, 3, 'Die Antenneneingangsleistung ist der 
 INSERT INTO answer VALUES(13040, 3260, 4, 'Die Antenneneingangsleistung ist der Spitzen-Spitzen-Wert der Senderausgangsleistung, also: <img src=''texrender_answer_13040_0.svg''>', '');
 INSERT INTO answer VALUES(13041, 3261, 1, 'Die Formel gilt nur für Abstände <img src=''texrender_answer_13041_0.svg''> bei den meisten Antennenformen (z. B. Dipol-Antennen). Für Antennen, die z. B. geometrisch klein im Verhältnis zur Wellenlänge sind und/oder in kürzerem Abstand zur Antenne muss der Sicherheitsabstand zum Beispiel durch Feldstärkemessungen oder Nahfeldberechnungen (Simulationen) ermittelt werden.', '');
 INSERT INTO answer VALUES(13042, 3261, 2, 'Im Bereich von Amateurfunkstellen ist der Unterschied zwischen Nah- und Fernfeld so gering, dass obige Formel, die eigentlich nur im Fernfeld gilt, trotzdem für alle Raumbereiche verwendet werden kann.', '');
-INSERT INTO answer VALUES(13043, 3261, 3, 'Die Formel gilt nur für Abstände <img src=''texrender_answer_13043_0.svg''> bei horizontal polarisierten Antennen.
-Bei kleineren Abständen und immer bei vertikal polarisierten Antennen muss der Sicherheitsabstand durch zum Beispiel Feldstärkemessungen oder Nahfeldberechnungen (Simulationen) ermittelt werden.', '');
-INSERT INTO answer VALUES(13044, 3261, 4, 'Die Formel gilt nur für Abstände <img src=''texrender_answer_13044_0.svg''> bei vertikal polarisierten Antennen.
-Bei kleineren Abständen und immer bei horizontal polarisierten Antennen muss der Sicherheitsabstand durch zum Beispiel Feldstärkemessungen oder Nahfeldberechnungen (Simulationen) ermittelt werden.', '');
+INSERT INTO answer VALUES(13043, 3261, 3, 'Die Formel gilt nur für Abstände <img src=''texrender_answer_13043_0.svg''> bei horizontal polarisierten Antennen. Bei kleineren Abständen und immer bei vertikal polarisierten Antennen muss der Sicherheitsabstand durch zum Beispiel Feldstärkemessungen oder Nahfeldberechnungen (Simulationen) ermittelt werden.', '');
+INSERT INTO answer VALUES(13044, 3261, 4, 'Die Formel gilt nur für Abstände <img src=''texrender_answer_13044_0.svg''> bei vertikal polarisierten Antennen. Bei kleineren Abständen und immer bei horizontal polarisierten Antennen muss der Sicherheitsabstand durch zum Beispiel Feldstärkemessungen oder Nahfeldberechnungen (Simulationen) ermittelt werden.', '');
 INSERT INTO answer VALUES(13045, 3262, 1, 'Durch den Wellenwiderstand im jeweiligen Medium ', '');
 INSERT INTO answer VALUES(13046, 3262, 2, 'Durch die Aufbauhöhe der Antenne', '');
 INSERT INTO answer VALUES(13047, 3262, 3, 'Durch die Ausbreitungsbedingungen in der Ionosphäre', '');
@@ -7535,8 +7497,7 @@ INSERT INTO answer VALUES(13089, 3273, 1, 'Bereits bei geringen Sendeleistungen 
 INSERT INTO answer VALUES(13090, 3273, 2, 'Auf Kurzwelle ab 100 Watt, auf VHF/UHF ab 50 Watt', '');
 INSERT INTO answer VALUES(13091, 3273, 3, 'Bei Sendeleistungen höher 100 Watt', '');
 INSERT INTO answer VALUES(13092, 3273, 4, 'Bei Sendeleistungen höher 500 Watt', '');
-INSERT INTO answer VALUES(13093, 3274, 1, 'Die Länge der Erdleitung entspricht annähernd einem Viertel der Wellenlänge der
-Sendefrequenz oder einem ungeraden Vielfachen davon.', '');
+INSERT INTO answer VALUES(13093, 3274, 1, 'Die Länge der Erdleitung entspricht annähernd einem Viertel der Wellenlänge der Sendefrequenz oder einem ungeraden Vielfachen davon.', '');
 INSERT INTO answer VALUES(13094, 3274, 2, 'Die verwendete Kupfer-Erdleitung ist nicht versilbert und somit zur guten Ableitung von Hochfrequenz nicht geeignet.', '');
 INSERT INTO answer VALUES(13095, 3274, 3, 'Die Länge der Erdleitung entspricht annähernd einer halben Wellenlänge der Sendefrequenz oder Vielfachen davon.', '');
 INSERT INTO answer VALUES(13096, 3274, 4, 'Für die verwendete Erdleitung wurde ein massiver Leiter anstatt einer für Hochfrequenz besser geeigneten mehradrigen Litze verwendet.', '');
@@ -8243,9 +8204,7 @@ INSERT INTO answer VALUES(13884, 3471, 4, 'Funkamateure dürfen nur Mitteilungen
 INSERT INTO answer VALUES(13885, 3472, 1, 'Den gleichen Zwecken wie der übrige Amateurfunkdienst', '');
 INSERT INTO answer VALUES(13886, 3472, 2, 'Der Beobachtung des terrestrischen Wetters im Röntgenspektrum', '');
 INSERT INTO answer VALUES(13887, 3472, 3, 'Der Ermittlung der Dämpfung der ionisierenden Regionen', '');
-INSERT INTO answer VALUES(13888, 3472, 4, 'Der Ermittlung der Dämpfung der reflektierenden Schichten im UHF-Bereich
-
-', '');
+INSERT INTO answer VALUES(13888, 3472, 4, 'Der Ermittlung der Dämpfung der reflektierenden Schichten im UHF-Bereich', '');
 INSERT INTO answer VALUES(13889, 3473, 1, 'Zur eigenen Ausbildung, für den Funkverkehr der Funkamateure untereinander und für technische Studien', '');
 INSERT INTO answer VALUES(13890, 3473, 2, 'Zur Kommunikation der Funkamateure untereinander und mit anderen Funkdiensten', '');
 INSERT INTO answer VALUES(13891, 3473, 3, 'Zur Bereitstellung von Kommunikationsdienstleistungen in Gebieten mit fehlender Kommunikationsinfrastruktur', '');
@@ -8354,8 +8313,7 @@ INSERT INTO answer VALUES(13993, 3499, 1, 'bescheinigt eine erfolgreich abgelegt
 INSERT INTO answer VALUES(13994, 3499, 2, 'berechtigt den Funkamateur zur Durchführung von vorübergehendem Amateurfunkbetrieb nach der CEPT-Empfehlung T/R 61-01.', '');
 INSERT INTO answer VALUES(13995, 3499, 3, 'bescheinigt eine erfolgreich abgelegte Prüfung der Klasse E nach ECC (05)06. Damit kann ein Funkamateur in den beteiligten Ländern eine Amateurfunkzulassung erhalten.', '');
 INSERT INTO answer VALUES(13996, 3499, 4, 'erhalten Funkamateure, die die freiwillige Morseprüfung erfolgreich abgelegt haben.', '');
-INSERT INTO answer VALUES(13997, 3500, 1, 'Es ist eine harmonisierte Amateurfunkprüfungsbescheinigung gemäß der CEPT-Empfehlung T/R 61-02.
-Das Amateurfunkzeugnis der Klasse A entspricht dieser Empfehlung.', '');
+INSERT INTO answer VALUES(13997, 3500, 1, 'Es ist eine harmonisierte Amateurfunkprüfungsbescheinigung gemäß der CEPT-Empfehlung T/R 61-02.  Das Amateurfunkzeugnis der Klasse A entspricht dieser Empfehlung.', '');
 INSERT INTO answer VALUES(13998, 3500, 2, 'Es ist eine harmonisierte CEPT-Amateurfunkgenehmigung gemäß der CEPT-Empfehlung T/R 61-01.', '');
 INSERT INTO answer VALUES(13999, 3500, 3, 'Es ist eine harmonisierte CEPT-Novice-Amateurfunkprüfungsbescheinigung gemäß dem ERC-Report 32. Das Amateurfunkzeugnis der Klasse E entspricht dieser Empfehlung.', '');
 INSERT INTO answer VALUES(14000, 3500, 4, 'Es ist eine harmonisierte CEPT-Novice-Amateurfunkgenehmigung gemäß der ECC-Empfehlung (05)06.', '');
@@ -8392,11 +8350,9 @@ INSERT INTO answer VALUES(14030, 3508, 2, 'Der Funkamateur muss seine Amateurfun
 INSERT INTO answer VALUES(14031, 3508, 3, 'Amateurfunkstellen sind hinsichtlich ihrer Störfestigkeit anderen Betriebsmitteln gleichgestellt.', '');
 INSERT INTO answer VALUES(14032, 3508, 4, 'Amateurfunkstellen müssen elektromagnetische Störungen durch andere Betriebsmittel hinnehmen, selbst wenn diese nicht den grundlegenden Anforderungen nach dem Gesetz über die elektromagnetische Verträglichkeit von Betriebsmitteln (EMVG) entsprechen.', '');
 INSERT INTO answer VALUES(14033, 3509, 1, 'Der Funkamateur muss die Schutzanforderungen zur Gewährleistung der elektromagnetischen Verträglichkeit im Sinne des Gesetzes über die elektromagnetische Verträglichkeit von Betriebsmitteln (EMVG) einhalten.', '');
-INSERT INTO answer VALUES(14034, 3509, 2, 'Der Funkamateur benötigt für seine Amateurfunkstelle eine aktuelle  Verträglichkeitsbescheinigung der BNetzA.
-', '');
+INSERT INTO answer VALUES(14034, 3509, 2, 'Der Funkamateur benötigt für seine Amateurfunkstelle eine aktuelle  Verträglichkeitsbescheinigung der BNetzA.', '');
 INSERT INTO answer VALUES(14035, 3509, 3, 'Die Amateurfunkstelle darf nur aus baumustergeprüften Funkgeräten bestehen, die den Anforderungen des Gesetzes über Funkanlagen (FuAG) entsprechen.', '');
-INSERT INTO answer VALUES(14036, 3509, 4, 'Die Amateurfunkstelle muss von einem zertifizierten Elektromeister auf die Einhaltung der elektromagnetischen Verträglichkeit geprüft werden. Das Abnahmeprotokoll ist für die BNetzA bereitzuhalten.
-', '');
+INSERT INTO answer VALUES(14036, 3509, 4, 'Die Amateurfunkstelle muss von einem zertifizierten Elektromeister auf die Einhaltung der elektromagnetischen Verträglichkeit geprüft werden. Das Abnahmeprotokoll ist für die BNetzA bereitzuhalten.', '');
 INSERT INTO answer VALUES(14037, 3510, 1, 'Aus wichtigen Gründen, insbesondere bei Änderungen internationaler Vorgaben, kann das Rufzeichen geändert werden.', '');
 INSERT INTO answer VALUES(14038, 3510, 2, 'Bei Umzug in den Zuständigkeitsbereich einer anderen Außenstelle der Bundesnetzagentur erhält der Funkamateur eine neue Rufzeichenzuteilung.', '');
 INSERT INTO answer VALUES(14039, 3510, 3, 'Das zugeteilte Rufzeichen ist Eigentum des Funkamateurs, das durch die Bundesnetzagentur nicht geändert wird.', '');
@@ -8577,8 +8533,7 @@ INSERT INTO answer VALUES(14213, 3554, 1, 'Vom Auszubildenden', '');
 INSERT INTO answer VALUES(14214, 3554, 2, 'Vom Ausbilder', '');
 INSERT INTO answer VALUES(14215, 3554, 3, 'Vom Auszubildenden und vom Ausbilder', '');
 INSERT INTO answer VALUES(14216, 3554, 4, 'Vom Verantwortlichen der Schulstation', '');
-INSERT INTO answer VALUES(14217, 3555, 1, 'Der  Ausbilder  hat  auf  Verlangen  der  Bundesnetzagentur  Auskunft  über  Art  und  Umfang  des
-Ausbildungsfunkbetriebs zu geben.', '');
+INSERT INTO answer VALUES(14217, 3555, 1, 'Der  Ausbilder  hat  auf  Verlangen  der  Bundesnetzagentur  Auskunft  über  Art  und  Umfang  des Ausbildungsfunkbetriebs zu geben.', '');
 INSERT INTO answer VALUES(14218, 3555, 2, 'Beim Ausbildungsfunkverkehr darf nicht an Amateurfunkwettbewerben teilgenommen werden.', '');
 INSERT INTO answer VALUES(14219, 3555, 3, 'Der Ausbildungsfunkverkehr darf ausschließlich in Gegenwart des Ausbilders an einer Klub- oder Schulstation durchgeführt werden.', '');
 INSERT INTO answer VALUES(14220, 3555, 4, 'Der Ausbildungsfunkverkehr darf ausschließlich in Telefonie (SSB oder FM) durchgeführt werden.', '');
