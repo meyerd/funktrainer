@@ -41,6 +41,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -201,6 +207,21 @@ public class AdvancedQuestionAsker extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+//
+//        View rootView = findViewById(R.id.questionAskerViewFlipper);
+//        ViewCompat.setOnApplyWindowInsetsListener(rootView, new OnApplyWindowInsetsListener() {
+//            @NonNull
+//            @Override
+//            public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+//                int left = insets.getInsets(WindowInsetsCompat.Type.systemBars()).left;
+//                int top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).top;
+//                int right = insets.getInsets(WindowInsetsCompat.Type.systemBars()).right;
+//                int bottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
+//                v.setPadding(left, top, right, bottom);
+//                return insets;
+//            }
+//        });
         mUpdateNextAnswered = true;
 
         repository = Repository.getInstance();

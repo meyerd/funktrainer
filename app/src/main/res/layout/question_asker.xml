@@ -6,7 +6,8 @@
     android:id="@+id/questionAskerViewFlipper"
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true">
+    android:layout_alignParentStart="true"
+    android:fitsSystemWindows="true">
     <ScrollView
             android:layout_width="fill_parent" android:layout_height="fill_parent"
             android:orientation="vertical"

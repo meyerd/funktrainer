@@ -2,41 +2,41 @@ apply plugin: 'com.android.application'
 import java.util.regex.Pattern
 
 android {
-    compileSdk 34
+    compileSdk = 36
     defaultConfig {
-        applicationId 'de.hosenhasser.funktrainer'
-        minSdkVersion 19
-        targetSdk 34
+        applicationId = 'de.hosenhasser.funktrainer'
+        minSdkVersion 21
+        targetSdk = 36
         vectorDrawables.useSupportLibrary = true
         // versionCode getVersionCodeFromManifest()
-        versionCode 51
-        versionName '1.4.0.1'
+        versionCode = 53
+        versionName = '1.4.0.3'
     }
     buildTypes {
         debug {
-            minifyEnabled false
+            minifyEnabled = false
         }
         release {
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled = false
+            shrinkResources = false
+            proguardFiles = [getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt']
         }
     }
     compileOptions {
-        targetCompatibility 17
-        sourceCompatibility 17
+        targetCompatibility = 17
+        sourceCompatibility = 17
     }
 
     splits {
         abi {
-            enable true // enable ABI split feature to create one APK per ABI
-            universalApk true //generate an additional APK that targets all the ABIs
+            enable = true // enable ABI split feature to create one APK per ABI
+            universalApk = true //generate an additional APK that targets all the ABIs
         }
     }
     lint {
-        disable 'PluralsCandidate', 'UnusedAttribute', 'UnusedResources', 'IconDipSize', 'IconLocation', 'IconDuplicates', 'IconMissingDensityFolder'
+        disable = ['PluralsCandidate', 'UnusedAttribute', 'UnusedResources', 'IconDipSize', 'IconLocation', 'IconDuplicates', 'IconMissingDensityFolder']
     }
-    namespace 'de.hosenhasser.funktrainer'
+    namespace = 'de.hosenhasser.funktrainer'
 
     //versionCode digit for each supported ABI, with 64bit>32bit and x86>armeabi-*
     project.ext.versionCodes = ['armeabi': 1, 'armeabi-v7a': 2, 'arm64-v8a': 3, 'mips': 5, 'mips64': 6, 'x86': 8, 'x86_64': 9]
@@ -48,7 +48,6 @@ android {
                     project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) * 1000000 + defaultConfig.versionCode
         }
     }
-
 }
 
 dependencies {
@@ -57,13 +56,13 @@ dependencies {
     implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.recyclerview:recyclerview:1.3.2'
-    implementation 'com.google.guava:guava:32.1.3-jre'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'com.google.guava:guava:33.4.8-jre'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:5.7.0'
+    testImplementation 'org.mockito:mockito-core:5.18.0'
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")

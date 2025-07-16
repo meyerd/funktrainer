@@ -44,6 +44,8 @@ import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import androidx.core.view.WindowCompat;
+
 public class FunkTrainerActivity extends Activity {
 	private Repository repository;
     private SimpleCursorAdapter adapter;
@@ -54,6 +56,8 @@ public class FunkTrainerActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+//        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
         TabHost th = findViewById(R.id.tabhost);
         th.setup();

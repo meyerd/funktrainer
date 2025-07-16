@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.hosenhasser.funktrainer.FormelsammlungViewerActivity">
+    tools:context="de.hosenhasser.funktrainer.FormelsammlungViewerActivity"
+    android:fitsSystemWindows="true">
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/formelsammlung_pdfview"
