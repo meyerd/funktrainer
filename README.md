@@ -1,8 +1,6 @@
 Funktrainer
 ===========
 
-[![Build Status](https://travis-ci.com/meyerd/funktrainer.svg?branch=master)](https://travis-ci.com/meyerd/funktrainer)
-
 This is an Android App for studying for your german Amateurfunklizenz.
 You can find the app on F-Droid and Google Play: 
 

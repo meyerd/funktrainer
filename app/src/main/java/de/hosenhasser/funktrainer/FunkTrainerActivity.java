@@ -18,8 +18,15 @@
 
 package de.hosenhasser.funktrainer;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 import de.hosenhasser.funktrainer.data.Repository;
 import de.hosenhasser.funktrainer.exam.QuestionListActivity;
@@ -27,6 +34,7 @@ import de.hosenhasser.funktrainer.exam.QuestionListActivity;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -43,6 +51,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.view.WindowCompat;
 
@@ -50,6 +59,9 @@ public class FunkTrainerActivity extends Activity {
 	private Repository repository;
     private SimpleCursorAdapter adapter;
     private Account mAccount;
+
+    private static final int REQUEST_BACKUP_WRITE_URI = 1;
+    private static final int REQUEST_BACKUP_READ_URI = 2;
 
     /** Called when the activity is first created. */
     @Override
@@ -196,7 +208,7 @@ public class FunkTrainerActivity extends Activity {
 		switch (item.getItemId()) {
 			case R.id.mainSearch:
                 final Intent intent = new Intent(FunkTrainerActivity.this, QuestionSearch.class);
-                // intent.putExtra(AdvacnedQuestionAsker.class.getName() + ".topic", id);
+                // intent.putExtra(AdvancedQuestionAsker.class.getName() + ".topic", id);
                 startActivity(intent);
                 return true;
 //            case R.id.mainExamMode:
@@ -219,6 +231,12 @@ public class FunkTrainerActivity extends Activity {
                 final Intent intentSettings = new Intent(this, SettingsActivity.class);
                 startActivity(intentSettings);
                 return true;
+            case R.id.mainExportDatabase:
+                this.exportDB();
+                return true;
+            case R.id.mainImportDatabase:
+                this.importDB();
+                return true;
 
 //		case R.id.mainHelp:
 //			final StringBuilder uri = new StringBuilder();
@@ -238,4 +256,92 @@ public class FunkTrainerActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        /**
+         * taken from https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java
+         */
+        if (resultCode == RESULT_OK) {
+            try {
+
+                // data is the uri the database should be backed up to
+                if (requestCode == REQUEST_BACKUP_WRITE_URI) {
+                    OutputStream outputStream = getContentResolver().openOutputStream(Objects.requireNonNull(data.getData()));
+                    Repository repo = Repository.getInstance();
+                    repo.exportDatabase(outputStream);
+                    Toast.makeText(FunkTrainerActivity.this, R.string.export_db_success, Toast.LENGTH_LONG).show();
+                }
+
+                // data is the uri the database should be imported from
+                else if (requestCode == REQUEST_BACKUP_READ_URI) {
+                    InputStream inputStream = getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
+                    Repository repo = Repository.getInstance();
+                    if (repo.importDatabase(inputStream)) {
+                        Toast.makeText(FunkTrainerActivity.this, R.string.import_db_success, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(FunkTrainerActivity.this, R.string.import_db_failed, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            } catch (FileNotFoundException e) {
+                // Should not happen since source/destination file was picked by create document activity
+                Toast.makeText(FunkTrainerActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+            } catch (IOException e) {
+                Toast.makeText(FunkTrainerActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    /**
+     * taken from https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java
+     */
+    public void exportDB() {
+        Calendar today = Calendar.getInstance();
+        int year = today.get(Calendar.YEAR);
+        int month = today.get(Calendar.MONTH) + 1;
+        int day = today.get(Calendar.DAY_OF_MONTH);
+        String defaultFileName = String.format((Locale) null, "funktrainer-backup-%04d%02d%02d.db", year, month, day);
+
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/x-sqlite3");
+        intent.putExtra(Intent.EXTRA_TITLE, defaultFileName);
+
+        // issue #142:
+        //      Deactivating File Manager on some phones may make ACTION_CREATE_DOCUMENT unavailable.
+        //      Check if activity is available and fail gracefully otherwise.
+//        boolean isActivityAvailable = intent.resolveActivity(getPackageManager()) != null;
+//        if (isActivityAvailable) {
+            startActivityForResult(intent, REQUEST_BACKUP_WRITE_URI);
+//        } else {
+//            Toast.makeText(this,R.string.export_error_activity_not_found,Toast.LENGTH_LONG).show();
+//        }
+    }
+
+    /**
+     * taken from https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/Tickmate.java
+     */
+    public void importDB() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        String[] mimetypes = {"application/x-sqlite3", "application/octet-stream"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+        intent.setType("*/*");
+
+        // issue #142:
+        //      Deactivating File Manager on some phones may make ACTION_OPEN_DOCUMENT unavailable.
+        //      Check if activity is available and fail gracefully otherwise.
+//        ComponentName act = intent.resolveActivity(getPackageManager());
+//        boolean isActivityAvailable = intent.resolveActivity(getPackageManager()) != null;
+//        if (isActivityAvailable) {
+            startActivityForResult(intent, REQUEST_BACKUP_READ_URI);
+//        } else {
+//            Toast.makeText(this,R.string.import_error_activity_not_found,Toast.LENGTH_LONG).show();
+//        }
+
+    }
 }

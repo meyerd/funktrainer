@@ -19,9 +19,13 @@
 package de.hosenhasser.funktrainer.data;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -38,6 +42,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -45,6 +50,8 @@ import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 
 import com.google.common.collect.ObjectArrays;
+
+import static android.database.sqlite.SQLiteDatabase.OPEN_READONLY;
 
 public class Repository extends SQLiteOpenHelper {
     private static volatile Repository sRepositorySingletonInstance;
@@ -654,8 +661,18 @@ public class Repository extends SQLiteOpenHelper {
         long waiting_time = Long.valueOf(sharedPref.getString("pref_waiting_time_on_level_" + Integer.toString(level), "0"));
         return waiting_time * 1000;
 	}
-	
-	private SQLiteDatabase getDb() {
+
+    private SQLiteDatabase getDb() {
+        return this.getDb(false);
+    }
+	private SQLiteDatabase getDb(boolean force) {
+        if (force) {
+           if(database != null) {
+               if(database.isOpen())
+                   database.close();
+               database = null;
+           }
+        }
 		if (database == null) {
 			database = this.getWritableDatabase();
 		}
@@ -817,4 +834,96 @@ public class Repository extends SQLiteOpenHelper {
         realUpgrade(db, oldVersion, newVersion);
         Log.i("Funktrainer", "Database upgrade finished");
 	}
+
+    public String getDatabasePath() {
+        String db_path = context.getDatabasePath(this.getDatabaseName()).getAbsolutePath();
+        Log.v("Funktrainer", "internal database '" + this.getDatabaseName() + "' path: " + db_path);
+        return db_path;
+    }
+
+    /**
+     * Copies internal database to outputStream.
+     * (taken from https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/database/DatabaseOpenHelper.java)
+     */
+    public boolean exportDatabase(OutputStream outputStream) throws IOException {
+        // Close the SQLiteOpenHelper so it will commit the created empty
+        // database to internal storage.
+        SQLiteDatabase db = this.getDb();
+        db.close();
+
+        File myDb = new File(getDatabasePath());
+        FileInputStream inFile = new FileInputStream(myDb);
+        FileUtils.copyFile(inFile, outputStream);
+
+        // re-open database to global singleton variable
+        SQLiteDatabase db1 = this.getDb(true);
+
+        return true;
+    }
+
+    /**
+     * Copies the database file at the specified location over the current
+     * internal application database.
+     * (taken from https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/database/DatabaseOpenHelper.java)
+     */
+    public boolean importDatabase(InputStream inputStream) throws IOException {
+        // Close the SQLiteOpenHelper so it will commit the created empty
+        // database to internal storage.
+        close();
+
+        // copy external db to internal storage
+        String currentDbPath = getDatabasePath();
+        String tempImportFilePath = currentDbPath.substring(0, currentDbPath.lastIndexOf("/") + 1) + "tempDbImport.db";
+        File tempImportFile = new File(tempImportFilePath);
+        FileUtils.copyFile(inputStream, new FileOutputStream(tempImportFile));
+
+        // check validity of import db
+        boolean isValid = false;
+        try {
+            SQLiteDatabase newDb = SQLiteDatabase.openDatabase(tempImportFilePath, null, OPEN_READONLY);
+            isValid = isValidDb(newDb);
+            newDb.close();
+        } catch (SQLiteException e) {
+            Log.v("Funktrainer", "Could not open import db file: " + e.toString());
+        }
+
+        if (!isValid) {
+            if (!tempImportFile.delete()) {
+                Log.v("Funktrainer", "Failed to delete temporary import db file.");
+            }
+            getDb(true); // force re-opening database
+            return false;
+        }
+
+        // delete old db and replace with imported db
+        boolean success;
+        File currentDb = new File(currentDbPath);
+        success = currentDb.delete();
+        success &= tempImportFile.renameTo(currentDb);
+        if (!success) {
+            Log.v("Funktrainer", "Failed to replace current db with imported db.");
+        }
+        getDb(true); // force re-opening database
+        return success;
+    }
+
+    private static final String DATABASE_VALIDITY_CHECK = "select tbl_name from sqlite_master where tbl_name = 'question'";
+
+    /**
+     * Perform basic validity check on given db. (check if ticks table exists)
+     * Used to check if compatible file was selected for db import
+     * (taken from https://github.com/lordi/tickmate/blob/master/app/src/main/java/de/smasi/tickmate/database/DatabaseOpenHelper.java)
+     *
+     * @param db the database to test
+     * @return true if db can be imported
+     */
+    public boolean isValidDb(SQLiteDatabase db) {
+        boolean isValid = false;
+        Cursor cursor = db.rawQuery(DATABASE_VALIDITY_CHECK, null);
+        if (cursor != null) {
+            isValid = cursor.getCount() > 0;
+            cursor.close();
+        }
+        return isValid;
+    }
 }
