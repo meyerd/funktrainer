@@ -11,4 +11,8 @@
 		app:showAsAction="never" />
 	<item android:id="@+id/mainFormelsammlung" android:title="@string/menuShowFormelsammlung" android:titleCondensed="@string/menuShowFormelsammlungCondensed" android:visible="true" android:enabled="true"
 		app:showAsAction="never" />
+	<item android:id="@+id/mainExportDatabase" android:title="@string/menuExportDatabase" android:visible="true" android:enabled="true"
+		app:showAsAction="never" />
+	<item android:id="@+id/mainImportDatabase" android:title="@string/menuImportDatabase" android:visible="true" android:enabled="true"
+		app:showAsAction="never" />
 </menu>

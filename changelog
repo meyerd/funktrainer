@@ -1,3 +1,6 @@
+1.4.1.0:
+- import and export database functionality
+
 1.4.0.3:
 - update android sdk + dependencies
 
@@ -77,6 +80,9 @@
 
 
 engl:
+
+1.4.1.0:
+- import and export database functionality
 
 1.4.0.3:
 - update android sdk requirements + dependencies

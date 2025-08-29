@@ -116,4 +116,11 @@
     <string name="zeroString">0</string>
     <string name="pref_description_questions_version">Veröffentlichungsjahr des Fragenkatalogs</string>
     <string name="pref_title_questions_version_title">Verwende Prüfungsfragen aus einem älteren Fragenkatalog</string>
+    <string name="menuExportDatabase">Datenexport</string>
+    <string name="menuImportDatabase">Datenimport</string>
+    <string name="export_db_success">Export erfolgreich</string>
+    <string name="import_db_success">Import erfolgreich</string>
+    <string name="import_db_failed">Import fehlgeschlagen</string>
+    <string name="export_error_activity_not_found">ACTION_CREATE_DOCUMENT not available: Please enable File Manager for export.</string>
+    <string name="import_error_activity_not_found">ACTION_CREATE_DOCUMENT not available: Please enable File Manager for export.</string>
 </resources>
